@@ -1,0 +1,1391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>When a Gas Becomes One — Ninaad Adhvaryu</title>
+  <meta name="description" content="On Bose-Einstein condensation, dipolar quantum gases, and a map of the vortex states that appear when matter is made to spin near absolute zero.">
+  <link rel="stylesheet" href="../../style.css">
+
+  <!-- MathJax -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']],
+        packages: {'[+]': ['ams']}
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+  <!-- p5.js for vortex interactive -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.3/p5.min.js"></script>
+
+  <style>
+    /* ============================================================
+       PAGE TOKENS
+    ============================================================ */
+    :root {
+      --cream-dark:    #E8E2D9;
+      --cream-card:    #FDFBF8;
+      --ink-muted:     #6B6460;
+      --teal-pale:     rgba(42, 107, 107, 0.09);
+      --obsidian-mid:  #272540;
+      --obsidian-text: #C9C5DA;
+      --obsidian-muted:#7C789A;
+      --max-width:     1080px;
+      --gutter:        2.5rem;
+      --prose-width:   700px;
+    }
+
+    /* ============================================================
+       BASE
+    ============================================================ */
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--serif-body);
+      font-size: 1rem;
+      line-height: 1.72;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    ::selection { background: rgba(42, 107, 107, 0.18); }
+
+    a {
+      color: var(--teal);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    /* ============================================================
+       NAV
+    ============================================================ */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: var(--obsidian);
+      height: 54px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--gutter);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .nav-monogram {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--obsidian-muted);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.25rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      color: var(--obsidian-text);
+      text-transform: lowercase;
+      padding-bottom: 2px;
+      border-bottom: 1px solid transparent;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--teal-light);
+      border-bottom-color: var(--teal-light);
+    }
+
+    /* ============================================================
+       LAYOUT
+    ============================================================ */
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 var(--gutter);
+    }
+
+    /* ============================================================
+       ESSAY HEADER
+    ============================================================ */
+    .essay-header {
+      padding: 6rem 0 3.5rem;
+      border-bottom: 1px solid var(--cream-dark);
+      max-width: var(--prose-width);
+    }
+
+    .essay-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 1.75rem;
+    }
+
+    .essay-eyebrow::before {
+      content: '';
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--teal);
+      flex-shrink: 0;
+    }
+
+    .essay-title {
+      font-family: var(--serif-display);
+      font-size: clamp(1.9rem, 3.5vw, 2.9rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: 1.5rem;
+    }
+
+    .essay-lede {
+      font-family: var(--serif-body);
+      font-size: 1.06rem;
+      font-style: italic;
+      font-weight: 300;
+      line-height: 1.72;
+      color: var(--ink-muted);
+      max-width: 560px;
+      margin-bottom: 2rem;
+    }
+
+    .essay-meta-row {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+    }
+
+    .essay-meta-sep {
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: var(--cream-dark);
+    }
+
+    /* ============================================================
+       ESSAY BODY
+    ============================================================ */
+    .essay-body {
+      max-width: var(--prose-width);
+      padding: 4rem 0 8rem;
+    }
+
+    .essay-body p {
+      font-size: 1.02rem;
+      line-height: 1.88;
+      color: var(--ink);
+      margin-bottom: 1.5em;
+    }
+
+    .essay-body h2 {
+      font-family: var(--serif-display);
+      font-size: 1.3rem;
+      font-weight: 600;
+      line-height: 1.3;
+      color: var(--ink);
+      margin: 3.5rem 0 1.25rem;
+    }
+
+    .essay-body em { font-style: italic; }
+
+    .essay-body strong {
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    /* ============================================================
+       MATH DISPLAY
+    ============================================================ */
+    .math-display {
+      overflow-x: auto;
+      padding: 1.6rem 0;
+      text-align: center;
+    }
+
+    .math-label {
+      display: block;
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-top: 0.5rem;
+      text-align: center;
+    }
+
+    /* ============================================================
+       DIAGRAM BLOCKS
+    ============================================================ */
+    .diagram-block {
+      margin: 2.5rem 0;
+      padding: 2rem 1.5rem;
+      background: var(--cream-card);
+      border: 1px solid var(--cream-dark);
+      border-radius: 4px;
+    }
+
+    .diagram-block svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .diagram-caption {
+      margin-top: 1rem;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.05em;
+      color: var(--ink-muted);
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    /* ============================================================
+       FIGURE PLACEHOLDER
+    ============================================================ */
+    .figure-placeholder {
+      margin: 2.5rem 0;
+      border: 1.5px dashed var(--cream-dark);
+      border-radius: 4px;
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+
+    .figure-placeholder-label {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 0.5rem;
+    }
+
+    .figure-placeholder-desc {
+      font-family: var(--serif-body);
+      font-size: 0.9rem;
+      font-style: italic;
+      color: var(--ink-muted);
+      max-width: 400px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* ============================================================
+       INTERACTIVE BLOCK
+    ============================================================ */
+    .interactive-block {
+      margin: 3rem 0;
+      background: #F8F5F0;
+      border: 1px solid var(--cream-dark);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .interactive-header {
+      padding: 0.9rem 1.5rem;
+      border-bottom: 1px solid var(--cream-dark);
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+
+    .interactive-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--teal);
+      opacity: 0.7;
+    }
+
+    .interactive-title {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+    }
+
+    .interactive-inner {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    #vortex-sketch canvas {
+      display: block;
+      border-radius: 3px;
+    }
+
+    .slider-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      width: 100%;
+      max-width: 440px;
+    }
+
+    .slider-row label {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      white-space: nowrap;
+    }
+
+    .slider-row input[type="range"] {
+      flex: 1;
+      -webkit-appearance: none;
+      height: 3px;
+      background: var(--cream-dark);
+      border-radius: 2px;
+      outline: none;
+    }
+
+    .slider-row input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--teal);
+      cursor: pointer;
+    }
+
+    #omega-val {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--teal);
+      min-width: 140px;
+      letter-spacing: 0.05em;
+    }
+
+    .interactive-caption {
+      font-family: var(--mono);
+      font-size: 0.66rem;
+      letter-spacing: 0.04em;
+      color: var(--ink-muted);
+      text-align: center;
+      max-width: 440px;
+      line-height: 1.6;
+    }
+
+    /* ============================================================
+       CALLOUT
+    ============================================================ */
+    .callout {
+      margin: 2.5rem 0;
+      padding: 1.5rem 1.75rem;
+      border-left: 3px solid var(--teal);
+      background: var(--teal-pale);
+    }
+
+    .callout p {
+      margin: 0;
+      font-size: 0.97rem;
+      line-height: 1.72;
+      color: var(--ink);
+    }
+
+    .diagram-caption {
+      font-size: 0.88rem;
+      color: var(--ink-muted);
+      font-style: italic;
+      text-align: center;
+      margin-top: 0.75rem;
+      line-height: 1.55;
+      max-width: 560px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    footer {
+      background: var(--obsidian);
+      padding: 3rem var(--gutter);
+      text-align: center;
+    }
+
+    .footer-text {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--obsidian-muted);
+    }
+
+    .footer-back {
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--obsidian-text);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .footer-back:hover {
+      color: var(--teal-light);
+      border-bottom-color: var(--teal-light);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ============================================================
+       NAV
+  ============================================================ -->
+  <nav>
+    <span class="nav-monogram">N · A</span>
+    <ul class="nav-links">
+      <li><a href="../../index.html">home</a></li>
+      <li><a href="../../index.html#inquiries">inquiries</a></li>
+      <li><a href="#" style="color: var(--teal-light); border-bottom-color: var(--teal-light);">thesis</a></li>
+      <li><a href="../../index.html#writing">writing</a></li>
+    </ul>
+  </nav>
+
+  <!-- ============================================================
+       ESSAY HEADER
+  ============================================================ -->
+  <div class="container">
+    <header class="essay-header">
+      <div class="essay-eyebrow">Quantum Matter &nbsp;·&nbsp; Thesis Work</div>
+      <h1 class="essay-title">When a Gas Becomes One</h1>
+      <p class="essay-lede">On Bose-Einstein condensation, dipolar quantum gases, and a map of the vortex states that appear when matter is made to spin near absolute zero.</p>
+      <div class="essay-meta-row">
+        <span>2023</span>
+        <span class="essay-meta-sep"></span>
+        <span>Physics</span>
+        <span class="essay-meta-sep"></span>
+        <span>Thesis</span>
+        <span class="essay-meta-sep"></span>
+        <span>~20 min read</span>
+      </div>
+    </header>
+  </div>
+
+  <!-- ============================================================
+       ESSAY BODY
+  ============================================================ -->
+  <div class="container">
+    <article class="essay-body">
+
+      <p>At around 170 nanokelvin — a temperature roughly a hundred million times colder than the cosmic microwave background — a dilute gas of atoms does something that has no classical explanation. It stops behaving like a collection of individual particles and becomes, in a precise quantum-mechanical sense, one.</p>
+
+      <p>This is Bose-Einstein condensation: a phase transition in which a macroscopic fraction of atoms all fall into the same quantum ground state. What makes this remarkable is not the low temperature alone but the mechanism. The atoms do not freeze. They do not crystallise. They remain a dilute gas, separated by distances far larger than their physical size. What changes is not their positions but their quantum identity — the wave functions of individual atoms begin to overlap, and when the overlap becomes total, the system suddenly behaves as if it were described by a single, coherent wave function spanning the entire cloud.</p>
+
+      <p>My thesis was about what happens when you add something to this picture: rotation, and long-range anisotropic interactions, in a condensate made of dysprosium — one of the most magnetic atoms on the periodic table. The result was a phase diagram: a map of the distinct vortex states that appear across the parameter space of rotation and interaction strength. But to understand what that map is a map <em>of</em>, it helps to start at the beginning.</p>
+
+      <!-- =============================================
+           SECTION 1: THE STATISTICS OF NOTHING
+      ============================================== -->
+      <h2>The Statistics of Nothing</h2>
+
+      <p>Particles in quantum mechanics come in two fundamental varieties, distinguished by a single rule about what happens when you exchange two identical ones. Fermions — electrons, protons, quarks — acquire a minus sign when exchanged, which is the origin of the Pauli exclusion principle: no two fermions can occupy the same quantum state. Bosons — photons, helium-4 atoms, the alkali and rare-earth atoms used in BEC experiments — acquire no sign change. Any number of bosons can occupy the same state simultaneously. For fermions, the Pauli principle is a prohibition. For bosons, the analogous rule is an invitation.</p>
+
+      <p>This difference has a direct consequence for the statistical distribution of particles across energy levels. In the grand canonical ensemble — the framework for a system that can exchange both energy and particles with a thermal reservoir — the mean occupation number of a single-particle state with energy \(\epsilon_i\) is given by the Bose-Einstein distribution,</p>
+
+      <div class="math-display">
+        \[ n_i = \frac{1}{e^{\beta(\epsilon_i - \mu)} - 1} \]
+        <span class="math-label">Bose-Einstein distribution</span>
+      </div>
+
+      <p>where \(\beta = 1/k_BT\) and \(\mu\) is the chemical potential. The \(-1\) in the denominator, rather than the \(+1\) that appears for fermions, is everything. It means that as \(\mu\) approaches the energy of the ground state \(\epsilon_0\) from below, the occupation of the ground state diverges. There is no upper bound on how many bosons can crowd into a single state.</p>
+
+      <p>In a gas at fixed particle number and temperature, the chemical potential is determined by the constraint that all occupation numbers sum to the total count \(N\). As temperature decreases, \(\mu\) must increase to keep the count right. At a critical temperature \(T_c\), \(\mu\) reaches \(\epsilon_0\) — and at that point, the ground state occupation becomes macroscopic. For a three-dimensional homogeneous gas, this transition happens at</p>
+
+      <div class="math-display">
+        \[ T_c = 3.31\,\frac{\hbar^2 n^{2/3}}{m k_B} \]
+        <span class="math-label">BEC critical temperature</span>
+      </div>
+
+      <p>where \(n\) is the number density and \(m\) is the atomic mass. Below \(T_c\), the condensate fraction — the proportion of atoms in the ground state — grows as</p>
+
+      <div class="math-display">
+        \[ \frac{n_0}{n} = 1 - \left(\frac{T}{T_c}\right)^{3/2} \]
+        <span class="math-label">condensate fraction</span>
+      </div>
+
+      <p>The \(T^{3/2}\) scaling is a clean prediction of the non-interacting (ideal) gas model; real condensates deviate from it in ways that are themselves instructive. But the broad shape is correct: a sharp transition, a growing condensate fraction, and at \(T = 0\), in principle, every atom in the same single-particle ground state.</p>
+
+      <!-- Diagram 1: BEC transition schematic -->
+      <div class="diagram-block">
+        <svg viewBox="0 0 560 230" xmlns="http://www.w3.org/2000/svg" aria-label="Diagram showing energy level occupation in thermal gas vs BEC">
+
+          <!-- ---- LEFT PANEL: Thermal gas ---- -->
+          <!-- Energy levels -->
+          <line x1="30" y1="195" x2="230" y2="195" stroke="#d0c9c0" stroke-width="1.5"/>
+          <line x1="30" y1="162" x2="230" y2="162" stroke="#d0c9c0" stroke-width="1.5"/>
+          <line x1="30" y1="129" x2="230" y2="129" stroke="#d0c9c0" stroke-width="1.5"/>
+          <line x1="30" y1="96"  x2="230" y2="96"  stroke="#d0c9c0" stroke-width="1.5"/>
+          <line x1="30" y1="63"  x2="230" y2="63"  stroke="#d0c9c0" stroke-width="1.5"/>
+
+          <!-- Energy axis arrow -->
+          <line x1="18" y1="200" x2="18" y2="48" stroke="#a09890" stroke-width="1.2"/>
+          <polygon points="18,44 15,54 21,54" fill="#a09890"/>
+          <text x="12" y="130" font-family="Georgia, serif" font-size="10" fill="#8a8078" text-anchor="middle" transform="rotate(-90, 12, 130)">energy</text>
+
+          <!-- Atoms: distributed (Boltzmann-ish) -->
+          <!-- Level ε₀ (bottom): 4 atoms -->
+          <circle cx="88"  cy="187" r="8" fill="#2a6b6b" opacity="0.85"/>
+          <circle cx="108" cy="187" r="8" fill="#2a6b6b" opacity="0.85"/>
+          <circle cx="128" cy="187" r="8" fill="#2a6b6b" opacity="0.85"/>
+          <circle cx="148" cy="187" r="8" fill="#2a6b6b" opacity="0.85"/>
+          <!-- Level ε₁: 3 atoms -->
+          <circle cx="98"  cy="154" r="8" fill="#2a6b6b" opacity="0.75"/>
+          <circle cx="118" cy="154" r="8" fill="#2a6b6b" opacity="0.75"/>
+          <circle cx="138" cy="154" r="8" fill="#2a6b6b" opacity="0.75"/>
+          <!-- Level ε₂: 2 atoms -->
+          <circle cx="108" cy="121" r="8" fill="#2a6b6b" opacity="0.60"/>
+          <circle cx="128" cy="121" r="8" fill="#2a6b6b" opacity="0.60"/>
+          <!-- Level ε₃: 1 atom -->
+          <circle cx="118" cy="88" r="8" fill="#2a6b6b" opacity="0.45"/>
+          <!-- Level ε₄: 1 atom -->
+          <circle cx="118" cy="55" r="8" fill="#2a6b6b" opacity="0.30"/>
+
+          <!-- Label -->
+          <text x="130" y="220" font-family="Georgia, serif" font-size="12" fill="#6B6460" text-anchor="middle" font-style="italic">T &gt; T<tspan baseline-shift="sub" font-size="9">c</tspan></text>
+          <text x="130" y="16" font-family="Georgia, serif" font-size="12.5" fill="#3d3731" text-anchor="middle">thermal gas</text>
+
+          <!-- Divider -->
+          <line x1="275" y1="14" x2="275" y2="215" stroke="#E0D9D0" stroke-width="1" stroke-dasharray="4,3"/>
+
+          <!-- ---- RIGHT PANEL: BEC ---- -->
+          <!-- Energy levels -->
+          <line x1="320" y1="195" x2="535" y2="195" stroke="#d0c9c0" stroke-width="1.5"/>
+          <line x1="320" y1="162" x2="535" y2="162" stroke="#d0c9c0" stroke-width="1.5"/>
+          <line x1="320" y1="129" x2="535" y2="129" stroke="#d0c9c0" stroke-width="1.5"/>
+          <line x1="320" y1="96"  x2="535" y2="96"  stroke="#d0c9c0" stroke-width="1.5"/>
+          <line x1="320" y1="63"  x2="535" y2="63"  stroke="#d0c9c0" stroke-width="1.5"/>
+
+          <!-- Energy axis arrow -->
+          <line x1="308" y1="200" x2="308" y2="48" stroke="#a09890" stroke-width="1.2"/>
+          <polygon points="308,44 305,54 311,54" fill="#a09890"/>
+
+          <!-- Atoms: condensate at ground state -->
+          <!-- ε₀: 8 atoms — the condensate -->
+          <circle cx="335" cy="187" r="8" fill="#2a6b6b" opacity="0.92"/>
+          <circle cx="353" cy="187" r="8" fill="#2a6b6b" opacity="0.92"/>
+          <circle cx="371" cy="187" r="8" fill="#2a6b6b" opacity="0.92"/>
+          <circle cx="389" cy="187" r="8" fill="#2a6b6b" opacity="0.92"/>
+          <circle cx="407" cy="187" r="8" fill="#2a6b6b" opacity="0.92"/>
+          <circle cx="425" cy="187" r="8" fill="#2a6b6b" opacity="0.92"/>
+          <circle cx="443" cy="187" r="8" fill="#2a6b6b" opacity="0.92"/>
+          <circle cx="461" cy="187" r="8" fill="#2a6b6b" opacity="0.92"/>
+          <!-- ε₁: 1 faint thermal atom -->
+          <circle cx="420" cy="154" r="8" fill="#2a6b6b" opacity="0.30"/>
+          <!-- ε₂: 1 very faint -->
+          <circle cx="420" cy="121" r="8" fill="#2a6b6b" opacity="0.15"/>
+
+          <!-- Brace / annotation for condensate -->
+          <path d="M 480 180 Q 490 180 490 187 Q 490 194 480 194" fill="none" stroke="#2a6b6b" stroke-width="1.3" opacity="0.7"/>
+          <text x="497" y="192" font-family="Georgia, serif" font-size="10.5" fill="#2a6b6b" font-style="italic">n₀ → N</text>
+
+          <!-- Label -->
+          <text x="420" y="220" font-family="Georgia, serif" font-size="12" fill="#6B6460" text-anchor="middle" font-style="italic">T &lt; T<tspan baseline-shift="sub" font-size="9">c</tspan></text>
+          <text x="420" y="16" font-family="Georgia, serif" font-size="12.5" fill="#3d3731" text-anchor="middle">Bose-Einstein condensate</text>
+        </svg>
+        <p class="diagram-caption">As temperature drops below T<sub>c</sub>, atoms pile into the ground state. The same number of atoms now occupy a single quantum state — a macroscopic occupation with no classical analogue.</p>
+      </div>
+
+      <p>What this transition is not, importantly, is a spatial ordering. The atoms remain spread throughout the trap. The order that emerges is in phase space, not real space — and capturing it precisely requires the language of the order parameter and long-range coherence, which I will come to shortly.</p>
+
+      <!-- =============================================
+           SECTION 2: INTERACTIONS
+      ============================================== -->
+      <h2>Two Kinds of Interaction</h2>
+
+      <p>The ideal Bose gas captures the essential logic of BEC. It does not capture what actual condensates do — because actual atoms interact, and those interactions are not a small perturbation. They determine the density profile, the stability, the collective excitations, and — in my case — the entire structure of the vortex phase diagram.</p>
+
+      <p>In the ultracold, dilute regime relevant to BEC experiments, two-body interactions come in two qualitatively different forms.</p>
+
+      <p>The first is the contact interaction. At the low energies and densities of a BEC, two-atom collisions are entirely dominated by s-wave scattering — the lowest angular momentum channel. The actual short-range potential between atoms (a complicated Lennard-Jones landscape of quantum-mechanical repulsion and van der Waals attraction) can be replaced, without loss of physical accuracy in this limit, by a much simpler pseudo-potential,</p>
+
+      <div class="math-display">
+        \[ V_s(\mathbf{r}) = g_s\,\delta(\mathbf{r}) \qquad \text{where} \qquad g_s = \frac{4\pi\hbar^2}{m}\,a_s \]
+        <span class="math-label">contact interaction pseudo-potential</span>
+      </div>
+
+      <p>The entire interaction is encoded in one number: the s-wave scattering length \(a_s\). Positive \(a_s\) means effective repulsion; negative means attraction. Crucially, \(a_s\) can be tuned experimentally across a wide range — including through zero to large positive or large negative values — using Feshbach resonances: magnetic-field resonances that couple the two-body scattering state to a near-threshold molecular bound state. This tunability is one of the great practical advantages of ultracold atomic systems.</p>
+
+      <p>The second interaction is the one that drove my thesis. Dysprosium atoms in their ground state carry a magnetic moment of approximately ten Bohr magnetons — an unusually large value. In an applied external magnetic field, these dipoles align, and they interact through the magnetic dipole-dipole potential,</p>
+
+      <div class="math-display">
+        \[ V_{dd}(r,\theta) = \frac{\mu_0\,\mu_m^2}{4\pi}\,\frac{1 - 3\cos^2\theta}{r^3} \]
+        <span class="math-label">dipole-dipole interaction</span>
+      </div>
+
+      <p>where \(r\) is the inter-atomic separation and \(\theta\) is the angle between the line joining the two atoms and the direction of the external field.</p>
+
+      <!-- Diagram 2: Contact vs Dipolar -->
+      <div class="diagram-block">
+        <svg viewBox="0 0 560 200" xmlns="http://www.w3.org/2000/svg" aria-label="Comparison of contact interaction (isotropic) with dipolar interaction (anisotropic)">
+
+          <!-- ---- LEFT: Contact interaction ---- -->
+          <text x="130" y="20" font-family="Georgia, serif" font-size="12.5" fill="#3d3731" text-anchor="middle">contact interaction</text>
+
+          <!-- Atom -->
+          <circle cx="130" cy="105" r="22" fill="#2a6b6b" opacity="0.15" stroke="#2a6b6b" stroke-width="1.2" stroke-dasharray="4,3"/>
+          <circle cx="130" cy="105" r="12" fill="#2a6b6b" opacity="0.8"/>
+
+          <!-- Isotropic range ring -->
+          <circle cx="130" cy="105" r="50" fill="none" stroke="#2a6b6b" stroke-width="1" opacity="0.25" stroke-dasharray="3,4"/>
+
+          <!-- Label: isotropic -->
+          <text x="130" y="175" font-family="Georgia, serif" font-size="11" fill="#6B6460" text-anchor="middle" font-style="italic">isotropic, short-range</text>
+          <text x="130" y="190" font-family="var(--mono), monospace" font-size="10" fill="#8a8078" text-anchor="middle">∝ δ(r)</text>
+
+          <!-- Divider -->
+          <line x1="275" y1="10" x2="275" y2="195" stroke="#E0D9D0" stroke-width="1" stroke-dasharray="4,3"/>
+
+          <!-- ---- RIGHT: Dipolar interaction ---- -->
+          <text x="420" y="20" font-family="Georgia, serif" font-size="12.5" fill="#3d3731" text-anchor="middle">dipolar interaction</text>
+
+          <!-- External field arrow (vertical, pointing up) -->
+          <line x1="420" y1="170" x2="420" y2="30" stroke="#c08040" stroke-width="1.3" stroke-dasharray="3,4" opacity="0.7"/>
+          <polygon points="420,27 416,38 424,38" fill="#c08040" opacity="0.7"/>
+          <text x="432" y="50" font-family="Georgia, serif" font-size="10" fill="#c08040" font-style="italic">B</text>
+
+          <!-- Head-to-tail pair (attractive, along field axis) -->
+          <!-- Top atom -->
+          <circle cx="390" cy="70" r="11" fill="#2a6b6b" opacity="0.85"/>
+          <!-- Dipole arrow (up) -->
+          <line x1="390" y1="64" x2="390" y2="54" stroke="#fff" stroke-width="1.8"/>
+          <polygon points="390,51 387,58 393,58" fill="#fff"/>
+
+          <!-- Bottom atom -->
+          <circle cx="390" cy="115" r="11" fill="#2a6b6b" opacity="0.85"/>
+          <!-- Dipole arrow (up) -->
+          <line x1="390" y1="109" x2="390" y2="99" stroke="#fff" stroke-width="1.8"/>
+          <polygon points="390,96 387,103 393,103" fill="#fff"/>
+
+          <!-- Attractive arrow between head-to-tail pair -->
+          <path d="M 390 83 Q 370 92 390 102" fill="none" stroke="#c65656" stroke-width="1.5"/>
+          <polygon points="390,102 385,93 395,93" fill="#c65656"/>
+          <text x="352" y="96" font-family="Georgia, serif" font-size="10" fill="#c65656" font-style="italic">attract</text>
+
+          <!-- Angle theta -->
+          <path d="M 420 90 A 18 18 0 0 1 411 75" fill="none" stroke="#c08040" stroke-width="1" opacity="0.8"/>
+          <text x="437" y="85" font-family="Georgia, serif" font-size="11" fill="#c08040" font-style="italic">θ ≈ 0°</text>
+
+          <!-- Side-by-side pair (repulsive, perpendicular to field) -->
+          <!-- Left atom -->
+          <circle cx="465" cy="115" r="11" fill="#2a6b6b" opacity="0.85"/>
+          <line x1="465" y1="109" x2="465" y2="99" stroke="#fff" stroke-width="1.8"/>
+          <polygon points="465,96 462,103 468,103" fill="#fff"/>
+
+          <!-- Right atom -->
+          <circle cx="510" cy="115" r="11" fill="#2a6b6b" opacity="0.85"/>
+          <line x1="510" y1="109" x2="510" y2="99" stroke="#fff" stroke-width="1.8"/>
+          <polygon points="510,96 507,103 513,103" fill="#fff"/>
+
+          <!-- Repulsive arrow -->
+          <path d="M 476 115 L 499 115" fill="none" stroke="#4a80b0" stroke-width="1.5"/>
+          <polygon points="476,115 483,111 483,119" fill="#4a80b0"/>
+          <polygon points="499,115 492,111 492,119" fill="#4a80b0"/>
+          <text x="487" y="135" font-family="Georgia, serif" font-size="10" fill="#4a80b0" font-style="italic" text-anchor="middle">repel</text>
+          <text x="487" y="155" font-family="Georgia, serif" font-size="10.5" fill="#8a8078" text-anchor="middle" font-style="italic">θ = 90°</text>
+
+          <!-- Right panel label -->
+          <text x="440" y="185" font-family="Georgia, serif" font-size="11" fill="#6B6460" text-anchor="middle" font-style="italic">anisotropic, long-range</text>
+          <text x="440" y="198" font-family="var(--mono), monospace" font-size="10" fill="#8a8078" text-anchor="middle">∝ (1 − 3cos²θ) / r³</text>
+        </svg>
+        <p class="diagram-caption">The contact interaction (left) is isotropic: it treats every direction the same. The dipolar interaction (right) is fundamentally anisotropic: head-to-tail dipoles attract; side-by-side dipoles repel. The angular factor \(1 - 3\cos^2\theta\) changes sign at \(\theta \approx 54.7°\) — the magic angle of dipolar physics.</p>
+      </div>
+
+      <p>Two things about the dipolar interaction set it apart from the contact term. First, it is long-range: the \(r^{-3}\) decay means dipolar interactions extend across the cloud in a way that a delta function cannot. Second, it is anisotropic: the factor \((1-3\cos^2\theta)\) is negative (attractive) when atoms are aligned head-to-tail along the field direction, and positive (repulsive) when they sit side-by-side. At \(\theta \approx 54.7°\) — the so-called magic angle — the interaction passes through zero.</p>
+
+      <p>The relative strength of dipolar to contact interactions is captured by a single dimensionless parameter,</p>
+
+      <div class="math-display">
+        \[ \epsilon_{dd} = \frac{\mu_0\,\mu_m^2\,m}{12\pi\hbar^2\,a_s} \]
+        <span class="math-label">dipolar strength parameter</span>
+      </div>
+
+      <p>When \(\epsilon_{dd} \ll 1\), the contact interaction dominates and the physics is well-approximated by the simpler isotropic model. When \(\epsilon_{dd} \gtrsim 1\), dipolar effects become important and the condensate begins to explore qualitatively new territory — including the possibility of instability and collapse, and the anisotropic phase diagrams that my thesis was about.</p>
+
+      <!-- =============================================
+           SECTION 3: GPE
+      ============================================== -->
+      <h2>One Equation for Everything</h2>
+
+      <p>The theoretical backbone of dilute BEC physics is the Gross-Pitaevskii equation. It is a nonlinear Schrödinger equation for the condensate wave function \(\psi(\mathbf{r})\), derived by assuming all atoms occupy the same single-particle state and minimising the total energy with respect to \(\psi\).</p>
+
+      <p>In a condensed system, the many-body wave function is approximated as a symmetric product of identical single-particle states. The total Hamiltonian includes kinetic energy, an external trapping potential \(V_{ext}(\mathbf{r})\) — in experiments, a magnetic or optical trap that confines the cloud — and the two-body contact interaction between particles. Minimising the resulting energy functional under the constraint of fixed particle number gives the time-independent GPE,</p>
+
+      <div class="math-display">
+        \[ \mu\,\psi(\mathbf{r}) = \left(-\frac{\hbar^2}{2m}\nabla^2 + V_{ext}(\mathbf{r}) + g_s\,|\psi(\mathbf{r})|^2\right)\psi(\mathbf{r}) \]
+        <span class="math-label">Gross-Pitaevskii equation (contact interaction)</span>
+      </div>
+
+      <p>The term \(g_s|\psi|^2\) is the mean-field interaction: each atom feels an effective potential proportional to the local density. This is what makes the equation nonlinear — \(\psi\) appears on both sides, and the interaction potential that \(\psi\) feels depends on \(\psi\) itself. The nonlinearity is the source of most of the interesting behaviour: solitons, vortices, collective oscillations, and the stability boundaries that dominate the phase diagram of a dipolar condensate.</p>
+
+      <p>For a condensate with dipolar interactions, an additional nonlocal term appears: \(\Phi_{dd}[\psi]\), the dipolar mean-field potential, which each atom feels from the entire cloud weighted by the dipole-dipole interaction kernel. And for a strongly dipolar gas like dysprosium, a third correction becomes essential. Quantum fluctuations beyond the mean field — the Lee-Huang-Yang (LHY) correction — contribute a term \(g_{qf}|\psi|^3\) that provides a stabilising quantum pressure against collapse. Together, in the rotating frame, these give the extended Gross-Pitaevskii equation (eGPE):</p>
+
+      <div class="math-display">
+        \[ \mu\,\psi = \left(-\frac{\hbar^2}{2m}\nabla^2 + V_{ext} + g_s\,|\psi|^2 + \Phi_{dd}[\psi] + g_{qf}\,|\psi|^3 - \hat\Omega\,L_z\right)\psi \]
+        <span class="math-label">extended GPE (eGPE) — rotating frame</span>
+      </div>
+
+      <p>The \(-\hat\Omega\,L_z\) term shifts the energy in proportion to the angular momentum, selecting ground states that carry rotation. The LHY coefficient \(g_{qf}\) depends on both the contact and dipolar interaction strengths — it grows with \(\epsilon_{dd}\), so in weakly dipolar condensates the correction is negligible, while in a dysprosium condensate it is the difference between stability and collapse. This is the equation my thesis was primarily concerned with solving numerically.</p>
+
+      <p>The Thomas-Fermi approximation provides a useful limit in which the kinetic energy term can be dropped entirely, leaving a simple algebraic equation for the density profile. For a harmonic trap, this gives an inverted parabola: the density falls smoothly to zero at the Thomas-Fermi radius, set by the balance between the trap and the repulsive mean-field pressure. The Thomas-Fermi profile is a good approximation far from vortex cores, where the density is smooth and the kinetic energy is small.</p>
+
+      <!-- =============================================
+           SECTION 4: ORDER AND ITS BREAKING
+      ============================================== -->
+      <h2>What Order Means</h2>
+
+      <p>There is a concept, older than BEC itself, that underpins much of condensed matter physics: long-range order. In a crystal, it refers to the periodic arrangement of atoms — the probability of finding an atom at position \(\mathbf{r}\) given one at the origin does not decay to zero as \(|\mathbf{r}|\to\infty\). For a superfluid, the analogous quantity is phase order, and the mathematical object that captures it is the one-body density matrix,</p>
+
+      <div class="math-display">
+        \[ \rho^{(1)}(\mathbf{r},\mathbf{r}') = \langle\,\hat{\psi}^\dagger(\mathbf{r})\,\hat{\psi}(\mathbf{r}')\,\rangle \]
+        <span class="math-label">one-body density matrix</span>
+      </div>
+
+      <p>where \(\hat{\psi}^\dagger\) and \(\hat{\psi}\) are the quantum field operators that create and annihilate an atom. In a normal gas at any temperature, this quantity decays exponentially as the separation \(|\mathbf{r} - \mathbf{r}'|\) grows: coherence between two points vanishes at large distances. In a BEC, it approaches a nonzero constant:</p>
+
+      <div class="math-display">
+        \[ \lim_{|\mathbf{r} - \mathbf{r}'| \to \infty} \rho^{(1)}(\mathbf{r},\mathbf{r}') = n_0 \neq 0 \]
+        <span class="math-label">off-diagonal long-range order (ODLRO)</span>
+      </div>
+
+      <p>This is <em>off-diagonal long-range order</em> — ODLRO — and it is the precise mathematical definition of Bose-Einstein condensation. The condensate fraction \(n_0/n\) is the largest eigenvalue of the one-body density matrix.</p>
+
+      <p>I found ODLRO genuinely difficult the first time I encountered it. The difficulty is that it is not spatial structure — not atoms arranged in a particular pattern — but phase coherence. Two points in the condensate, separated by macroscopic distances, share a common quantum phase. Remove an atom from one point and add it to another, and the process has a definite quantum amplitude that does not vanish no matter how far apart the points are. This is what it means for the condensate wave function to be a well-defined, extended object.</p>
+
+      <p>The emergence of ODLRO corresponds to spontaneous symmetry breaking. The Hamiltonian is invariant under multiplying all wave functions by an arbitrary global phase factor \(e^{i\alpha}\) — a continuous U(1) symmetry. In the condensed phase, the system picks a particular value of \(\alpha\) and commits to it. The condensate wave function \(\psi\), with its specific phase, is the order parameter: the quantity that is zero above the transition and nonzero below it. It encodes both the density profile and — crucially — the phase structure of the condensate, which is where all the superfluid dynamics live.</p>
+
+      <!-- =============================================
+           SECTION 5: VORTICES
+      ============================================== -->
+      <h2>The Physics of Not Rotating</h2>
+
+      <p>Here is something counterintuitive about superfluids: they cannot rotate. Or rather, they resist rotation with a rigidity that follows directly from their quantum nature — and then accommodate it, when forced to, through a mechanism that has no classical analogue.</p>
+
+      <p>Write the condensate wave function as \(\psi(\mathbf{r}) = f(\mathbf{r})\,e^{i\phi(\mathbf{r})}\), where \(f\) is the real amplitude and \(\phi\) is the phase. The superfluid velocity field is then</p>
+
+      <div class="math-display">
+        \[ \mathbf{v} = \frac{\hbar}{m}\,\nabla\phi \]
+        <span class="math-label">superfluid velocity field</span>
+      </div>
+
+      <p>Because \(\mathbf{v}\) is the gradient of a scalar function, its curl is identically zero: \(\nabla \times \mathbf{v} = 0\). A classical fluid in solid-body rotation has uniform nonzero vorticity everywhere. A superfluid has zero vorticity — everywhere that the phase is well-defined.</p>
+
+      <!-- SVG 3: Single vortex structure -->
+      <div class="diagram-block">
+        <svg viewBox="0 0 560 220" xmlns="http://www.w3.org/2000/svg" aria-label="Diagram of a single quantized vortex in a BEC">
+
+          <!-- ---- LEFT: Density profile cross-section ---- -->
+          <text x="130" y="18" font-family="Georgia, serif" font-size="12.5" fill="#3d3731" text-anchor="middle">density profile</text>
+
+          <!-- Density profile curve -->
+          <!-- x-axis -->
+          <line x1="30" y1="155" x2="235" y2="155" stroke="#c0b8b0" stroke-width="1.2"/>
+          <!-- y-axis -->
+          <line x1="130" y1="165" x2="130" y2="30" stroke="#c0b8b0" stroke-width="1.2"/>
+          <polygon points="130,27 127,38 133,38" fill="#c0b8b0"/>
+          <text x="142" y="36" font-family="Georgia, serif" font-size="10" fill="#8a8078" font-style="italic">n</text>
+          <text x="238" y="158" font-family="Georgia, serif" font-size="10" fill="#8a8078" font-style="italic">r</text>
+
+          <!-- Density curve: n(r) ∝ tanh²(r/ξ) for a vortex -->
+          <!-- Left side (negative r) -->
+          <path d="M 40,155 C 55,154 70,148 85,133 C 96,121 105,105 115,80 C 120,67 125,52 130,40" fill="none" stroke="#2a6b6b" stroke-width="2"/>
+          <!-- Right side (positive r) -->
+          <path d="M 130,40 C 135,52 140,67 145,80 C 155,105 164,121 175,133 C 190,148 205,154 220,155" fill="none" stroke="#2a6b6b" stroke-width="2"/>
+
+          <!-- Healing length label -->
+          <line x1="130" y1="95" x2="160" y2="95" stroke="#c08040" stroke-width="1" stroke-dasharray="3,3"/>
+          <line x1="160" y1="90" x2="160" y2="162" stroke="#c08040" stroke-width="1" stroke-dasharray="3,3"/>
+          <text x="175" y="92" font-family="Georgia, serif" font-size="10.5" fill="#c08040" font-style="italic">ξ</text>
+          <text x="175" y="106" font-family="Georgia, serif" font-size="9.5" fill="#c08040">(healing length)</text>
+
+          <!-- Core label -->
+          <text x="130" y="178" font-family="Georgia, serif" font-size="10" fill="#6B6460" text-anchor="middle" font-style="italic">vortex core: n → 0</text>
+
+          <!-- Divider -->
+          <line x1="275" y1="10" x2="275" y2="215" stroke="#E0D9D0" stroke-width="1" stroke-dasharray="4,3"/>
+
+          <!-- ---- RIGHT: Velocity / phase winding ---- -->
+          <text x="420" y="18" font-family="Georgia, serif" font-size="12.5" fill="#3d3731" text-anchor="middle">phase winding</text>
+
+          <!-- Condensate circle (top view) -->
+          <circle cx="420" cy="118" r="80" fill="#e8f0ef" stroke="#c0cece" stroke-width="1"/>
+
+          <!-- Vortex core -->
+          <circle cx="420" cy="118" r="12" fill="#3d3731" opacity="0.15" stroke="#3d3731" stroke-width="1.2"/>
+          <circle cx="420" cy="118" r="4" fill="#3d3731" opacity="0.5"/>
+          <text x="420" y="145" font-family="Georgia, serif" font-size="9.5" fill="#3d3731" text-anchor="middle" font-style="italic">core</text>
+
+          <!-- Circulation arrows (counterclockwise) -->
+          <path d="M 420 50 A 68 68 0 0 0 488 118" fill="none" stroke="#2a6b6b" stroke-width="1.8" marker-end="url(#arrow-teal)"/>
+          <path d="M 488 118 A 68 68 0 0 0 420 186" fill="none" stroke="#2a6b6b" stroke-width="1.8" marker-end="url(#arrow-teal)"/>
+          <path d="M 420 186 A 68 68 0 0 0 352 118" fill="none" stroke="#2a6b6b" stroke-width="1.8" marker-end="url(#arrow-teal)"/>
+          <path d="M 352 118 A 68 68 0 0 0 420 50" fill="none" stroke="#2a6b6b" stroke-width="1.8" marker-end="url(#arrow-teal)"/>
+
+          <!-- Phase winding label -->
+          <text x="420" y="100" font-family="Georgia, serif" font-size="11" fill="#2a6b6b" text-anchor="middle" font-style="italic">Δφ = 2π</text>
+
+          <!-- Quantized circulation label -->
+          <text x="420" y="200" font-family="var(--mono), monospace" font-size="10.5" fill="#6B6460" text-anchor="middle">Γ = h/m</text>
+
+          <!-- Arrow marker -->
+          <defs>
+            <marker id="arrow-teal" markerWidth="8" markerHeight="8" refX="4" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L7,3 z" fill="#2a6b6b"/>
+            </marker>
+          </defs>
+        </svg>
+        <p class="diagram-caption">A quantized vortex seen from two perspectives. Left: the density profile — the condensate density dips to exactly zero at the core over a length scale ξ (the healing length), then recovers. Right: looking down the vortex axis, the phase of the condensate wave function winds by exactly 2π around the core, producing a quantized circulation Γ = h/m.</p>
+      </div>
+
+      <p>The phase need not be defined everywhere. If \(\phi\) has a singularity at a point — if the phase winds by \(2\pi l\) (for integer \(l\)) as you traverse a closed loop around it — then the wave function remains single-valued while the circulation integral acquires a quantised value,</p>
+
+      <div class="math-display">
+        \[ \Gamma = \oint \mathbf{v} \cdot d\mathbf{l} = l\,\frac{h}{m} \]
+        <span class="math-label">quantized circulation</span>
+      </div>
+
+      <p>The integer \(l\) is the winding number. The density must vanish at the singularity itself — otherwise the phase winding would cost infinite kinetic energy in the gradient \(\nabla\phi\). The result is a vortex: a topological defect in which the condensate density dips to zero at the core, while a circulating velocity field winds around it. The healing length \(\xi = \hbar/\sqrt{2mng_s}\) sets the size of the core.</p>
+
+      <p>When a BEC is set in rotation — by stirring the condensate with a focused laser, or by rotating the trapping potential — it cannot accommodate the rotation by spinning like a rigid body. Instead, it nucleates vortices. Each vortex carries one quantum of angular momentum, and the system threads as many vortices as needed to match the imposed rotation. In an isotropic condensate, these vortices repel each other (via the kinetic energy of their velocity fields) and arrange themselves in a regular triangular lattice — the Abrikosov vortex lattice, closely analogous to the vortex structure of Type II superconductors in a magnetic field. The lattice spacing and geometry are set by the balance between confinement, rotation, and inter-vortex repulsion.</p>
+
+      <!-- Interactive: Vortex lattice -->
+      <div class="interactive-block">
+        <div class="interactive-header">
+          <div class="interactive-dot"></div>
+          <span class="interactive-title">Live · Rotating BEC · Vortex Lattice</span>
+        </div>
+        <div class="interactive-inner">
+          <div id="vortex-sketch"></div>
+          <div class="slider-row">
+            <label for="omega-slider">rotation Ω̂</label>
+            <input type="range" id="omega-slider" min="0" max="3" step="1" value="2"
+                   oninput="window.setOmega(this.value)">
+            <span id="omega-val">3 vortices · triangular</span>
+          </div>
+          <p class="interactive-caption">The phase of the condensate wave function is shown as colour (hue = phase angle). Each dark core is a vortex, where the density drops to zero and the phase winds by 2π. Increasing rotation nucleates more vortices, which arrange into a triangular lattice. The slow rotation of the pattern reflects the frame-dependent dynamics of the lattice.</p>
+        </div>
+      </div>
+
+      <p>The number of vortices and their arrangement is a direct fingerprint of the condensate's angular momentum state. This is what makes rotating BECs such a clean experimental and theoretical laboratory: the discrete, visually observable vortex lattice encodes the quantum state of the system. You can count the vortices in an absorption image and read off the angular momentum.</p>
+
+      <!-- =============================================
+           SECTION 6: THE DIPOLAR DIFFERENCE
+      ============================================== -->
+      <h2>The Dipolar Difference</h2>
+
+      <p>In an isotropic condensate — one where only the contact interaction matters — vortex cores are round, their size is set universally by the healing length, and the triangular lattice is the ground state at any rotation rate. Add dipolar interactions, and none of this remains true.</p>
+
+      <p>The anisotropy of \(V_{dd}\) means that the effective interaction energy between two regions of the condensate depends on the direction connecting them relative to the applied field. In the Born approximation, the combined interaction potential takes the form</p>
+
+      <div class="math-display">
+        \[ V_{\text{int}} = \frac{g_s}{2}\left(1 + \epsilon_{dd}\,(3\cos^2\theta - 1)\right) \]
+        <span class="math-label">effective interaction potential</span>
+      </div>
+
+      <p>Head-to-tail alignment (\(\theta = 0\)) enhances the interaction; side-by-side (\(\theta = \pi/2\)) reduces it. When \(\epsilon_{dd} > 1\), the average interaction over all angles becomes net attractive, and the condensate approaches a mean-field instability — a tendency to collapse along the dipolar axis unless stabilised by quantum fluctuations or geometric confinement. My thesis operated in the regime approaching but not reaching this instability, where the interplay between contact and dipolar terms is richest.</p>
+
+      <p>The anisotropy has a direct consequence for vortices. A vortex in a dipolar condensate is no longer rotationally symmetric — the restoring force that sets the core shape depends on direction, and the core deforms into an ellipse aligned with the dipolar axis. More significantly, the vortex-vortex interaction acquires a directional dependence: vortices prefer certain separations and orientations relative to the field. The triangular Abrikosov lattice, which relies on the isotropy of the inter-vortex repulsion, is no longer guaranteed to be the ground state. As \(\epsilon_{dd}\) increases, the lattice can undergo structural transitions — becoming elongated, square, stripe-like, or giving way to entirely different configurations.</p>
+
+      <p>These transitions are genuine phase boundaries: the system reorganises its topological defects in response to the competition between kinetic energy, trap geometry, contact repulsion, and the long-range anisotropic force. Each boundary represents a point where the energy balance tips from one vortex configuration to another — sometimes continuously, sometimes as a first-order jump.</p>
+
+      <!-- =============================================
+           SECTION 7: CGM
+      ============================================== -->
+      <h2>The Conjugate Gradient Method</h2>
+
+      <p>The problem of finding the eGPE ground state is a variational one: minimise the energy functional</p>
+
+      <div class="math-display">
+        \[ E[\psi] = \int \left[ \frac{\hbar^2}{2m}|\nabla\psi|^2 + V_{ext}|\psi|^2 + \frac{g_s}{2}|\psi|^4 + \frac{1}{2}\Phi_{dd}|\psi|^2 + \frac{2g_{qf}}{5}|\psi|^5 - \Omega\,\mathrm{Re}(\psi^*L_z\psi) \right] d^3r \]
+        <span class="math-label">energy functional of the eGPE</span>
+      </div>
+
+      <p>subject to the normalisation constraint \(\langle\psi|\psi\rangle = N\). The eGPE itself is the Euler-Lagrange equation of this functional — its ground-state solution is the \(\psi\) that minimises \(E\) at fixed particle number. This reformulation is useful because it turns a differential equation problem into an optimisation problem, and optimisation has a rich toolkit.</p>
+
+      <p>The gradient of \(E\) with respect to \(\psi^*\) is the eGPE residual:</p>
+
+      <div class="math-display">
+        \[ \nabla_{\psi^*} E = H\psi - \mu\psi \]
+        <span class="math-label">energy gradient — vanishes at the ground state</span>
+      </div>
+
+      <p>where \(H\) is the full eGPE operator and \(\mu = \langle\psi|H|\psi\rangle/\langle\psi|\psi\rangle\) is the chemical potential, which appears as the Lagrange multiplier enforcing normalisation. When \(\psi\) is the true ground state, this gradient vanishes exactly. The convergence criterion in the thesis was \(\|\nabla E\| < 10^{-14}\).</p>
+
+      <p>Simple gradient descent along \(-\nabla E\) converges, but inefficiently — it zig-zags across narrow valleys in the energy landscape rather than traversing them directly. The conjugate gradient improvement is the key insight: at each step \(k\), descend not in the direction of the current gradient \(g_k\) but along a direction \(d_k\) that is conjugate (orthogonal in a generalised sense) to all previous directions. Using the Polak-Ribière formula, the search direction is updated as</p>
+
+      <div class="math-display">
+        \[ d_k = -\tilde{g}_k + \beta_k\, d_{k-1}, \qquad \beta_k = \frac{\langle \tilde{g}_k,\; g_k - g_{k-1} \rangle}{\langle \tilde{g}_{k-1},\; g_{k-1} \rangle} \]
+        <span class="math-label">Polak-Ribière conjugate direction update</span>
+      </div>
+
+      <p>where \(g_k = H\psi_k - \mu_k\psi_k\) is the gradient at step \(k\) and \(\tilde{g}_k = P^{-1}g_k\) is the preconditioned gradient. An approximate line search finds the optimal step size \(\alpha_k\) along \(d_k\), and the update is \(\psi_{k+1} = (\psi_k + \alpha_k d_k)/\|\psi_k + \alpha_k d_k\|\) — the denominator enforcing the normalisation constraint at each step.</p>
+
+      <p>The preconditioner \(P\) is where much of the practical engineering sits. A good preconditioner approximates the Hessian of \(E\), mapping the search into a better-conditioned space and reducing the number of iterations to convergence. The thesis tested several variants. \(P_\Delta\) uses only the kinetic (Laplacian) operator — appropriate near vortex cores where density gradients are steep and kinetic energy dominates. \(P_V\) incorporates the external potential and mean-field interactions. \(PC_1\) and \(PC_2\) combine kinetic and potential parts with different weighting schemes. \(P_{La}\) uses the bare Laplace operator. The PRK preconditioner, based on a modified kinetic operator from Ronen, showed the most substantial improvement specifically for the four-vortex ground state — a case whose energy landscape contains closely spaced near-degenerate structures that challenge poorly-conditioned searches. For the simpler single-vortex case, all preconditioners converged in roughly 100–120 seconds with little differentiation between them.</p>
+
+      <!-- =============================================
+           SECTION 8: ITE
+      ============================================== -->
+      <h2>Imaginary Time Evolution</h2>
+
+      <p>The second method takes a completely different point of departure. Rather than optimising the energy directly, Imaginary Time Evolution evolves the wavefunction in a fictitious time coordinate until it relaxes into the ground state by physical selection.</p>
+
+      <p>The substitution \(t \to -i\tau\) turns the time-dependent eGPE from a Schrödinger equation into a diffusion equation:</p>
+
+      <div class="math-display">
+        \[ \hbar\,\frac{\partial\psi}{\partial\tau} = -(H - \mu)\psi \]
+        <span class="math-label">eGPE in imaginary time</span>
+      </div>
+
+      <p>Formally, the solution is \(\psi(\tau) = e^{-(H-\mu)\tau/\hbar}\psi(0)\). Expanding the initial state in energy eigenstates, \(\psi(0) = \sum_n c_n\phi_n\), each component evolves as \(c_n\phi_n\,e^{-(E_n-\mu)\tau/\hbar}\). Every component with \(E_n > \mu\) decays exponentially; the ground state \(\phi_0\), whose energy is lowest, decays slowest and comes to dominate. After renormalising at each step to maintain unit norm, the procedure converges — in principle, always — to \(\psi_0\).</p>
+
+      <p>The computational difficulty is that \(H\) contains non-commuting parts. The kinetic-rotation operator \(T = -\hbar^2/(2m)\nabla^2 - \hat\Omega\,L_z\) is most naturally evaluated in Fourier space, where the Laplacian is diagonal. The potential operator \(V = V_{ext} + g_s|\psi|^2 + \Phi_{dd}[\psi] + g_{qf}|\psi|^3\) is diagonal in real space. Because \(T\) and \(V\) do not commute, the exact propagator does not factorise:</p>
+
+      <div class="math-display">
+        \[ e^{-(T+V)\,d\tau} \;\neq\; e^{-T\,d\tau}\,e^{-V\,d\tau} \]
+        <span class="math-label">the non-commutativity obstacle</span>
+      </div>
+
+      <p>Strang splitting resolves this with a symmetric decomposition accurate to second order in \(d\tau\):</p>
+
+      <div class="math-display">
+        \[ e^{-(T+V)\,d\tau} = e^{-T\,d\tau/2}\,e^{-V\,d\tau}\,e^{-T\,d\tau/2} + \mathcal{O}(d\tau^3) \]
+        <span class="math-label">Strang splitting — second-order, symmetric</span>
+      </div>
+
+      <p>Each half-step of \(T\) is applied in Fourier space (FFT → pointwise multiply → IFFT), and the full \(V\) step is a pointwise multiplication in real space. The nonlocal dipolar term \(\Phi_{dd}[\psi]\) inside \(V\) is itself computed via FFT at each step: transform \(|\psi|^2\) to momentum space, multiply by the cut-off dipolar kernel \(\tilde{V}_{dd}(\mathbf{k})\), then inverse-transform to get the convolution.</p>
+
+      <p>A further complication: the rotation term \(L_z = -i\hbar(x\partial_y - y\partial_x)\) couples the \(x\) and \(y\) Fourier components, preventing a simple diagonal structure for the kinetic half-steps. The solution is an Alternating Direction Implicit (ADI) decomposition — splitting \(T\) into a symmetric sequence of directional half-steps, each acting on one spatial direction at a time. The resulting five-step sequence for one imaginary-time step is:</p>
+
+      <!-- SVG: Strang splitting pipeline -->
+      <div class="diagram-block">
+        <svg viewBox="0 0 700 130" xmlns="http://www.w3.org/2000/svg" aria-label="Five-step Strang splitting pipeline for ITE">
+
+          <!-- Background lane -->
+          <rect x="8" y="44" width="684" height="42" rx="4" fill="rgba(42,107,107,0.06)" stroke="none"/>
+
+          <!-- Arrow line -->
+          <line x1="8" y1="65" x2="692" y2="65" stroke="#c0b8b0" stroke-width="1.4"/>
+          <polygon points="692,65 682,61 682,69" fill="#c0b8b0"/>
+
+          <!-- Labels -->
+          <text x="14" y="38" font-family="Georgia, serif" font-size="12" fill="#3d3731" font-style="italic">ψ(τ)</text>
+          <text x="644" y="38" font-family="Georgia, serif" font-size="12" fill="#3d3731" font-style="italic">ψ(τ+dτ)</text>
+
+          <!-- Step 1: KinX -->
+          <rect x="28" y="47" width="98" height="36" rx="5" fill="#2a6b6b" opacity="0.80"/>
+          <text x="77" y="62" font-family="monospace" font-size="9" fill="#f5f2ed" text-anchor="middle">FFT x,z</text>
+          <text x="77" y="76" font-family="Georgia, serif" font-size="9.5" fill="#e8f0f0" text-anchor="middle" font-style="italic">e⁻T̃ₓ dτ/2</text>
+
+          <!-- Step 2: KinY -->
+          <rect x="144" y="47" width="98" height="36" rx="5" fill="#2a6b6b" opacity="0.80"/>
+          <text x="193" y="62" font-family="monospace" font-size="9" fill="#f5f2ed" text-anchor="middle">FFT y,z</text>
+          <text x="193" y="76" font-family="Georgia, serif" font-size="9.5" fill="#e8f0f0" text-anchor="middle" font-style="italic">e⁻T̃ᵧ dτ/2</text>
+
+          <!-- Step 3: V (middle, wider) -->
+          <rect x="260" y="42" width="180" height="46" rx="5" fill="#4a3060" opacity="0.85"/>
+          <text x="350" y="61" font-family="monospace" font-size="9" fill="#f5f2ed" text-anchor="middle">real space + FFT(Φ_dd)</text>
+          <text x="350" y="76" font-family="Georgia, serif" font-size="9.5" fill="#d8d0e8" text-anchor="middle" font-style="italic">e⁻ᵛ dτ · (V_ext + g_s|ψ|² + Φ_dd + g_qf|ψ|³)</text>
+
+          <!-- Step 4: KinY -->
+          <rect x="458" y="47" width="98" height="36" rx="5" fill="#2a6b6b" opacity="0.80"/>
+          <text x="507" y="62" font-family="monospace" font-size="9" fill="#f5f2ed" text-anchor="middle">FFT y,z</text>
+          <text x="507" y="76" font-family="Georgia, serif" font-size="9.5" fill="#e8f0f0" text-anchor="middle" font-style="italic">e⁻T̃ᵧ dτ/2</text>
+
+          <!-- Step 5: KinX -->
+          <rect x="574" y="47" width="98" height="36" rx="5" fill="#2a6b6b" opacity="0.80"/>
+          <text x="623" y="62" font-family="monospace" font-size="9" fill="#f5f2ed" text-anchor="middle">FFT x,z</text>
+          <text x="623" y="76" font-family="Georgia, serif" font-size="9.5" fill="#e8f0f0" text-anchor="middle" font-style="italic">e⁻T̃ₓ dτ/2</text>
+
+          <!-- Labels below -->
+          <text x="77" y="100" font-family="monospace" font-size="8.5" fill="#5a8080" text-anchor="middle">½ kin+rot X</text>
+          <text x="193" y="100" font-family="monospace" font-size="8.5" fill="#5a8080" text-anchor="middle">½ kin+rot Y</text>
+          <text x="350" y="100" font-family="monospace" font-size="8.5" fill="#7060a0" text-anchor="middle">full potential step</text>
+          <text x="507" y="100" font-family="monospace" font-size="8.5" fill="#5a8080" text-anchor="middle">½ kin+rot Y</text>
+          <text x="623" y="100" font-family="monospace" font-size="8.5" fill="#5a8080" text-anchor="middle">½ kin+rot X</text>
+
+          <!-- Symmetry brace -->
+          <line x1="28" y1="116" x2="672" y2="116" stroke="#c0b8b0" stroke-width="0.8"/>
+          <line x1="28" y1="111" x2="28" y2="121" stroke="#c0b8b0" stroke-width="0.8"/>
+          <line x1="672" y1="111" x2="672" y2="121" stroke="#c0b8b0" stroke-width="0.8"/>
+          <text x="350" y="129" font-family="monospace" font-size="8.5" fill="#8a8078" text-anchor="middle">symmetric X – Y – V – Y – X · one imaginary-time step dτ</text>
+
+        </svg>
+        <p class="diagram-caption">One imaginary-time step via the symmetric Strang splitting. Kinetic-rotation half-steps (teal) are applied in Fourier space — one FFT pair per direction. The central potential step (purple) runs in real space, with \(\Phi_{dd}\) computed via an additional FFT convolution. The symmetry of the sequence (X–Y–V–Y–X) ensures second-order accuracy in \(d\tau\).</p>
+      </div>
+
+      <p>Within each kinetic half-step, the Fourier-space multiplier encodes both the kinetic energy and the \(L_z\) coupling. For the x-direction, the exponent in the multiplier contains a term proportional to \(\hat\Omega \cdot R_y \cdot k_x\) — the real-space \(y\)-coordinate acting as a multiplicative operator in the mixed position-momentum representation. This is the essence of the ADI treatment: by handling one direction at a time, the two-dimensional coupling of \(L_z\) is decomposed into a sequence of one-dimensional problems, each amenable to a simple FFT evaluation.</p>
+
+      <p>The z-direction contributes only a pure kinetic factor \(e^{-\hbar^2k_z^2 d\tau/(4m)}\), since rotation is about the z-axis and \(L_z\) does not couple z to the transverse directions. The kinetic half-steps for x and y each involve both their own kinetic term and half the z kinetic contribution, which is why the code shows both \(k_x^2/2\) and \(k_z^2/4\) terms in the x-step exponential.</p>
+
+      <p>One important practical constraint: rotating-frame ITE requires \(d\tau < 10^{-6}\) for stability. Near a vortex core, the density gradient is steep and the kinetic energy is large — a step size that is too large causes the Strang splitting to over-amplify kinetic contributions and break the solution. Non-rotating condensates tolerate step sizes orders of magnitude larger; the rotating case is genuinely stiffer. This is one dimension in which CGM has an advantage: it uses a line search to choose its step size adaptively, rather than requiring a fixed \(d\tau\) set conservatively enough to accommodate the worst-case kinetic energy in the grid.</p>
+
+      <!-- =============================================
+           SECTION 9: CMM
+      ============================================== -->
+      <h2>The Cascadic Multigrid Method</h2>
+
+      <p>Both CGM and ITE share a structural inefficiency: on a 128³ grid, every iteration is expensive — FFTs scale as \(N\log N\) in each dimension — and convergence from a poor initial guess requires many iterations. The Cascadic Multigrid Method (CMM) addresses this by building the solution up through a hierarchy of grids, each initialised from the converged solution of the previous coarser one.</p>
+
+      <p>The procedure is a cascade. On the coarsest grid — typically 32³ grid points — the ground state is found starting from a simple Gaussian or vortex ansatz. This is computationally cheap: a 32³ grid has 64× fewer points than a 128³ one, and each iteration is correspondingly faster. Once converged, the coarse-grid wavefunction is interpolated to the next finer grid. This interpolated state — which already captures the large-scale structure of the ground state, including the number and rough positions of any vortices — serves as the initial guess for the fine-grid search, replacing the generic Gaussian that would otherwise be used.</p>
+
+      <!-- SVG: CMM cascade diagram -->
+      <div class="diagram-block">
+        <svg viewBox="0 0 680 250" xmlns="http://www.w3.org/2000/svg" aria-label="Cascadic Multigrid Method grid hierarchy">
+
+          <!-- Resolution labels -->
+          <text x="80" y="20" font-family="monospace" font-size="11" fill="#3d3731" text-anchor="middle">32³</text>
+          <text x="240" y="20" font-family="monospace" font-size="11" fill="#3d3731" text-anchor="middle">64³</text>
+          <text x="420" y="20" font-family="monospace" font-size="11" fill="#3d3731" text-anchor="middle">96³</text>
+          <text x="600" y="20" font-family="monospace" font-size="11" fill="#2a6b6b" text-anchor="middle" font-weight="bold">128³</text>
+
+          <!-- Grid 1: 32³ — coarse (4×4 cells visible) -->
+          <rect x="30" y="30" width="100" height="100" rx="3" fill="none" stroke="#c0b8b0" stroke-width="1.2"/>
+          <line x1="30" y1="55" x2="130" y2="55" stroke="#ddd8d2" stroke-width="0.8"/>
+          <line x1="30" y1="80" x2="130" y2="80" stroke="#ddd8d2" stroke-width="0.8"/>
+          <line x1="30" y1="105" x2="130" y2="105" stroke="#ddd8d2" stroke-width="0.8"/>
+          <line x1="55" y1="30" x2="55" y2="130" stroke="#ddd8d2" stroke-width="0.8"/>
+          <line x1="80" y1="30" x2="80" y2="130" stroke="#ddd8d2" stroke-width="0.8"/>
+          <line x1="105" y1="30" x2="105" y2="130" stroke="#ddd8d2" stroke-width="0.8"/>
+          <!-- Blob: wide blurry condensate -->
+          <ellipse cx="80" cy="80" rx="34" ry="30" fill="rgba(42,107,107,0.13)" stroke="none"/>
+          <ellipse cx="80" cy="80" rx="20" ry="17" fill="rgba(42,107,107,0.25)" stroke="none"/>
+          <ellipse cx="80" cy="80" rx="9" ry="8" fill="rgba(42,107,107,0.48)" stroke="none"/>
+          <!-- Blurry vortex hole -->
+          <circle cx="80" cy="80" r="4" fill="rgba(248,244,238,0.5)" stroke="none"/>
+
+          <!-- Grid 2: 64³ — medium (8×8 cells visible) -->
+          <rect x="190" y="30" width="100" height="100" rx="3" fill="none" stroke="#c0b8b0" stroke-width="1.2"/>
+          <line x1="190" y1="42.5" x2="290" y2="42.5" stroke="#e0dbd5" stroke-width="0.6"/>
+          <line x1="190" y1="55" x2="290" y2="55" stroke="#e0dbd5" stroke-width="0.6"/>
+          <line x1="190" y1="67.5" x2="290" y2="67.5" stroke="#e0dbd5" stroke-width="0.6"/>
+          <line x1="190" y1="80" x2="290" y2="80" stroke="#e0dbd5" stroke-width="0.6"/>
+          <line x1="190" y1="92.5" x2="290" y2="92.5" stroke="#e0dbd5" stroke-width="0.6"/>
+          <line x1="190" y1="105" x2="290" y2="105" stroke="#e0dbd5" stroke-width="0.6"/>
+          <line x1="190" y1="117.5" x2="290" y2="117.5" stroke="#e0dbd5" stroke-width="0.6"/>
+          <line x1="202.5" y1="30" x2="202.5" y2="130" stroke="#e0dbd5" stroke-width="0.6"/>
+          <line x1="215" y1="30" x2="215" y2="130" stroke="#e0dbd5" stroke-width="0.6"/>
+          <line x1="227.5" y1="30" x2="227.5" y2="130" stroke="#e0dbd5" stroke-width="0.6"/>
+          <line x1="240" y1="30" x2="240" y2="130" stroke="#e0dbd5" stroke-width="0.6"/>
+          <line x1="252.5" y1="30" x2="252.5" y2="130" stroke="#e0dbd5" stroke-width="0.6"/>
+          <line x1="265" y1="30" x2="265" y2="130" stroke="#e0dbd5" stroke-width="0.6"/>
+          <line x1="277.5" y1="30" x2="277.5" y2="130" stroke="#e0dbd5" stroke-width="0.6"/>
+          <!-- Blob: medium, vortex more defined -->
+          <ellipse cx="240" cy="80" rx="31" ry="27" fill="rgba(42,107,107,0.12)" stroke="none"/>
+          <ellipse cx="240" cy="80" rx="19" ry="16" fill="rgba(42,107,107,0.24)" stroke="none"/>
+          <ellipse cx="240" cy="80" rx="10" ry="9" fill="rgba(42,107,107,0.46)" stroke="none"/>
+          <circle cx="240" cy="80" r="4.5" fill="rgba(248,244,238,0.65)" stroke="rgba(42,107,107,0.2)" stroke-width="0.5"/>
+
+          <!-- Grid 3: 96³ — finer (12×12 cells visible) -->
+          <rect x="370" y="30" width="100" height="100" rx="3" fill="none" stroke="#c0b8b0" stroke-width="1.2"/>
+          <line x1="370" y1="38.3" x2="470" y2="38.3" stroke="#eae5df" stroke-width="0.45"/>
+          <line x1="370" y1="46.6" x2="470" y2="46.6" stroke="#eae5df" stroke-width="0.45"/>
+          <line x1="370" y1="55" x2="470" y2="55" stroke="#eae5df" stroke-width="0.45"/>
+          <line x1="370" y1="63.3" x2="470" y2="63.3" stroke="#eae5df" stroke-width="0.45"/>
+          <line x1="370" y1="71.6" x2="470" y2="71.6" stroke="#eae5df" stroke-width="0.45"/>
+          <line x1="370" y1="80" x2="470" y2="80" stroke="#eae5df" stroke-width="0.45"/>
+          <line x1="370" y1="88.3" x2="470" y2="88.3" stroke="#eae5df" stroke-width="0.45"/>
+          <line x1="370" y1="96.6" x2="470" y2="96.6" stroke="#eae5df" stroke-width="0.45"/>
+          <line x1="370" y1="105" x2="470" y2="105" stroke="#eae5df" stroke-width="0.45"/>
+          <line x1="370" y1="113.3" x2="470" y2="113.3" stroke="#eae5df" stroke-width="0.45"/>
+          <line x1="370" y1="121.6" x2="470" y2="121.6" stroke="#eae5df" stroke-width="0.45"/>
+          <line x1="378.3" y1="30" x2="378.3" y2="130" stroke="#eae5df" stroke-width="0.45"/>
+          <line x1="386.6" y1="30" x2="386.6" y2="130" stroke="#eae5df" stroke-width="0.45"/>
+          <line x1="395" y1="30" x2="395" y2="130" stroke="#eae5df" stroke-width="0.45"/>
+          <line x1="403.3" y1="30" x2="403.3" y2="130" stroke="#eae5df" stroke-width="0.45"/>
+          <line x1="411.6" y1="30" x2="411.6" y2="130" stroke="#eae5df" stroke-width="0.45"/>
+          <line x1="420" y1="30" x2="420" y2="130" stroke="#eae5df" stroke-width="0.45"/>
+          <line x1="428.3" y1="30" x2="428.3" y2="130" stroke="#eae5df" stroke-width="0.45"/>
+          <line x1="436.6" y1="30" x2="436.6" y2="130" stroke="#eae5df" stroke-width="0.45"/>
+          <line x1="445" y1="30" x2="445" y2="130" stroke="#eae5df" stroke-width="0.45"/>
+          <line x1="453.3" y1="30" x2="453.3" y2="130" stroke="#eae5df" stroke-width="0.45"/>
+          <line x1="461.6" y1="30" x2="461.6" y2="130" stroke="#eae5df" stroke-width="0.45"/>
+          <!-- Blob: sharper vortex -->
+          <ellipse cx="420" cy="80" rx="30" ry="26" fill="rgba(42,107,107,0.11)" stroke="none"/>
+          <ellipse cx="420" cy="80" rx="18" ry="15" fill="rgba(42,107,107,0.23)" stroke="none"/>
+          <ellipse cx="420" cy="80" rx="11" ry="10" fill="rgba(42,107,107,0.45)" stroke="none"/>
+          <circle cx="420" cy="80" r="5" fill="rgba(248,244,238,0.80)" stroke="rgba(42,107,107,0.35)" stroke-width="0.7"/>
+
+          <!-- Grid 4: 128³ — fine (16×16 cells visible) — highlighted -->
+          <rect x="550" y="30" width="100" height="100" rx="3" fill="rgba(42,107,107,0.04)" stroke="#2a6b6b" stroke-width="1.6"/>
+          <line x1="550" y1="36.25" x2="650" y2="36.25" stroke="#cce0e0" stroke-width="0.4"/>
+          <line x1="550" y1="42.5" x2="650" y2="42.5" stroke="#cce0e0" stroke-width="0.4"/>
+          <line x1="550" y1="48.75" x2="650" y2="48.75" stroke="#cce0e0" stroke-width="0.4"/>
+          <line x1="550" y1="55" x2="650" y2="55" stroke="#cce0e0" stroke-width="0.4"/>
+          <line x1="550" y1="61.25" x2="650" y2="61.25" stroke="#cce0e0" stroke-width="0.4"/>
+          <line x1="550" y1="67.5" x2="650" y2="67.5" stroke="#cce0e0" stroke-width="0.4"/>
+          <line x1="550" y1="73.75" x2="650" y2="73.75" stroke="#cce0e0" stroke-width="0.4"/>
+          <line x1="550" y1="80" x2="650" y2="80" stroke="#cce0e0" stroke-width="0.4"/>
+          <line x1="550" y1="86.25" x2="650" y2="86.25" stroke="#cce0e0" stroke-width="0.4"/>
+          <line x1="550" y1="92.5" x2="650" y2="92.5" stroke="#cce0e0" stroke-width="0.4"/>
+          <line x1="550" y1="98.75" x2="650" y2="98.75" stroke="#cce0e0" stroke-width="0.4"/>
+          <line x1="550" y1="105" x2="650" y2="105" stroke="#cce0e0" stroke-width="0.4"/>
+          <line x1="550" y1="111.25" x2="650" y2="111.25" stroke="#cce0e0" stroke-width="0.4"/>
+          <line x1="550" y1="117.5" x2="650" y2="117.5" stroke="#cce0e0" stroke-width="0.4"/>
+          <line x1="550" y1="123.75" x2="650" y2="123.75" stroke="#cce0e0" stroke-width="0.4"/>
+          <line x1="556.25" y1="30" x2="556.25" y2="130" stroke="#cce0e0" stroke-width="0.4"/>
+          <line x1="562.5" y1="30" x2="562.5" y2="130" stroke="#cce0e0" stroke-width="0.4"/>
+          <line x1="568.75" y1="30" x2="568.75" y2="130" stroke="#cce0e0" stroke-width="0.4"/>
+          <line x1="575" y1="30" x2="575" y2="130" stroke="#cce0e0" stroke-width="0.4"/>
+          <line x1="581.25" y1="30" x2="581.25" y2="130" stroke="#cce0e0" stroke-width="0.4"/>
+          <line x1="587.5" y1="30" x2="587.5" y2="130" stroke="#cce0e0" stroke-width="0.4"/>
+          <line x1="593.75" y1="30" x2="593.75" y2="130" stroke="#cce0e0" stroke-width="0.4"/>
+          <line x1="600" y1="30" x2="600" y2="130" stroke="#cce0e0" stroke-width="0.4"/>
+          <line x1="606.25" y1="30" x2="606.25" y2="130" stroke="#cce0e0" stroke-width="0.4"/>
+          <line x1="612.5" y1="30" x2="612.5" y2="130" stroke="#cce0e0" stroke-width="0.4"/>
+          <line x1="618.75" y1="30" x2="618.75" y2="130" stroke="#cce0e0" stroke-width="0.4"/>
+          <line x1="625" y1="30" x2="625" y2="130" stroke="#cce0e0" stroke-width="0.4"/>
+          <line x1="631.25" y1="30" x2="631.25" y2="130" stroke="#cce0e0" stroke-width="0.4"/>
+          <line x1="637.5" y1="30" x2="637.5" y2="130" stroke="#cce0e0" stroke-width="0.4"/>
+          <line x1="643.75" y1="30" x2="643.75" y2="130" stroke="#cce0e0" stroke-width="0.4"/>
+          <!-- Sharp vortex -->
+          <ellipse cx="600" cy="80" rx="29" ry="25" fill="rgba(42,107,107,0.11)" stroke="none"/>
+          <ellipse cx="600" cy="80" rx="18" ry="15" fill="rgba(42,107,107,0.23)" stroke="none"/>
+          <ellipse cx="600" cy="80" rx="11" ry="10" fill="rgba(42,107,107,0.46)" stroke="none"/>
+          <circle cx="600" cy="80" r="5.5" fill="rgba(248,244,238,0.95)" stroke="#2a6b6b" stroke-width="1"/>
+
+          <!-- Interpolation arrows with defs -->
+          <defs>
+            <marker id="arr-cmm" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L7,3 z" fill="#2a6b6b" opacity="0.75"/>
+            </marker>
+          </defs>
+          <line x1="135" y1="80" x2="183" y2="80" stroke="#2a6b6b" stroke-width="1.8" opacity="0.75" marker-end="url(#arr-cmm)"/>
+          <line x1="295" y1="80" x2="363" y2="80" stroke="#2a6b6b" stroke-width="1.8" opacity="0.75" marker-end="url(#arr-cmm)"/>
+          <line x1="475" y1="80" x2="543" y2="80" stroke="#2a6b6b" stroke-width="1.8" opacity="0.75" marker-end="url(#arr-cmm)"/>
+
+          <text x="159" y="72" font-family="monospace" font-size="8" fill="#2a6b6b" text-anchor="middle">interp.</text>
+          <text x="329" y="72" font-family="monospace" font-size="8" fill="#2a6b6b" text-anchor="middle">interp.</text>
+          <text x="509" y="72" font-family="monospace" font-size="8" fill="#2a6b6b" text-anchor="middle">interp.</text>
+
+          <!-- Iteration annotations below -->
+          <text x="80" y="148" font-family="Georgia, serif" font-size="9.5" fill="#6b6460" text-anchor="middle" font-style="italic">many iter.</text>
+          <text x="80" y="160" font-family="monospace" font-size="8.5" fill="#9a9490" text-anchor="middle">cheap / iter.</text>
+          <text x="240" y="148" font-family="Georgia, serif" font-size="9.5" fill="#6b6460" text-anchor="middle" font-style="italic">fewer iter.</text>
+          <text x="240" y="160" font-family="monospace" font-size="8.5" fill="#9a9490" text-anchor="middle">warm start</text>
+          <text x="420" y="148" font-family="Georgia, serif" font-size="9.5" fill="#6b6460" text-anchor="middle" font-style="italic">fewer still</text>
+          <text x="420" y="160" font-family="monospace" font-size="8.5" fill="#9a9490" text-anchor="middle">warm start</text>
+          <text x="600" y="148" font-family="Georgia, serif" font-size="9.5" fill="#2a6b6b" text-anchor="middle" font-style="italic">target</text>
+          <text x="600" y="160" font-family="monospace" font-size="8.5" fill="#2a6b6b" text-anchor="middle">converged</text>
+
+          <!-- Bottom summary line -->
+          <text x="340" y="190" font-family="Georgia, serif" font-size="10.5" fill="#3d3731" text-anchor="middle">Per-iteration cost grows with resolution · Iteration count shrinks with warm starts</text>
+          <text x="340" y="207" font-family="monospace" font-size="9" fill="#6b6460" text-anchor="middle">Net effect: 5–22× faster convergence for single-vortex ground states (thesis result)</text>
+
+          <!-- Grid error bar -->
+          <text x="80" y="228" font-family="monospace" font-size="8.5" fill="#9a9490" text-anchor="middle">grid error ~10⁻⁶–10⁻⁷</text>
+          <text x="600" y="228" font-family="monospace" font-size="8.5" fill="#2a6b6b" text-anchor="middle">tolerance 10⁻¹⁴</text>
+          <line x1="30" y1="235" x2="130" y2="235" stroke="#c0b8b0" stroke-width="0.9"/>
+          <line x1="550" y1="235" x2="650" y2="235" stroke="#2a6b6b" stroke-width="1.1"/>
+          <line x1="130" y1="235" x2="550" y2="235" stroke="#c0b8b0" stroke-width="0.7" stroke-dasharray="4,3"/>
+
+        </svg>
+        <p class="diagram-caption">The CMM cascade for a single-vortex ground state. At 32³, the wavefunction is coarsely resolved and the vortex core blurred, but the topology is correct. Each interpolation to the next grid level provides a warm start. The 128³ grid (highlighted) is reached with far fewer iterations than starting from a Gaussian — at the cost of only the cheap coarse-grid calculations.</p>
+      </div>
+
+      <p>The efficiency gain is substantial where the warm start is well-aligned with the true ground state. For the single-vortex case, the CMM achieved runtime reductions of 5–22× compared to direct fine-grid computation from a generic initial state. The savings arise from two compounding effects: the coarse-grid solves are individually cheap, and the interpolated initialisation dramatically reduces the number of fine-grid iterations needed to reach the \(10^{-14}\) convergence criterion.</p>
+
+      <p>The picture is less clean for vortex lattices. When the ground state has multiple vortices arranged in a specific geometry, the coarse-grid solution may not capture their positions accurately enough for the interpolation to serve as a reliable warm start — the fine-grid solver may need to reorganise vortex positions from a configuration that is close but topologically distinct from the true minimum. In these cases, the CMM speedup is more modest, and the choice of initial state on the coarsest grid matters more. The thesis found mixed results for the vortex-lattice case, consistent with this sensitivity.</p>
+
+      <p>There is something appealing about the CMM as a principle. It operationalises a commonsense observation — a crude answer is usually closer to the truth than nothing — and turns it into a systematic acceleration strategy. The coarse-grid physics is wrong in its fine details (the vortex core is blurred, the grid error is \(\sim 10^{-6}\) to \(10^{-7}\)), but it captures the essential topology of the ground state: the number of vortices, their rough positions, the overall density envelope. That is enough for the fine-grid solver to find its way quickly to the precise answer.</p>
+
+      <!-- =============================================
+           SECTION 10: THE PHASE DIAGRAM
+      ============================================== -->
+      <h2>A Map of What's Possible</h2>
+
+      <p>My thesis was, at its core, about building reliable tools for navigating new territory — and then using them to see what the ground states actually look like. The central question was not yet 'what does the full phase diagram look like across all of \((\hat\Omega, \epsilon_{dd})\) space?', but something more foundational: can we reliably compute the ground state of a rotating dipolar condensate at all, and how do two distinct numerical approaches — the Conjugate Gradient Method and Imaginary Time Evolution — compare in their accuracy and cost?</p>
+
+      <p>This matters because the eGPE in the rotating frame is genuinely hard to solve. The nonlocal dipolar term requires a Fourier-space computation at every iteration; the rotation operator couples spatial directions; the LHY correction introduces a fractional power of the density. Finding the ground state means locating the minimum of a high-dimensional nonlinear energy functional on a 128³ spatial grid — iteratively, stably, and to a convergence tolerance of \(10^{-14}\). Getting this right is a prerequisite for any systematic map of what's possible.</p>
+
+      <!-- Figure placeholder -->
+      <div class="figure-placeholder">
+        <p class="figure-placeholder-label">Figure · Thesis</p>
+        <p class="figure-placeholder-desc">Ground-state density and phase distributions for a rotating dysprosium condensate (\(N = 75{,}000\) atoms) at rotation rates \(\hat\Omega = 0.7,\, 0.8,\, 0.9\,\omega_{trap}\). Four vortices, a single vortex, and a nascent vortex lattice emerge as rotation increases — configurations recovered independently by both the CGM and ITE methods.</p>
+      </div>
+
+      <p>What emerged from this work was a validated numerical framework and a first set of ground states across specific parameter values. With contact interactions alone — and verified against existing literature — the condensate at \(\hat\Omega = 0.7\,\omega_{trap}\) settles into four vortices; at \(\hat\Omega = 0.8\), a single central vortex; at \(\hat\Omega = 0.9\), a vortex lattice begins to form. Both CGM and ITE converged to the same configurations, confirming the implementation. With dipolar interactions active, the same framework extended these results into the dipolar regime. The cartography is not yet finished — but the instruments are calibrated.</p>
+
+      <p>What I found most striking, working through this, was how much physics is compressed into each ground state. A particular vortex configuration at given \((\hat\Omega, \epsilon_{dd})\) is not just an arrangement of topological defects — it encodes the interplay of quantum statistics, real-space geometry, long-range interactions, and topological constraints simultaneously. Moving from one configuration to another as \(\hat\Omega\) increases is not a smooth deformation; it is a transition where the energy balance tips and the system reorganises. Crossing that threshold can mean a single new vortex appearing, or the entire lattice restructuring its geometry.</p>
+
+      <p>There is a great deal that this picture cannot yet capture: the full phase diagram across \((\hat\Omega, \epsilon_{dd})\) space remains to be mapped, and the physics becomes richer still when quantum fluctuations are taken seriously. These drive phenomena well beyond individual vortex states — including quantum droplets, where the LHY correction stabilises what would otherwise be a collapsing condensate, and supersolid phases, in which the condensate spontaneously breaks translational symmetry while remaining globally phase-coherent. Both have since been observed experimentally in dysprosium and erbium systems. The eGPE-level ground states computed in this thesis are an early reconnaissance — necessarily limited in scope, but pointing toward the questions worth asking next.</p>
+
+      <div class="callout">
+        <p>The full thesis — <em>Dipolar Quantum Gases under Rotation</em> (Univ. Stuttgart, 2023) — is available on request. The numerical work implemented two complementary ground-state methods: a preconditioned Conjugate Gradient Method (CGM) and Imaginary Time Evolution (ITE) with Strang operator splitting — both applied to the full eGPE on a three-dimensional 128³ spatial grid. The nonlocal dipolar term was computed via fast Fourier transform in momentum space using a cut-off interaction kernel. A Cascadic Multigrid Method (CMM) accelerated convergence by initialising successive fine-grid problems from coarse-grid solutions, reducing computation time by up to 22× in favourable cases.</p>
+      </div>
+
+    </article>
+  </div>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer>
+    <div>
+      <a href="../../index.html" class="footer-back">← all essays</a>
+    </div>
+    <p class="footer-text">Ninaad Adhvaryu &nbsp;·&nbsp; Quantum Matter &nbsp;·&nbsp; 2023</p>
+  </footer>
+
+  <!-- ============================================================
+       VORTEX INTERACTIVE SCRIPT
+  ============================================================ -->
+  <script>
+    // ── Global state for slider ──────────────────────────────────
+    const omegaLabels = [
+      'no vortices · Ω = 0',
+      '1 vortex · singly quantised',
+      '3 vortices · triangular',
+      '7 vortices · hexagonal lattice'
+    ];
+    let currentOmegaIdx = 2;
+
+    window.setOmega = function(val) {
+      currentOmegaIdx = parseInt(val);
+      document.getElementById('omega-val').textContent = omegaLabels[currentOmegaIdx];
+    };
+
+    // ── p5 instance mode sketch ──────────────────────────────────
+    const vortexSketch = function(p) {
+      const SZ  = 440;   // canvas size (px)
+      const R   = 155;   // condensate radius in canvas units
+      const XI  = 20;    // healing length (vortex core size)
+      const PIX = 4;     // pixel block size for performance
+
+      // Vortex positions as fractions of R (x, y)
+      const CONFIGS = [
+        [],
+        [[0, 0]],
+        [[0, -0.50], [0.433, 0.25], [-0.433, 0.25]],
+        [[0, 0],
+         [0, -0.52],  [0.45, -0.26],  [0.45, 0.26],
+         [0,  0.52], [-0.45,  0.26], [-0.45, -0.26]]
+      ];
+
+      let t = 0;
+
+      p.setup = function() {
+        p.createCanvas(SZ, SZ);
+        p.colorMode(p.HSB, 360, 100, 100);
+        p.noStroke();
+        p.frameRate(30);
+      };
+
+      p.draw = function() {
+        t += 0.004;
+        // Cream background (HSB: warm white)
+        p.background(38, 4, 99);
+
+        const cx = SZ / 2;
+        const cy = SZ / 2;
+        const cfg = CONFIGS[currentOmegaIdx];
+
+        // Slowly rotate the vortex lattice
+        const cosT = Math.cos(t * 0.28);
+        const sinT = Math.sin(t * 0.28);
+
+        // Build vortex positions in pixel space
+        const vortices = cfg.map(([fx, fy]) => {
+          const x0 = fx * R;
+          const y0 = fy * R;
+          return [x0 * cosT - y0 * sinT,
+                  x0 * sinT + y0 * cosT];
+        });
+
+        // ── Draw pixel field ──────────────────────────────────
+        for (let px = 0; px < SZ; px += PIX) {
+          for (let py = 0; py < SZ; py += PIX) {
+            const x = px + PIX / 2 - cx;
+            const y = py + PIX / 2 - cy;
+            const r = Math.sqrt(x * x + y * y);
+
+            // Outside condensate → cream
+            if (r > R * 1.06) {
+              p.fill(38, 4, 99);
+              p.rect(px, py, PIX, PIX);
+              continue;
+            }
+
+            // Thomas-Fermi density profile
+            const n0 = Math.max(0, 1 - (r / R) * (r / R));
+
+            // Accumulate phase and density suppression from vortices
+            let phase = 0;
+            let core  = 1;
+            for (const [vx, vy] of vortices) {
+              const dx = x - vx;
+              const dy = y - vy;
+              const rv = Math.sqrt(dx * dx + dy * dy);
+              phase += Math.atan2(dy, dx);
+              const th = Math.tanh(rv / XI);
+              core *= th * th;
+            }
+
+            const density = n0 * core;
+
+            let hue, sat, bri;
+            if (cfg.length === 0) {
+              // No vortices: show plain teal density gradient
+              hue = 175;
+              sat = 35;
+              bri = 30 + density * 65;
+            } else {
+              // Phase coloring: hue encodes quantum phase
+              hue = ((phase / (2 * Math.PI) * 360) % 360 + 360) % 360;
+              sat = 62 * Math.min(1, density * 1.8);
+              bri = 22 + density * 74;
+            }
+
+            p.fill(hue, sat, bri);
+            p.rect(px, py, PIX, PIX);
+          }
+        }
+
+        // ── Draw vortex core outlines ─────────────────────────
+        p.noFill();
+        p.stroke(0, 0, 80);
+        p.strokeWeight(1.2);
+        for (const [vx, vy] of vortices) {
+          p.ellipse(cx + vx, cy + vy, XI * 2.4, XI * 2.4);
+        }
+        p.noStroke();
+      };
+    };
+
+    // Attach to DOM element
+    new p5(vortexSketch, document.getElementById('vortex-sketch'));
+  </script>
+
+</body>
+</html>

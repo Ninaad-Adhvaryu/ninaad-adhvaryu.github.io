@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What Happens When a Forest Dataset Meets a Mangrove? — Ninaad Adhvaryu</title>
+  <meta name="description" content="On comparing satellite forest datasets in Mumbai, and on what it means when two global products disagree about whether a mangrove is 'there.'">
+  <link rel="stylesheet" href="../../style.css">
+
+  <!-- MathJax for LaTeX rendering -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']],
+        packages: {'[+]': ['ams']}
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+  <style>
+    /* ============================================================
+       PAGE TOKENS
+    ============================================================ */
+    :root {
+      --cream-dark:    #E8E2D9;
+      --cream-card:    #FDFBF8;
+      --ink-muted:     #6B6460;
+      --teal-pale:     rgba(42, 107, 107, 0.09);
+      --obsidian-mid:  #272540;
+      --obsidian-text: #C9C5DA;
+      --obsidian-muted:#7C789A;
+      --max-width:     1080px;
+      --gutter:        2.5rem;
+      --prose-width:   700px;
+    }
+
+    /* ============================================================
+       BASE
+    ============================================================ */
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--serif-body);
+      font-size: 1rem;
+      line-height: 1.72;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    ::selection { background: rgba(42, 107, 107, 0.18); }
+
+    a {
+      color: var(--teal);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    /* ============================================================
+       NAV
+    ============================================================ */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: var(--obsidian);
+      height: 54px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--gutter);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .nav-monogram {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--obsidian-muted);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.25rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      color: var(--obsidian-text);
+      text-transform: lowercase;
+      padding-bottom: 2px;
+      border-bottom: 1px solid transparent;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--teal-light);
+      border-bottom-color: var(--teal-light);
+    }
+
+    .nav-back {
+      color: var(--obsidian-text);
+    }
+
+    /* ============================================================
+       LAYOUT
+    ============================================================ */
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 var(--gutter);
+    }
+
+    section { padding: 4rem 0; }
+
+    .essay-header {
+      padding: 5rem 0 3.5rem;
+    }
+
+    .essay-title {
+      font-family: var(--serif-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.015em;
+      color: var(--ink);
+      margin-bottom: 1.75rem;
+      max-width: 680px;
+    }
+
+    .essay-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-top: 2.5rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--cream-dark);
+    }
+
+    .essay-meta-block {
+      flex: 0 1 auto;
+    }
+
+    .essay-meta-label {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .essay-meta-value {
+      font-family: var(--serif-body);
+      font-size: 0.95rem;
+      color: var(--ink);
+    }
+
+    /* ============================================================
+       PROSE
+    ============================================================ */
+    .essay-body {
+      max-width: var(--prose-width);
+      margin: 0 auto;
+    }
+
+    .essay-body p {
+      font-size: 1rem;
+      line-height: 1.82;
+      margin-bottom: 1.4em;
+      color: var(--ink);
+    }
+
+    .essay-body h2 {
+      font-family: var(--serif-display);
+      font-size: 1.5rem;
+      font-weight: 600;
+      line-height: 1.28;
+      color: var(--ink);
+      margin-top: 2.5em;
+      margin-bottom: 1.2em;
+    }
+
+    .essay-body em { font-style: italic; }
+    .essay-body strong { font-weight: 600; }
+
+    /* ============================================================
+       FIGURES & CAPTIONS
+    ============================================================ */
+    .figure-wrap {
+      margin: 3rem 0;
+      text-align: center;
+    }
+
+    .figure-wrap img {
+      max-width: 100%;
+      height: auto;
+      display: inline-block;
+      border-radius: 2px;
+      background: var(--cream-dark);
+      padding: 0.5rem;
+    }
+
+    .figure-caption {
+      font-family: var(--serif-body);
+      font-size: 0.85rem;
+      line-height: 1.6;
+      color: var(--ink-muted);
+      margin-top: 1rem;
+      font-style: italic;
+    }
+
+    /* ============================================================
+       FOOTER NAV
+    ============================================================ */
+    .essay-footer {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--cream-dark);
+    }
+
+    .back-link {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: lowercase;
+      color: var(--teal);
+      border-bottom: 1px solid var(--teal-rule);
+      padding-bottom: 2px;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .back-link:hover {
+      color: var(--teal-light);
+      border-bottom-color: var(--teal-light);
+    }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 768px) {
+      :root { --gutter: 1.5rem; }
+      section { padding: 3rem 0; }
+      .essay-header { padding: 3rem 0 2rem; }
+      .essay-title { font-size: 1.8rem; }
+      .essay-meta { gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="../../index.html" class="nav-monogram nav-back">← back</a>
+    <ul class="nav-links">
+      <li><a href="../../#inquiries">inquiries</a></li>
+      <li><a href="../../#thesis">thesis</a></li>
+      <li><a href="../../#teaching">teaching</a></li>
+      <li><a href="../../#writing">writing</a></li>
+      <li><a href="../../#contact">contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ESSAY -->
+  <section class="essay-header">
+    <div class="container">
+      <h1 class="essay-title">What Happens When a Forest Dataset Meets a Mangrove?</h1>
+      <div class="essay-meta">
+        <div class="essay-meta-block">
+          <p class="essay-meta-label">Domain</p>
+          <p class="essay-meta-value">Environment · Geospatial Analysis</p>
+        </div>
+        <div class="essay-meta-block">
+          <p class="essay-meta-label">Status</p>
+          <p class="essay-meta-value">Complete · 2025</p>
+        </div>
+        <div class="essay-meta-block">
+          <p class="essay-meta-label">Methods</p>
+          <p class="essay-meta-value">Satellite comparison · Classification metrics · Geospatial workflows</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="essay-body-wrap">
+    <div class="container">
+      <div class="essay-body">
+
+        <p>A mangrove is obviously a forest until you ask a global dataset to prove it every year. Then the answer becomes strangely unstable.</p>
+
+        <p>What drew me to this project was not just the ecology of Mumbai's coastline, though that is interesting enough on its own. It was the fact that two open-access datasets, both widely used and both superficially plausible, could look at the same urban mangrove system and tell slightly different stories. That is usually where the science gets interesting: not when the map looks clean, but when the disagreement forces you to ask what exactly is being measured.</p>
+
+        <h2>Two datasets, two ideas of a mangrove</h2>
+
+        <p>At first glance, the comparison seems straightforward. Hansen Global Forest Change is a general forest-monitoring product built largely from Landsat optical imagery at 30 m resolution. It is very good at answering a broad question: where is tree cover, and where has it changed? Global Mangrove Watch is a more specific product. It is built for mangroves, uses radar as well as optical data, and bakes coastal and intertidal context into the classification.</p>
+
+        <p>Those are not minor technical differences. They amount to two different ideas of what counts as evidence. Hansen is asking whether a pixel looks enough like forest to cross a canopy threshold. GMW is asking whether a coastal wetland pixel belongs to a mangrove system.</p>
+
+        <p>Mumbai is a good place to make that distinction matter. Its mangroves are ecologically important and geographically awkward: muddy, intertidal, fragmented, and pressed against one of the densest urban regions in the world. They sit in exactly the sort of landscape where mixed pixels, tidal inundation, cloud-contaminated optical scenes, and threshold effects are likely to show up. If a generic forest product is going to wobble anywhere, it will wobble here.</p>
+
+        <p>So the first job was not analysis in the glamorous sense. It was making the datasets comparable at all. Both rasters had to be projected into a common CRS, EPSG:32643, and aligned on a common grid. I used the GMW mangrove mask as the baseline spatial extent and then asked a narrower question inside that mask: when, and how consistently, does Hansen classify those same pixels as forest?</p>
+
+        <p>That narrowing matters. It turns a vague comparison of two maps into a concrete test. Instead of asking whether the datasets look similar in the abstract, the project asks whether a pixel that a mangrove-specific dataset considers mangrove is treated as stable forest by a generic forest product.</p>
+
+        <div class="figure-wrap">
+          <img src="figures/Overlap Disagreement Map - Project Essays.png" alt="Spatial overlap and disagreement between Hansen and GMW datasets">
+          <p class="figure-caption">This is the cleanest single picture of the project. The point is not merely that the datasets disagree, but where they disagree: the mismatches cluster around the messy intertidal edges, where a generic forest classifier should be expected to struggle.</p>
+        </div>
+
+        <p>Once the grids were aligned, the basic overlap looked encouraging. Within the study region, the GMW mask covered 1508.85 hectares of mangroves. Roughly 92% of those mangrove pixels were detected as forest at least once by Hansen. If the analysis had stopped there, the conclusion would have been mild and fairly comforting: the generic forest product is imperfect, but it broadly sees the mangroves.</p>
+
+        <p>The trouble started the moment I asked the temporal question more carefully.</p>
+
+        <h2>The suspicious result</h2>
+
+        <p>Hansen provides more than a yes-or-no forest signal. It also records the first year and last year a pixel is detected as forest. That makes it possible to do something more interesting than a static overlap map. Inside the GMW mangrove mask, each pixel can be sorted into three classes: never forest, temporary forest, and persistent forest.</p>
+
+        <p>This is where the project stopped being a routine comparison and became a lesson in what datasets do under stress.</p>
+
+        <p>About 92.34% of the mangrove area fell into the "temporary forest" category. About 7.66% was "never forest." Persistent forest, on the other hand, came out to exactly 0%.</p>
+
+        <p>That result is not merely surprising. It is scientifically suspicious.</p>
+
+        <p>If one took it literally, the implication would be absurd: Mumbai's mangroves are somehow being detected as forest briefly, intermittently, and then not persisting through the end of the record at all. Mangroves do not behave like a crop that appears and disappears on yearly timescales. The more plausible interpretation is that the classification itself is flickering.</p>
+
+        <div class="figure-wrap">
+          <img src="figures/Mangrove Presence Classes.png" alt="Breakdown of pixels by detection persistence category">
+          <p class="figure-caption">This is the figure that makes the problem impossible to ignore. The absence of any persistent-forest class is too extreme to read as ecology; it has to be read as a property of the classifier interacting with a difficult landscape.</p>
+        </div>
+
+        <p>The duration analysis says the same thing in a slightly different language. Detection durations were dominated by short intervals, with a median near zero years and very few pixels showing long-lived forest persistence. Spatially, the duration map does not reveal a system that is steadily degrading. It reveals a system that drops in and out of recognition.</p>
+
+        <div class="figure-wrap">
+          <img src="figures/Detection Duration Histogram.png" alt="Histogram of detection duration across pixels">
+          <p class="figure-caption">The histogram gives the summary, but the map makes the pattern legible. The short durations are not isolated outliers; they are spread across the mangrove system, which is exactly what one would expect from unstable classification rather than synchronized ecological collapse.</p>
+        </div>
+
+        <p>That distinction is the entire essay. A bad interpretation here would be to turn a classification artifact into a dramatic environmental claim. A better interpretation is more modest and more useful: Hansen does detect mangrove vegetation in Mumbai, but it does not do so in a temporally stable way.</p>
+
+        <h2>What the mismatch is really about</h2>
+
+        <p>Once the result is framed that way, the physics and remote sensing become easier to think about. Mangroves live in an intertidal environment. The same pixel can contain different mixtures of canopy, water, exposed mudflat, and shadow depending on tide stage, season, and image conditions. At 30 m resolution, those mixtures matter. A pixel near a canopy threshold can cross it, then fall back below it, without the ecosystem having meaningfully changed.</p>
+
+        <p>This is one of the quiet ways classification systems mislead people. The output looks categorical, but the underlying reality is continuous and messy. A pixel is not deciding whether it is forest. A model is deciding whether the evidence is strong enough, under a particular sensing modality and a particular set of assumptions, to call it forest.</p>
+
+        <p>That is also why the comparison with GMW is so useful rather than merely adversarial. GMW is not "better" in some universal sense. It is better for this ecosystem because it was built with this ecosystem in mind. Radar is less vulnerable to the cloud and haze problems that affect optical products, and the mangrove-specific ecological constraints matter precisely in wetlands where inland forest logic begins to fray.</p>
+
+        <p>This changed the way I think about dataset choice. The question is not which product is globally correct. The question is what question the product is actually equipped to answer. If I want baseline extent mapping for Mumbai mangroves, GMW is the safer foundation. If I want a tentative annual signal for where a generic forest product thinks tree cover has fluctuated inside mangroves, Hansen can still be useful, but only with caution and only after the mangrove extent has been defined externally.</p>
+
+        <p>There is a broader planning point hiding in that conclusion. Open-access geospatial products often enter environmental workflows with an aura of objectivity. But a map is not a neutral mirror. It is a compressed bundle of sensor choices, classification rules, thresholds, and ecological assumptions. In a coastal city such as Mumbai, where mangroves matter for flood buffering, shoreline stability, and environmental regulation, that bundle matters.</p>
+
+        <p>What I like about this project is that it resisted the easy ending. It did not produce a neat one-line answer about how much mangrove loss occurred. Instead it exposed a more basic issue: a generic forest product can look persuasive while being unstable in exactly the landscape where many people would be tempted to trust it. That is not a failure of the project. It is the project.</p>
+
+        <p>If I were extending it, I would do two things next. The first would be to add a third comparator such as ESA WorldCover or a regionally validated mangrove layer, just to see whether the GMW-versus-Hansen mismatch sits inside a broader consensus or a broader disagreement. The second would be to cleanly audit the first/last-year encoding one more time, because when a result is this stark, it deserves to be challenged before it is interpreted. But even without that extension, the main lesson is already clear. When a forest dataset meets a mangrove, the interesting question is not only what it sees. It is what kind of seeing it was built to do.</p>
+
+        <div class="essay-footer">
+          <a href="../../#inquiries" class="back-link">← back to inquiries</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>

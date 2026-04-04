@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What the Word "Emergence" Does to a Room — Ninaad Adhvaryu</title>
+  <meta name="description" content="On teaching a first-year interdisciplinary seminar that asked students from physics, computer science, and philosophy to read the same texts — and arrive at the same questions.">
+  <link rel="stylesheet" href="../../style.css">
+
+  <style>
+    /* ============================================================
+       PAGE TOKENS
+    ============================================================ */
+    :root {
+      --cream-dark:    #E8E2D9;
+      --cream-card:    #FDFBF8;
+      --ink-muted:     #6B6460;
+      --teal-pale:     rgba(42, 107, 107, 0.09);
+      --obsidian-mid:  #272540;
+      --obsidian-text: #C9C5DA;
+      --obsidian-muted:#7C789A;
+      --max-width:     1080px;
+      --gutter:        2.5rem;
+      --prose-width:   700px;
+    }
+
+    /* ============================================================
+       BASE
+    ============================================================ */
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--serif-body);
+      font-size: 1rem;
+      line-height: 1.72;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    ::selection { background: rgba(42, 107, 107, 0.18); }
+
+    a {
+      color: var(--teal);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    /* ============================================================
+       NAV
+    ============================================================ */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: var(--obsidian);
+      height: 54px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--gutter);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .nav-monogram {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--obsidian-muted);
+    }
+
+    .nav-monogram a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .nav-monogram a:hover { color: var(--teal-light); }
+
+    .nav-links {
+      display: flex;
+      gap: 2.25rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      color: var(--obsidian-text);
+      text-transform: lowercase;
+      padding-bottom: 2px;
+      border-bottom: 1px solid transparent;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--teal-light);
+      border-bottom-color: var(--teal-light);
+    }
+
+    /* ============================================================
+       LAYOUT
+    ============================================================ */
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 var(--gutter);
+    }
+
+    /* ============================================================
+       HERO
+    ============================================================ */
+    .hero-wrap {
+      width: 100%;
+      overflow: hidden;
+      line-height: 0;
+    }
+
+    .hero-wrap svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* ============================================================
+       ESSAY HEADER
+    ============================================================ */
+    .essay-header {
+      padding: 4rem 0 2.5rem;
+    }
+
+    .essay-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 1.1rem;
+    }
+
+    .essay-title {
+      font-family: var(--serif-display);
+      font-size: clamp(1.8rem, 3.8vw, 2.75rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      max-width: var(--prose-width);
+      margin-bottom: 1.25rem;
+    }
+
+    .essay-lede {
+      font-family: var(--serif-body);
+      font-size: 1.08rem;
+      font-style: italic;
+      line-height: 1.65;
+      color: var(--ink-muted);
+      max-width: var(--prose-width);
+      margin-bottom: 2.5rem;
+    }
+
+    /* ============================================================
+       BODY GRID
+    ============================================================ */
+    .essay-grid {
+      display: grid;
+      grid-template-columns: 1fr 256px;
+      gap: 4.5rem;
+      align-items: start;
+      padding-bottom: 8rem;
+    }
+
+    /* ============================================================
+       PROSE
+    ============================================================ */
+    .essay-prose {
+      max-width: var(--prose-width);
+    }
+
+    .essay-prose p {
+      font-size: 0.97rem;
+      line-height: 1.88;
+      color: var(--ink);
+      margin-bottom: 1.35em;
+    }
+
+    .essay-prose h2 {
+      font-family: var(--serif-display);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin: 2.5rem 0 0.9rem;
+      letter-spacing: -0.01em;
+    }
+
+    .essay-prose em {
+      font-style: italic;
+    }
+
+    .essay-prose a {
+      color: var(--teal);
+      border-bottom: 1px solid var(--teal-pale);
+      padding-bottom: 1px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .essay-prose a:hover {
+      color: var(--teal-light);
+      border-bottom-color: var(--teal-light);
+    }
+
+    /* ============================================================
+       ASIDE / METADATA CARD
+    ============================================================ */
+    .essay-aside {
+      position: sticky;
+      top: 78px;
+    }
+
+    .aside-card {
+      background: var(--obsidian);
+      padding: 1.75rem 1.6rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .aside-label {
+      font-family: var(--mono);
+      font-size: 0.52rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--obsidian-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .aside-row {
+      margin-bottom: 1.1rem;
+    }
+
+    .aside-row:last-child { margin-bottom: 0; }
+
+    .aside-key {
+      font-family: var(--mono);
+      font-size: 0.54rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--obsidian-muted);
+      margin-bottom: 0.25rem;
+    }
+
+    .aside-val {
+      font-family: var(--serif-body);
+      font-size: 0.82rem;
+      line-height: 1.5;
+      color: var(--obsidian-text);
+    }
+
+    .aside-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+      margin-top: 0.3rem;
+    }
+
+    .aside-tag {
+      font-family: var(--mono);
+      font-size: 0.5rem;
+      letter-spacing: 0.08em;
+      background: rgba(42,107,107,0.18);
+      color: var(--teal-light);
+      padding: 0.15rem 0.42rem;
+      border-radius: 1px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--teal);
+      border-bottom: 1px solid rgba(42,107,107,0.3);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .back-link:hover {
+      color: var(--teal-light);
+      border-bottom-color: var(--teal-light);
+    }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    footer {
+      background: var(--obsidian);
+      padding: 1.5rem var(--gutter);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    footer span {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      color: var(--obsidian-muted);
+    }
+
+    footer a {
+      color: var(--obsidian-muted);
+      transition: color 0.2s;
+    }
+
+    footer a:hover { color: var(--teal-light); }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 820px) {
+      :root { --gutter: 1.5rem; }
+
+      .essay-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      .essay-aside {
+        position: static;
+      }
+
+      .nav-monogram { display: none; }
+      .nav-links { gap: 1.75rem; }
+
+      footer {
+        flex-direction: column;
+        gap: 0.4rem;
+        text-align: center;
+      }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .essay-header { animation: fadeUp 0.6s 0.05s ease both; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <span class="nav-monogram"><a href="../../index.html">N. Adhvaryu</a></span>
+    <ul class="nav-links">
+      <li><a href="../../index.html#inquiries">inquiries</a></li>
+      <li><a href="../../index.html#teaching">teaching</a></li>
+      <li><a href="../../index.html#contact">contact</a></li>
+    </ul>
+  </nav>
+
+
+  <!-- HERO SVG: interdisciplinary network diagram -->
+  <div class="hero-wrap">
+    <svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg"
+         preserveAspectRatio="xMidYMid meet"
+         aria-label="Network diagram showing Physics, Computer Science, Philosophy and Biology connected through the concept of emergence">
+      <defs>
+        <radialGradient id="center-glow" cx="350" cy="105" r="80" gradientUnits="userSpaceOnUse">
+          <stop offset="0%"   stop-color="#2A6B6B" stop-opacity="0.35"/>
+          <stop offset="60%"  stop-color="#1C2A3A" stop-opacity="0.14"/>
+          <stop offset="100%" stop-color="#0D0B1A" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="node-glow-tl" cx="155" cy="52" r="40" gradientUnits="userSpaceOnUse">
+          <stop offset="0%"   stop-color="#2A6B6B" stop-opacity="0.22"/>
+          <stop offset="100%" stop-color="#0D0B1A" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="node-glow-tr" cx="545" cy="52" r="40" gradientUnits="userSpaceOnUse">
+          <stop offset="0%"   stop-color="#3D9090" stop-opacity="0.18"/>
+          <stop offset="100%" stop-color="#0D0B1A" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="node-glow-bl" cx="155" cy="162" r="40" gradientUnits="userSpaceOnUse">
+          <stop offset="0%"   stop-color="#2A6B6B" stop-opacity="0.20"/>
+          <stop offset="100%" stop-color="#0D0B1A" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="node-glow-br" cx="545" cy="162" r="40" gradientUnits="userSpaceOnUse">
+          <stop offset="0%"   stop-color="#3D9090" stop-opacity="0.18"/>
+          <stop offset="100%" stop-color="#0D0B1A" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+
+      <!-- Background -->
+      <rect width="700" height="210" fill="#0D0B1A"/>
+
+      <!-- Node glows -->
+      <circle cx="155" cy="52"  r="40" fill="url(#node-glow-tl)"/>
+      <circle cx="545" cy="52"  r="40" fill="url(#node-glow-tr)"/>
+      <circle cx="155" cy="162" r="40" fill="url(#node-glow-bl)"/>
+      <circle cx="545" cy="162" r="40" fill="url(#node-glow-br)"/>
+      <circle cx="350" cy="105" r="80" fill="url(#center-glow)"/>
+
+      <!-- Connecting lines — from each outer node to centre -->
+      <line x1="155" y1="52"  x2="350" y2="105" stroke="rgba(42,107,107,0.35)" stroke-width="1" stroke-dasharray="4 4"/>
+      <line x1="545" y1="52"  x2="350" y2="105" stroke="rgba(42,107,107,0.35)" stroke-width="1" stroke-dasharray="4 4"/>
+      <line x1="155" y1="162" x2="350" y2="105" stroke="rgba(42,107,107,0.35)" stroke-width="1" stroke-dasharray="4 4"/>
+      <line x1="545" y1="162" x2="350" y2="105" stroke="rgba(42,107,107,0.35)" stroke-width="1" stroke-dasharray="4 4"/>
+
+      <!-- Cross-connections between outer nodes -->
+      <line x1="155" y1="52"  x2="545" y2="162" stroke="rgba(42,107,107,0.14)" stroke-width="0.7" stroke-dasharray="2 6"/>
+      <line x1="545" y1="52"  x2="155" y2="162" stroke="rgba(42,107,107,0.14)" stroke-width="0.7" stroke-dasharray="2 6"/>
+      <line x1="155" y1="52"  x2="545" y2="52"  stroke="rgba(42,107,107,0.12)" stroke-width="0.7" stroke-dasharray="2 6"/>
+      <line x1="155" y1="162" x2="545" y2="162" stroke="rgba(42,107,107,0.12)" stroke-width="0.7" stroke-dasharray="2 6"/>
+
+      <!-- Central node: Emergence -->
+      <circle cx="350" cy="105" r="28" fill="none" stroke="rgba(42,107,107,0.55)" stroke-width="1.2"/>
+      <circle cx="350" cy="105" r="20" fill="#0D0B1A"/>
+      <circle cx="350" cy="105" r="20" fill="rgba(42,107,107,0.15)"/>
+      <text x="350" y="101" font-family="'JetBrains Mono', monospace" font-size="6.5" fill="#3D9090"
+            text-anchor="middle" letter-spacing="0.14em" text-transform="uppercase">EMERGENCE</text>
+      <text x="350" y="113" font-family="'JetBrains Mono', monospace" font-size="5.5" fill="rgba(61,144,144,0.6)"
+            text-anchor="middle" letter-spacing="0.1em">complexity</text>
+
+      <!-- Outer node: Physics (top-left) -->
+      <circle cx="155" cy="52" r="18" fill="#0D0B1A"/>
+      <circle cx="155" cy="52" r="18" fill="rgba(42,107,107,0.12)"/>
+      <circle cx="155" cy="52" r="18" fill="none" stroke="rgba(42,107,107,0.45)" stroke-width="1"/>
+      <text x="155" y="48.5" font-family="'JetBrains Mono', monospace" font-size="6" fill="#3D9090"
+            text-anchor="middle" letter-spacing="0.1em">PHYSICS</text>
+      <text x="155" y="58" font-family="'Source Serif 4', Georgia, serif" font-size="5.5" fill="rgba(201,197,218,0.5)"
+            text-anchor="middle" font-style="italic">Anderson</text>
+
+      <!-- Outer node: CS (top-right) -->
+      <circle cx="545" cy="52" r="18" fill="#0D0B1A"/>
+      <circle cx="545" cy="52" r="18" fill="rgba(42,107,107,0.10)"/>
+      <circle cx="545" cy="52" r="18" fill="none" stroke="rgba(42,107,107,0.40)" stroke-width="1"/>
+      <text x="545" y="48.5" font-family="'JetBrains Mono', monospace" font-size="5.2" fill="#3D9090"
+            text-anchor="middle" letter-spacing="0.08em">COMP. SCI.</text>
+      <text x="545" y="58" font-family="'Source Serif 4', Georgia, serif" font-size="5.5" fill="rgba(201,197,218,0.5)"
+            text-anchor="middle" font-style="italic">Game of Life</text>
+
+      <!-- Outer node: Philosophy (bottom-left) -->
+      <circle cx="155" cy="162" r="18" fill="#0D0B1A"/>
+      <circle cx="155" cy="162" r="18" fill="rgba(42,107,107,0.10)"/>
+      <circle cx="155" cy="162" r="18" fill="none" stroke="rgba(42,107,107,0.40)" stroke-width="1"/>
+      <text x="155" y="158.5" font-family="'JetBrains Mono', monospace" font-size="5" fill="#3D9090"
+            text-anchor="middle" letter-spacing="0.08em">PHILOSOPHY</text>
+      <text x="155" y="168" font-family="'Source Serif 4', Georgia, serif" font-size="5.5" fill="rgba(201,197,218,0.5)"
+            text-anchor="middle" font-style="italic">process ontology</text>
+
+      <!-- Outer node: Biology (bottom-right) -->
+      <circle cx="545" cy="162" r="18" fill="#0D0B1A"/>
+      <circle cx="545" cy="162" r="18" fill="rgba(42,107,107,0.10)"/>
+      <circle cx="545" cy="162" r="18" fill="none" stroke="rgba(42,107,107,0.40)" stroke-width="1"/>
+      <text x="545" y="158.5" font-family="'JetBrains Mono', monospace" font-size="6" fill="#3D9090"
+            text-anchor="middle" letter-spacing="0.1em">BIOLOGY</text>
+      <text x="545" y="168" font-family="'Source Serif 4', Georgia, serif" font-size="5.5" fill="rgba(201,197,218,0.5)"
+            text-anchor="middle" font-style="italic">Schrödinger</text>
+
+      <!-- Small dot accents on the connecting lines (mid-points) -->
+      <circle cx="252" cy="78"  r="2.2" fill="rgba(42,107,107,0.6)"/>
+      <circle cx="448" cy="78"  r="2.2" fill="rgba(42,107,107,0.6)"/>
+      <circle cx="252" cy="134" r="2.2" fill="rgba(42,107,107,0.6)"/>
+      <circle cx="448" cy="134" r="2.2" fill="rgba(42,107,107,0.6)"/>
+    </svg>
+  </div>
+
+
+  <!-- ESSAY HEADER -->
+  <div class="container">
+    <div class="essay-header">
+      <p class="essay-eyebrow">Teaching · FYS114 · 2025</p>
+      <h1 class="essay-title">What the Word "Emergence" Does to a Room</h1>
+      <p class="essay-lede">On teaching a first-year interdisciplinary seminar that asked students from physics, computer science, and philosophy to read the same texts — and arrive, sometimes, at the same questions.</p>
+    </div>
+  </div>
+
+
+  <!-- ESSAY BODY -->
+  <div class="container">
+    <div class="essay-grid">
+
+      <!-- PROSE -->
+      <article class="essay-prose">
+
+        <p>The question that opens Week 1 — what does the phrase "more than the sum of its parts" mean to you? — sounds almost trivial until you ask it to a room of thirty students split across physics, computer science, and philosophy. The physicist reaches for symmetry breaking. The philosopher reaches for Aristotle. The computer scientist describes a distributed system. None of them is wrong. All of them have said, in different languages, the same thing.</p>
+
+        <p>That convergence is what FYS114 was designed to make visible.</p>
+
+        <h2>The Bet</h2>
+
+        <p>The course rests on a particular intellectual bet: that emergence — the process by which complex, unpredictable behaviours arise from simple interactions — is not a metaphor borrowed from physics and applied loosely elsewhere, but a genuine mechanism, and that it operates in recognisably similar ways whether the substrate is a physical system, a biological organism, a social network, or a piece of music. The bet is that if you put students from different disciplines in the same room and ask them to read the same texts, they will not just understand each other — they will find that they have been asking the same questions all along, in unnecessarily separate vocabularies.</p>
+
+        <p>This is not an obvious claim. "Interdisciplinary" is often code for superficially adjacent. The aim here was something harder: genuine conceptual contact across domains, not merely goodwill.</p>
+
+        <h2>No Lectures</h2>
+
+        <p>The pedagogy follows from the bet. FYS114 is a seminar: no slides, no lectures, no formal instruction. Students read the texts in advance. Class time is discussion. The faculty role is to ask better questions, not to transmit information.</p>
+
+        <p>This choice has consequences. A student who coasts through a lecture can remain invisible. A student who has not read the text in a seminar is immediately apparent — not from attendance records but from silence. The room regulates itself more than any marking rubric does.</p>
+
+        <p>The texts were chosen for their range and their difficulty. Week 1: Jensen's <em>Complexity Science</em> and Anderson's "More is Different" — the latter a two-page article from 1972 that remains, fifty years later, one of the most compressed and demanding arguments in physics. Week 2: Schrödinger's <em>What is Life?</em> — written in 1944 by a physicist who decided to reason carefully about biology before the relevant experiments existed. Week 3: a student-chosen survey of emergent phenomena across disciplines, from crowd physics to online mob dynamics to Turing's venture into pattern formation.</p>
+
+        <p>The choice of Schrödinger deserves explanation. It is not assigned because it has been vindicated by molecular biology. It is assigned because of what it models: a physicist crossing a disciplinary boundary, taking the tools of one domain and applying them carefully to another. The students are asked to notice what that looks like when done well — and to notice, in Week 1, what it looks like when Jensen and Anderson do the same thing in opposite directions.</p>
+
+        <h2>Writing as Thinking</h2>
+
+        <p>The course is, equally, a writing course. Three weekly essays of five to six pages, each building on the last, culminating in a twenty-page final paper. The prompts do not ask students to summarise what they have read. They ask students to argue.</p>
+
+        <p>Week 1: discuss emergence from the viewpoint that reality consists of processes, not things. Week 2: at what point does a collection of things become a new collective whole? Week 3: compare two distinct examples of emergent phenomena and identify the patterns that unify them.</p>
+
+        <p>These prompts are deliberately uncomfortable. They require the student to have genuinely understood the reading, to have formed an opinion, and to be willing to defend it in prose. The most consistent feedback in Week 1 was structural: not that students' ideas were wrong, but that their arguments were doing the work without the scaffolding. They knew what they wanted to say. They had not yet learned to take the reader with them.</p>
+
+        <p>By Week 3 that had changed, and the change was more visible in the prose than in the ideas. The sentences were longer. The examples were doing specific work. Students had learned to slow down before a claim they actually meant.</p>
+
+        <h2>On AI, Used Carefully</h2>
+
+        <p>The syllabus includes an explicit module on using AI tools as reading aids. This is not incidental — it appears in the learning outcomes. The module arrives in Week 3, deliberately late, after students have already developed habits around the readings. The framing is narrow: AI is presented as a vocabulary tool for unfamiliar texts, not as a replacement for engagement with the argument.</p>
+
+        <p>The reason for the delay became clear in the essays. Students who reached for AI in Week 1 produced writing that reproduced the surface structure of the reading without the comprehension underneath — correct vocabulary, absent reasoning. That pattern is pedagogically useful: it makes visible what understanding actually is. Not familiarity with the terminology, but the ability to apply it to cases the text never mentions.</p>
+
+        <p>The best use I saw was a student who used an AI to identify which sentences in Schrödinger she did not understand, then worked through those sentences herself. The tool was a diagnostic, not a crutch.</p>
+
+        <h2>What Happened</h2>
+
+        <p>Students surprised me in Week 3. By that point they had formed strong intellectual personalities. A physics student who always pushed for formalism. A philosophy student who was suspicious of every metaphor. A CS student who could not resist building a model out of anything. When they were asked to choose their own texts and present them, the selections were revealing. One group chose a paper on sand avalanches alongside one on flocking behaviour, and spent twenty minutes arguing about whether the same underlying mathematics could describe both. They were right to argue. It is not obvious. The argument was exactly the one the course was built to produce.</p>
+
+        <p>The final essays were the most honest measure. Several students chose systems from their own experience: an essay on how music genres emerge and dissolve, one on the structure of a language spoken at home, one on the political science of protest movements. The emergence framework was being used as a tool, not just demonstrated as a concept. That is the intended outcome.</p>
+
+        <p>Whether it constitutes success depends on what you think teaching is for. I think it is for producing students who have one more lens through which to look at unfamiliar problems — and who know when to use it and when to put it down. Whether FYS114 produced that is not something I can measure cleanly. What I can say is that a physics student and a philosophy student ended the final week arguing about whether consciousness qualifies as strongly or weakly emergent, and neither of them was wrong, and neither of them was done.</p>
+
+      </article>
+
+      <!-- ASIDE -->
+      <aside class="essay-aside">
+
+        <a href="../../index.html#teaching" class="back-link">← all teaching</a>
+
+        <div class="aside-card" style="margin-top: 1.5rem;">
+          <p class="aside-label">course details</p>
+
+          <div class="aside-row">
+            <p class="aside-key">Course code</p>
+            <p class="aside-val">FYS114</p>
+          </div>
+          <div class="aside-row">
+            <p class="aside-key">Title</p>
+            <p class="aside-val">Emergence: Understanding Complex Systems in Science and Society</p>
+          </div>
+          <div class="aside-row">
+            <p class="aside-key">Format</p>
+            <p class="aside-val">First-year interdisciplinary seminar · 4 weeks · discussion-based</p>
+          </div>
+          <div class="aside-row">
+            <p class="aside-key">Students</p>
+            <p class="aside-val">BSc Physics · BSc CS · BA Philosophy · iMSc</p>
+          </div>
+          <div class="aside-row">
+            <p class="aside-key">Assessment</p>
+            <p class="aside-val">3 × weekly essays (5–6 pp) + in-class discussion + 20-page final paper</p>
+          </div>
+        </div>
+
+        <div class="aside-card">
+          <p class="aside-label">core texts</p>
+          <div class="aside-row">
+            <div class="aside-tags">
+              <span class="aside-tag">Jensen — Complexity Science</span>
+              <span class="aside-tag">Anderson — More is Different</span>
+              <span class="aside-tag">Schrödinger — What is Life?</span>
+              <span class="aside-tag">Turing patterns (Nature)</span>
+              <span class="aside-tag">Ball — Patterns in Nature</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="aside-card">
+          <p class="aside-label">themes</p>
+          <div class="aside-row">
+            <div class="aside-tags">
+              <span class="aside-tag">emergence</span>
+              <span class="aside-tag">complexity</span>
+              <span class="aside-tag">interdisciplinary writing</span>
+              <span class="aside-tag">seminar pedagogy</span>
+              <span class="aside-tag">AI as reading tool</span>
+            </div>
+          </div>
+        </div>
+
+      </aside>
+
+    </div>
+  </div>
+
+
+  <!-- FOOTER -->
+  <footer>
+    <span>Ninaad Adhvaryu</span>
+    <span><a href="../../index.html">ninaad.github.io</a></span>
+  </footer>
+
+</body>
+</html>

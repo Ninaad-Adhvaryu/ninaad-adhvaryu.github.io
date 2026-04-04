@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How Dense Does a Forest Have to Be Before a Spark Matters? — Ninaad Adhvaryu</title>
+  <meta name="description" content="On measuring ignition thresholds in forest-fire models, and on what connectivity means when a spark lands in the wrong place.">
+  <link rel="stylesheet" href="../../style.css">
+
+  <!-- MathJax for LaTeX rendering -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']],
+        packages: {'[+]': ['ams']}
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+  <style>
+    /* ============================================================
+       PAGE TOKENS
+    ============================================================ */
+    :root {
+      --cream-dark:    #E8E2D9;
+      --cream-card:    #FDFBF8;
+      --ink-muted:     #6B6460;
+      --teal-pale:     rgba(42, 107, 107, 0.09);
+      --obsidian-mid:  #272540;
+      --obsidian-text: #C9C5DA;
+      --obsidian-muted:#7C789A;
+      --max-width:     1080px;
+      --gutter:        2.5rem;
+      --prose-width:   700px;
+    }
+
+    /* ============================================================
+       BASE
+    ============================================================ */
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--serif-body);
+      font-size: 1rem;
+      line-height: 1.72;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    ::selection { background: rgba(42, 107, 107, 0.18); }
+
+    a {
+      color: var(--teal);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    /* ============================================================
+       NAV
+    ============================================================ */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: var(--obsidian);
+      height: 54px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--gutter);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .nav-monogram {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--obsidian-muted);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.25rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      color: var(--obsidian-text);
+      text-transform: lowercase;
+      padding-bottom: 2px;
+      border-bottom: 1px solid transparent;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--teal-light);
+      border-bottom-color: var(--teal-light);
+    }
+
+    .nav-back {
+      color: var(--obsidian-text);
+    }
+
+    /* ============================================================
+       LAYOUT
+    ============================================================ */
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 var(--gutter);
+    }
+
+    section { padding: 4rem 0; }
+
+    .essay-header {
+      padding: 5rem 0 3.5rem;
+    }
+
+    .essay-title {
+      font-family: var(--serif-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.015em;
+      color: var(--ink);
+      margin-bottom: 1.75rem;
+      max-width: 680px;
+    }
+
+    .essay-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-top: 2.5rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--cream-dark);
+    }
+
+    .essay-meta-block {
+      flex: 0 1 auto;
+    }
+
+    .essay-meta-label {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .essay-meta-value {
+      font-family: var(--serif-body);
+      font-size: 0.95rem;
+      color: var(--ink);
+    }
+
+    /* ============================================================
+       PROSE
+    ============================================================ */
+    .essay-body {
+      max-width: var(--prose-width);
+      margin: 0 auto;
+    }
+
+    .essay-body p {
+      font-size: 1rem;
+      line-height: 1.82;
+      margin-bottom: 1.4em;
+      color: var(--ink);
+    }
+
+    .essay-body h2 {
+      font-family: var(--serif-display);
+      font-size: 1.5rem;
+      font-weight: 600;
+      line-height: 1.28;
+      color: var(--ink);
+      margin-top: 2.5em;
+      margin-bottom: 1.2em;
+    }
+
+    .essay-body em { font-style: italic; }
+    .essay-body strong { font-weight: 600; }
+
+    /* ============================================================
+       FIGURES & CAPTIONS
+    ============================================================ */
+    .figure-wrap {
+      margin: 3rem 0;
+      text-align: center;
+    }
+
+    .figure-wrap img {
+      max-width: 100%;
+      height: auto;
+      display: inline-block;
+      border-radius: 2px;
+      background: var(--cream-dark);
+      padding: 0.5rem;
+    }
+
+    .figure-caption {
+      font-family: var(--serif-body);
+      font-size: 0.85rem;
+      line-height: 1.6;
+      color: var(--ink-muted);
+      margin-top: 1rem;
+      font-style: italic;
+    }
+
+    /* ============================================================
+       FOOTER NAV
+    ============================================================ */
+    .essay-footer {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--cream-dark);
+    }
+
+    .back-link {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: lowercase;
+      color: var(--teal);
+      border-bottom: 1px solid var(--teal-rule);
+      padding-bottom: 2px;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .back-link:hover {
+      color: var(--teal-light);
+      border-bottom-color: var(--teal-light);
+    }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 768px) {
+      :root { --gutter: 1.5rem; }
+      section { padding: 3rem 0; }
+      .essay-header { padding: 3rem 0 2rem; }
+      .essay-title { font-size: 1.8rem; }
+      .essay-meta { gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="../../index.html" class="nav-monogram nav-back">← back</a>
+    <ul class="nav-links">
+      <li><a href="../../#inquiries">inquiries</a></li>
+      <li><a href="../../#thesis">thesis</a></li>
+      <li><a href="../../#teaching">teaching</a></li>
+      <li><a href="../../#writing">writing</a></li>
+      <li><a href="../../#contact">contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ESSAY -->
+  <section class="essay-header">
+    <div class="container">
+      <h1 class="essay-title">How Dense Does a Forest Have to Be Before a Spark Matters?</h1>
+      <div class="essay-meta">
+        <div class="essay-meta-block">
+          <p class="essay-meta-label">Domain</p>
+          <p class="essay-meta-value">Environment · Complex Systems</p>
+        </div>
+        <div class="essay-meta-block">
+          <p class="essay-meta-label">Status</p>
+          <p class="essay-meta-value">Complete · 2025</p>
+        </div>
+        <div class="essay-meta-block">
+          <p class="essay-meta-label">Methods</p>
+          <p class="essay-meta-value">Percolation theory · Network connectivity · Ensemble simulation</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="essay-body-wrap">
+    <div class="container">
+      <div class="essay-body">
+
+        <p>Most ignitions do almost nothing. A spark lands, a few trees burn, and the event is over before it has really become an event at all. What interested me here was the transition in the other direction: when does a random ignition stop being local bad luck and start accessing enough connected fuel to become a genuinely large burn?</p>
+
+        <p>A student I was working with had built a version of the Drossel–Schwabl forest-fire model, which is one of those deceptively simple models that becomes more interesting the longer you stare at it. The lattice is just a square grid. Each site is empty, tree-filled, burning, or burnt. Between lightning strikes, trees regrow at random; when lightning lands on a tree, the entire connected cluster containing that site is removed in one go. It is a stylised model in the strongest possible sense. There is no wind, no slope, no moisture, no suppression, and no fire front moving cell by cell. But that simplification is the point. It strips the problem down to connectivity.</p>
+
+        <div class="figure-wrap">
+          <img src="figures/model_schematic.png" alt="Drossel-Schwabl forest-fire model schematic showing pre-ignition and post-ignition lattice states">
+          <p class="figure-caption">This is the model in one glance. The crucial point is that θ does not control fire size directly; it controls how much connected fuel has time to accumulate before the next random lightning strike.</p>
+        </div>
+
+        <p>The model is event-based rather than continuous. Before each lightning event, the simulation performs <em>θ</em> random regrowth attempts. Then one random site is chosen for ignition. If that site is not a tree, nothing happens. If it is a tree, the whole 4-neighbour connected cluster burns instantly. That makes <em>θ</em> the control knob for how connected the lattice is likely to be when lightning arrives.</p>
+
+        <p>There is an obvious first quantity to measure here, which is the global tree density. But it is also the wrong one if the real question is about ignition. Lightning does not care about the average state of the forest. It cares about the patch it happens to hit. So instead of asking only how full the lattice is overall, I wanted to know what the neighbourhood around the ignition site looks like at the instant of impact.</p>
+
+        <p>The paper's key local quantity is the tree density inside a \(9\times 9\) window centred on the lightning strike. Call that local density \(\rho_{\mathrm{loc}}\). If 49 of the 81 cells in that window are trees, then \(\rho_{\mathrm{loc}} \approx 0.61\). That number turned out to matter much more than I expected.</p>
+
+        <p>What the simulation shows is not a gradual, featureless increase in fire size as the local neighbourhood gets denser. Instead, the median fire size as a function of \(\rho_{\mathrm{loc}}\) develops a very sharp uptick. Across the parameter sweeps in the paper, that knee sits remarkably close to the same place: \(\rho_{\mathrm{loc}}^\star \approx 0.61\). Below that, typical burns stay small. Above it, the ignition site is much more likely to sit inside a connected fuel network that can support a much larger event.</p>
+
+        <div class="figure-wrap">
+          <img src="figures/s_vs_x_with_knees.png" alt="Fire size vs local density, showing connectivity threshold">
+          <p class="figure-caption">The eye goes first to the height of the curve, but the more interesting feature is where it turns. Even when θ is large and post-threshold fires become much more severe, the knee still appears at essentially the same local density.</p>
+        </div>
+
+        <p>I like this result because it is both modest and concrete. It is not claiming to have found the wildfire threshold in nature; that would be nonsense. It is saying something narrower and cleaner. In this model, there is a reproducible local connectivity threshold at ignition, and it corresponds to a simple count you can picture: roughly 49 trees in an 81-cell neighbourhood. That is the point where the local geometry begins to look less like a collection of fragments and more like connected fuel.</p>
+
+        <p>There is a percolation flavour to this, though not in the strict textbook sense of estimating a universal lattice threshold. The useful idea from percolation theory is that connectivity changes qualitatively once occupancy gets high enough. What this model adds is an ignition-centred version of that idea. The relevant question is not just whether the lattice contains large clusters somewhere, but whether a randomly chosen ignition site lands inside one.</p>
+
+        <p>The next thing I wanted to know was whether increasing <em>θ</em> moves that threshold around. It does not, at least not much. What changes instead is the severity of what happens once the threshold is crossed. At larger <em>θ</em>, the lattice has had more opportunities to regrow before lightning strikes, so lightning is more likely to hit a tree at all, and once it does, the accessible clusters are larger.</p>
+
+        <p>For a representative sweep at <em>N</em>=128, the probability that a lightning event produces any fire rises from about 0.405 at <em>θ</em>=250 to about 0.482 at <em>θ</em>=3000. More dramatically, the unconditional probability of a genuinely large event—defined here as burning at least ten percent of the lattice, so \(S \ge 0.10N^2\)—rises from about 0.028 to about 0.196. That is a big jump, and it matters that it is expressed per lightning event rather than conditional on a fire already having started. Operationally, that is the quantity that tells you how often a random strike produces a serious event in the model.</p>
+
+        <div class="figure-wrap">
+          <img src="figures/exceedance_vs_theta.png" alt="Exceedance probability vs regrowth parameter">
+          <p class="figure-caption">The threshold itself barely shifts, but the risk above it changes sharply. As θ increases, large fires stop being rare per lightning event; the different initial layouts lying close together is also a quiet hint that the dynamics are forgetting how the forest started.</p>
+        </div>
+
+        <p>That last point is worth pausing on. The simulations were initialised with several different spatial layouts: uniform random, clustered, striped, and gradient. One might expect those to leave strong signatures in the later dynamics. But under uniform random regrowth, they mostly do not. The steady-state risk metrics differ only weakly across layouts. This makes sense once you think about what the model is doing. If every regrowth attempt is spatially uniform, then the model is continually washing structure away. Initial condition matters early. In the long run, the regrowth–ignition balance matters more.</p>
+
+        <p>That is not a failure of the model. It is a clean statement about what kind of question the model can answer. If the aim is to study persistent landscape heterogeneity, then the regrowth rule has to remember the landscape somehow: a fertility mask, a spatially varying growth probability, something that stops the system from homogenising itself. Otherwise one should not pretend to be studying long-lived structure. The model is telling you, quite plainly, that it forgets.</p>
+
+        <p>There is a second place where the paper had the good sense not to cheat. Finite-size comparisons can go badly wrong if one carries the same parameter from one system size to another and acts as if nothing has changed. Here the regrowth mechanism performs <em>θ</em> random site attempts per lightning event. On an <em>N</em>×<em>N</em> lattice, that means the effective per-cell regrowth opportunity scales like</p>
+
+        <p style="text-align: center; margin: 1.5em 0;"><em>φ</em> = <em>θ</em>/<em>N</em>².</p>
+
+        <p>So holding <em>θ</em> fixed while increasing <em>N</em> is not a fair comparison at all. Larger systems are effectively being regrown more slowly on a per-cell basis. Once you notice that, the right scaling variable is obvious. The comparison should be organised around <em>φ</em>, not raw <em>θ</em>. I find this kind of bookkeeping point oddly satisfying, because it is exactly the sort of thing that quietly ruins an analysis if nobody says it out loud.</p>
+
+        <p>What remains, then, is a model with a very specific kind of explanatory power. It does not simulate wildfire spread in a realistic sense. It does not forecast anything. What it does do is isolate a mechanism: local connectivity at the point of ignition. In this stripped-down setting, that mechanism is strong enough to generate a stable threshold and a sharp change in event statistics. Once the local neighbourhood gets dense enough, a spark is no longer interacting with a sparse patchwork. It is interacting with a network.</p>
+
+        <p>That, to me, is the most interesting outcome here. The global density matters, of course, because it influences what local environments are available. But the real action is local. A fire becomes large not because the forest is vaguely full on average, but because the ignition happens to land in the wrong place at the wrong time: a place where connectivity has already crossed a threshold.</p>
+
+        <p>The natural extension is to make the model remember geography instead of erasing it. If regrowth were persistently heterogeneous rather than spatially uniform, the question would become sharper. Does the same local threshold survive when the landscape has durable structure? I do not think this paper answers that. It does something more useful first: it shows that even before adding realism, there is already a clean local mechanism worth understanding.</p>
+
+        <div class="essay-footer">
+          <a href="../../#inquiries" class="back-link">← back to inquiries</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>

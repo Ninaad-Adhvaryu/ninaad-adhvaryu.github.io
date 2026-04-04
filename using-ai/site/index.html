@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Why to Hate but How to Use AI — Ninaad Adhvaryu</title>
+  <meta name="description" content="On the genuine reasons to be suspicious of AI tools — and on how to use them well anyway.">
+  <link rel="stylesheet" href="../../style.css">
+
+  <style>
+    :root {
+      --cream-dark:    #E8E2D9;
+      --ink-muted:     #6B6460;
+      --teal-pale:     rgba(42, 107, 107, 0.09);
+      --obsidian-mid:  #272540;
+      --obsidian-text: #C9C5DA;
+      --obsidian-muted:#7C789A;
+      --max-width:     1080px;
+      --gutter:        2.5rem;
+      --prose-width:   700px;
+    }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--serif-body);
+      font-size: 1rem;
+      line-height: 1.72;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::selection { background: rgba(42, 107, 107, 0.18); }
+
+    a { color: var(--teal); text-decoration: none; transition: color 0.2s; }
+
+    nav {
+      position: sticky; top: 0; z-index: 200;
+      background: var(--obsidian); height: 54px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 var(--gutter);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .nav-monogram {
+      font-family: var(--mono); font-size: 0.72rem;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--obsidian-muted);
+    }
+    .nav-monogram a { color: inherit; }
+    .nav-monogram a:hover { color: var(--teal-light); }
+
+    .nav-links { display: flex; gap: 2.25rem; list-style: none; }
+    .nav-links a {
+      font-family: var(--mono); font-size: 0.7rem;
+      letter-spacing: 0.1em; color: var(--obsidian-text);
+      text-transform: lowercase; padding-bottom: 2px;
+      border-bottom: 1px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .nav-links a:hover { color: var(--teal-light); border-bottom-color: var(--teal-light); }
+
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--gutter); }
+
+    .placeholder-section {
+      padding: 8rem 0 10rem;
+      max-width: var(--prose-width);
+    }
+
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 1.1rem;
+    }
+
+    h1 {
+      font-family: var(--serif-display);
+      font-size: clamp(1.8rem, 3.8vw, 2.75rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: 1.25rem;
+    }
+
+    .lede {
+      font-family: var(--serif-body);
+      font-size: 1.05rem;
+      font-style: italic;
+      line-height: 1.65;
+      color: var(--ink-muted);
+      margin-bottom: 3rem;
+    }
+
+    .status-card {
+      background: var(--obsidian);
+      padding: 1.5rem 1.6rem;
+      display: inline-block;
+    }
+
+    .status-label {
+      font-family: var(--mono);
+      font-size: 0.52rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--obsidian-muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .status-val {
+      font-family: var(--serif-body);
+      font-size: 0.88rem;
+      color: var(--obsidian-text);
+    }
+
+    .back-link {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-family: var(--mono); font-size: 0.6rem;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--teal); border-bottom: 1px solid rgba(42,107,107,0.3);
+      padding-bottom: 2px; margin-top: 2.5rem;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .back-link:hover { color: var(--teal-light); border-bottom-color: var(--teal-light); }
+
+    footer {
+      background: var(--obsidian); padding: 1.5rem var(--gutter);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    footer span { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.12em; color: var(--obsidian-muted); }
+    footer a { color: var(--obsidian-muted); }
+    footer a:hover { color: var(--teal-light); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .placeholder-section { animation: fadeUp 0.6s 0.05s ease both; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <span class="nav-monogram"><a href="../../index.html">N. Adhvaryu</a></span>
+    <ul class="nav-links">
+      <li><a href="../../index.html#inquiries">inquiries</a></li>
+      <li><a href="../../index.html#teaching">teaching</a></li>
+      <li><a href="../../index.html#contact">contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <div class="placeholder-section">
+      <p class="eyebrow">Essay · In progress</p>
+      <h1>Why to Hate but How to Use AI</h1>
+      <p class="lede">On the genuine reasons to be suspicious of AI tools — and on how to use them well anyway. Coming soon.</p>
+
+      <div class="status-card">
+        <p class="status-label">Status</p>
+        <p class="status-val">Notes being gathered · essay forthcoming</p>
+      </div>
+
+      <br>
+      <a href="../../index.html" class="back-link">← back to index</a>
+    </div>
+  </div>
+
+  <footer>
+    <span>Ninaad Adhvaryu</span>
+    <span><a href="../../index.html">ninaad.github.io</a></span>
+  </footer>
+
+</body>
+</html>

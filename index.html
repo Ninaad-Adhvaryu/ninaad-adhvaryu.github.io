@@ -33,7 +33,7 @@
       background: var(--cream);
       color: var(--ink);
       font-family: var(--serif-body);
-      font-size: 17px;
+      font-size: 1rem;
       line-height: 1.72;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
@@ -137,7 +137,7 @@
 
     .opening-grid {
       display: grid;
-      grid-template-columns: 1fr 260px;
+      grid-template-columns: 1fr 290px;
       gap: 4rem;
       align-items: start;
     }
@@ -472,37 +472,13 @@
     .index-entry:nth-child(5) { animation: fadeUp 0.5s 0.25s ease both; }
     .index-entry:nth-child(6) { animation: fadeUp 0.5s 0.30s ease both; }
     .index-entry:nth-child(7) { animation: fadeUp 0.5s 0.35s ease both; }
+    .index-entry:nth-child(8) { animation: fadeUp 0.5s 0.40s ease both; }
 
-    /* ============================================================
-       BACKGROUND
-    ============================================================ */
-    #background {
-      border-top: 1px solid var(--cream-dark);
-    }
-
-    .background-grid {
-      display: grid;
-      grid-template-columns: 1fr 290px;
-      gap: 5rem;
-      align-items: start;
-    }
-
-    .background-prose p {
-      font-size: 0.97rem;
-      line-height: 1.88;
-      color: var(--ink);
-    }
-
-    .background-prose p + p {
-      margin-top: 1.35em;
-    }
-
-    /* Obsidian card */
+    /* Obsidian facts card (in opening) */
     .facts-card {
       background: var(--obsidian);
       padding: 2rem 1.85rem;
-      position: sticky;
-      top: 78px;
+      margin-top: 1.5rem;
     }
 
     .facts-card-label {
@@ -718,8 +694,7 @@
     @media (max-width: 820px) {
       :root { --gutter: 1.5rem; }
 
-      .opening-grid,
-      .background-grid {
+      .opening-grid {
         grid-template-columns: 1fr;
         gap: 2.5rem;
       }
@@ -735,10 +710,6 @@
       .entry-trigger { grid-template-columns: 36px 1fr auto; gap: 0.9rem; }
       .entry-body-content { grid-template-columns: 1fr; gap: 1.5rem; padding-left: 2.5rem; }
       .entry-note { order: -1; }
-
-      .facts-card {
-        position: static;
-      }
 
       .nav-monogram { display: none; }
       .nav-links { gap: 1.75rem; }
@@ -756,6 +727,231 @@
       .opening-name { font-size: 2.4rem; }
       .nav-links { gap: 1.25rem; }
     }
+
+    /* ============================================================
+       TEACHING
+    ============================================================ */
+    #teaching {
+      border-top: 1px solid var(--cream-dark);
+    }
+
+    .teaching-list {
+      max-width: 760px;
+    }
+
+    .teaching-item {
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 2rem;
+      padding: 1.75rem 0;
+      border-bottom: 1px solid var(--cream-dark);
+    }
+
+    .teaching-item:first-child {
+      border-top: 1px solid var(--cream-dark);
+    }
+
+    .teaching-year {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.06em;
+      color: var(--ink-muted);
+      padding-top: 0.3rem;
+    }
+
+    .teaching-venue {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 0.4rem;
+    }
+
+    .teaching-title {
+      font-family: var(--serif-display);
+      font-size: 1.02rem;
+      font-weight: 600;
+      line-height: 1.35;
+      margin-bottom: 0.55rem;
+    }
+
+    .teaching-title a {
+      color: var(--ink);
+      border-bottom: 1px solid var(--cream-dark);
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .teaching-title a:hover {
+      color: var(--teal);
+      border-bottom-color: var(--teal);
+    }
+
+    .teaching-desc {
+      font-size: 0.85rem;
+      line-height: 1.62;
+      color: var(--ink-muted);
+    }
+
+    .teaching-status {
+      display: inline-block;
+      margin-top: 0.55rem;
+      font-family: var(--mono);
+      font-size: 0.5rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.15rem 0.45rem;
+      border-radius: 1px;
+    }
+
+    .teaching-status.published {
+      background: rgba(42,107,107,0.14);
+      color: var(--teal-light);
+    }
+
+    .teaching-status.draft {
+      background: rgba(107, 100, 96, 0.12);
+      color: var(--ink-muted);
+    }
+
+    /* ============================================================
+       THESIS
+    ============================================================ */
+    #thesis {
+      border-top: 1px solid var(--cream-dark);
+      padding: 0 0 6.5rem;
+    }
+
+    .thesis-hero-wrap {
+      width: 100%;
+      margin-bottom: 4rem;
+      overflow: hidden;
+      line-height: 0;
+    }
+
+    .thesis-hero-wrap svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .thesis-title {
+      font-family: var(--serif-display);
+      font-size: clamp(1.75rem, 3.5vw, 2.55rem);
+      font-weight: 700;
+      line-height: 1.18;
+      letter-spacing: -0.018em;
+      color: var(--ink);
+      margin-bottom: 2.75rem;
+      max-width: 680px;
+    }
+
+    .thesis-intro-grid {
+      display: grid;
+      grid-template-columns: 1fr 272px;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .thesis-intro-prose p {
+      font-size: 0.97rem;
+      line-height: 1.88;
+      color: var(--ink);
+    }
+
+    .thesis-intro-prose p + p {
+      margin-top: 1.2em;
+    }
+
+    .thesis-read-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 1.5rem;
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--teal);
+      text-decoration: none;
+      border-bottom: 1px solid var(--teal-rule);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .thesis-read-link:hover {
+      color: var(--teal-light);
+      border-bottom-color: var(--teal-light);
+    }
+
+    .thesis-meta {
+      background: var(--obsidian);
+      padding: 1.75rem 1.6rem;
+      position: sticky;
+      top: 78px;
+    }
+
+    .thesis-meta-label {
+      font-family: var(--mono);
+      font-size: 0.52rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--obsidian-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .thesis-meta-row {
+      margin-bottom: 1rem;
+    }
+
+    .thesis-meta-row:last-child { margin-bottom: 0; }
+
+    .thesis-meta-key {
+      font-family: var(--mono);
+      font-size: 0.55rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--obsidian-muted);
+      margin-bottom: 0.22rem;
+    }
+
+    .thesis-meta-val {
+      font-family: var(--serif-body);
+      font-size: 0.8rem;
+      line-height: 1.45;
+      color: var(--obsidian-text);
+    }
+
+    .thesis-pdf-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--teal-light);
+      border: 1px solid rgba(61, 144, 144, 0.3);
+      padding: 0.45rem 0.85rem;
+      transition: background 0.2s ease, color 0.2s ease;
+      text-decoration: none;
+    }
+
+    .thesis-pdf-link:hover {
+      background: rgba(42, 107, 107, 0.14);
+      color: #5AC4C4;
+    }
+
+    @media (max-width: 820px) {
+      .thesis-intro-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+      .thesis-meta {
+        position: static;
+      }
+    }
   </style>
 </head>
 <body>
@@ -767,7 +963,8 @@
     <span class="nav-monogram">N. Adhvaryu</span>
     <ul class="nav-links">
       <li><a href="#inquiries">inquiries</a></li>
-      <li><a href="#background">background</a></li>
+      <li><a href="#thesis">thesis</a></li>
+      <li><a href="#teaching">teaching</a></li>
       <li><a href="#writing">writing</a></li>
       <li><a href="#contact">contact</a></li>
     </ul>
@@ -788,7 +985,7 @@
           </h1>
           <div class="opening-statement">
             <p>I build analytical pipelines for problems that resist clean categorisation. My training is in computational physics — numerical solvers, condensed matter, simulation — but my working context has ranged from mangrove cover mapping to cricket wicket prediction to endangered-language speech recognition.</p>
-            <p>I care about making technical work legible: to collaborators, to students, to decision-makers who need to act on it.</p>
+            <p>I care about making technical work legible: to collaborators, to students, to decision-makers. Teaching interdisciplinary seminars at Ahmedabad University and mentoring student research at Athena Education have been as central to that as the computation.</p>
           </div>
           <div class="opening-meta">
             <span class="opening-location">New Delhi, India</span>
@@ -811,6 +1008,44 @@
               </svg>
               <span>photo</span>
             </div>
+          </div>
+
+          <div class="facts-card">
+            <p class="facts-card-label">at a glance</p>
+
+            <div class="fact-group">
+              <p class="fact-group-title">Education</p>
+              <div class="fact-item">
+                MSc Physics
+                <small>University of Stuttgart · 2023</small>
+              </div>
+              <div class="fact-item">
+                BSc Physics (Research)
+                <small>Shiv Nadar University · 2019</small>
+              </div>
+            </div>
+
+            <div class="fact-group">
+              <p class="fact-group-title">Current</p>
+              <div class="fact-item">
+                Research Mentor
+                <small>Athena Education · 2025–present</small>
+              </div>
+            </div>
+
+            <div class="fact-group">
+              <p class="fact-group-title">Prior</p>
+              <div class="fact-item">
+                Teaching Assistant
+                <small>Ahmedabad University · 2024–25</small>
+              </div>
+              <div class="fact-item">
+                Research Intern
+                <small>CEPT University · 2019–20</small>
+              </div>
+            </div>
+
+            <a href="#" class="cv-link">↓ &nbsp;Download CV</a>
           </div>
         </div>
 
@@ -897,8 +1132,8 @@
             <span class="entry-num">02</span>
             <div class="entry-main">
               <p class="entry-domain">Environment · Geospatial</p>
-              <h2 class="entry-title">What does two decades of coastline look like when it disappears quietly?</h2>
-              <p class="entry-lede">On measuring mangrove loss along the Mumbai coast — and on why two satellite datasets can agree on the forest but disagree on its edges.</p>
+              <h2 class="entry-title">What Happens When a Forest Dataset Meets a Mangrove?</h2>
+              <p class="entry-lede">On comparing two satellite datasets in Mumbai — and on what disagreement reveals about classification systems struggling with intertidal edges.</p>
             </div>
             <span class="entry-toggle">+</span>
           </div>
@@ -906,22 +1141,29 @@
             <div class="entry-body-inner">
               <div class="entry-body-content">
                 <div class="entry-prose">
-                  <p><em>[Essay in progress]</em></p>
+                  <p>A mangrove is obviously a forest until you ask a global dataset to prove it every year. Then the answer becomes strangely unstable. Two open-access satellite products, both widely used, look at Mumbai's coastal wetlands and tell slightly different stories. That disagreement is where the science gets interesting — not because the datasets are wrong, but because their mismatches force you to ask what exactly "forest" means when you're looking through a specific sensor at a specific threshold.</p>
+                  <p>The deeper point is that a map is never a neutral mirror. It is a compressed bundle of sensor choices, classification rules, thresholds, and assumptions about what counts as evidence. In a landscape like Mumbai's mangroves — muddy, intertidal, fragmented — those choices matter operationally. A generic forest product can look persuasive while being unstable in exactly the environment where environmental planners most need to trust it.</p>
+                  <img src="mapping-mangroves/site/figures/Overlap Disagreement Map - Project Essays.png" alt="Spatial overlap and disagreement between Hansen and GMW datasets" style="width: 100%; max-width: 500px; margin: 1.5rem 0; border-radius: 2px; display: block;">
+                  <a href="mapping-mangroves/site/index.html" class="entry-read-link">Read full essay →</a>
                 </div>
                 <div class="entry-note">
                   <p class="entry-note-label">field notes</p>
                   <div class="note-row">
                     <p class="note-key">Status</p>
-                    <p class="note-val">Ongoing · 2025</p>
+                    <p class="note-val">Complete · 2025</p>
                   </div>
                   <div class="note-row">
                     <p class="note-key">Methods</p>
                     <div class="note-tags">
                       <span class="note-tag">GeoPandas</span>
                       <span class="note-tag">rasterio</span>
-                      <span class="note-tag">Jaccard metrics</span>
-                      <span class="note-tag">GFW · GMW</span>
+                      <span class="note-tag">Raster comparison</span>
+                      <span class="note-tag">GMW · Hansen GFC</span>
                     </div>
+                  </div>
+                  <div class="note-row">
+                    <p class="note-key">Key finding</p>
+                    <p class="note-val">0% persistent forest — classification flickering in intertidal zone reveals sensor instability, not ecosystem collapse.</p>
                   </div>
                 </div>
               </div>
@@ -1126,6 +1368,52 @@
           </div>
         </li>
 
+        <!-- 08 — FOREST FIRES -->
+        <li class="index-entry" data-domain="environment">
+          <div class="entry-trigger" onclick="toggleEntry(this)">
+            <span class="entry-num">08</span>
+            <div class="entry-main">
+              <p class="entry-domain">Environment · Complex Systems</p>
+              <h2 class="entry-title">How Dense Does a Forest Have to Be Before a Spark Matters?</h2>
+              <p class="entry-lede">On local connectivity thresholds in forest-fire models — and on why the geography of ignition points matters more than global forest density.</p>
+            </div>
+            <span class="entry-toggle">+</span>
+          </div>
+          <div class="entry-body">
+            <div class="entry-body-inner">
+              <div class="entry-body-content">
+                <div class="entry-prose">
+                  <p>Most ignitions do almost nothing. A spark lands, a few trees burn, and the event is over before it becomes an event at all. The question is: when does that change? When does a random ignition stop being local bad luck and start accessing enough connected fuel to become a genuinely large burn?</p>
+                  <p>Using the Drossel–Schwabl forest-fire model, this project isolates a single mechanism: local connectivity at the point of ignition. The model is deceptively simple — a square lattice, trees regrowing at random, fire propagating through connected clusters — but that simplification strips the problem down to its essence. What emerges is a reproducible threshold, located where local tree density reaches roughly 61%. Below that, burns stay small. Above it, the ignition site sits inside a connected fuel network that can support catastrophically larger events.</p>
+                  <p>The deeper lesson is about what mechanisms actually matter in fire ecology. Global density influences what local environments are available, but the real action is local. A fire becomes large not because the forest is vaguely full on average, but because the spark happened to land in the wrong place — where connectivity had already crossed a threshold.</p>
+                  <img src="forest-fires/site/figures/model_schematic.png" alt="Drossel-Schwabl forest-fire model schematic showing pre-ignition and post-ignition lattice states" style="width: 100%; max-width: 500px; margin: 1.5rem 0; border-radius: 2px; display: block;">
+                  <a href="forest-fires/site/index.html" class="entry-read-link">Read full essay →</a>
+                </div>
+                <div class="entry-note">
+                  <p class="entry-note-label">field notes</p>
+                  <div class="note-row">
+                    <p class="note-key">Status</p>
+                    <p class="note-val">Complete · 2025</p>
+                  </div>
+                  <div class="note-row">
+                    <p class="note-key">Methods</p>
+                    <div class="note-tags">
+                      <span class="note-tag">Percolation theory</span>
+                      <span class="note-tag">Network connectivity</span>
+                      <span class="note-tag">Ensemble simulation</span>
+                      <span class="note-tag">Event-based dynamics</span>
+                    </div>
+                  </div>
+                  <div class="note-row">
+                    <p class="note-key">Key result</p>
+                    <p class="note-val">Local connectivity threshold ρ_loc* ≈ 0.61 (≈49 trees in 9×9 window) is stable across parameter sweeps; post-threshold fire severity scales with regrowth opportunity.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+
       </ul>
 
     </div>
@@ -1133,62 +1421,144 @@
 
 
   <!-- ============================================================
-       BACKGROUND
+       THESIS
   ============================================================ -->
-  <section id="background">
+  <section id="thesis">
+
+    <!-- ── Hero SVG ─────────────────────────────────────────── -->
+    <div class="thesis-hero-wrap">
+      <svg viewBox="0 0 700 240" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" aria-label="Simulated density cross-section of a rotating dipolar BEC showing three-vortex triangular configuration — computed via eGPE on cascadic multigrid">
+        <defs>
+          <!-- Viridis-inspired radial density gradient (purple→teal→green→yellow) -->
+          <radialGradient id="bec-density" cx="350" cy="120" r="92" gradientUnits="userSpaceOnUse">
+            <stop offset="0%"   stop-color="#FDE725"/>
+            <stop offset="16%"  stop-color="#A0DA39"/>
+            <stop offset="32%"  stop-color="#4AC16D"/>
+            <stop offset="48%"  stop-color="#1FA187"/>
+            <stop offset="64%"  stop-color="#277F8E"/>
+            <stop offset="80%"  stop-color="#3B528B"/>
+            <stop offset="92%"  stop-color="#440154"/>
+            <stop offset="100%" stop-color="#0D0B1A" stop-opacity="0"/>
+          </radialGradient>
+          <!-- Outer ambient glow -->
+          <radialGradient id="bec-ambient" cx="350" cy="120" r="130" gradientUnits="userSpaceOnUse">
+            <stop offset="0%"   stop-color="#440154" stop-opacity="0.18"/>
+            <stop offset="100%" stop-color="#0D0B1A" stop-opacity="0"/>
+          </radialGradient>
+          <!-- Vortex core: dark dip in density fading to transparent -->
+          <radialGradient id="vortex-hole" cx="50%" cy="50%" r="50%">
+            <stop offset="0%"   stop-color="#08060F"/>
+            <stop offset="38%"  stop-color="#277F8E" stop-opacity="0.75"/>
+            <stop offset="100%" stop-color="#1FA187" stop-opacity="0"/>
+          </radialGradient>
+          <!-- Viridis linear gradient for density colourbar -->
+          <linearGradient id="viridis-bar" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%"   stop-color="#440154"/>
+            <stop offset="20%"  stop-color="#3B528B"/>
+            <stop offset="40%"  stop-color="#277F8E"/>
+            <stop offset="60%"  stop-color="#1FA187"/>
+            <stop offset="80%"  stop-color="#A0DA39"/>
+            <stop offset="100%" stop-color="#FDE725"/>
+          </linearGradient>
+          <!-- CMM coarse grid pattern (20px cells) -->
+          <pattern id="coarse-grid" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+            <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="0.5"/>
+          </pattern>
+          <!-- CMM fine grid pattern (5px cells) for vortex region -->
+          <pattern id="fine-grid" x="0" y="0" width="5" height="5" patternUnits="userSpaceOnUse">
+            <path d="M 5 0 L 0 0 0 5" fill="none" stroke="rgba(255,255,255,0.13)" stroke-width="0.35"/>
+          </pattern>
+        </defs>
+
+        <!-- Background -->
+        <rect width="700" height="240" fill="#0D0B1A"/>
+
+        <!-- Outer ambient glow -->
+        <circle cx="350" cy="120" r="130" fill="url(#bec-ambient)"/>
+
+        <!-- Main density blob — viridis radial gradient -->
+        <ellipse cx="350" cy="120" rx="92" ry="88" fill="url(#bec-density)"/>
+
+        <!-- CMM coarse grid overlay (over full density blob) -->
+        <ellipse cx="350" cy="120" rx="92" ry="88" fill="url(#coarse-grid)"/>
+
+        <!-- CMM fine grid overlay (central vortex region — mesh refinement) -->
+        <circle cx="350" cy="118" r="48" fill="url(#fine-grid)"/>
+
+        <!-- ── Three vortex cores: triangular arrangement ─── -->
+        <!-- Core 0: top -->
+        <circle cx="350" cy="100" r="11" fill="url(#vortex-hole)"/>
+        <!-- Core 1: lower-left -->
+        <circle cx="333" cy="130" r="11" fill="url(#vortex-hole)"/>
+        <!-- Core 2: lower-right -->
+        <circle cx="367" cy="130" r="11" fill="url(#vortex-hole)"/>
+
+        <!-- ── Left annotations ───────────────────────────── -->
+        <text x="42" y="72" font-family="'JetBrains Mono', monospace" font-size="7.5" letter-spacing="2" fill="#7C789A">ROTATING DIPOLAR BEC</text>
+        <text x="42" y="104" font-family="Georgia, serif" font-size="13" font-style="italic" fill="#C9C5DA" opacity="0.85">¹⁶⁴Dy · N = 75,000</text>
+        <text x="42" y="126" font-family="Georgia, serif" font-size="11" font-style="italic" fill="#3D9090" opacity="0.9">Ω̂/ω</text>
+        <text x="79" y="126" font-family="Georgia, serif" font-size="8" font-style="italic" fill="#3D9090" opacity="0.9">⊥</text>
+        <text x="86" y="126" font-family="Georgia, serif" font-size="11" fill="#7C789A" opacity="0.9"> = 0.90</text>
+        <text x="42" y="144" font-family="Georgia, serif" font-size="11" font-style="italic" fill="#3D9090" opacity="0.9">ε</text>
+        <text x="50" y="147" font-family="Georgia, serif" font-size="8" font-style="italic" fill="#3D9090" opacity="0.9">dd</text>
+        <text x="63" y="144" font-family="Georgia, serif" font-size="11" fill="#7C789A" opacity="0.9"> = 1.36</text>
+        <text x="42" y="166" font-family="'JetBrains Mono', monospace" font-size="8" fill="#4D4A62" letter-spacing="0.5">128³ spatial grid</text>
+
+        <!-- ── Right annotations ──────────────────────────── -->
+        <text x="486" y="72" font-family="'JetBrains Mono', monospace" font-size="7.5" letter-spacing="2" fill="#7C789A">UNIV. STUTTGART</text>
+        <text x="486" y="90" font-family="'JetBrains Mono', monospace" font-size="7" fill="#4D4A62" letter-spacing="1">PI5 · 2023</text>
+        <text x="486" y="118" font-family="'JetBrains Mono', monospace" font-size="7" fill="#4D4A62" letter-spacing="0.5">methods</text>
+        <text x="486" y="132" font-family="Georgia, serif" font-size="9.5" fill="#C9C5DA" opacity="0.75">CGM  ·  ITE  ·  CMM</text>
+
+        <!-- Viridis density colourbar (replaces phase-legend strip) -->
+        <g transform="translate(486, 163)">
+          <text x="0" y="0" font-family="'JetBrains Mono', monospace" font-size="7" fill="#4D4A62" letter-spacing="0.5">density  (10²¹ m⁻³)</text>
+          <rect x="0" y="7" width="174" height="8" fill="url(#viridis-bar)" rx="1"/>
+          <text x="0"   y="24" font-family="'JetBrains Mono', monospace" font-size="7" fill="#7C789A">0</text>
+          <text x="87"  y="24" font-family="'JetBrains Mono', monospace" font-size="7" fill="#7C789A" text-anchor="middle">7</text>
+          <text x="174" y="24" font-family="'JetBrains Mono', monospace" font-size="7" fill="#7C789A" text-anchor="end">14</text>
+        </g>
+
+      </svg>
+    </div>
+
     <div class="container">
-      <p class="section-marker">background</p>
+      <p class="section-marker">MSc Thesis · University of Stuttgart · 2023</p>
 
-      <div class="background-grid">
+      <h2 class="thesis-title">Dipolar Quantum Gases under Rotation</h2>
 
-        <div class="background-prose">
-          <p>My training is in physics. I spent three years at the University of Stuttgart building numerical solvers for rotating dipolar Bose–Einstein condensates — conjugate-gradient ground-state searches, imaginary-time evolution, systematic convergence studies of vortex formation. Before that, undergraduate research in X-ray absorption spectroscopy at Shiv Nadar University, and a summer in a surface-science lab in Alberta working on sessile droplet dynamics and wettability.</p>
-          <p>Since then, the context has shifted considerably. I spent 2024 teaching interdisciplinary seminars at Ahmedabad University — on complexity and emergence, on environment and climate, on feminist theory. Since mid-2025 I've been mentoring high school students on publishable research at Athena Education, where I also built internal tooling: a project-scoping GPT, a Notion dashboard now used across the mentoring team, and a zip-code–level mapping prototype for an NGO partner.</p>
-          <p>The technical and the pedagogical run together for me. I find that explaining a model to a student is one of the better ways to understand it.</p>
+      <div class="thesis-intro-grid">
+
+        <div class="thesis-intro-prose">
+          <p>My MSc thesis asked a deceptively narrow question: can we reliably compute the ground state of a rotating dipolar Bose–Einstein condensate, and how do two distinct numerical methods compare when they try? The system is a cloud of 75,000 dysprosium atoms — one of the most magnetic elements in the periodic table — cooled to within billionths of a degree of absolute zero, then spun. At that temperature, quantum mechanics stops being a correction and becomes the whole story.</p>
+          <p>What makes dipolar condensates unusual is that their atoms don't just interact when they touch. The magnetic dipole–dipole interaction reaches across space, couples to rotation, and introduces an anisotropy that no standard condensate has. When the cloud spins fast enough, it doesn't swell uniformly — it nucleates vortices, quantised holes in the wavefunction arranged in a hexagonal lattice. The image above shows one such configuration: seven vortices in a Abrikosov-like lattice, each colour-coded by the phase of the quantum field winding around its core.</p>
+          <p>The thesis developed and tested two complementary ground-state solvers — a preconditioned Conjugate Gradient Method and Imaginary Time Evolution with Strang operator splitting — on the full extended Gross–Pitaevskii equation, including the Lee–Huang–Yang quantum fluctuation correction. A Cascadic Multigrid Method reduced computation times by up to 22× by seeding fine-grid runs from coarse solutions. The essay below goes through all of this in detail.</p>
+          <a href="dipolar-quantum-gases/site/index.html" class="thesis-read-link">Read full essay →</a>
         </div>
 
-        <div>
-          <div class="facts-card">
-            <p class="facts-card-label">at a glance</p>
-
-            <div class="fact-group">
-              <p class="fact-group-title">Education</p>
-              <div class="fact-item">
-                MSc Physics
-                <small>University of Stuttgart · 2023</small>
-              </div>
-              <div class="fact-item">
-                BSc Physics (Research)
-                <small>Shiv Nadar University · 2019</small>
-              </div>
-            </div>
-
-            <div class="fact-group">
-              <p class="fact-group-title">Current</p>
-              <div class="fact-item">
-                Research Mentor
-                <small>Athena Education · 2025–present</small>
-              </div>
-            </div>
-
-            <div class="fact-group">
-              <p class="fact-group-title">Prior</p>
-              <div class="fact-item">
-                Teaching Assistant
-                <small>Ahmedabad University · 2024–25</small>
-              </div>
-              <div class="fact-item">
-                Research Intern
-                <small>CEPT University · 2019–20</small>
-              </div>
-            </div>
-
-            <!--
-              TO LINK YOUR CV:
-              Replace href="#" with the path to your CV PDF, e.g. href="CV_Ninaad.pdf"
-            -->
-            <a href="#" class="cv-link">↓ &nbsp;Download CV</a>
+        <div class="thesis-meta">
+          <p class="thesis-meta-label">thesis record</p>
+          <div class="thesis-meta-row">
+            <p class="thesis-meta-key">Institution</p>
+            <p class="thesis-meta-val">University of Stuttgart · PI5 (Pfau Group)</p>
           </div>
+          <div class="thesis-meta-row">
+            <p class="thesis-meta-key">Year</p>
+            <p class="thesis-meta-val">2023</p>
+          </div>
+          <div class="thesis-meta-row">
+            <p class="thesis-meta-key">System</p>
+            <p class="thesis-meta-val">¹⁶⁴Dy · N = 75,000 · 128³ spatial grid</p>
+          </div>
+          <div class="thesis-meta-row">
+            <p class="thesis-meta-key">Methods</p>
+            <p class="thesis-meta-val">eGPE · CGM · ITE · Strang splitting · CMM</p>
+          </div>
+          <div class="thesis-meta-row">
+            <p class="thesis-meta-key">Result</p>
+            <p class="thesis-meta-val">Hexagonal vortex lattices computed and cross-validated across two independent solvers; CMM speedup 5–22×</p>
+          </div>
+          <a href="https://www.pi5.uni-stuttgart.de/documents/abgeschlossene-arbeiten/2023-Adhvaryu-Ninaad-Dipolar-Quantum-Gases-under-Rotation-MSc.pdf" target="_blank" rel="noopener" class="thesis-pdf-link">↓ &nbsp;Download PDF</a>
         </div>
 
       </div>
@@ -1204,19 +1574,6 @@
       <p class="section-marker">writing</p>
 
       <div class="writing-list">
-
-        <div class="writing-item">
-          <span class="writing-year">2025</span>
-          <div>
-            <p class="writing-venue">Project Essays · Physics</p>
-            <h3 class="writing-title">
-              <a href="double-pendulum/site/index.html">
-                If you change the shape of gravity, does chaos follow?
-              </a>
-            </h3>
-            <p class="writing-desc">On what happens to a double pendulum's chaotic behaviour when the gravitational field is non-uniform — and what that reveals about the assumptions quietly built into every physical model.</p>
-          </div>
-        </div>
 
         <div class="writing-item">
           <span class="writing-year">2024</span>
@@ -1236,15 +1593,60 @@
           <div>
             <p class="writing-venue">University of Stuttgart · Master's Thesis</p>
             <h3 class="writing-title">
-              <!--
-                TO LINK YOUR THESIS:
-                Replace href="#" with your Stuttgart thesis URL
-              -->
-              <a href="#" target="_blank" rel="noopener">
+              <a href="https://www.pi5.uni-stuttgart.de/documents/abgeschlossene-arbeiten/2023-Adhvaryu-Ninaad-Dipolar-Quantum-Gases-under-Rotation-MSc.pdf" target="_blank" rel="noopener">
                 Dipolar Quantum Gases under Rotation
               </a>
             </h3>
-            <p class="writing-desc">Numerical study of vortex formation in rotating dipolar Bose–Einstein condensates using conjugate-gradient ground-state searches and imaginary-time evolution on discretised grids.</p>
+            <p class="writing-desc">Numerical study of vortex formation in rotating dipolar Bose–Einstein condensates using conjugate-gradient ground-state searches and imaginary-time evolution on discretised grids. Pi5 group, supervised by Dr. Tilman Pfau.</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       TEACHING
+  ============================================================ -->
+  <section id="teaching">
+    <div class="container">
+      <p class="section-marker">teaching</p>
+
+      <p class="teaching-intro" style="max-width:720px; font-size:0.92rem; line-height:1.72; color:var(--ink-muted); margin-bottom:2.5rem;">All teaching was at <a href="https://ahduni.edu.in/academics/schools-centres/undergraduate-college/foundation-programme/" target="_blank" rel="noopener">Ahmedabad University</a>, where I served as Teaching Assistant across the Foundation Programme and several interdisciplinary seminars in 2024–25.</p>
+
+      <div class="teaching-list">
+
+        <!-- ── Emergence: dedicated subsection ── -->
+        <div class="teaching-item">
+          <span class="teaching-year">2025</span>
+          <div>
+            <p class="teaching-venue">Emergence: Complex Systems in Science &amp; Society · Instructor Role</p>
+            <h3 class="teaching-title">
+              <a href="teaching-emergence/site/index.html">
+                What the Word "Emergence" Does to a Room
+              </a>
+            </h3>
+            <p class="teaching-desc">I designed and delivered this four-week seminar from scratch — choosing readings, structuring sessions, and writing all materials. Students from physics, computer science, and philosophy read Anderson, Schrödinger, and Turing side by side, integrating quantitative models with qualitative readings on complexity across science and society. They produced 20-page interdisciplinary research papers with emphasis on modelling assumptions and evidence.</p>
+            <span class="teaching-status published">Published</span>
+          </div>
+        </div>
+
+        <!-- ── Other courses: compact listing ── -->
+        <div class="teaching-item">
+          <span class="teaching-year">2025</span>
+          <div>
+            <p class="teaching-venue">Feminism is for Everybody</p>
+            <p class="teaching-desc">Interdisciplinary course on feminist theory and practice. Facilitated discussions connecting abstract concepts to contemporary social issues; provided feedback on argumentation, clarity, and engagement with readings.</p>
+          </div>
+        </div>
+
+        <div class="teaching-item">
+          <span class="teaching-year">2024–25</span>
+          <div>
+            <p class="teaching-venue">Foundation Programme</p>
+            <p class="teaching-desc">Interdisciplinary, project-based learning across studios including Environment &amp; Climate Change, Water, and Democracy &amp; Justice. Co-developed the Foundation Programme Handbook consolidating lesson plans, activities, and onboarding material; trained incoming TAs. Assessed student work with structured rubrics and provided iterative feedback on research design, argumentation, and written communication.</p>
           </div>
         </div>
 
@@ -1295,7 +1697,7 @@
   ============================================================ -->
   <footer>
     <span>Ninaad Adhvaryu</span>
-    <span>New Delhi · 2025</span>
+    <span>New Delhi · 2026</span>
   </footer>
 
   <script>
