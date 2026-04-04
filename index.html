@@ -290,14 +290,36 @@
 
     .entry-trigger {
       display: grid;
-      grid-template-columns: 52px 1fr auto;
-      align-items: baseline;
+      grid-template-columns: 52px 1fr 120px auto;
+      align-items: center;
       gap: 1.5rem;
       padding: 1.4rem 0;
       cursor: pointer;
       user-select: none;
       -webkit-user-select: none;
       transition: background 0.15s ease;
+    }
+
+    .entry-thumbnail {
+      width: 120px;
+      height: 75px;
+      background: var(--cream-dark);
+      border-radius: 3px;
+      overflow: hidden;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .entry-thumbnail img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .entry-thumbnail.empty {
+      background: linear-gradient(135deg, var(--teal-pale) 0%, rgba(42, 107, 107, 0.04) 100%);
     }
 
     .entry-trigger:hover .entry-title {
@@ -708,6 +730,7 @@
       }
 
       .entry-trigger { grid-template-columns: 36px 1fr auto; gap: 0.9rem; }
+      .entry-thumbnail { display: none; }
       .entry-body-content { grid-template-columns: 1fr; gap: 1.5rem; padding-left: 2.5rem; }
       .entry-note { order: -1; }
 
@@ -1085,16 +1108,15 @@
               <h2 class="entry-title">If you change the shape of gravity, does chaos follow?</h2>
               <p class="entry-lede">On what happens to a double pendulum when "downward" is no longer constant — and on what that reveals about the assumptions quietly built into every physical model.</p>
             </div>
+            <div class="entry-thumbnail empty"></div>
             <span class="entry-toggle">+</span>
           </div>
           <div class="entry-body">
             <div class="entry-body-inner">
               <div class="entry-body-content">
                 <div class="entry-prose">
-                  <p>The double pendulum is the standard demonstration of classical chaos: two linked rods, deterministic equations, and behaviour so sensitive to initial conditions that prediction becomes practically impossible within seconds. What almost every analysis of it shares is an assumption treated as completely obvious — that gravity is uniform and constant. This project asked what happens if you drop that assumption.</p>
-                  <p>The results were not what a naive intuition predicts. Introducing a vertical gravity gradient — gravity that grows or weakens with height — didn't simply increase or decrease chaos. It changed which configurations were chaotic at all. Initial conditions that produced full chaos under uniform gravity became quasi-periodic under the gradient. The relationship was non-monotonic: increasing the gradient further reversed the effect. The gravity field geometry was acting as a hidden control parameter for chaos, one the standard model cannot see.</p>
-                  <p>The black hole case made the underlying logic clearest. When the pivot was placed close to a compact object, the pendulum links were comparable in length to the orbital distance — the field was genuinely nonuniform across the system. For a Sun-mass or Sagittarius A* case at the same relative distance, the links were vanishingly small, and the field appeared effectively uniform. What determined the physics wasn't the exotic mass of the object. It was the dimensionless ratio of pendulum size to distance from the source. The lesson turned out to be geometric, not astrophysical.</p>
-                  <p>The deeper point — the one that motivated the project — is that the "uniform gravity" assumption isn't a neutral simplification. It pre-determines what behaviour you're allowed to find. That's not unique to pendulums.</p>
+                  <p>The double pendulum is the standard demonstration of classical chaos: two linked rods, deterministic equations, and behaviour so sensitive to initial conditions that prediction becomes practically impossible within seconds. What almost every analysis shares is an assumption treated as obvious — that gravity is uniform and constant.</p>
+                  <p>When I introduced a vertical gravity gradient, the result wasn't what intuition predicts: it didn't simply increase or decrease chaos. Instead, it changed which configurations were chaotic at all. The gravity field geometry was acting as a hidden control parameter for chaos, one the standard model cannot represent.</p>
                   <a href="double-pendulum/site/index.html" class="entry-read-link">Read full essay →</a>
                 </div>
                 <div class="entry-note">
@@ -1135,15 +1157,15 @@
               <h2 class="entry-title">What Happens When a Forest Dataset Meets a Mangrove?</h2>
               <p class="entry-lede">On comparing two satellite datasets in Mumbai — and on what disagreement reveals about classification systems struggling with intertidal edges.</p>
             </div>
+            <div class="entry-thumbnail"><img src="mapping-mangroves/site/figures/Overlap Disagreement Map - Project Essays.png" alt="Mangrove dataset disagreement map"></div>
             <span class="entry-toggle">+</span>
           </div>
           <div class="entry-body">
             <div class="entry-body-inner">
               <div class="entry-body-content">
                 <div class="entry-prose">
-                  <p>A mangrove is obviously a forest until you ask a global dataset to prove it every year. Then the answer becomes strangely unstable. Two open-access satellite products, both widely used, look at Mumbai's coastal wetlands and tell slightly different stories. That disagreement is where the science gets interesting — not because the datasets are wrong, but because their mismatches force you to ask what exactly "forest" means when you're looking through a specific sensor at a specific threshold.</p>
-                  <p>The deeper point is that a map is never a neutral mirror. It is a compressed bundle of sensor choices, classification rules, thresholds, and assumptions about what counts as evidence. In a landscape like Mumbai's mangroves — muddy, intertidal, fragmented — those choices matter operationally. A generic forest product can look persuasive while being unstable in exactly the environment where environmental planners most need to trust it.</p>
-                  <img src="mapping-mangroves/site/figures/Overlap Disagreement Map - Project Essays.png" alt="Spatial overlap and disagreement between Hansen and GMW datasets" style="width: 100%; max-width: 500px; margin: 1.5rem 0; border-radius: 2px; display: block;">
+                  <p>Two open-access satellite products look at Mumbai's coastal wetlands and tell slightly different stories. That disagreement is where the science gets interesting — not because the datasets are wrong, but because their mismatches force you to ask what exactly "forest" means when you're looking through a specific sensor.</p>
+                  <p>A map is never a neutral mirror. It is a compressed bundle of sensor choices, classification rules, thresholds, and assumptions about what counts as evidence. In a landscape like Mumbai's mangroves — muddy, intertidal, fragmented — those choices matter operationally.</p>
                   <a href="mapping-mangroves/site/index.html" class="entry-read-link">Read full essay →</a>
                 </div>
                 <div class="entry-note">
@@ -1180,6 +1202,7 @@
               <h2 class="entry-title">Can geometry substitute for infrastructure in a disaster?</h2>
               <p class="entry-lede">On placing wireless drones over broken terrain — and on what optimal coverage actually means when the terrain itself is the obstacle.</p>
             </div>
+            <div class="entry-thumbnail empty"></div>
             <span class="entry-toggle">+</span>
           </div>
           <div class="entry-body">
@@ -1218,6 +1241,7 @@
               <h2 class="entry-title">What does a language need before a machine can hear it?</h2>
               <p class="entry-lede">On building speech recognition for a low-resource language — and on what 'low-resource' actually costs, technically and otherwise.</p>
             </div>
+            <div class="entry-thumbnail empty"></div>
             <span class="entry-toggle">+</span>
           </div>
           <div class="entry-body">
@@ -1256,6 +1280,7 @@
               <h2 class="entry-title">Where should a bowler bowl when the match is on the line?</h2>
               <p class="entry-lede">On learning wicket probability from ball-tracking data — and on what 'optimal' means in a sport governed by context, not statistics.</p>
             </div>
+            <div class="entry-thumbnail empty"></div>
             <span class="entry-toggle">+</span>
           </div>
           <div class="entry-body">
@@ -1298,6 +1323,7 @@
               <h2 class="entry-title">How do you find a planet by learning the shape of its absence?</h2>
               <p class="entry-lede">On classifying exoplanet transit candidates from light curves — and on what it means to teach a model to recognise a shadow.</p>
             </div>
+            <div class="entry-thumbnail empty"></div>
             <span class="entry-toggle">+</span>
           </div>
           <div class="entry-body">
@@ -1339,6 +1365,7 @@
               <h2 class="entry-title">Does it matter who says buy — or only that they said it convincingly?</h2>
               <p class="entry-lede">On extracting per-ticker sentiment from finance videos — and on the gap between someone having an opinion and that opinion being legible to a machine.</p>
             </div>
+            <div class="entry-thumbnail empty"></div>
             <span class="entry-toggle">+</span>
           </div>
           <div class="entry-body">
@@ -1377,16 +1404,15 @@
               <h2 class="entry-title">How Dense Does a Forest Have to Be Before a Spark Matters?</h2>
               <p class="entry-lede">On local connectivity thresholds in forest-fire models — and on why the geography of ignition points matters more than global forest density.</p>
             </div>
+            <div class="entry-thumbnail"><img src="forest-fires/site/figures/model_schematic.png" alt="Forest fire model schematic"></div>
             <span class="entry-toggle">+</span>
           </div>
           <div class="entry-body">
             <div class="entry-body-inner">
               <div class="entry-body-content">
                 <div class="entry-prose">
-                  <p>Most ignitions do almost nothing. A spark lands, a few trees burn, and the event is over before it becomes an event at all. The question is: when does that change? When does a random ignition stop being local bad luck and start accessing enough connected fuel to become a genuinely large burn?</p>
-                  <p>Using the Drossel–Schwabl forest-fire model, this project isolates a single mechanism: local connectivity at the point of ignition. The model is deceptively simple — a square lattice, trees regrowing at random, fire propagating through connected clusters — but that simplification strips the problem down to its essence. What emerges is a reproducible threshold, located where local tree density reaches roughly 61%. Below that, burns stay small. Above it, the ignition site sits inside a connected fuel network that can support catastrophically larger events.</p>
-                  <p>The deeper lesson is about what mechanisms actually matter in fire ecology. Global density influences what local environments are available, but the real action is local. A fire becomes large not because the forest is vaguely full on average, but because the spark happened to land in the wrong place — where connectivity had already crossed a threshold.</p>
-                  <img src="forest-fires/site/figures/model_schematic.png" alt="Drossel-Schwabl forest-fire model schematic showing pre-ignition and post-ignition lattice states" style="width: 100%; max-width: 500px; margin: 1.5rem 0; border-radius: 2px; display: block;">
+                  <p>Most ignitions do almost nothing. A spark lands, a few trees burn, and the event is over. The question is: when does that change? When does a random ignition start accessing enough connected fuel to become genuinely large?</p>
+                  <p>Using the Drossel–Schwabl forest-fire model, this project isolates a single mechanism: local connectivity at ignition. A reproducible threshold emerges where local tree density reaches roughly 61%. Below that, burns stay small. Above it, fire accesses a connected fuel network supporting catastrophically larger events.</p>
                   <a href="forest-fires/site/index.html" class="entry-read-link">Read full essay →</a>
                 </div>
                 <div class="entry-note">
