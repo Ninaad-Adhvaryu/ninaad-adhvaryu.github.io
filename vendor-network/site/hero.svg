@@ -1,0 +1,69 @@
+<svg viewBox="0 0 1200 675" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Three-phase diagram of a vendor-platform market filling the canvas with Digital, Mixed and Local regimes separated by a dashed soft boundary">
+  <defs>
+    <style>
+      .bg       { fill: #F7F3EE; }
+      .frame    { fill: none; stroke: #1A1714; stroke-width: 1.6; }
+      .phase-d  { fill: #2A6B6B; }
+      .phase-m  { fill: rgba(42,107,107,0.32); }
+      .phase-l  { fill: rgba(42,107,107,0.12); }
+      .hard     { stroke: #1A1714; stroke-width: 1.6; fill: none; }
+      .soft     { stroke: #2A6B6B; stroke-width: 1.8; stroke-dasharray: 6 5; fill: none; }
+      .tick     { stroke: #6B6460; stroke-width: 0.8; fill: none; }
+    </style>
+  </defs>
+
+  <rect class="bg" width="1200" height="675"/>
+
+  <!-- Plot frame: x = 60..1140, y = 40..635  (1080 x 595) -->
+
+  <!-- PHASE L (Local Dominance) — fills whole background inside frame -->
+  <rect class="phase-l" x="60" y="40" width="1080" height="595"/>
+
+  <!-- PHASE M (Mixed) — area below the soft (dashed) boundary -->
+  <path class="phase-m" d="
+    M 60,40
+    L 60,520
+    C 200,500 340,450 500,370
+    C 680,280 880,180 1140,90
+    L 1140,40
+    Z"/>
+
+  <!-- PHASE D (Digital Dominance) — area below the hard (solid) boundary -->
+  <path class="phase-d" d="
+    M 60,40
+    L 60,360
+    C 180,360 300,340 420,290
+    C 560,230 700,140 820,70
+    L 820,40
+    Z"/>
+
+  <!-- Hard boundary (between D and M) -->
+  <path class="hard" d="
+    M 60,360
+    C 180,360 300,340 420,290
+    C 560,230 700,140 820,70
+    L 820,40"/>
+
+  <!-- Soft boundary (between M and L) -->
+  <path class="soft" d="
+    M 60,520
+    C 200,500 340,450 500,370
+    C 680,280 880,180 1140,90"/>
+
+  <!-- Frame drawn last so it sits on top -->
+  <rect class="frame" x="60" y="40" width="1080" height="595" rx="2"/>
+
+  <!-- Subtle axis ticks inside the frame (no labels) -->
+  <g>
+    <line class="tick" x1="60"  y1="635" x2="60"  y2="645"/>
+    <line class="tick" x1="330" y1="635" x2="330" y2="645"/>
+    <line class="tick" x1="600" y1="635" x2="600" y2="645"/>
+    <line class="tick" x1="870" y1="635" x2="870" y2="645"/>
+    <line class="tick" x1="1140" y1="635" x2="1140" y2="645"/>
+    <line class="tick" x1="50"  y1="40"  x2="60"  y2="40"/>
+    <line class="tick" x1="50"  y1="190" x2="60"  y2="190"/>
+    <line class="tick" x1="50"  y1="340" x2="60"  y2="340"/>
+    <line class="tick" x1="50"  y1="490" x2="60"  y2="490"/>
+    <line class="tick" x1="50"  y1="635" x2="60"  y2="635"/>
+  </g>
+</svg>

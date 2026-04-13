@@ -1,0 +1,40 @@
+<!--
+  WIRING PATCH — paste this block into /Project Essays/index.html
+  inside the <div class="featured-grid"> … </div> block.
+
+  Only do this AFTER the user has reviewed the draft and hero and said
+  "wire it in". See SKILL.md §2.
+
+  Replace all {{TOKENS}} before pasting. Do NOT renumber the Inquiry
+  number — look it up by searching the root index.html for the essay's
+  original title or slug, and reuse that number.
+-->
+
+<a class="featured-card" href="{{SLUG}}/site/index.html">
+  <div class="featured-hero-wrap">
+    <img src="{{SLUG}}/site/hero.svg" alt="{{HERO ALT — describe the stylised figure, not the essay}}">
+    <span class="featured-num">Inquiry {{NN}}</span>
+  </div>
+  <div class="featured-body">
+    <p class="featured-domain">{{DOMAIN — e.g. "Sports Analytics · Spatial Statistics"}}</p>
+    <h2 class="featured-title">{{TITLE — the question form}}</h2>
+    <p class="featured-lede">{{LEDE — "On X, and on Y"}}</p>
+    <span class="featured-read">Read full essay →</span>
+  </div>
+</a>
+
+<!--
+  ADDITIONAL CLEANUP after pasting:
+
+  1. If this essay was previously listed in <ul class="secondary-list">
+     as "In progress", remove its <li class="secondary-item">.
+
+  2. Order inside .featured-grid is by Inquiry number (01, 05, 08, 09, …).
+     Insert the new card in the correct position.
+
+  3. If adding a 5th featured essay, ASK the user first — the grid is
+     designed as 2×N and a 5th card will leave one slot empty. The user
+     may want to un-feature an existing card instead.
+
+  4. VERIFY the root index.html still parses (see SKILL.md §8).
+-->

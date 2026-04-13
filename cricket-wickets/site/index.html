@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Does the "Corridor of Uncertainty" Actually Take Wickets? — Ninaad Adhvaryu</title>
+  <meta name="description" content="On testing a piece of cricket coaching folklore against 140,000 Hawkeye deliveries, and on the one result that wouldn't behave.">
+  <link rel="stylesheet" href="../../style.css">
+
+  <!-- MathJax for LaTeX rendering -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']],
+        packages: {'[+]': ['ams']}
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+  <style>
+    /* ============================================================
+       PAGE TOKENS
+    ============================================================ */
+    :root {
+      --cream-dark:    #E8E2D9;
+      --cream-card:    #FDFBF8;
+      --ink-muted:     #6B6460;
+      --teal-pale:     rgba(42, 107, 107, 0.09);
+      --obsidian-mid:  #272540;
+      --obsidian-text: #C9C5DA;
+      --obsidian-muted:#7C789A;
+      --max-width:     1080px;
+      --gutter:        2.5rem;
+      --prose-width:   700px;
+    }
+
+    /* ============================================================
+       BASE
+    ============================================================ */
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--serif-body);
+      font-size: 1rem;
+      line-height: 1.72;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    ::selection { background: rgba(42, 107, 107, 0.18); }
+
+    a {
+      color: var(--teal);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    /* ============================================================
+       NAV
+    ============================================================ */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: var(--obsidian);
+      height: 54px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--gutter);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .nav-monogram {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--obsidian-muted);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.25rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      color: var(--obsidian-text);
+      text-transform: lowercase;
+      padding-bottom: 2px;
+      border-bottom: 1px solid transparent;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--teal-light);
+      border-bottom-color: var(--teal-light);
+    }
+
+    .nav-back {
+      color: var(--obsidian-text);
+    }
+
+    /* ============================================================
+       LAYOUT
+    ============================================================ */
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 var(--gutter);
+    }
+
+    section { padding: 4rem 0; }
+
+    .essay-header {
+      padding: 3rem 0 3.5rem;
+    }
+
+    .essay-hero {
+      margin: 0 0 2.75rem;
+    }
+
+    .essay-hero img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border: 1px solid var(--cream-dark);
+      border-radius: 2px;
+    }
+
+    .essay-title {
+      font-family: var(--serif-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.015em;
+      color: var(--ink);
+      margin-bottom: 1.75rem;
+      max-width: 680px;
+    }
+
+    .essay-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-top: 2.5rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--cream-dark);
+    }
+
+    .essay-meta-block {
+      flex: 0 1 auto;
+    }
+
+    .essay-meta-label {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .essay-meta-value {
+      font-family: var(--serif-body);
+      font-size: 0.95rem;
+      color: var(--ink);
+    }
+
+    /* ============================================================
+       PROSE
+    ============================================================ */
+    .essay-body {
+      max-width: var(--prose-width);
+      margin: 0 auto;
+    }
+
+    .essay-body p {
+      font-size: 1rem;
+      line-height: 1.82;
+      margin-bottom: 1.4em;
+      color: var(--ink);
+    }
+
+    .essay-body h2 {
+      font-family: var(--serif-display);
+      font-size: 1.5rem;
+      font-weight: 600;
+      line-height: 1.28;
+      color: var(--ink);
+      margin-top: 2.5em;
+      margin-bottom: 1.2em;
+    }
+
+    .essay-body em { font-style: italic; }
+    .essay-body strong { font-weight: 600; }
+
+    /* ============================================================
+       FIGURES & CAPTIONS
+    ============================================================ */
+    .figure-wrap {
+      margin: 3rem 0;
+      text-align: center;
+    }
+
+    .figure-wrap img {
+      max-width: 100%;
+      height: auto;
+      display: inline-block;
+      border-radius: 2px;
+      background: var(--cream-dark);
+      padding: 0.5rem;
+    }
+
+    .figure-caption {
+      font-family: var(--serif-body);
+      font-size: 0.85rem;
+      line-height: 1.6;
+      color: var(--ink-muted);
+      margin-top: 1rem;
+      font-style: italic;
+    }
+
+    /* ============================================================
+       FOOTER NAV
+    ============================================================ */
+    .essay-footer {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--cream-dark);
+    }
+
+    .back-link {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: lowercase;
+      color: var(--teal);
+      border-bottom: 1px solid var(--teal-rule);
+      padding-bottom: 2px;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .back-link:hover {
+      color: var(--teal-light);
+      border-bottom-color: var(--teal-light);
+    }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 768px) {
+      :root { --gutter: 1.5rem; }
+      section { padding: 3rem 0; }
+      .essay-header { padding: 3rem 0 2rem; }
+      .essay-title { font-size: 1.8rem; }
+      .essay-meta { gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="../../index.html" class="nav-monogram nav-back">← back</a>
+    <ul class="nav-links">
+      <li><a href="../../#inquiries">inquiries</a></li>
+      <li><a href="../../#thesis">thesis</a></li>
+      <li><a href="../../#teaching">teaching</a></li>
+      <li><a href="../../#writing">writing</a></li>
+      <li><a href="../../#contact">contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ESSAY -->
+  <section class="essay-header">
+    <div class="container">
+      <figure class="essay-hero">
+        <img src="hero.svg" alt="Stylised cricket pitch from above with KDE wicket density contours clustered in the good-length off-stump corridor">
+      </figure>
+      <h1 class="essay-title">Does the "Corridor of Uncertainty" Actually Take Wickets?</h1>
+      <div class="essay-meta">
+        <div class="essay-meta-block">
+          <p class="essay-meta-label">Domain</p>
+          <p class="essay-meta-value">Sports Analytics · Spatial Statistics</p>
+        </div>
+        <div class="essay-meta-block">
+          <p class="essay-meta-label">Status</p>
+          <p class="essay-meta-value">Complete · 2026</p>
+        </div>
+        <div class="essay-meta-block">
+          <p class="essay-meta-label">Methods</p>
+          <p class="essay-meta-value">Hawkeye ball-tracking · Kernel density estimation · Zone-based stratification</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="essay-body-wrap">
+    <div class="container">
+      <div class="essay-body">
+
+        <p>There is a sentence that every cricket coach says at least once a week, usually with the same hand gesture: <em>pitch it up on a good length, just outside off stump, and the wickets will come</em>. It is the closest thing cricket has to a folk theorem. The sentence is old enough and confident enough that it mostly goes uninspected. The question I wanted to ask — with a friend who spent the summer cleaning up an IPL ball-tracking dataset — was whether the sentence actually survives contact with ball-level data. The answer turned out to be <em>mostly yes, with one uncomfortable exception that still bothers me</em>.</p>
+
+        <p>The dataset is a Hawkeye feed from IPL men's matches, one row per legal delivery, and the columns that mattered for this first pass were small and well-defined. Two of them carry almost all the geometric information: <code>pitch_x</code> is the lateral distance in metres from middle stump at the point where the ball bounces (negative is leg side, positive is off side), and <code>pitch_y</code> is the distance along the pitch from the stumps to where the ball lands. A third column, <code>dismissal_details</code>, is either null or carries a short text describing a wicket, and that was enough to construct a binary <code>is_wicket</code> label. After dropping rows with implausible pitch coordinates (\(|\mathrm{pitch\_x}| > 2\) m or <code>pitch_y</code> outside \([0, 22]\) m — almost certainly sensor glitches) and filtering out sub-10 km/h ball speeds for the speed plots, the working frame held roughly 140,000 deliveries. That is a large enough sample to look at fine slices without the standard errors swallowing the result.</p>
+
+        <p>The first question to press on was the easy one: where, on the two-dimensional \((\mathrm{pitch\_x}, \mathrm{pitch\_y})\) plane, do wickets actually happen relative to where the ball is usually pitched? The coaching claim is specifically <em>relative</em>. Bowlers target the good-length off-stump channel heavily; the question is whether that region has an <em>elevated</em> wicket rate, or whether wickets are just mechanically dense there because the pitch count is dense there.</p>
+
+        <p>Before looking at the heatmap, it helps to have a shared picture of the zones coaches actually use. The ball's length — its <code>pitch_y</code> — gets carved into five discrete bands that every commentator falls back on, and they are not distributed uniformly: Yorker territory is a narrow sliver right at the stumps, Good Length is the disputed region, and "Bouncer or Very Short" is a huge tail that stretches to the far end of the pitch.</p>
+
+        <div class="figure-wrap">
+          <svg viewBox="0 0 680 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Schematic of the five cricket length zones mapped to pitch_y in metres" style="max-width:100%;height:auto;background:var(--cream-dark);padding:1rem;border-radius:2px;">
+            <defs>
+              <style>
+                .z-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; fill: #6B6460; letter-spacing: 0.04em; text-transform: uppercase; }
+                .z-name { font-family: 'Source Serif 4', serif; font-size: 12px; fill: #1a1a1a; font-style: italic; }
+                .z-yorker { fill: #f2d0b8; stroke: #c8c0aa; stroke-width: 1; }
+                .z-full   { fill: #f6dcae; stroke: #c8c0aa; stroke-width: 1; }
+                .z-good   { fill: #c8e6d0; stroke: #c8c0aa; stroke-width: 1; }
+                .z-short  { fill: #b8d4e0; stroke: #c8c0aa; stroke-width: 1; }
+                .z-bouncer{ fill: #9fb6cc; stroke: #c8c0aa; stroke-width: 1; }
+                .stumps   { fill: #272540; }
+                .tick     { stroke: #6B6460; stroke-width: 0.6; }
+                .tick-lbl { font-family: 'JetBrains Mono', monospace; font-size: 9px; fill: #6B6460; }
+              </style>
+            </defs>
+            <g transform="translate(40, 40)">
+              <rect class="stumps" x="-4" y="10" width="4" height="40"/>
+              <rect class="z-yorker" x="0" y="10" width="81.8" height="40"/>
+              <rect class="z-full" x="81.8" y="10" width="68.2" height="40"/>
+              <rect class="z-good" x="150" y="10" width="54.5" height="40"/>
+              <rect class="z-short" x="204.5" y="10" width="68.2" height="40"/>
+              <rect class="z-bouncer" x="272.7" y="10" width="327.3" height="40"/>
+              <g>
+                <line class="tick" x1="0" y1="50" x2="0" y2="58"/>
+                <line class="tick" x1="81.8" y1="50" x2="81.8" y2="58"/>
+                <line class="tick" x1="150" y1="50" x2="150" y2="58"/>
+                <line class="tick" x1="204.5" y1="50" x2="204.5" y2="58"/>
+                <line class="tick" x1="272.7" y1="50" x2="272.7" y2="58"/>
+                <line class="tick" x1="600" y1="50" x2="600" y2="58"/>
+                <text class="tick-lbl" x="0" y="70" text-anchor="middle">0</text>
+                <text class="tick-lbl" x="81.8" y="70" text-anchor="middle">3</text>
+                <text class="tick-lbl" x="150" y="70" text-anchor="middle">5.5</text>
+                <text class="tick-lbl" x="204.5" y="70" text-anchor="middle">7.5</text>
+                <text class="tick-lbl" x="272.7" y="70" text-anchor="middle">10</text>
+                <text class="tick-lbl" x="600" y="70" text-anchor="middle">22 m</text>
+              </g>
+              <text class="z-name" x="40" y="35" text-anchor="middle">Yorker</text>
+              <text class="z-name" x="115" y="35" text-anchor="middle">Full</text>
+              <text class="z-name" x="177" y="35" text-anchor="middle">Good</text>
+              <text class="z-name" x="238" y="35" text-anchor="middle">Short</text>
+              <text class="z-name" x="436" y="35" text-anchor="middle">Bouncer / Very Short</text>
+              <text class="z-label" x="-8" y="5" text-anchor="end">stumps</text>
+              <text class="z-label" x="300" y="95" text-anchor="middle">pitch_y — distance from the stumps along the pitch</text>
+            </g>
+          </svg>
+          <p class="figure-caption">The five length zones as they actually map to the pitch. The "Bouncer or Very Short" band is much larger than it looks when coaches draw it — anything more than ten metres from the stumps falls into one category, which is already enough to make one suspicious of any effect measured from it.</p>
+        </div>
+
+        <p>With that picture held in mind, the overall spatial distribution looks exactly like the coaching story would predict.</p>
+
+        <div class="figure-wrap">
+          <img src="figures/kde_heatmap.png" alt="KDE heatmap of all deliveries overlaid with wicket deliveries in pitch_x and pitch_y coordinates">
+          <p class="figure-caption">Two-dimensional KDE overlay on the \((\mathrm{pitch\_x}, \mathrm{pitch\_y})\) plane. The bulk of all deliveries sit in a channel just outside off stump between about five and eight metres, which is the textbook "good length" region. The wicket-only density sits on the same channel but slightly fuller — closer to the batter — and a bit tighter laterally. The coaching sentence survives the first look.</p>
+        </div>
+
+        <p>The one-dimensional projections make the contraction easier to see, because you can watch the wicket curve visibly crowd inward relative to the non-wicket one on both axes.</p>
+
+        <div class="figure-wrap">
+          <img src="figures/length_density.png" alt="Density of pitch_y for wicket and non-wicket deliveries">
+          <p class="figure-caption">Marginal density of <code>pitch_y</code> (length) split by whether the ball was a wicket. Non-wicket deliveries spread broadly from roughly four to ten metres; wicket deliveries pile up in a narrower band between about 4.5 and 7 m, and the wicket mode sits slightly fuller than the non-wicket mode. The lateral axis tells the same story but more gently — wickets concentrate closer to the stump line than the average delivery does.</p>
+        </div>
+
+        <p>So far the story is a tidy vindication of the folk theorem. But the moment you collapse the plane into bar chart form, something misbehaves.</p>
+
+        <div class="figure-wrap">
+          <img src="figures/wicket_rate_all.png" alt="Wicket rate by length zone across all bowlers">
+          <p class="figure-caption">Wicket rate — fraction of deliveries in each zone that produced a dismissal — across the five length zones, pooled across all bowlers and all match phases. Full and Good Length sit where one would expect, around five to six per cent. Yorkers are a hair behind. Short is the weakest. And then Bouncer / Very Short, at roughly six per cent, is competitive with the best zone on the chart.</p>
+        </div>
+
+        <p>The Bouncer bar is the result that wouldn't sit still. Taken at face value, it looks as though hurling the ball halfway down the pitch is, on average, about as effective a wicket-taking tactic as pitching it on a nagging length just outside off. That is not a conclusion anyone who has watched cricket would accept. It is worth pausing on <em>why</em> the result is almost certainly wrong before deciding what to do about it, because the answer turns out to be a useful lesson about how much damage a single pooled axis can do.</p>
+
+        <p>Two things are happening at once, and they both inflate that bar. The first is phase mixing. Death-overs bowling is tactically very different from powerplay bowling, and short-pitched deliveries in the final two overs are a high-wicket event — they are being used into set fields with deep fine leg and deep square leg explicitly to convert a mistimed hook or pull into a catch. Pooling those overs together with the middle-overs short balls, which are defensive, artificially shifts the rate upward. The second is the zone definition itself. The "Bouncer or Very Short" label runs from 10 m all the way to 22 m. That is more than half the pitch. Any full toss that skewed past 10 m (there are surprisingly many in the filtered data) goes into the same bucket as a genuine chest-high bouncer. The bucket is too generous, and generous buckets look more effective than they are because they absorb rare but high-wicket deliveries at both ends of the range.</p>
+
+        <p>The correct response to the misbehaving bar is not to throw out the finding. It is to stratify — to re-compute the wicket rate separately by bowling style, or separately by match phase, and see whether the Bouncer anomaly survives the split. And when you do that, the story becomes legible in a way that the pooled chart obscured.</p>
+
+        <div class="figure-wrap">
+          <img src="figures/wicket_rate_pace.png" alt="Wicket rate by length zone for pace bowlers only">
+          <p class="figure-caption">The same bar chart restricted to pace bowlers. Full is still at the top. Bouncer is still elevated but no longer competitive with Good Length in the way the pooled version made it look. The pattern that survives the restriction — Full and Good Length as the reliable wicket-takers, Short as the weakest, Yorker as tactically important — is much closer to the coaching picture. The anomaly was a pooling artifact.</p>
+        </div>
+
+        <p>Splitting by bowling style sharpens the picture further. Spin and pace are not merely two versions of the same process. They generate wickets through geometrically different mechanisms, and the heatmaps make that visible without any further modelling.</p>
+
+        <div class="figure-wrap">
+          <img src="figures/pace_vs_spin_heatmap.png" alt="Wicket density heatmaps for pace and spin bowlers, side by side">
+          <p class="figure-caption">Wicket-density heatmaps for pace (left) and spin (right). Pace wickets spread out along the off-stump corridor, with the mode sitting around \(\mathrm{pitch\_x} \approx -0.4\) m and \(\mathrm{pitch\_y}\) between six and eight metres, and the distribution tailing meaningfully into shorter lengths. Spin wickets form a much tighter, more central cluster — almost on the line of the stumps, shorter lengths between four and six metres. The two styles are producing wickets out of different regions, and the pooled story misses this entirely.</p>
+        </div>
+
+        <p>There is a second, related finding that seems worth flagging. For seam bowlers specifically, ball speed carries almost no independent signal about wicket probability.</p>
+
+        <div class="figure-wrap">
+          <img src="figures/ball_speed_kde.png" alt="Kernel density of ball speed for wicket vs non-wicket deliveries, seamers only">
+          <p class="figure-caption">KDE of ball speed for seam bowlers, split on <code>is_wicket</code>. The wicket and non-wicket curves overlap almost completely through the bulk of the professional speed range. Whatever is making a delivery a wicket ball, it is not pace by itself. (The small cluster at near-zero is sensor noise that survived the filter and should be ignored.)</p>
+        </div>
+
+        <p>Here is the overall shape of the thing. The "good length just outside off" rule of thumb survives, <em>descriptively</em>: when you look at where wickets actually happen relative to where the ball gets pitched, that region really is doing disproportionate work. But any version of the analysis that reports a single pooled wicket rate per zone will also hand you the Bouncer anomaly, and that anomaly will make you believe something about bouncers that is mostly the fault of how the zones were drawn and how the phases were averaged. The finding and the artifact travel together in the same table, and the only way to separate them is to stratify until the artifact dissolves.</p>
+
+        <h2>An honest caveat that should go before any stronger claim</h2>
+
+        <p>The one thing that needs restating before any of this is used in an actual coaching conversation is that it is all observational. Bowlers do not deliver uniformly across the \((\mathrm{pitch\_x}, \mathrm{pitch\_y})\) plane — they target the "good length outside off" region precisely because they already believe it is effective, which means the high wicket rate in that region is partly a selection effect and partly a real property of the region. The present analysis cannot separate the two. A rigorous causal version of the same question would need to condition on bowler identity, batter handedness, phase, and the field setting, and would probably need a matched-comparison design between balls that were <em>intended</em> for a given zone and balls that actually landed in it. None of that is in this first pass. What this pass does well is describe the joint distribution clearly enough that the next pass knows where to push.</p>
+
+        <div class="essay-footer">
+          <a href="../../#inquiries" class="back-link">← back to inquiries</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>

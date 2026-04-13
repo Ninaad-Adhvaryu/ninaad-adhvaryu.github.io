@@ -1,0 +1,249 @@
+<svg viewBox="0 0 1200 675" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Percolation grid in which a connected fire cluster has spread across a dense patch of trees">
+  <defs>
+    <style>
+      .bg     { fill: #F7F3EE; }
+      .tree   { fill: #2A6B6B; }
+      .tree-s { fill: #B8CDCD; }
+      .burned { fill: #1A4F4F; }
+      .hull   { fill: rgba(26,79,79,0.14); stroke: #1A4F4F; stroke-width: 1.8; stroke-dasharray: 5 4; }
+      .thresh { stroke: #2A6B6B; stroke-width: 1.2; stroke-dasharray: 4 5; fill: none; }
+    </style>
+  </defs>
+
+  <rect class="bg" width="1200" height="675"/>
+
+  <!-- Sparse field (left of threshold) — scattered dim dots -->
+  <g>
+    <circle class="tree-s" cx="70"  cy="120" r="9"/>
+    <circle class="tree-s" cx="150" cy="180" r="9"/>
+    <circle class="tree-s" cx="100" cy="240" r="9"/>
+    <circle class="tree-s" cx="180" cy="310" r="9"/>
+    <circle class="tree-s" cx="90"  cy="370" r="9"/>
+    <circle class="tree-s" cx="170" cy="430" r="9"/>
+    <circle class="tree-s" cx="110" cy="500" r="9"/>
+    <circle class="tree-s" cx="195" cy="560" r="9"/>
+    <circle class="tree-s" cx="65"  cy="600" r="9"/>
+    <circle class="tree-s" cx="220" cy="100" r="9"/>
+    <circle class="tree-s" cx="250" cy="210" r="9"/>
+    <circle class="tree-s" cx="240" cy="380" r="9"/>
+    <circle class="tree-s" cx="275" cy="490" r="9"/>
+    <circle class="tree-s" cx="130" cy="60"  r="9"/>
+    <circle class="tree-s" cx="215" cy="630" r="9"/>
+  </g>
+
+  <!-- Threshold line -->
+  <line class="thresh" x1="330" y1="50" x2="330" y2="625"/>
+
+  <!-- Dense grid (right of threshold) — 18 cols x 11 rows, spacing 44, radius 14 -->
+  <g>
+    <circle class="tree" cx="390.0" cy="60.0" r="15"/>
+    <circle class="tree" cx="436.9" cy="60.0" r="15"/>
+    <circle class="tree" cx="483.8" cy="60.0" r="15"/>
+    <circle class="tree" cx="530.6" cy="60.0" r="15"/>
+    <circle class="tree" cx="577.5" cy="60.0" r="15"/>
+    <circle class="tree" cx="624.4" cy="60.0" r="15"/>
+    <circle class="tree" cx="671.2" cy="60.0" r="15"/>
+    <circle class="tree" cx="718.1" cy="60.0" r="15"/>
+    <circle class="tree" cx="765.0" cy="60.0" r="15"/>
+    <circle class="tree" cx="811.9" cy="60.0" r="15"/>
+    <circle class="tree" cx="858.8" cy="60.0" r="15"/>
+    <circle class="tree" cx="905.6" cy="60.0" r="15"/>
+    <circle class="tree" cx="952.5" cy="60.0" r="15"/>
+    <circle class="tree" cx="999.4" cy="60.0" r="15"/>
+    <circle class="tree" cx="1046.2" cy="60.0" r="15"/>
+    <circle class="tree" cx="1093.1" cy="60.0" r="15"/>
+    <circle class="tree" cx="1140.0" cy="60.0" r="15"/>
+    <circle class="tree" cx="390.0" cy="110.9" r="15"/>
+    <circle class="tree" cx="436.9" cy="110.9" r="15"/>
+    <circle class="tree" cx="483.8" cy="110.9" r="15"/>
+    <circle class="tree" cx="530.6" cy="110.9" r="15"/>
+    <circle class="tree" cx="577.5" cy="110.9" r="15"/>
+    <circle class="tree" cx="624.4" cy="110.9" r="15"/>
+    <circle class="tree" cx="671.2" cy="110.9" r="15"/>
+    <circle class="tree" cx="718.1" cy="110.9" r="15"/>
+    <circle class="tree" cx="765.0" cy="110.9" r="15"/>
+    <circle class="tree" cx="811.9" cy="110.9" r="15"/>
+    <circle class="tree" cx="858.8" cy="110.9" r="15"/>
+    <circle class="tree" cx="905.6" cy="110.9" r="15"/>
+    <circle class="tree" cx="952.5" cy="110.9" r="15"/>
+    <circle class="tree" cx="999.4" cy="110.9" r="15"/>
+    <circle class="tree" cx="1046.2" cy="110.9" r="15"/>
+    <circle class="tree" cx="1093.1" cy="110.9" r="15"/>
+    <circle class="tree" cx="1140.0" cy="110.9" r="15"/>
+    <circle class="tree" cx="390.0" cy="161.8" r="15"/>
+    <circle class="tree" cx="436.9" cy="161.8" r="15"/>
+    <circle class="tree" cx="483.8" cy="161.8" r="15"/>
+    <circle class="tree" cx="530.6" cy="161.8" r="15"/>
+    <circle class="tree" cx="577.5" cy="161.8" r="15"/>
+    <circle class="tree" cx="624.4" cy="161.8" r="15"/>
+    <circle class="burned" cx="671.2" cy="161.8" r="15"/>
+    <circle class="burned" cx="718.1" cy="161.8" r="15"/>
+    <circle class="burned" cx="765.0" cy="161.8" r="15"/>
+    <circle class="burned" cx="811.9" cy="161.8" r="15"/>
+    <circle class="burned" cx="858.8" cy="161.8" r="15"/>
+    <circle class="burned" cx="905.6" cy="161.8" r="15"/>
+    <circle class="tree" cx="952.5" cy="161.8" r="15"/>
+    <circle class="tree" cx="999.4" cy="161.8" r="15"/>
+    <circle class="tree" cx="1046.2" cy="161.8" r="15"/>
+    <circle class="tree" cx="1093.1" cy="161.8" r="15"/>
+    <circle class="tree" cx="1140.0" cy="161.8" r="15"/>
+    <circle class="tree" cx="390.0" cy="212.7" r="15"/>
+    <circle class="tree" cx="436.9" cy="212.7" r="15"/>
+    <circle class="tree" cx="483.8" cy="212.7" r="15"/>
+    <circle class="tree" cx="530.6" cy="212.7" r="15"/>
+    <circle class="tree" cx="577.5" cy="212.7" r="15"/>
+    <circle class="burned" cx="624.4" cy="212.7" r="15"/>
+    <circle class="burned" cx="671.2" cy="212.7" r="15"/>
+    <circle class="burned" cx="718.1" cy="212.7" r="15"/>
+    <circle class="burned" cx="765.0" cy="212.7" r="15"/>
+    <circle class="burned" cx="811.9" cy="212.7" r="15"/>
+    <circle class="burned" cx="858.8" cy="212.7" r="15"/>
+    <circle class="burned" cx="905.6" cy="212.7" r="15"/>
+    <circle class="burned" cx="952.5" cy="212.7" r="15"/>
+    <circle class="tree" cx="999.4" cy="212.7" r="15"/>
+    <circle class="tree" cx="1046.2" cy="212.7" r="15"/>
+    <circle class="tree" cx="1093.1" cy="212.7" r="15"/>
+    <circle class="tree" cx="1140.0" cy="212.7" r="15"/>
+    <circle class="tree" cx="390.0" cy="263.6" r="15"/>
+    <circle class="tree" cx="436.9" cy="263.6" r="15"/>
+    <circle class="tree" cx="483.8" cy="263.6" r="15"/>
+    <circle class="burned" cx="530.6" cy="263.6" r="15"/>
+    <circle class="burned" cx="577.5" cy="263.6" r="15"/>
+    <circle class="burned" cx="624.4" cy="263.6" r="15"/>
+    <circle class="burned" cx="671.2" cy="263.6" r="15"/>
+    <circle class="burned" cx="718.1" cy="263.6" r="15"/>
+    <circle class="burned" cx="765.0" cy="263.6" r="15"/>
+    <circle class="burned" cx="811.9" cy="263.6" r="15"/>
+    <circle class="burned" cx="858.8" cy="263.6" r="15"/>
+    <circle class="burned" cx="905.6" cy="263.6" r="15"/>
+    <circle class="burned" cx="952.5" cy="263.6" r="15"/>
+    <circle class="burned" cx="999.4" cy="263.6" r="15"/>
+    <circle class="tree" cx="1046.2" cy="263.6" r="15"/>
+    <circle class="tree" cx="1093.1" cy="263.6" r="15"/>
+    <circle class="tree" cx="1140.0" cy="263.6" r="15"/>
+    <circle class="tree" cx="390.0" cy="314.5" r="15"/>
+    <circle class="tree" cx="436.9" cy="314.5" r="15"/>
+    <circle class="tree" cx="483.8" cy="314.5" r="15"/>
+    <circle class="burned" cx="530.6" cy="314.5" r="15"/>
+    <circle class="burned" cx="577.5" cy="314.5" r="15"/>
+    <circle class="burned" cx="624.4" cy="314.5" r="15"/>
+    <circle class="burned" cx="671.2" cy="314.5" r="15"/>
+    <circle class="burned" cx="718.1" cy="314.5" r="15"/>
+    <circle class="burned" cx="765.0" cy="314.5" r="15"/>
+    <circle class="burned" cx="811.9" cy="314.5" r="15"/>
+    <circle class="burned" cx="858.8" cy="314.5" r="15"/>
+    <circle class="burned" cx="905.6" cy="314.5" r="15"/>
+    <circle class="burned" cx="952.5" cy="314.5" r="15"/>
+    <circle class="burned" cx="999.4" cy="314.5" r="15"/>
+    <circle class="tree" cx="1046.2" cy="314.5" r="15"/>
+    <circle class="tree" cx="1093.1" cy="314.5" r="15"/>
+    <circle class="tree" cx="1140.0" cy="314.5" r="15"/>
+    <circle class="tree" cx="390.0" cy="365.5" r="15"/>
+    <circle class="tree" cx="436.9" cy="365.5" r="15"/>
+    <circle class="tree" cx="483.8" cy="365.5" r="15"/>
+    <circle class="burned" cx="530.6" cy="365.5" r="15"/>
+    <circle class="tree" cx="577.5" cy="365.5" r="15"/>
+    <circle class="burned" cx="624.4" cy="365.5" r="15"/>
+    <circle class="burned" cx="671.2" cy="365.5" r="15"/>
+    <circle class="burned" cx="718.1" cy="365.5" r="15"/>
+    <circle class="burned" cx="765.0" cy="365.5" r="15"/>
+    <circle class="burned" cx="811.9" cy="365.5" r="15"/>
+    <circle class="burned" cx="858.8" cy="365.5" r="15"/>
+    <circle class="burned" cx="905.6" cy="365.5" r="15"/>
+    <circle class="burned" cx="952.5" cy="365.5" r="15"/>
+    <circle class="burned" cx="999.4" cy="365.5" r="15"/>
+    <circle class="tree" cx="1046.2" cy="365.5" r="15"/>
+    <circle class="tree" cx="1093.1" cy="365.5" r="15"/>
+    <circle class="tree" cx="1140.0" cy="365.5" r="15"/>
+    <circle class="tree" cx="390.0" cy="416.4" r="15"/>
+    <circle class="tree" cx="436.9" cy="416.4" r="15"/>
+    <circle class="tree" cx="483.8" cy="416.4" r="15"/>
+    <circle class="tree" cx="530.6" cy="416.4" r="15"/>
+    <circle class="burned" cx="577.5" cy="416.4" r="15"/>
+    <circle class="burned" cx="624.4" cy="416.4" r="15"/>
+    <circle class="burned" cx="671.2" cy="416.4" r="15"/>
+    <circle class="burned" cx="718.1" cy="416.4" r="15"/>
+    <circle class="burned" cx="765.0" cy="416.4" r="15"/>
+    <circle class="burned" cx="811.9" cy="416.4" r="15"/>
+    <circle class="burned" cx="858.8" cy="416.4" r="15"/>
+    <circle class="burned" cx="905.6" cy="416.4" r="15"/>
+    <circle class="burned" cx="952.5" cy="416.4" r="15"/>
+    <circle class="tree" cx="999.4" cy="416.4" r="15"/>
+    <circle class="tree" cx="1046.2" cy="416.4" r="15"/>
+    <circle class="tree" cx="1093.1" cy="416.4" r="15"/>
+    <circle class="tree" cx="1140.0" cy="416.4" r="15"/>
+    <circle class="tree" cx="390.0" cy="467.3" r="15"/>
+    <circle class="tree" cx="436.9" cy="467.3" r="15"/>
+    <circle class="tree" cx="483.8" cy="467.3" r="15"/>
+    <circle class="tree" cx="530.6" cy="467.3" r="15"/>
+    <circle class="tree" cx="577.5" cy="467.3" r="15"/>
+    <circle class="tree" cx="624.4" cy="467.3" r="15"/>
+    <circle class="tree" cx="671.2" cy="467.3" r="15"/>
+    <circle class="burned" cx="718.1" cy="467.3" r="15"/>
+    <circle class="burned" cx="765.0" cy="467.3" r="15"/>
+    <circle class="burned" cx="811.9" cy="467.3" r="15"/>
+    <circle class="burned" cx="858.8" cy="467.3" r="15"/>
+    <circle class="tree" cx="905.6" cy="467.3" r="15"/>
+    <circle class="tree" cx="952.5" cy="467.3" r="15"/>
+    <circle class="tree" cx="999.4" cy="467.3" r="15"/>
+    <circle class="tree" cx="1046.2" cy="467.3" r="15"/>
+    <circle class="tree" cx="1093.1" cy="467.3" r="15"/>
+    <circle class="tree" cx="1140.0" cy="467.3" r="15"/>
+    <circle class="tree" cx="390.0" cy="518.2" r="15"/>
+    <circle class="tree" cx="436.9" cy="518.2" r="15"/>
+    <circle class="tree" cx="483.8" cy="518.2" r="15"/>
+    <circle class="tree" cx="530.6" cy="518.2" r="15"/>
+    <circle class="tree" cx="577.5" cy="518.2" r="15"/>
+    <circle class="tree" cx="624.4" cy="518.2" r="15"/>
+    <circle class="tree" cx="671.2" cy="518.2" r="15"/>
+    <circle class="tree" cx="718.1" cy="518.2" r="15"/>
+    <circle class="tree" cx="765.0" cy="518.2" r="15"/>
+    <circle class="tree" cx="811.9" cy="518.2" r="15"/>
+    <circle class="tree" cx="858.8" cy="518.2" r="15"/>
+    <circle class="tree" cx="905.6" cy="518.2" r="15"/>
+    <circle class="tree" cx="952.5" cy="518.2" r="15"/>
+    <circle class="tree" cx="999.4" cy="518.2" r="15"/>
+    <circle class="tree" cx="1046.2" cy="518.2" r="15"/>
+    <circle class="tree" cx="1093.1" cy="518.2" r="15"/>
+    <circle class="tree" cx="1140.0" cy="518.2" r="15"/>
+    <circle class="tree" cx="390.0" cy="569.1" r="15"/>
+    <circle class="tree" cx="436.9" cy="569.1" r="15"/>
+    <circle class="tree" cx="483.8" cy="569.1" r="15"/>
+    <circle class="tree" cx="530.6" cy="569.1" r="15"/>
+    <circle class="tree" cx="577.5" cy="569.1" r="15"/>
+    <circle class="tree" cx="624.4" cy="569.1" r="15"/>
+    <circle class="tree" cx="671.2" cy="569.1" r="15"/>
+    <circle class="tree" cx="718.1" cy="569.1" r="15"/>
+    <circle class="tree" cx="765.0" cy="569.1" r="15"/>
+    <circle class="tree" cx="811.9" cy="569.1" r="15"/>
+    <circle class="tree" cx="858.8" cy="569.1" r="15"/>
+    <circle class="tree" cx="905.6" cy="569.1" r="15"/>
+    <circle class="tree" cx="952.5" cy="569.1" r="15"/>
+    <circle class="tree" cx="999.4" cy="569.1" r="15"/>
+    <circle class="tree" cx="1046.2" cy="569.1" r="15"/>
+    <circle class="tree" cx="1093.1" cy="569.1" r="15"/>
+    <circle class="tree" cx="1140.0" cy="569.1" r="15"/>
+    <circle class="tree" cx="390.0" cy="620.0" r="15"/>
+    <circle class="tree" cx="436.9" cy="620.0" r="15"/>
+    <circle class="tree" cx="483.8" cy="620.0" r="15"/>
+    <circle class="tree" cx="530.6" cy="620.0" r="15"/>
+    <circle class="tree" cx="577.5" cy="620.0" r="15"/>
+    <circle class="tree" cx="624.4" cy="620.0" r="15"/>
+    <circle class="tree" cx="671.2" cy="620.0" r="15"/>
+    <circle class="tree" cx="718.1" cy="620.0" r="15"/>
+    <circle class="tree" cx="765.0" cy="620.0" r="15"/>
+    <circle class="tree" cx="811.9" cy="620.0" r="15"/>
+    <circle class="tree" cx="858.8" cy="620.0" r="15"/>
+    <circle class="tree" cx="905.6" cy="620.0" r="15"/>
+    <circle class="tree" cx="952.5" cy="620.0" r="15"/>
+    <circle class="tree" cx="999.4" cy="620.0" r="15"/>
+    <circle class="tree" cx="1046.2" cy="620.0" r="15"/>
+    <circle class="tree" cx="1093.1" cy="620.0" r="15"/>
+    <circle class="tree" cx="1140.0" cy="620.0" r="15"/>
+  </g>
+
+  <!-- Cluster hull -->
+  <g>
+    <ellipse class="hull" cx="775.3" cy="310.2" rx="264.4" ry="182.7"/>
+  </g>
+</svg>

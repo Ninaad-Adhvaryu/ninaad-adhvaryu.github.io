@@ -1,0 +1,48 @@
+<!--
+  ESSAY PAGE TEMPLATE — DO NOT USE THIS FILE DIRECTLY AS A TEMPLATE
+
+  The canonical essay-page shape lives in the four existing essays:
+    forest-fires/site/index.html      (cleanest / simplest structure)
+    vendor-network/site/index.html    (with inline SVG explanatory diagram)
+    cricket-wickets/site/index.html   (with longer body + multiple figures)
+    double-pendulum/site/index.html   (with interactive canvas simulator)
+
+  To create a new essay page:
+
+  1. Pick the closest-matching existing essay by structure:
+     - Simple essay with paper figures              → copy forest-fires/site/index.html
+     - Essay with an inline explanatory SVG         → copy vendor-network/site/index.html
+     - Long essay with many figures + editor notes  → copy cricket-wickets/site/index.html
+     - Interactive essay with canvas/JS             → copy double-pendulum/site/index.html
+
+  2. Duplicate the chosen file as <NEW_SLUG>/site/index.html
+
+  3. Do a global find/replace on the following:
+
+     <title>...</title>            → page title
+     domain marker line            → new domain tag (e.g. "Sports Analytics · Spatial Statistics")
+     essay-title h1                → new title
+     essay-lede paragraph          → new lede
+     methods meta block            → new methods
+     collaborator meta block       → new collaborator (or delete if solo)
+     year                          → new year
+     body paragraphs (<div class="essay-body">…)
+     figure references (src + alt + caption)
+
+  4. Replace the body <section class="essay-body"> content with the rendered
+     HTML of the reviewed draft-01.md (paragraphs + figure-wraps).
+
+  5. The stylesheet link at the top must be `../../style.css`.
+     Do NOT modify the site-level style.css.
+
+  6. If the essay needs page-specific styles (e.g. a custom inline SVG),
+     put them in a local <style> block in the essay page's <head>,
+     not in the site stylesheet.
+
+  7. VERIFY the page parses:
+     python3 -c "from html.parser import HTMLParser; …"  (see SKILL.md §8)
+
+  This file intentionally contains only instructions, not a full template,
+  because the live essay pages are the source of truth — duplicating them
+  here would risk them drifting out of sync.
+-->

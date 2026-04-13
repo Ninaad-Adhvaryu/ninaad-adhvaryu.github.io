@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What Does Four Years of Browser Tabs Actually Look Like? — Ninaad Adhvaryu</title>
+  <meta name="description" content="On pointing a clustering algorithm at 4,000 personal bookmarks, and on what the resulting 42 topic clusters say about how a person's attention is actually distributed.">
+  <link rel="stylesheet" href="../../style.css">
+
+  <style>
+    :root {
+      --cream-dark:    #E8E2D9;
+      --cream-card:    #FDFBF8;
+      --ink-muted:     #6B6460;
+      --teal-pale:     rgba(42, 107, 107, 0.09);
+      --obsidian-mid:  #272540;
+      --obsidian-text: #C9C5DA;
+      --obsidian-muted:#7C789A;
+      --max-width:     1080px;
+      --gutter:        2.5rem;
+      --prose-width:   700px;
+    }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--serif-body);
+      font-size: 1rem;
+      line-height: 1.72;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    ::selection { background: rgba(42, 107, 107, 0.18); }
+
+    a {
+      color: var(--teal);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: var(--obsidian);
+      height: 54px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--gutter);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .nav-monogram {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--obsidian-muted);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.25rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      color: var(--obsidian-text);
+      text-transform: lowercase;
+      padding-bottom: 2px;
+      border-bottom: 1px solid transparent;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--teal-light);
+      border-bottom-color: var(--teal-light);
+    }
+
+    .nav-back { color: var(--obsidian-text); }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 var(--gutter);
+    }
+
+    section { padding: 4rem 0; }
+
+    .essay-header { padding: 3rem 0 3.5rem; }
+
+    .essay-hero { margin: 0 0 2.75rem; }
+
+    .essay-hero img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border: 1px solid var(--cream-dark);
+      border-radius: 2px;
+    }
+
+    .essay-title {
+      font-family: var(--serif-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.015em;
+      color: var(--ink);
+      margin-bottom: 1.75rem;
+      max-width: 720px;
+    }
+
+    .essay-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-top: 2.5rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--cream-dark);
+    }
+
+    .essay-meta-block { flex: 0 1 auto; }
+
+    .essay-meta-label {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .essay-meta-value {
+      font-family: var(--serif-body);
+      font-size: 0.95rem;
+      color: var(--ink);
+    }
+
+    .essay-body {
+      max-width: var(--prose-width);
+      margin: 0 auto;
+    }
+
+    .essay-body p {
+      font-size: 1rem;
+      line-height: 1.82;
+      margin-bottom: 1.4em;
+      color: var(--ink);
+    }
+
+    .essay-body h2 {
+      font-family: var(--serif-display);
+      font-size: 1.5rem;
+      font-weight: 600;
+      line-height: 1.28;
+      color: var(--ink);
+      margin-top: 2.5em;
+      margin-bottom: 1.2em;
+    }
+
+    .essay-body em { font-style: italic; }
+    .essay-body strong { font-weight: 600; }
+    .essay-body code {
+      font-family: var(--mono);
+      font-size: 0.88em;
+      background: var(--teal-pale);
+      padding: 0.15em 0.35em;
+      border-radius: 2px;
+    }
+
+    .figure-wrap {
+      margin: 3rem 0;
+      text-align: center;
+    }
+
+    .figure-wrap svg {
+      max-width: 100%;
+      height: auto;
+      display: inline-block;
+      border: 1px solid var(--cream-dark);
+      border-radius: 2px;
+      background: var(--cream-card);
+    }
+
+    .figure-caption {
+      font-family: var(--serif-body);
+      font-size: 0.85rem;
+      line-height: 1.6;
+      color: var(--ink-muted);
+      margin-top: 1rem;
+      font-style: italic;
+      max-width: var(--prose-width);
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .essay-footer {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--cream-dark);
+    }
+
+    .back-link {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: lowercase;
+      color: var(--teal);
+      border-bottom: 1px solid var(--teal-rule);
+      padding-bottom: 2px;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .back-link:hover {
+      color: var(--teal-light);
+      border-bottom-color: var(--teal-light);
+    }
+
+    @media (max-width: 768px) {
+      :root { --gutter: 1.5rem; }
+      section { padding: 3rem 0; }
+      .essay-header { padding: 3rem 0 2rem; }
+      .essay-title { font-size: 1.8rem; }
+      .essay-meta { gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="../../index.html" class="nav-monogram nav-back">← back</a>
+    <ul class="nav-links">
+      <li><a href="../../#inquiries">inquiries</a></li>
+      <li><a href="../../#thesis">thesis</a></li>
+      <li><a href="../../#teaching">teaching</a></li>
+      <li><a href="../../#writing">writing</a></li>
+      <li><a href="../../#contact">contact</a></li>
+    </ul>
+  </nav>
+
+  <section class="essay-header">
+    <div class="container">
+      <figure class="essay-hero">
+        <img src="hero.svg" alt="Scatter of teal dots forming visible clusters of varying density, with sparse noise dots between them — a stylised UMAP projection of 2,393 bookmark embeddings">
+      </figure>
+      <h1 class="essay-title">What Does Four Years of Browser Tabs Actually Look Like?</h1>
+      <div class="essay-meta">
+        <div class="essay-meta-block">
+          <p class="essay-meta-label">Domain</p>
+          <p class="essay-meta-value">Data · Personal Analytics</p>
+        </div>
+        <div class="essay-meta-block">
+          <p class="essay-meta-label">Status</p>
+          <p class="essay-meta-value">Complete · 2026</p>
+        </div>
+        <div class="essay-meta-block">
+          <p class="essay-meta-label">Methods</p>
+          <p class="essay-meta-value">Sentence-transformers · UMAP · HDBSCAN · TF-IDF</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="essay-body-wrap">
+    <div class="container">
+      <div class="essay-body">
+
+        <p>I exported my bookmarks one night because I was curious what they would look like from the outside. Not as a list — I already had the list, all 3,996 of them accumulated across four years and multiple browsers via Raindrop.io — but as a structure. If you took every URL a person had saved and asked a machine to sort them without any prior categories, what shape would emerge?</p>
+
+        <p>The answer turned out to be more legible than I expected, and more embarrassing in a few specific places.</p>
+
+        <p>The first problem was deduplication. Bookmarks, it turns out, are not saved once. The same arxiv PDF gets bookmarked in slightly different URL forms across browsers, across machines, across moods. Fuzzy string matching with rapidfuzz at a similarity threshold of 92 — with a length guard and a strict-subset rejection rule to avoid collapsing genuinely different pages — brought the count from 3,996 down to 2,393. The average bookmark had been saved 1.67 times. That number alone says something about how absent-mindedly I interact with the internet.</p>
+
+        <p>The pipeline from there was straightforward. The method is worth making concrete.</p>
+
+        <div class="figure-wrap">
+          <svg viewBox="0 0 700 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Pipeline diagram: bookmarks flow through embedding, dimensionality reduction, clustering, and naming stages">
+            <rect width="700" height="120" fill="#FDFBF8"/>
+            <defs>
+              <style>
+                .pipe-box { fill: #F7F3EE; stroke: #2A6B6B; stroke-width: 1.5; rx: 4; }
+                .pipe-label { font-family: 'Source Serif 4', serif; font-size: 11px; fill: #1A1714; text-anchor: middle; }
+                .pipe-sub { font-family: 'JetBrains Mono', monospace; font-size: 8px; fill: #6B6460; text-anchor: middle; }
+                .pipe-arrow { stroke: #2A6B6B; stroke-width: 1.5; fill: none; marker-end: url(#arrowhead); }
+              </style>
+              <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+                <path d="M 0 0 L 8 3 L 0 6 Z" fill="#2A6B6B"/>
+              </marker>
+            </defs>
+            <!-- Boxes -->
+            <rect class="pipe-box" x="16" y="30" width="110" height="56"/>
+            <text class="pipe-label" x="71" y="55">2,393 titles</text>
+            <text class="pipe-sub" x="71" y="72">after dedup</text>
+
+            <rect class="pipe-box" x="160" y="30" width="110" height="56"/>
+            <text class="pipe-label" x="215" y="55">Embed</text>
+            <text class="pipe-sub" x="215" y="72">MiniLM-L6-v2</text>
+
+            <rect class="pipe-box" x="304" y="30" width="110" height="56"/>
+            <text class="pipe-label" x="359" y="55">Reduce</text>
+            <text class="pipe-sub" x="359" y="72">UMAP → 10d</text>
+
+            <rect class="pipe-box" x="448" y="30" width="110" height="56"/>
+            <text class="pipe-label" x="503" y="55">Cluster</text>
+            <text class="pipe-sub" x="503" y="72">HDBSCAN</text>
+
+            <rect class="pipe-box" x="592" y="30" width="92" height="56"/>
+            <text class="pipe-label" x="638" y="55">Name</text>
+            <text class="pipe-sub" x="638" y="72">TF-IDF</text>
+
+            <!-- Arrows -->
+            <line class="pipe-arrow" x1="126" y1="58" x2="158" y2="58"/>
+            <line class="pipe-arrow" x1="270" y1="58" x2="302" y2="58"/>
+            <line class="pipe-arrow" x1="414" y1="58" x2="446" y2="58"/>
+            <line class="pipe-arrow" x1="558" y1="58" x2="590" y2="58"/>
+          </svg>
+          <p class="figure-caption">The full pipeline: bookmark titles are embedded, reduced to 10 dimensions via UMAP with cosine distance, clustered by HDBSCAN (minimum cluster size 15), and auto-named by TF-IDF keyword extraction. The whole thing runs locally in about thirty seconds.</p>
+        </div>
+
+        <p>Sentence-transformers — specifically <code>all-MiniLM-L6-v2</code> — generated an embedding for each bookmark's title. UMAP reduced the dimensionality from 384 to 10, using cosine distance. HDBSCAN, a density-based clustering algorithm, grouped the embeddings into clusters — 42 of them — with a minimum cluster size of 15. TF-IDF keyword extraction named each cluster automatically. The whole pipeline ran locally, no API calls, no cloud, just a laptop and about thirty seconds of compute.</p>
+
+        <p>The output was 42 named topic clusters across 9 parent categories, plus a 525-item noise bin of things HDBSCAN could not confidently assign to any cluster.</p>
+
+        <div class="figure-wrap">
+          <svg viewBox="0 0 700 160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Deduplication funnel: 3996 raw bookmarks reduced to 2393 deduped, 1868 clustered, 525 noise">
+            <rect width="700" height="160" fill="#FDFBF8"/>
+            <defs>
+              <style>
+                .bar-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; fill: #1A1714; }
+                .bar-val { font-family: 'JetBrains Mono', monospace; font-size: 12px; fill: #F7F3EE; font-weight: 700; }
+              </style>
+            </defs>
+            <!-- Bars scaled to max=3996 → width 600 -->
+            <rect x="80" y="20" width="600" height="26" rx="2" fill="#1A4F4F"/>
+            <text class="bar-val" x="90" y="38">3,996</text>
+            <text class="bar-label" x="690" y="38" text-anchor="end">raw</text>
+
+            <rect x="80" y="54" width="359" height="26" rx="2" fill="#2A6B6B"/>
+            <text class="bar-val" x="90" y="72">2,393</text>
+            <text class="bar-label" x="449" y="72">after dedup</text>
+
+            <rect x="80" y="88" width="280" height="26" rx="2" fill="#3D9090"/>
+            <text class="bar-val" x="90" y="106">1,868</text>
+            <text class="bar-label" x="370" y="106">clustered</text>
+
+            <rect x="80" y="122" width="79" height="26" rx="2" fill="#6B6460"/>
+            <text class="bar-val" x="90" y="140" fill="#F7F3EE">525</text>
+            <text class="bar-label" x="169" y="140">noise</text>
+          </svg>
+          <p class="figure-caption">The funnel. Forty percent of bookmarks were duplicates. Of the survivors, roughly three-quarters clustered cleanly; the rest were too semantically scattered for HDBSCAN to group with confidence.</p>
+        </div>
+
+        <p>What was interesting was less the number of clusters than their character. Physics dominated, accounting for roughly a third of all bookmarks across three sub-categories: research topics (X-ray absorption, BEC, the Hubbard model, cold atoms), graduate school logistics (PhD programme listings, Lancaster admissions pages, GRE prep), and reference material (lecture note PDFs, textbook chapters). That was not surprising. What was mildly surprising was the size of a few non-physics clusters: 67 bookmarks about film and video essays, more than all lifestyle, fashion, and stationery bookmarks combined. A 62-item cricket cluster correctly fused across Cricbuzz, Reddit, and SonyLiv. A 52-item OnePlus Nord and GCam cluster that, for reasons I still do not fully understand, contained a 10-item sub-spike of VOSviewer bibliometrics pages.</p>
+
+        <p>The noise bin was revealing in its own way. YouTube and Reddit dominated it — 44 and 41 items respectively — which makes sense because their page titles are semantically random enough that no embedding model can do much with them. But buried inside the noise were roughly 100 university and admissions pages that had landed as singletons only because each institution uses slightly different phrasing for the same information. Those could be rescued with a targeted second pass.</p>
+
+        <p>HDBSCAN's cluster quality turned out to be surprisingly high. After manual review of all 42 clusters: 25 were clean enough to use as-is, 7 needed better names, 5 needed splits, and 5 were honest junk drawers that the algorithm had correctly identified as <em>these go together, but what they are is mess</em>. Zero were structurally broken. For an unsupervised method running on bookmark titles alone — not full-text content, not click history, just titles — that is a better hit rate than I would have predicted.</p>
+
+        <p>The whole thing took about four hours on a weeknight. The output was a set of Obsidian markdown files with YAML frontmatter, organised into topic folders, ready to absorb future imports from Readwise and Notion. Whether I will actually use it as a knowledge base is an open question. But as a one-evening exercise in self-quantification, it was more informative than I expected. The algorithm did not discover anything I did not already know about myself. It just made the proportions visible. Physics is a third of my attention. Media and culture is a fifth. Everything else is a long tail of things I cared about for two weeks and then forgot.</p>
+
+        <p>That, apparently, is the shape of one person's curiosity when nobody is watching.</p>
+
+        <div class="essay-footer">
+          <a href="../../#inquiries" class="back-link">← back to inquiries</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>

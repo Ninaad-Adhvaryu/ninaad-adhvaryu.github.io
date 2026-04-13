@@ -1,0 +1,77 @@
+<svg viewBox="0 0 1200 675" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cricket pitch viewed from above, with dense teal kernel-density contours clustered in the good-length off-stump corridor">
+  <defs>
+    <style>
+      .bg       { fill: #F7F3EE; }
+      .pitch    { fill: #FDFBF8; stroke: #1A1714; stroke-width: 1.4; }
+      .crease   { stroke: #1A1714; stroke-width: 1; fill: none; }
+      .stump    { stroke: #2A6B6B; stroke-width: 2.2; stroke-linecap: round; }
+      .midline  { stroke: #B8B0A6; stroke-width: 0.8; stroke-dasharray: 2 6; fill: none; }
+      .c1 { fill: rgba(42,107,107,0.06);  stroke: #2A6B6B; stroke-width: 1.0; }
+      .c2 { fill: rgba(42,107,107,0.10);  stroke: #2A6B6B; stroke-width: 1.2; }
+      .c3 { fill: rgba(42,107,107,0.16);  stroke: #2A6B6B; stroke-width: 1.4; }
+      .c4 { fill: rgba(42,107,107,0.24);  stroke: #2A6B6B; stroke-width: 1.6; }
+      .c5 { fill: rgba(42,107,107,0.34);  stroke: #2A6B6B; stroke-width: 1.8; }
+      .c6 { fill: rgba(42,107,107,0.48);  stroke: #2A6B6B; stroke-width: 2.0; }
+      .c7 { fill: rgba(42,107,107,0.64);  stroke: #2A6B6B; stroke-width: 2.2; }
+      .dot { fill: #1A4F4F; }
+    </style>
+  </defs>
+
+  <rect class="bg" width="1200" height="675"/>
+
+  <!-- Vertical cricket pitch filling most of the canvas.
+       Pitch rectangle: x=460..740 (w=280), y=40..635 (h=595). -->
+  <rect class="pitch" x="460" y="40" width="280" height="595" rx="3"/>
+
+  <!-- Popping creases -->
+  <line class="crease" x1="460" y1="110" x2="740" y2="110"/>
+  <line class="crease" x1="460" y1="565" x2="740" y2="565"/>
+  <!-- Return creases -->
+  <line class="crease" x1="520" y1="40" x2="520" y2="120"/>
+  <line class="crease" x1="680" y1="40" x2="680" y2="120"/>
+  <line class="crease" x1="520" y1="555" x2="520" y2="635"/>
+  <line class="crease" x1="680" y1="555" x2="680" y2="635"/>
+
+  <!-- Stumps: bowler's end (top) -->
+  <g>
+    <line class="stump" x1="593" y1="55" x2="593" y2="95"/>
+    <line class="stump" x1="600" y1="55" x2="600" y2="95"/>
+    <line class="stump" x1="607" y1="55" x2="607" y2="95"/>
+  </g>
+  <!-- Stumps: batter's end (bottom) -->
+  <g>
+    <line class="stump" x1="593" y1="580" x2="593" y2="620"/>
+    <line class="stump" x1="600" y1="580" x2="600" y2="620"/>
+    <line class="stump" x1="607" y1="580" x2="607" y2="620"/>
+  </g>
+
+  <!-- Off-stump corridor midline (light dashed) -->
+  <line class="midline" x1="600" y1="40" x2="600" y2="635"/>
+
+  <!-- KDE contours centred in the good-length off-stump corridor
+       (slightly off-stump → x≈625, good length from stumps → y≈205 from top) -->
+  <g>
+    <ellipse class="c1" cx="625" cy="205" rx="230" ry="155"/>
+    <ellipse class="c2" cx="625" cy="205" rx="190" ry="128"/>
+    <ellipse class="c3" cx="625" cy="205" rx="152" ry="102"/>
+    <ellipse class="c4" cx="625" cy="205" rx="116" ry="78"/>
+    <ellipse class="c5" cx="625" cy="205" rx="82"  ry="56"/>
+    <ellipse class="c6" cx="625" cy="205" rx="52"  ry="36"/>
+    <ellipse class="c7" cx="625" cy="205" rx="26"  ry="18"/>
+  </g>
+
+  <!-- Scattered wicket dots -->
+  <g>
+    <circle class="dot" cx="625" cy="205" r="3"/>
+    <circle class="dot" cx="610" cy="198" r="2.2"/>
+    <circle class="dot" cx="642" cy="212" r="2.2"/>
+    <circle class="dot" cx="598" cy="215" r="2"/>
+    <circle class="dot" cx="658" cy="198" r="2"/>
+    <circle class="dot" cx="580" cy="228" r="1.8"/>
+    <circle class="dot" cx="674" cy="210" r="1.8"/>
+    <circle class="dot" cx="552" cy="240" r="1.6"/>
+    <circle class="dot" cx="698" cy="192" r="1.6"/>
+    <circle class="dot" cx="632" cy="168" r="1.8"/>
+    <circle class="dot" cx="614" cy="250" r="1.6"/>
+  </g>
+</svg>

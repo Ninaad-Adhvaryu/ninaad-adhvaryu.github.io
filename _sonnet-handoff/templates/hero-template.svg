@@ -1,0 +1,65 @@
+<!--
+  HERO TEMPLATE — house style for Ninaad Adhvaryu's personal site.
+
+  Read this carefully BEFORE touching the markup. Getting the hero wrong
+  wastes more time than getting the essay wrong.
+
+  A hero is a PURE VISUAL. It is not a figure from the paper, it is not a
+  diagram, it is not a chart. It is a single clear shape or arrangement
+  that reads at a glance on a landing-page card at ~520px wide and still
+  holds up as a full-width splash at the top of the essay page.
+
+  Lock these parameters:
+    viewBox      0 0 1200 675  (16:9)
+    background   #F7F3EE       cream — never any dark panel
+    palette      teal #2A6B6B · teal-light #3D9090 · teal-deep #1A4F4F
+                 ink #1A1714   for thin outlines only
+                 ink-muted #6B6460  only for the rare axis tick
+    subject      fills the full canvas (aim for ≤80px margins on all sides)
+
+  HARD RULES — do not break these:
+    1. NO text inside the SVG. Not a title, not an Inquiry label,
+       not axis labels, not legend labels, not footer captions,
+       not italic annotations. Zero text.
+    2. NO dark panels. No obsidian rectangles. No meta boxes.
+    3. NO empty space. The visual should fill the canvas. If it
+       leaves half the canvas blank, enlarge it until it doesn't.
+    4. Teal is the dominant fill. Ink is reserved for thin outlines
+       and the occasional frame. Darker accents use teal-deep
+       (#1A4F4F), never obsidian.
+    5. The visual must be legible at ~520px wide without any text to
+       explain it. If you find yourself wanting to add a label, make
+       the visual itself clearer instead.
+
+  STYLISTIC RULES:
+    - Prefer few large shapes over many small ones.
+    - Prefer heavy teal fills over thin outlines.
+    - Prefer one clear arrangement over two cluttered panels.
+    - Keep the axis and scaffolding of the figure only if it is
+      itself visually interesting (e.g. a cricket pitch silhouette,
+      a percolation grid). Otherwise remove it.
+-->
+<svg viewBox="0 0 1200 675" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{HERO ALT TEXT — describe the stylised figure, not the essay}}">
+  <defs>
+    <style>
+      .bg       { fill: #F7F3EE; }
+      .primary  { fill: #2A6B6B; }
+      .primary-line { stroke: #2A6B6B; stroke-width: 1.8; fill: none; }
+      .primary-soft { fill: rgba(42,107,107,0.18); }
+      .primary-mid  { fill: rgba(42,107,107,0.34); }
+      .deep     { fill: #1A4F4F; }
+      .ink-line { stroke: #1A1714; stroke-width: 1.6; fill: none; }
+      .dashed   { stroke: #2A6B6B; stroke-width: 1.8; fill: none; stroke-dasharray: 6 5; }
+    </style>
+  </defs>
+
+  <rect class="bg" width="1200" height="675"/>
+
+  <!-- MAIN VISUAL — replace with your shape.
+       Fill the canvas. No text. No dark panels. -->
+  <g>
+    <!-- {{REPLACE ME with the stylised shape}} -->
+    <rect x="80" y="80" width="1040" height="515" fill="none"
+          stroke="#E8E2D9" stroke-width="1" stroke-dasharray="6 6"/>
+  </g>
+</svg>

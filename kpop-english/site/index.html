@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>When English Took Over the Chorus, but Not the Chart — Ninaad Adhvaryu</title>
+  <meta name="description" content="A quantitative look at how English lyric usage changed in the Melon Top 100, and why the obvious hypothesis about popularity mostly fails.">
+  <link rel="stylesheet" href="../../style.css">
+
+  <style>
+    :root {
+      --cream-dark:    #E8E2D9;
+      --cream-card:    #FDFBF8;
+      --ink-muted:     #6B6460;
+      --teal-pale:     rgba(42, 107, 107, 0.09);
+      --obsidian-mid:  #272540;
+      --obsidian-text: #C9C5DA;
+      --obsidian-muted:#7C789A;
+      --max-width:     1080px;
+      --gutter:        2.5rem;
+      --prose-width:   700px;
+    }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--serif-body);
+      font-size: 1rem;
+      line-height: 1.72;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    ::selection { background: rgba(42, 107, 107, 0.18); }
+
+    a {
+      color: var(--teal);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: var(--obsidian);
+      height: 54px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--gutter);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .nav-monogram {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--obsidian-muted);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.25rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      color: var(--obsidian-text);
+      text-transform: lowercase;
+      padding-bottom: 2px;
+      border-bottom: 1px solid transparent;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--teal-light);
+      border-bottom-color: var(--teal-light);
+    }
+
+    .nav-back { color: var(--obsidian-text); }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 var(--gutter);
+    }
+
+    section { padding: 4rem 0; }
+
+    .essay-header { padding: 3rem 0 3.5rem; }
+
+    .essay-hero { margin: 0 0 2.75rem; }
+
+    .essay-hero img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border: 1px solid var(--cream-dark);
+      border-radius: 2px;
+    }
+
+    .essay-title {
+      font-family: var(--serif-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.015em;
+      color: var(--ink);
+      margin-bottom: 1.75rem;
+      max-width: 720px;
+    }
+
+    .essay-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-top: 2.5rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--cream-dark);
+    }
+
+    .essay-meta-block { flex: 0 1 auto; }
+
+    .essay-meta-label {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .essay-meta-value {
+      font-family: var(--serif-body);
+      font-size: 0.95rem;
+      color: var(--ink);
+    }
+
+    .essay-body {
+      max-width: var(--prose-width);
+      margin: 0 auto;
+    }
+
+    .essay-body p {
+      font-size: 1rem;
+      line-height: 1.82;
+      margin-bottom: 1.4em;
+      color: var(--ink);
+    }
+
+    .essay-body h2 {
+      font-family: var(--serif-display);
+      font-size: 1.5rem;
+      font-weight: 600;
+      line-height: 1.28;
+      color: var(--ink);
+      margin-top: 2.5em;
+      margin-bottom: 1.2em;
+    }
+
+    .essay-body em { font-style: italic; }
+    .essay-body strong { font-weight: 600; }
+
+    .figure-wrap {
+      margin: 3rem 0;
+      text-align: center;
+    }
+
+    .figure-wrap svg {
+      max-width: 100%;
+      height: auto;
+      display: inline-block;
+      border: 1px solid var(--cream-dark);
+      border-radius: 2px;
+      background: var(--cream-card);
+    }
+
+    .figure-caption {
+      font-family: var(--serif-body);
+      font-size: 0.85rem;
+      line-height: 1.6;
+      color: var(--ink-muted);
+      margin-top: 1rem;
+      font-style: italic;
+      max-width: var(--prose-width);
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .essay-footer {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--cream-dark);
+    }
+
+    .back-link {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: lowercase;
+      color: var(--teal);
+      border-bottom: 1px solid var(--teal-rule);
+      padding-bottom: 2px;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .back-link:hover {
+      color: var(--teal-light);
+      border-bottom-color: var(--teal-light);
+    }
+
+    @media (max-width: 768px) {
+      :root { --gutter: 1.5rem; }
+      section { padding: 3rem 0; }
+      .essay-header { padding: 3rem 0 2rem; }
+      .essay-title { font-size: 1.8rem; }
+      .essay-meta { gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="../../index.html" class="nav-monogram nav-back">← back</a>
+    <ul class="nav-links">
+      <li><a href="../../#inquiries">inquiries</a></li>
+      <li><a href="../../#thesis">thesis</a></li>
+      <li><a href="../../#teaching">teaching</a></li>
+      <li><a href="../../#writing">writing</a></li>
+      <li><a href="../../#contact">contact</a></li>
+    </ul>
+  </nav>
+
+  <section class="essay-header">
+    <div class="container">
+      <figure class="essay-hero">
+        <img src="hero.svg" alt="Smooth time series of mean and median percent English in K-pop chart entries from 2000 to 2023, with a long flat median followed by a sharp late rise in both curves">
+      </figure>
+      <h1 class="essay-title">When English Took Over the Chorus, but Not the Chart</h1>
+      <div class="essay-meta">
+        <div class="essay-meta-block">
+          <p class="essay-meta-label">Domain</p>
+          <p class="essay-meta-value">Linguistics · Data Analysis</p>
+        </div>
+        <div class="essay-meta-block">
+          <p class="essay-meta-label">Status</p>
+          <p class="essay-meta-value">Complete · 2026</p>
+        </div>
+        <div class="essay-meta-block">
+          <p class="essay-meta-label">Methods</p>
+          <p class="essay-meta-value">Line-level language classification · Longitudinal chart analysis · Effect-size estimation</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="essay-body-wrap">
+    <div class="container">
+      <div class="essay-body">
+
+        <p>There is a very easy story to tell about English in K-pop. As the industry globalised, the songs became more English-heavy, and the more English songs presumably floated upward. It is a clean story. It is also only half true.</p>
+
+        <p>What interested me here was not just whether English usage had increased. That part was plausible before I opened the dataset. The more interesting question was whether English functioned as a measurable advantage <em>inside</em> the chart itself. If English had become a kind of commercial shorthand for global polish, one might expect it to show up not just historically but competitively: more English, better rank. The data do not give that clean answer.</p>
+
+        <p>The project begins with a simple measurement problem. "English in a song" sounds obvious until one tries to quantify it across tens of thousands of chart entries. A song might have a fully English hook and otherwise Korean verses. It might use isolated English phrases as style markers. It might switch within the line. So the analysis settles on a deliberately blunt but tractable unit: lyric lines. Each line is classified as English or not-English, and percent English is then defined as the fraction of lyric lines judged primarily English. It is not a perfect measure, but it is legible, scalable, and consistent enough to make the longer historical view possible.</p>
+
+        <p>What this made possible was a longitudinal scan across 25,876 chart-month entries from the Melon Monthly Top 100, covering 2000 through 2023. Each row is not just a song but a song <em>in a particular chart month</em>, which matters because chart presence is persistent: a hit can reappear for months. That means this is not a census of unique tracks. It is a record of what stayed visible, month after month, in the public ranking system. That distinction matters later, because the chart is measuring not just release activity but staying power, fandom behaviour, and timing.</p>
+
+        <div class="figure-wrap">
+          <svg viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mean and median percent English in Melon Top 100 lyrics, 2000 to 2023">
+            <rect width="720" height="360" fill="#FDFBF8"/>
+            <line x1="60" y1="221.9" x2="696" y2="221.9" stroke="#E8E2D9" stroke-width="0.8"/><text x="52" y="224.9" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="9" fill="#6B6460">10%</text><line x1="60" y1="133.8" x2="696" y2="133.8" stroke="#E8E2D9" stroke-width="0.8"/><text x="52" y="136.8" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="9" fill="#6B6460">20%</text><line x1="60" y1="45.6" x2="696" y2="45.6" stroke="#E8E2D9" stroke-width="0.8"/><text x="52" y="48.6" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="9" fill="#6B6460">30%</text>
+            <line x1="60" y1="28" x2="60" y2="310" stroke="#1A1714" stroke-width="1.2"/>
+            <line x1="60" y1="310" x2="696" y2="310" stroke="#1A1714" stroke-width="1.2"/>
+            <line x1="60.0" y1="310" x2="60.0" y2="315" stroke="#6B6460" stroke-width="0.8"/><text x="60.0" y="328" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#6B6460">2000</text><line x1="170.6" y1="310" x2="170.6" y2="315" stroke="#6B6460" stroke-width="0.8"/><text x="170.6" y="328" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#6B6460">2004</text><line x1="281.2" y1="310" x2="281.2" y2="315" stroke="#6B6460" stroke-width="0.8"/><text x="281.2" y="328" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#6B6460">2008</text><line x1="391.8" y1="310" x2="391.8" y2="315" stroke="#6B6460" stroke-width="0.8"/><text x="391.8" y="328" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#6B6460">2012</text><line x1="502.4" y1="310" x2="502.4" y2="315" stroke="#6B6460" stroke-width="0.8"/><text x="502.4" y="328" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#6B6460">2016</text><line x1="613.0" y1="310" x2="613.0" y2="315" stroke="#6B6460" stroke-width="0.8"/><text x="613.0" y="328" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#6B6460">2020</text><line x1="696.0" y1="310" x2="696.0" y2="315" stroke="#6B6460" stroke-width="0.8"/><text x="696.0" y="328" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#6B6460">2023</text>
+            <path d="M 60.0,310.0 C 73.8,310.0 73.8,310.0 87.7,310.0 C 101.5,310.0 101.5,310.0 115.3,310.0 C 129.1,310.0 129.1,310.0 143.0,310.0 C 156.8,310.0 156.8,310.0 170.6,310.0 C 184.4,310.0 184.4,310.0 198.3,310.0 C 212.1,310.0 212.1,310.0 225.9,310.0 C 239.7,310.0 239.7,310.0 253.6,310.0 C 267.4,310.0 267.4,298.3 281.2,298.3 C 295.0,298.3 295.0,270.9 308.9,270.9 C 322.7,270.9 322.7,282.5 336.5,282.5 C 350.3,282.5 350.3,289.5 364.2,289.5 C 378.0,289.5 378.0,262.8 391.8,262.8 C 405.7,262.8 405.7,269.9 419.5,269.9 C 433.3,269.9 433.3,269.9 447.1,269.9 C 461.0,269.9 461.0,264.4 474.8,264.4 C 488.6,264.4 488.6,242.2 502.4,242.2 C 516.3,242.2 516.3,231.5 530.1,231.5 C 543.9,231.5 543.9,220.1 557.7,220.1 C 571.6,220.1 571.6,270.2 585.4,270.2 C 599.2,270.2 599.2,276.5 613.0,276.5 C 626.9,276.5 626.9,292.0 640.7,292.0 C 654.5,292.0 654.5,243.9 668.3,243.9 C 682.2,243.9 682.2,139.7 696.0,139.7" fill="none" stroke="#1A4F4F" stroke-width="2.4" stroke-dasharray="2 4" stroke-linecap="round"/>
+            <path d="M 60.0,253.2 C 73.8,253.2 73.8,241.8 87.7,241.8 C 101.5,241.8 101.5,238.9 115.3,238.9 C 129.1,238.9 129.1,243.5 143.0,243.5 C 156.8,243.5 156.8,216.5 170.6,216.5 C 184.4,216.5 184.4,217.9 198.3,217.9 C 212.1,217.9 212.1,234.9 225.9,234.9 C 239.7,234.9 239.7,239.7 253.6,239.7 C 267.4,239.7 267.4,200.6 281.2,200.6 C 295.0,200.6 295.0,174.6 308.9,174.6 C 322.7,174.6 322.7,180.2 336.5,180.2 C 350.3,180.2 350.3,193.9 364.2,193.9 C 378.0,193.9 378.0,172.6 391.8,172.6 C 405.7,172.6 405.7,198.0 419.5,198.0 C 433.3,198.0 433.3,177.1 447.1,177.1 C 461.0,177.1 461.0,162.5 474.8,162.5 C 488.6,162.5 488.6,174.2 502.4,174.2 C 516.3,174.2 516.3,182.0 530.1,182.0 C 543.9,182.0 543.9,180.3 557.7,180.3 C 571.6,180.3 571.6,189.9 585.4,189.9 C 599.2,189.9 599.2,187.9 613.0,187.9 C 626.9,187.9 626.9,194.1 640.7,194.1 C 654.5,194.1 654.5,129.0 668.3,129.0 C 682.2,129.0 682.2,47.1 696.0,47.1" fill="none" stroke="#2A6B6B" stroke-width="3" stroke-linecap="round"/>
+            <g transform="translate(70,36)">
+              <line x1="0" y1="6" x2="22" y2="6" stroke="#2A6B6B" stroke-width="3"/>
+              <text x="28" y="9" font-family="Source Serif 4, serif" font-size="10" fill="#1A1714">mean % English</text>
+              <line x1="120" y1="6" x2="142" y2="6" stroke="#1A4F4F" stroke-width="2.4" stroke-dasharray="2 4"/>
+              <text x="148" y="9" font-family="Source Serif 4, serif" font-size="10" fill="#1A1714">median % English</text>
+            </g>
+          </svg>
+          <p class="figure-caption">The essay's backbone figure. The important feature is not merely that the mean rises; it is that the mean and median stay far apart for long stretches, which tells us the increase is being pulled upward by a growing tail of English-heavy songs rather than by a uniform shift across the whole chart.</p>
+        </div>
+
+        <p>The first clear result is historical. English usage rises over the full period, and rises especially hard in the later years. But the distribution is badly skewed. For many years the median sits near the floor even while the mean climbs, which is exactly what one would expect if most songs remained predominantly Korean while a smaller group became aggressively bilingual or almost fully English. By 2022, 13.42% of chart entries were above 50% English, and by 2023 that share had reached 28.22%. The increase is therefore not just a matter of more scattered English phrases. It reflects a genuine thickening of the English-heavy end of the distribution.</p>
+
+        <p>That distinction matters because it rescues the trend from a lazy interpretation. A rising average can be caused by a few outliers. Here, outliers are part of the story. K-pop's English turn does not look like a smooth cultural translation of the whole field. It looks more like the increasing chart presence of a subset of songs designed to operate comfortably across linguistic markets.</p>
+
+        <p>The genre split sharpens that picture. Genres tied to performance, hooks, and production-forward presentation carry more English. Dance/EDM shows mean and median values of 24.92% and 22.08%, while Rap/Hip-Hop sits at 18.52% and 13.83%. Ballad/OST, by contrast, is at 3.95% mean and 0.00% median. That median of zero is not subtle. It says that in the ballad-heavy part of the chart, Korean remains the default compositional language, even while the broader chart becomes more linguistically mixed.</p>
+
+        <p>I think this is one of the project's more useful corrective points. "K-pop" is too often treated as though it were a single stylistic object moving in one direction. It is not. The language story differs by genre because the function of language differs by genre. In a dance track, English can serve as percussive texture, hook architecture, or cosmopolitan signal. In a ballad, lyrics are carrying a different load. The chart is one system; the songs inside it are not.</p>
+
+        <p>The artist-level summaries push the same point in a more personified way. NewJeans averages 51.05% English across its charting entries. BLACKPINK sits at 44.55%, BTS at 37.76%. Those are not minor embellishments. They reflect catalogues in which English is often structural, not decorative. At the same time, the dataset includes non-Korean and Western pop entries, especially in the "Pop" bucket, which means any triumphalist claim that "K-pop itself became English" would be sloppy. Some of the late increase is absolutely entangled with what the chart is willing to host, not just what Korean idol music became internally.</p>
+
+        <p>And then there is the more interesting failure. The raw intuition that more English should mean better chart performance mostly collapses when you test it directly. Pearson's r is 0.0353. Spearman's rho is 0.0121, with the rank-based association missing conventional significance at p = 0.051. The dataset is large enough that tiny effects can produce impressive-looking p-values, but that is precisely why one has to ignore the theatre of small p-values and look at magnitude. English percentage alone explains very little about where a song lands on the chart.</p>
+
+        <p>This is not a disappointing result. It is the adult result. Charts are composite social objects. They fold together fandom, release timing, artist reputation, platform behaviour, competition within the month, and the basic fact that people like songs for reasons more complex than the proportion of their lines that happen to be in English. If the relationship had come out strong, I would have distrusted it.</p>
+
+        <p>Still, the story is not simply null.</p>
+
+        <div class="figure-wrap">
+          <svg viewBox="0 0 720 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cohen's d effect size for percent English between Top 10 and ranks 11 to 100, by year">
+            <rect width="720" height="320" fill="#FDFBF8"/>
+            <line x1="60" y1="245.8" x2="696" y2="245.8" stroke="#E8E2D9" stroke-width="0.8"/><text x="52" y="248.8" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="9" fill="#6B6460">-0.2</text><line x1="60" y1="197.4" x2="696" y2="197.4" stroke="#E8E2D9" stroke-width="0.8"/><text x="52" y="200.4" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="9" fill="#6B6460">0</text><line x1="60" y1="149.0" x2="696" y2="149.0" stroke="#E8E2D9" stroke-width="0.8"/><text x="52" y="152.0" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="9" fill="#6B6460">+0.2</text><line x1="60" y1="100.6" x2="696" y2="100.6" stroke="#E8E2D9" stroke-width="0.8"/><text x="52" y="103.6" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="9" fill="#6B6460">+0.4</text><line x1="60" y1="52.2" x2="696" y2="52.2" stroke="#E8E2D9" stroke-width="0.8"/><text x="52" y="55.2" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="9" fill="#6B6460">+0.6</text>
+            <rect x="50.7" y="166.3" width="18.5" height="31.1" fill="#2A6B6B"/><rect x="78.4" y="183.1" width="18.5" height="14.3" fill="#2A6B6B"/><rect x="106.0" y="197.4" width="18.5" height="19.6" fill="rgba(42,107,107,0.35)"/><rect x="133.7" y="168.9" width="18.5" height="28.5" fill="#2A6B6B"/><rect x="161.3" y="197.4" width="18.5" height="44.8" fill="rgba(42,107,107,0.35)"/><rect x="189.0" y="197.4" width="18.5" height="66.4" fill="rgba(42,107,107,0.35)"/><rect x="216.6" y="197.4" width="18.5" height="55.7" fill="rgba(42,107,107,0.35)"/><rect x="244.3" y="197.4" width="18.5" height="18.1" fill="rgba(42,107,107,0.35)"/><rect x="271.9" y="136.6" width="18.5" height="60.8" fill="#2A6B6B"/><rect x="299.6" y="136.1" width="18.5" height="61.3" fill="#2A6B6B"/><rect x="327.2" y="151.1" width="18.5" height="46.3" fill="#2A6B6B"/><rect x="354.9" y="173.5" width="18.5" height="23.9" fill="#2A6B6B"/><rect x="382.6" y="193.1" width="18.5" height="4.3" fill="#2A6B6B"/><rect x="410.2" y="197.4" width="18.5" height="13.6" fill="rgba(42,107,107,0.35)"/><rect x="437.9" y="185.8" width="18.5" height="11.6" fill="#2A6B6B"/><rect x="465.5" y="197.4" width="18.5" height="5.1" fill="rgba(42,107,107,0.35)"/><rect x="493.2" y="197.4" width="18.5" height="53.1" fill="rgba(42,107,107,0.35)"/><rect x="520.8" y="197.4" width="18.5" height="16.9" fill="rgba(42,107,107,0.35)"/><rect x="548.5" y="179.4" width="18.5" height="18.0" fill="#2A6B6B"/><rect x="576.1" y="197.4" width="18.5" height="63.7" fill="rgba(42,107,107,0.35)"/><rect x="603.8" y="139.3" width="18.5" height="58.1" fill="#2A6B6B"/><rect x="631.4" y="59.9" width="18.5" height="137.5" fill="#2A6B6B"/><rect x="659.1" y="165.1" width="18.5" height="32.3" fill="#2A6B6B"/><rect x="686.7" y="94.2" width="18.5" height="103.2" fill="#2A6B6B"/>
+            <line x1="60" y1="197.4" x2="696" y2="197.4" stroke="#1A1714" stroke-width="1.2"/>
+            <line x1="60" y1="28" x2="60" y2="270" stroke="#1A1714" stroke-width="1.2"/>
+            <line x1="60.0" y1="270" x2="60.0" y2="275" stroke="#6B6460" stroke-width="0.8"/><text x="60.0" y="288" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#6B6460">2000</text><line x1="170.6" y1="270" x2="170.6" y2="275" stroke="#6B6460" stroke-width="0.8"/><text x="170.6" y="288" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#6B6460">2004</text><line x1="281.2" y1="270" x2="281.2" y2="275" stroke="#6B6460" stroke-width="0.8"/><text x="281.2" y="288" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#6B6460">2008</text><line x1="391.8" y1="270" x2="391.8" y2="275" stroke="#6B6460" stroke-width="0.8"/><text x="391.8" y="288" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#6B6460">2012</text><line x1="502.4" y1="270" x2="502.4" y2="275" stroke="#6B6460" stroke-width="0.8"/><text x="502.4" y="288" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#6B6460">2016</text><line x1="613.0" y1="270" x2="613.0" y2="275" stroke="#6B6460" stroke-width="0.8"/><text x="613.0" y="288" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#6B6460">2020</text><line x1="696.0" y1="270" x2="696.0" y2="275" stroke="#6B6460" stroke-width="0.8"/><text x="696.0" y="288" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#6B6460">2023</text>
+            <text x="16" y="149.0" font-family="JetBrains Mono, monospace" font-size="9" fill="#6B6460" transform="rotate(-90 16 149.0)">cohen's d (top 10 − rest)</text>
+          </svg>
+          <p class="figure-caption">The late rise matters more than the early flatness. For most of the period, English usage does not separate the Top 10 from the rest of the chart in any meaningful way; after 2020, it begins to do so intermittently, which suggests a recent shift in what top-charting visibility looks like rather than a timeless rule.</p>
+        </div>
+
+        <p>When the chart is split into Top 10 versus ranks 11–100, the effect size remains near zero for much of the early period and then strengthens after 2020. Cohen's d reaches 0.240 in 2020, 0.568 in 2021, 0.133 in 2022, and 0.427 in 2023. That is not overwhelming, but it is real enough to take seriously. The point is not that English suddenly became a master variable. It is that recent Top 10 songs appear more likely than the rest of the chart to come from the English-heavier tail.</p>
+
+        <p>That distinction between "not predictive overall" and "more common in recent top performers" is the essay's central hinge. English does not robustly order the whole chart. But in the contemporary period, some of the most visible songs are disproportionately likely to use it at high levels. Those are different claims, and collapsing them into one would be analytically lazy.</p>
+
+        <h2>An honest caveat that should go before any stronger claim</h2>
+
+        <p>There are obvious limits. Line-level language detection misses mixed lines, slang, romanised Korean, and short fragments. Repeated chart appearances mean the dataset privileges persistence as well as presence. Genre labels are messy and sometimes internally inconsistent. None of that kills the result, but it does constrain what can be said cleanly.</p>
+
+        <p>If I were extending this project, I would push in exactly the place where the current result becomes most interesting: <em>duration</em>. Not whether English predicts rank in a static sense, but whether it predicts staying power. Does a heavily English song remain on the chart longer? Does it enter differently? Does the answer change once foreign pop entries are removed and the comparison is forced back onto Korean releases alone?</p>
+
+        <p>The broader point is that language in pop music is not just a linguistic variable. It is a design choice, a market signal, a genre convention, and sometimes just a hook that sounds good against the beat. What this dataset shows is that English in K-pop has unquestionably expanded, but its role is messier than the usual globalisation cliché allows. It changed the texture of the chart more clearly than it changed the logic of success.</p>
+
+        <div class="essay-footer">
+          <a href="../../#inquiries" class="back-link">← back to inquiries</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>

@@ -1,0 +1,101 @@
+<svg viewBox="0 0 1200 675" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Two double pendulum trajectories under uniform and gradient gravity tracing visibly different patterns">
+  <defs>
+    <style>
+      .bg       { fill: #F7F3EE; }
+      .divider  { stroke: #B8B0A6; stroke-width: 0.8; stroke-dasharray: 2 6; fill: none; }
+      .field    { stroke: #B8B0A6; stroke-width: 0.8; fill: none; stroke-dasharray: 3 5; }
+      .trail-a  { stroke: #2A6B6B; stroke-width: 1.8; fill: none; stroke-linecap: round; stroke-linejoin: round; opacity: 0.9; }
+      .trail-b  { stroke: #2A6B6B; stroke-width: 1.8; fill: none; stroke-linecap: round; stroke-linejoin: round; opacity: 0.9; }
+      .arm      { stroke: #1A1714; stroke-width: 3.2; stroke-linecap: round; fill: none; }
+      .bob      { fill: #1A4F4F; stroke: #1A1714; stroke-width: 1.4; }
+      .pivot    { fill: #1A1714; }
+    </style>
+  </defs>
+
+  <rect class="bg" width="1200" height="675"/>
+
+  <!-- LEFT PANEL: uniform g — tight rosette-style orbit -->
+  <g transform="translate(300, 340)">
+    <!-- Field lines (straight, parallel — uniform g) -->
+    <line class="field" x1="-220" y1="-260" x2="-220" y2="260"/>
+    <line class="field" x1="-150" y1="-260" x2="-150" y2="260"/>
+    <line class="field" x1="-80"  y1="-260" x2="-80"  y2="260"/>
+    <line class="field" x1="0"    y1="-260" x2="0"    y2="260"/>
+    <line class="field" x1="80"   y1="-260" x2="80"   y2="260"/>
+    <line class="field" x1="150"  y1="-260" x2="150"  y2="260"/>
+    <line class="field" x1="220"  y1="-260" x2="220"  y2="260"/>
+
+    <!-- Smooth quasi-periodic trail — a Lissajous-like rosette -->
+    <path class="trail-a" d="
+      M -180,20
+      C -150,-80 -40,-150 80,-120
+      S 220,20 150,140
+      S -60,230 -180,140
+      S -260,-60 -150,-150
+      S 80,-200 180,-60
+      S 180,150 40,200
+      S -190,140 -220,0
+      S -130,-180 20,-200
+      S 220,-80 190,80
+      S 40,230 -120,180
+      S -240,30 -170,-100
+      S -30,-210 120,-160
+      S 230,-10 150,130
+      S -50,220 -180,100
+      S -220,-80 -80,-180"/>
+
+    <!-- Pendulum A: arm + bobs, at rest-ish pose -->
+    <circle class="pivot" cx="0" cy="-200" r="5"/>
+    <line class="arm" x1="0" y1="-200" x2="95" y2="-110"/>
+    <circle class="bob" cx="95" cy="-110" r="16"/>
+    <line class="arm" x1="95" y1="-110" x2="175" y2="10"/>
+    <circle class="bob" cx="175" cy="10" r="22"/>
+  </g>
+
+  <!-- DIVIDER -->
+  <line class="divider" x1="600" y1="60" x2="600" y2="615"/>
+
+  <!-- RIGHT PANEL: gradient g — chaotic, wider-spread trail -->
+  <g transform="translate(900, 340)">
+    <!-- Field lines (radiating / converging — gradient g) -->
+    <g stroke="#B8B0A6" stroke-width="0.8" fill="none" stroke-dasharray="3 5">
+      <line x1="-220" y1="-280" x2="-100" y2="280"/>
+      <line x1="-150" y1="-280" x2="-65"  y2="280"/>
+      <line x1="-80"  y1="-280" x2="-35"  y2="280"/>
+      <line x1="0"    y1="-280" x2="0"    y2="280"/>
+      <line x1="80"   y1="-280" x2="35"   y2="280"/>
+      <line x1="150"  y1="-280" x2="65"   y2="280"/>
+      <line x1="220"  y1="-280" x2="100"  y2="280"/>
+    </g>
+
+    <!-- Chaotic trail — noisier path covering more of the canvas -->
+    <path class="trail-b" d="
+      M -200,-180
+      C -120,-240 40,-230 150,-140
+      S 250,60 120,160
+      S -160,210 -240,80
+      S -200,-120 -50,-220
+      S 200,-200 260,-30
+      S 200,200 20,250
+      S -260,180 -260,-20
+      S -120,-260 110,-250
+      S 270,-80 230,120
+      S 60,260 -140,230
+      S -290,60 -220,-150
+      S -30,-280 180,-200
+      S 290,20 170,220
+      S -80,290 -240,170
+      S -280,-60 -130,-220
+      S 80,-270 220,-100
+      S 250,140 100,250
+      S -180,230 -260,50
+      S -240,-180 -80,-260"/>
+
+    <!-- Pendulum B: arm + bobs, mid-swing pose -->
+    <circle class="pivot" cx="0" cy="-200" r="5"/>
+    <line class="arm" x1="0" y1="-200" x2="-60" y2="-60"/>
+    <circle class="bob" cx="-60" cy="-60" r="16"/>
+    <line class="arm" x1="-60" y1="-60" x2="80" y2="30"/>
+    <circle class="bob" cx="80" cy="30" r="22"/>
+  </g>
+</svg>
