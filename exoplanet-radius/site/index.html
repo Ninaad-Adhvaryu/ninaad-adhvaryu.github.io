@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How Do You Find a Planet by Learning the Shape of Its Absence? — Ninaad Adhvaryu</title>
+  <meta name="description" content="On predicting exoplanet radius from 17,781 NASA Exoplanet Archive entries — and on the moment a model learns the detection pipeline as if it were the physics.">
+  <link rel="stylesheet" href="../../style.css">
+
+  <style>
+    :root {
+      --cream-dark:    #E8E2D9;
+      --cream-card:    #FDFBF8;
+      --ink-muted:     #6B6460;
+      --teal-pale:     rgba(42, 107, 107, 0.09);
+      --obsidian-mid:  #272540;
+      --obsidian-text: #C9C5DA;
+      --obsidian-muted:#7C789A;
+      --max-width:     1080px;
+      --gutter:        2.5rem;
+      --prose-width:   700px;
+    }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--serif-body);
+      font-size: 1rem;
+      line-height: 1.72;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    ::selection { background: rgba(42, 107, 107, 0.18); }
+    a { color: var(--teal); text-decoration: none; transition: color 0.2s ease; }
+
+    nav {
+      position: sticky; top: 0; z-index: 200;
+      background: var(--obsidian); height: 54px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 var(--gutter);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .nav-monogram { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--obsidian-muted); }
+    .nav-links { display: flex; gap: 2.25rem; list-style: none; }
+    .nav-links a { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; color: var(--obsidian-text); text-transform: lowercase; padding-bottom: 2px; border-bottom: 1px solid transparent; transition: color 0.2s ease, border-color 0.2s ease; }
+    .nav-links a:hover { color: var(--teal-light); border-bottom-color: var(--teal-light); }
+    .nav-back { color: var(--obsidian-text); }
+
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--gutter); }
+    section { padding: 4rem 0; }
+
+    .essay-header { padding: 3rem 0 3.5rem; }
+    .essay-hero { margin: 0 0 2.75rem; }
+    .essay-hero img {
+      display: block; width: 100%; height: auto;
+      border: 1px solid var(--cream-dark); border-radius: 2px;
+    }
+    .essay-title {
+      font-family: var(--serif-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700; line-height: 1.15; letter-spacing: -0.015em;
+      color: var(--ink); margin-bottom: 1.75rem; max-width: 680px;
+    }
+    .essay-meta {
+      display: flex; flex-wrap: wrap; gap: 2rem;
+      margin-top: 2.5rem; padding-top: 2.5rem;
+      border-top: 1px solid var(--cream-dark);
+    }
+    .essay-meta-block { flex: 0 1 auto; }
+    .essay-meta-label {
+      font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--ink-muted); margin-bottom: 0.5rem;
+    }
+    .essay-meta-value { font-family: var(--serif-body); font-size: 0.95rem; color: var(--ink); }
+
+    .essay-body { max-width: var(--prose-width); margin: 0 auto; }
+    .essay-body p {
+      font-size: 1rem; line-height: 1.82;
+      margin-bottom: 1.4em; color: var(--ink);
+    }
+    .essay-body em { font-style: italic; }
+    .essay-body strong { font-weight: 600; }
+
+    .essay-footer { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--cream-dark); }
+    .back-link {
+      font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em;
+      text-transform: lowercase; color: var(--teal);
+      border-bottom: 1px solid var(--teal-rule); padding-bottom: 2px;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+    .back-link:hover { color: var(--teal-light); border-bottom-color: var(--teal-light); }
+
+    @media (max-width: 768px) {
+      :root { --gutter: 1.5rem; }
+      section { padding: 3rem 0; }
+      .essay-header { padding: 3rem 0 2rem; }
+      .essay-title { font-size: 1.8rem; }
+      .essay-meta { gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="../../index.html" class="nav-monogram nav-back">← back</a>
+    <ul class="nav-links">
+      <li><a href="../../#inquiries">inquiries</a></li>
+      <li><a href="../../#building">building</a></li>
+      <li><a href="../../#thesis">thesis</a></li>
+      <li><a href="../../#teaching">teaching</a></li>
+      <li><a href="../../#writing">writing</a></li>
+      <li><a href="../../#contact">contact</a></li>
+    </ul>
+  </nav>
+
+  <section class="essay-header">
+    <div class="container">
+      <figure class="essay-hero">
+        <img src="hero.svg" alt="Stylised transit geometry — a star with a planet silhouetted in front, and the characteristic trapezoidal dip in the brightness curve below; the depth of the dip is the squared radius ratio">
+      </figure>
+      <h1 class="essay-title">How Do You Find a Planet by Learning the Shape of Its Absence?</h1>
+      <div class="essay-meta">
+        <div class="essay-meta-block">
+          <p class="essay-meta-label">Domain</p>
+          <p class="essay-meta-value">Astrophysics · Machine Learning</p>
+        </div>
+        <div class="essay-meta-block">
+          <p class="essay-meta-label">Status</p>
+          <p class="essay-meta-value">Complete · 2026</p>
+        </div>
+        <div class="essay-meta-block">
+          <p class="essay-meta-label">Methods</p>
+          <p class="essay-meta-value">NASA Exoplanet Archive · Ridge / Random Forest / XGBoost regression · Feature importance</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="essay-body-wrap">
+    <div class="container">
+      <div class="essay-body">
+
+        <p>A confirmed exoplanet is a strange object. It is observed indirectly, by the periodic dimming of its star, and its radius is reported as a ratio between two depths of brightness: the star at full light, and the star with a planet in front of it. The radius column in any exoplanet catalogue is therefore a measurement of an absence — the missing light during the transit.</p>
+
+        <p>The question was whether that radius can be predicted from the other columns of the same catalogue: the host star's mass, radius, and effective temperature; the planet's orbital period and semi-major axis; and the system's distance from Earth. Three regression models on 17,781 confirmed planets from the NASA Exoplanet Archive — Ridge as a linear baseline, Random Forest and XGBoost as non-linear comparators. XGBoost achieves R² = 0.765 and RMSE = 0.527 Earth radii on a held-out test set, substantially beating the linear baseline. The radius column carries enough information in the other columns to be reconstructed reasonably well.</p>
+
+        <p>The feature-importance ranking is where it gets interesting. The strongest predictors of planet radius, according to Random Forest's split-gain measure, are orbital period and the system's distance from Earth.</p>
+
+        <p>Orbital period has a plausible physics story behind it. Planets at short periods experience strong irradiation, which drives atmospheric loss and shifts the radius distribution. The radius gap near 1.5 to 2 Earth radii — super-Earths on one side, sub-Neptunes on the other — is partly a phenomenon of orbital evolution. Period showing up high in the importances is not surprising.</p>
+
+        <p>Distance from Earth has no such story. The distance from the Sun to a star a few hundred parsecs away has no physical reason to affect the planet's size. What it does have is a relationship to detection. Small planets are easier to characterise around nearby stars, where the transit signal-to-noise is better and the host's properties are better constrained. The catalogue is denser in small planets at small distances because the catalogue is shaped by what we can see. The model is reading that shape.</p>
+
+        <p>That is the part worth writing about. The model is right, in the narrow sense: it really does predict the radius column from the other columns. But the other columns include one whose informativeness is mostly about the detector. A prediction that lifts when a feature only correlates with detectability is not a prediction about the planet. It is a prediction about how the planet was found.</p>
+
+        <p>The way to read R² = 0.765 in this light is not as a failure of the analysis but as a reminder that radii in exoplanet catalogues are catalogue radii, not Platonic ones. The catalogue's gaps and densities are part of the signal. The model is doing what every honest model does: telling you what the data is shaped like. The shape, here, is partly an absence.</p>
+
+        <div class="essay-footer">
+          <a href="../../#inquiries" class="back-link">← back to inquiries</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>

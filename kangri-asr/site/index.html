@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What Does a Language Need Before a Machine Can Hear It? — Ninaad Adhvaryu</title>
+  <meta name="description" content="On testing a Hindi-trained Whisper model against 30 Kangri sentences — and on the difference between not understanding a language and fluently misunderstanding it.">
+  <link rel="stylesheet" href="../../style.css">
+
+  <style>
+    :root {
+      --cream-dark:    #E8E2D9;
+      --cream-card:    #FDFBF8;
+      --ink-muted:     #6B6460;
+      --teal-pale:     rgba(42, 107, 107, 0.09);
+      --obsidian-mid:  #272540;
+      --obsidian-text: #C9C5DA;
+      --obsidian-muted:#7C789A;
+      --max-width:     1080px;
+      --gutter:        2.5rem;
+      --prose-width:   700px;
+    }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--serif-body);
+      font-size: 1rem;
+      line-height: 1.72;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    ::selection { background: rgba(42, 107, 107, 0.18); }
+    a { color: var(--teal); text-decoration: none; transition: color 0.2s ease; }
+
+    nav {
+      position: sticky; top: 0; z-index: 200;
+      background: var(--obsidian); height: 54px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 var(--gutter);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .nav-monogram { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--obsidian-muted); }
+    .nav-links { display: flex; gap: 2.25rem; list-style: none; }
+    .nav-links a { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; color: var(--obsidian-text); text-transform: lowercase; padding-bottom: 2px; border-bottom: 1px solid transparent; transition: color 0.2s ease, border-color 0.2s ease; }
+    .nav-links a:hover { color: var(--teal-light); border-bottom-color: var(--teal-light); }
+    .nav-back { color: var(--obsidian-text); }
+
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--gutter); }
+    section { padding: 4rem 0; }
+
+    .essay-header { padding: 3rem 0 3.5rem; }
+    .essay-hero { margin: 0 0 2.75rem; }
+    .essay-hero img {
+      display: block; width: 100%; height: auto;
+      border: 1px solid var(--cream-dark); border-radius: 2px;
+    }
+    .essay-title {
+      font-family: var(--serif-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700; line-height: 1.15; letter-spacing: -0.015em;
+      color: var(--ink); margin-bottom: 1.75rem; max-width: 720px;
+    }
+    .essay-meta {
+      display: flex; flex-wrap: wrap; gap: 2rem;
+      margin-top: 2.5rem; padding-top: 2.5rem;
+      border-top: 1px solid var(--cream-dark);
+    }
+    .essay-meta-block { flex: 0 1 auto; }
+    .essay-meta-label {
+      font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--ink-muted); margin-bottom: 0.5rem;
+    }
+    .essay-meta-value { font-family: var(--serif-body); font-size: 0.95rem; color: var(--ink); }
+
+    .essay-body { max-width: var(--prose-width); margin: 0 auto; }
+    .essay-body p {
+      font-size: 1rem; line-height: 1.82;
+      margin-bottom: 1.4em; color: var(--ink);
+    }
+    .essay-body em { font-style: italic; }
+    .essay-body strong { font-weight: 600; }
+
+    .essay-footer { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--cream-dark); }
+    .back-link {
+      font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em;
+      text-transform: lowercase; color: var(--teal);
+      border-bottom: 1px solid var(--teal-rule); padding-bottom: 2px;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+    .back-link:hover { color: var(--teal-light); border-bottom-color: var(--teal-light); }
+
+    @media (max-width: 768px) {
+      :root { --gutter: 1.5rem; }
+      section { padding: 3rem 0; }
+      .essay-header { padding: 3rem 0 2rem; }
+      .essay-title { font-size: 1.8rem; }
+      .essay-meta { gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="../../index.html" class="nav-monogram nav-back">← back</a>
+    <ul class="nav-links">
+      <li><a href="../../#inquiries">inquiries</a></li>
+      <li><a href="../../#building">building</a></li>
+      <li><a href="../../#thesis">thesis</a></li>
+      <li><a href="../../#teaching">teaching</a></li>
+      <li><a href="../../#writing">writing</a></li>
+      <li><a href="../../#contact">contact</a></li>
+    </ul>
+  </nav>
+
+  <section class="essay-header">
+    <div class="container">
+      <figure class="essay-hero">
+        <img src="hero.svg" alt="Three-panel pipeline showing a Kangri sentence meaning 'he had run away' being transcribed by a Hindi-trained Whisper model as 'yes, it is okay', then translated faithfully into wrong English">
+      </figure>
+      <h1 class="essay-title">What Does a Language Need Before a Machine Can Hear It?</h1>
+      <div class="essay-meta">
+        <div class="essay-meta-block">
+          <p class="essay-meta-label">Domain</p>
+          <p class="essay-meta-value">Language · NLP · ASR for Low-Resource Languages</p>
+        </div>
+        <div class="essay-meta-block">
+          <p class="essay-meta-label">Status</p>
+          <p class="essay-meta-value">Complete · 2026</p>
+        </div>
+        <div class="essay-meta-block">
+          <p class="essay-meta-label">Methods</p>
+          <p class="essay-meta-value">Whisper-Vaani Hindi ASR · Hindi-to-English MT · Word error rate · Targeted error analysis</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="essay-body-wrap">
+    <div class="container">
+      <div class="essay-body">
+
+        <p>A Whisper model trained on Hindi has a particular kind of confidence. Given any audio, it produces fluent Hindi. The Hindi will be grammatical, lexically common, prosodically plausible — and, when the audio is not Hindi, almost entirely fabricated. Whether the model can do anything useful for Kangri, an endangered Western Pahari language with roughly a million speakers in the lower Himalayas, depends on how that confidence breaks.</p>
+
+        <p>Thirty Kangri sentences, chosen to stress-test the grammar and phonology that distinguishes Kangri from Hindi, were recorded by a heritage speaker with controlled Hindi reference translations. Two Whisper pipelines were applied: the generic multilingual whisper-large-v3 and the Hindi-finetuned ARTPARK-IISc Vaani model. Each Hindi transcript was then passed through a Hindi-to-English machine-translation model. Word error rate against the Hindi reference ranged from 0.33 to 1.33, with a median of 1.00. For twenty of the thirty sentences, the number of word edits needed to turn the model's output into the reference exceeded the number of words in the reference itself.</p>
+
+        <p>The interesting pattern is not the headline number but how the model fails. It does not produce noise. It produces confidently wrong Hindi. The Kangri sentence <em>हा नठी गेया सैह्</em> (he had run away) becomes <em>हाँ न ठीक है ऐसे</em> — yes, it is okay. The Kangri <em>सिरे मती पीड़ लगियो</em> (I have a lot of pain in my head) is transcribed as <em>सिरेमती पीड़ लगियो</em>, with two distinct Kangri words merged into one nonsense token. The Kangri intensifier <em>मती</em>, which agrees with the noun's gender, does not exist in Hindi, and the model has no slot for it. Where the input departs from Hindi structure, the model does not flag uncertainty — it reaches for the nearest fluent Hindi sequence and outputs that.</p>
+
+        <p>The translation step amplifies the failure. A model trained on Hindi-to-English faithfully translates the wrong Hindi into wrong English. Sometimes the English is biblically irrelevant: a Kangri sentence about feeling cold inside the house produces several lines of unrelated training-distribution text. The pipeline does not break. It does the wrong thing fluently at every stage.</p>
+
+        <p>The structural point is worth stating cleanly. Kangri shares much of Hindi's lexicon — perhaps eighty per cent of the words in casual speech — but its grammar is its own. The continuous participle is verb + <em>आदा</em>, not verb + <em>रहा है</em>. Oblique nouns can function as locatives without a postposition. Word order is freer; auxiliaries can precede main verbs. The phonology is shifted: aspirated consonants soften, certain retroflexes drift. A Hindi-trained model has been taught a tight distribution of expected sounds and morphology. Anything outside it gets bent back in.</p>
+
+        <p>What a language needs before a machine can hear it is not simply more data. It needs data the model has been allowed to disagree with. A handful of hours of clean Kangri audio with native transcriptions would not match the scale of Hindi training, but it would establish that Kangri's distinctive shapes are not noise to be smoothed away. The pipeline that exists today is faithful to Hindi. That is its training. Hearing Kangri requires a system that is allowed to be unfaithful to it.</p>
+
+        <div class="essay-footer">
+          <a href="../../#inquiries" class="back-link">← back to inquiries</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>

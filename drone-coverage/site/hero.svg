@@ -1,0 +1,161 @@
+<svg viewBox="0 0 1200 675" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stylised top-down view of a fragmented flood-plain terrain with three drone Wi-Fi hotspots placed in the channel-bounded accessible pockets, each with a transparent teal coverage circle">
+  <defs>
+    <style>
+      .bg       { fill: #F7F3EE; }
+      .water    { fill: #C9D8DA; }
+      .water-deep { fill: #B8CDCD; }
+      .land-edge{ stroke: #1A4F4F; stroke-width: 1.1; fill: none; opacity: 0.45; }
+      .grid     { stroke: #1A1714; stroke-width: 0.4; opacity: 0.06; fill: none; }
+      .coverage { fill: rgba(42,107,107,0.18); stroke: #2A6B6B; stroke-width: 1.6; stroke-dasharray: 4 4; }
+      .drone-body { fill: #1A4F4F; }
+      .drone-arm  { stroke: #1A4F4F; stroke-width: 2.4; stroke-linecap: round; }
+      .label    { fill: #6B6460; font-family: 'Courier New', monospace; font-size: 16px; letter-spacing: 0.14em; text-transform: uppercase; }
+      .label-sm { fill: #6B6460; font-family: 'Courier New', monospace; font-size: 12px; letter-spacing: 0.10em; }
+      .scale    { stroke: #6B6460; stroke-width: 1; fill: none; }
+    </style>
+
+    <!-- Grid pattern (40px cells, evokes the 20m simulation grid abstractly) -->
+    <pattern id="sim-grid" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path class="grid" d="M 40 0 L 0 0 0 40"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect class="bg" width="1200" height="675"/>
+
+  <!-- Subtle simulation-grid overlay across whole canvas -->
+  <rect width="1200" height="675" fill="url(#sim-grid)"/>
+
+  <!-- ─────────────────────────────────────────────────────────────
+       FRAGMENTED FLOODPLAIN TERRAIN
+       Water channels carving the land into accessible pockets.
+       The terrain is a stylised abstraction of Kuttanad-like
+       backwaters: branching channels separating land islands.
+       ───────────────────────────────────────────────────────────── -->
+
+  <!-- Channel 1 — main horizontal river through the middle -->
+  <path class="water" d="
+    M 0,360
+    C 120,335 200,365 320,355
+    C 440,345 520,395 640,380
+    C 760,365 860,420 980,400
+    C 1080,385 1140,410 1200,395
+    L 1200,440
+    C 1140,455 1080,430 980,445
+    C 860,465 760,410 640,425
+    C 520,440 440,390 320,400
+    C 200,410 120,380 0,405
+    Z"/>
+
+  <!-- Channel 2 — diagonal inlet upper-left -->
+  <path class="water" d="
+    M 0,90
+    C 80,80 140,140 220,160
+    C 290,178 340,230 360,275
+    L 320,295
+    C 300,250 240,210 180,195
+    C 110,180 60,135 0,135
+    Z"/>
+
+  <!-- Channel 3 — branching tributary lower-right -->
+  <path class="water" d="
+    M 900,500
+    C 940,520 1000,510 1060,545
+    C 1110,575 1140,600 1200,610
+    L 1200,655
+    C 1130,635 1080,615 1020,580
+    C 970,555 910,545 880,530
+    Z"/>
+
+  <!-- Channel 4 — small backwater bay center-bottom -->
+  <path class="water-deep" d="
+    M 420,575
+    C 480,560 560,580 640,575
+    C 700,572 740,595 730,625
+    C 700,640 600,635 520,630
+    C 460,625 410,610 420,575 Z"/>
+
+  <!-- Channel 5 — small inlet upper-right -->
+  <path class="water-deep" d="
+    M 880,90
+    C 940,100 990,140 1020,160
+    C 1050,180 1090,195 1100,220
+    L 1060,235
+    C 1040,210 1000,195 960,180
+    C 920,165 870,135 870,110 Z"/>
+
+  <!-- Subtle land-edge outlines on the channels for definition -->
+  <path class="land-edge" d="M 0,360 C 120,335 200,365 320,355 C 440,345 520,395 640,380 C 760,365 860,420 980,400 C 1080,385 1140,410 1200,395"/>
+  <path class="land-edge" d="M 0,440 C 60,432 140,460 240,448 C 360,432 460,402 580,432 C 700,460 800,432 920,452 C 1040,468 1140,450 1200,460" opacity="0.25"/>
+
+  <!-- ─────────────────────────────────────────────────────────────
+       COVERAGE CIRCLES — three drones placed by greedy
+       Each in a different channel-bounded accessible pocket.
+       Radius scaled to ~150px (~ stylised 400m on a 5km sector).
+       ───────────────────────────────────────────────────────────── -->
+
+  <!-- Pocket 1: upper-left land mass, between top edge and channel 1 -->
+  <circle class="coverage" cx="220" cy="220" r="148"/>
+
+  <!-- Pocket 2: large center-right land between channels 1 and 3 -->
+  <circle class="coverage" cx="600" cy="490" r="148"/>
+
+  <!-- Pocket 3: right-side upper pocket, between channel 1 and channel 5 -->
+  <circle class="coverage" cx="930" cy="260" r="148"/>
+
+  <!-- ─────────────────────────────────────────────────────────────
+       DRONE MARKERS — quadcopter top-down silhouette
+       Body + four arms with motor dots.
+       ───────────────────────────────────────────────────────────── -->
+
+  <!-- Drone 1 -->
+  <g transform="translate(220,220)">
+    <line class="drone-arm" x1="-13" y1="-13" x2="13" y2="13"/>
+    <line class="drone-arm" x1="-13" y1="13"  x2="13" y2="-13"/>
+    <circle class="drone-body" cx="0" cy="0" r="5"/>
+    <circle class="drone-body" cx="-13" cy="-13" r="3.2"/>
+    <circle class="drone-body" cx="13"  cy="-13" r="3.2"/>
+    <circle class="drone-body" cx="-13" cy="13"  r="3.2"/>
+    <circle class="drone-body" cx="13"  cy="13"  r="3.2"/>
+  </g>
+
+  <!-- Drone 2 -->
+  <g transform="translate(600,490)">
+    <line class="drone-arm" x1="-13" y1="-13" x2="13" y2="13"/>
+    <line class="drone-arm" x1="-13" y1="13"  x2="13" y2="-13"/>
+    <circle class="drone-body" cx="0" cy="0" r="5"/>
+    <circle class="drone-body" cx="-13" cy="-13" r="3.2"/>
+    <circle class="drone-body" cx="13"  cy="-13" r="3.2"/>
+    <circle class="drone-body" cx="-13" cy="13"  r="3.2"/>
+    <circle class="drone-body" cx="13"  cy="13"  r="3.2"/>
+  </g>
+
+  <!-- Drone 3 -->
+  <g transform="translate(930,260)">
+    <line class="drone-arm" x1="-13" y1="-13" x2="13" y2="13"/>
+    <line class="drone-arm" x1="-13" y1="13"  x2="13" y2="-13"/>
+    <circle class="drone-body" cx="0" cy="0" r="5"/>
+    <circle class="drone-body" cx="-13" cy="-13" r="3.2"/>
+    <circle class="drone-body" cx="13"  cy="-13" r="3.2"/>
+    <circle class="drone-body" cx="-13" cy="13"  r="3.2"/>
+    <circle class="drone-body" cx="13"  cy="13"  r="3.2"/>
+  </g>
+
+  <!-- ─────────────────────────────────────────────────────────────
+       META: scale bar + label
+       ───────────────────────────────────────────────────────────── -->
+
+  <!-- Scale bar bottom-left: 1 km = ~240 px on a stylised 5km sector -->
+  <g transform="translate(40,635)">
+    <line class="scale" x1="0" y1="0" x2="240" y2="0"/>
+    <line class="scale" x1="0" y1="-5" x2="0" y2="5"/>
+    <line class="scale" x1="240" y1="-5" x2="240" y2="5"/>
+    <text class="label-sm" x="0" y="22">0</text>
+    <text class="label-sm" x="240" y="22" text-anchor="end">1 km</text>
+  </g>
+
+  <!-- Config label top-right -->
+  <text class="label" x="1160" y="50" text-anchor="end">k = 3 · greedy placement</text>
+  <text class="label-sm" x="1160" y="70" text-anchor="end">stylised flood-plain · channels in blue</text>
+
+</svg>

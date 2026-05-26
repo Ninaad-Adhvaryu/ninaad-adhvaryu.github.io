@@ -1,0 +1,109 @@
+<svg viewBox="0 0 1200 675" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Three-stage speech-recognition pipeline showing how a Kangri sentence meaning 'he had run away' is transcribed by a Hindi-trained Whisper model as 'yes, it is okay' and then translated into English faithfully wrong">
+  <defs>
+    <style>
+      .bg          { fill: #F7F3EE; }
+      .panel       { fill: #FDFBF8; stroke: #1A1714; stroke-width: 1.2; }
+      .panel-bad   { fill: #FDFBF8; stroke: #B65656; stroke-width: 1.4; }
+      .panel-label { fill: #6B6460; font-family: 'Courier New', monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; }
+      .panel-label-bad { fill: #B65656; font-family: 'Courier New', monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; }
+      .script-kn   { fill: #1A1714; font-family: 'Source Serif 4', 'Mangal', serif; font-size: 28px; }
+      .script-hi   { fill: #1A1714; font-family: 'Source Serif 4', 'Mangal', serif; font-size: 28px; }
+      .script-en   { fill: #1A1714; font-family: 'Source Serif 4', serif; font-size: 26px; font-style: italic; }
+      .gloss       { fill: #6B6460; font-family: 'Source Serif 4', serif; font-size: 15px; font-style: italic; }
+      .arrow-line  { stroke: #2A6B6B; stroke-width: 2.4; fill: none; }
+      .arrow-head  { fill: #2A6B6B; }
+      .stage-label { fill: #6B6460; font-family: 'Courier New', monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; }
+      .top-label   { fill: #6B6460; font-family: 'Courier New', monospace; font-size: 14px; letter-spacing: 0.16em; text-transform: uppercase; }
+      .meta-label  { fill: #6B6460; font-family: 'Courier New', monospace; font-size: 11px; letter-spacing: 0.10em; }
+      .meaning-x   { stroke: #B65656; stroke-width: 2; stroke-linecap: round; opacity: 0.85; }
+      .wer-box     { fill: #F2E7E1; stroke: #B65656; stroke-width: 1; }
+      .wer-text    { fill: #B65656; font-family: 'Courier New', monospace; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; }
+      .wave        { stroke: #2A6B6B; stroke-width: 1.4; fill: none; opacity: 0.7; }
+    </style>
+  </defs>
+
+  <rect class="bg" width="1200" height="675"/>
+
+  <!-- Top label band -->
+  <text class="top-label" x="40" y="50">kangri → hindi → english · whisper-vaani + mt</text>
+  <text class="meta-label" x="40" y="72">30 kangri sentences · median WER 1.00 against hindi reference</text>
+
+  <!-- ─────────────────────────────────────────────────────────────
+       PANEL 1 — KANGRI INPUT (audio + reference text)
+       ───────────────────────────────────────────────────────────── -->
+  <rect class="panel" x="50" y="130" width="320" height="260" rx="6"/>
+  <text class="panel-label" x="65" y="158">kangri (spoken)</text>
+
+  <!-- Stylised audio waveform -->
+  <g transform="translate(70,200)">
+    <path class="wave" d="
+      M 0,30
+      L 12,18 L 24,42 L 36,12 L 48,48 L 60,22 L 72,38
+      L 84,16 L 96,44 L 108,24 L 120,40 L 132,18
+      L 144,46 L 156,20 L 168,34 L 180,14
+      L 192,42 L 204,26 L 216,38 L 228,16
+      L 240,40 L 252,22 L 264,36 L 276,18 L 290,30"/>
+  </g>
+
+  <!-- Devanagari original -->
+  <text class="script-kn" x="210" y="298" text-anchor="middle">हा नठी गेया सैह्</text>
+  <text class="gloss" x="210" y="328" text-anchor="middle">"he had run away"</text>
+
+  <text class="stage-label" x="65" y="378">heritage speaker · author elicitation</text>
+
+  <!-- ─────────────────────────────────────────────────────────────
+       PANEL 2 — HINDI TRANSCRIPTION (whisper output)
+       ───────────────────────────────────────────────────────────── -->
+  <rect class="panel-bad" x="440" y="130" width="320" height="260" rx="6"/>
+  <text class="panel-label-bad" x="455" y="158">hindi transcription · WER 1.20</text>
+
+  <text class="script-hi" x="600" y="220" text-anchor="middle">हाँ न ठीक है ऐसे</text>
+  <text class="gloss" x="600" y="250" text-anchor="middle">"yes, it is okay"</text>
+
+  <!-- The hallucination call-out -->
+  <line class="meaning-x" x1="475" y1="285" x2="725" y2="285"/>
+  <text class="meta-label" x="600" y="312" text-anchor="middle" fill="#B65656">no semantic relation to input</text>
+
+  <text class="stage-label" x="455" y="378">whisper-large-v3-vaani-hindi</text>
+
+  <!-- ─────────────────────────────────────────────────────────────
+       PANEL 3 — ENGLISH TRANSLATION (faithfully wrong)
+       ───────────────────────────────────────────────────────────── -->
+  <rect class="panel-bad" x="830" y="130" width="320" height="260" rx="6"/>
+  <text class="panel-label-bad" x="845" y="158">english translation</text>
+
+  <text class="script-en" x="990" y="230" text-anchor="middle">"Yes, it's okay."</text>
+  <text class="gloss" x="990" y="285" text-anchor="middle">fluent. confident. wrong.</text>
+
+  <text class="stage-label" x="845" y="378">hindi → english mt (indictrans2-style)</text>
+
+  <!-- ─────────────────────────────────────────────────────────────
+       ARROWS between panels
+       ───────────────────────────────────────────────────────────── -->
+
+  <!-- Arrow 1 -->
+  <line class="arrow-line" x1="380" y1="260" x2="425" y2="260"/>
+  <polygon class="arrow-head" points="425,260 415,254 415,266"/>
+  <text class="meta-label" x="402" y="248" text-anchor="middle">asr</text>
+
+  <!-- Arrow 2 -->
+  <line class="arrow-line" x1="770" y1="260" x2="815" y2="260"/>
+  <polygon class="arrow-head" points="815,260 805,254 805,266"/>
+  <text class="meta-label" x="792" y="248" text-anchor="middle">mt</text>
+
+  <!-- ─────────────────────────────────────────────────────────────
+       BOTTOM ANNOTATION — the failure pattern
+       ───────────────────────────────────────────────────────────── -->
+
+  <g transform="translate(50,460)">
+    <rect class="wer-box" x="0" y="0" width="1100" height="120" rx="4" opacity="0.45"/>
+    <text class="wer-text" x="22" y="32">FAILURE MODE</text>
+    <text class="meta-label" x="22" y="58" fill="#1A1714" font-size="13" letter-spacing="0">A Hindi-trained model produces fluent Hindi for any input. When the input is</text>
+    <text class="meta-label" x="22" y="78" fill="#1A1714" font-size="13" letter-spacing="0">Kangri, parts of the audio get segmented into the nearest high-frequency Hindi</text>
+    <text class="meta-label" x="22" y="98" fill="#1A1714" font-size="13" letter-spacing="0">tokens. The MT model then faithfully translates the wrong Hindi into wrong English.</text>
+  </g>
+
+  <!-- Footer meta -->
+  <text class="meta-label" x="1160" y="650" text-anchor="end">kangri · western pahari · ~1.1 million speakers · "definitely endangered"</text>
+
+</svg>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What Does a First-Order Markov Chain Know About a Raga? — Ninaad Adhvaryu</title>
+  <meta name="description" content="On pitch-class transition matrices, Jensen-Shannon divergence, and what survives when a melodic tradition is compressed into one step of context.">
+  <link rel="stylesheet" href="../../style.css">
+
+  <style>
+    :root {
+      --cream-dark:    #E8E2D9;
+      --cream-card:    #FDFBF8;
+      --ink-muted:     #6B6460;
+      --teal-pale:     rgba(42, 107, 107, 0.09);
+      --obsidian-mid:  #272540;
+      --obsidian-text: #C9C5DA;
+      --obsidian-muted:#7C789A;
+      --max-width:     1080px;
+      --gutter:        2.5rem;
+      --prose-width:   700px;
+    }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--serif-body);
+      font-size: 1rem;
+      line-height: 1.72;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    ::selection { background: rgba(42, 107, 107, 0.18); }
+    a { color: var(--teal); text-decoration: none; transition: color 0.2s ease; }
+
+    nav {
+      position: sticky; top: 0; z-index: 200;
+      background: var(--obsidian); height: 54px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 var(--gutter);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .nav-monogram { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--obsidian-muted); }
+    .nav-links { display: flex; gap: 2.25rem; list-style: none; }
+    .nav-links a { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; color: var(--obsidian-text); text-transform: lowercase; padding-bottom: 2px; border-bottom: 1px solid transparent; transition: color 0.2s ease, border-color 0.2s ease; }
+    .nav-links a:hover { color: var(--teal-light); border-bottom-color: var(--teal-light); }
+    .nav-back { color: var(--obsidian-text); }
+
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--gutter); }
+    section { padding: 4rem 0; }
+
+    .essay-header { padding: 3rem 0 3.5rem; }
+    .essay-hero { margin: 0 0 2.75rem; }
+    .essay-hero img {
+      display: block; width: 100%; height: auto;
+      border: 1px solid var(--cream-dark); border-radius: 2px;
+    }
+    .essay-title {
+      font-family: var(--serif-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700; line-height: 1.15; letter-spacing: -0.015em;
+      color: var(--ink); margin-bottom: 1.75rem; max-width: 720px;
+    }
+    .essay-meta {
+      display: flex; flex-wrap: wrap; gap: 2rem;
+      margin-top: 2.5rem; padding-top: 2.5rem;
+      border-top: 1px solid var(--cream-dark);
+    }
+    .essay-meta-block { flex: 0 1 auto; }
+    .essay-meta-label {
+      font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--ink-muted); margin-bottom: 0.5rem;
+    }
+    .essay-meta-value { font-family: var(--serif-body); font-size: 0.95rem; color: var(--ink); }
+
+    .essay-body { max-width: var(--prose-width); margin: 0 auto; }
+    .essay-body p {
+      font-size: 1rem; line-height: 1.82;
+      margin-bottom: 1.4em; color: var(--ink);
+    }
+    .essay-body em { font-style: italic; }
+    .essay-body strong { font-weight: 600; }
+
+    .essay-footer { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--cream-dark); }
+    .back-link {
+      font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em;
+      text-transform: lowercase; color: var(--teal);
+      border-bottom: 1px solid var(--teal-rule); padding-bottom: 2px;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+    .back-link:hover { color: var(--teal-light); border-bottom-color: var(--teal-light); }
+
+    @media (max-width: 768px) {
+      :root { --gutter: 1.5rem; }
+      section { padding: 3rem 0; }
+      .essay-header { padding: 3rem 0 2rem; }
+      .essay-title { font-size: 1.8rem; }
+      .essay-meta { gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="../../index.html" class="nav-monogram nav-back">← back</a>
+    <ul class="nav-links">
+      <li><a href="../../#inquiries">inquiries</a></li>
+      <li><a href="../../#building">building</a></li>
+      <li><a href="../../#thesis">thesis</a></li>
+      <li><a href="../../#teaching">teaching</a></li>
+      <li><a href="../../#writing">writing</a></li>
+      <li><a href="../../#contact">contact</a></li>
+    </ul>
+  </nav>
+
+  <section class="essay-header">
+    <div class="container">
+      <figure class="essay-hero">
+        <img src="hero.svg" alt="Side-by-side 12-by-12 pitch-class transition matrices — a sparse Carnatic raga matrix with mass concentrated on a few pentatonic transitions, and a more diffuse Western chorale matrix with diatonic stepwise motion distributed across many pitch-class pairs">
+      </figure>
+      <h1 class="essay-title">What Does a First-Order Markov Chain Know About a Raga?</h1>
+      <div class="essay-meta">
+        <div class="essay-meta-block">
+          <p class="essay-meta-label">Domain</p>
+          <p class="essay-meta-value">Computational Musicology · Probabilistic Models</p>
+        </div>
+        <div class="essay-meta-block">
+          <p class="essay-meta-label">Status</p>
+          <p class="essay-meta-value">Complete · 2026</p>
+        </div>
+        <div class="essay-meta-block">
+          <p class="essay-meta-label">Methods</p>
+          <p class="essay-meta-value">pYIN pitch tracking · Pitch-class transition matrices · Jensen-Shannon divergence · Convex blending</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="essay-body-wrap">
+    <div class="container">
+      <div class="essay-body">
+
+        <p>A first-order Markov chain knows only the most recent thing. Asked to model a melody, it can tell you the probability that the next pitch class will be G given that the current one is D. That is the whole horizon: one step back. Anything that depends on the phrase, the contour, the build-up of an idea over the last twenty notes — invisible to it. The interesting question is how much of the structure of a musical tradition survives that compression.</p>
+
+        <p>To find out, six Carnatic ragas — Bhairavi, Kalyani, Kambhoji, Mohanam, Shankarabharanam, Todi — were recorded three times each, and twenty-two soprano lines from Bach chorales were assembled as a Western comparator. Audio went through the pYIN algorithm for fundamental-frequency extraction, was rounded into MIDI note numbers, then folded down into twelve pitch classes by taking the value modulo twelve. Each piece became a 12×12 matrix in which each row, normalised, gave the conditional probability of the next pitch class given the current one.</p>
+
+        <p>The raga matrices are sparse and the Western matrices are not. Each raga concentrates mass on a small number of high-probability transitions — the pitch classes the raga allows, the moves the tradition expects. Bhairavi clusters around C, D♯, and A♯. Kalyani highlights its augmented fourth with a strong B-to-F♯. Mohanam's pentatonic constraint shows up as a transition matrix with broad zero rows. The Western aggregate, by contrast, spreads its mass: diatonic motion makes many pitch-class pairs probable, and the soprano-line average pools across many tonal contexts.</p>
+
+        <p>The Jensen-Shannon divergence between any two matrices — bounded, symmetric, zero when distributions match — gives a clean measure of how stylistically distant they are. Computed across all 40-by-40 pairs of files, the JSD matrix has visible blocks: an 18×18 raga block and a 22×22 Western block, both cooler along the diagonal than the off-diagonal between them. The within-raga distances are significantly tighter than the between-tradition distances (Mann-Whitney U, p = 0.021). The within-Western distances are not (p = 0.056). Six ragas across eighteen recordings cluster more tightly than twenty-two Bach chorales do amongst themselves. The raga tradition is rule-defined in ways that survive compression to a Markov chain. The Western tradition is harmonically defined, and harmony lives several pitch-class transitions away.</p>
+
+        <p>Blending the two aggregate matrices linearly — M(α) = α·M<sub>raga</sub> + (1−α)·M<sub>western</sub> — is a convex combination of stochastic matrices, which means it remains a stochastic matrix for every α. Sequences generated from the blend shift continuously from Western-like to raga-like as α moves from zero to one, with the crossover at α ≈ 0.55. There is no discontinuity. The blending is the mathematics doing exactly what it is supposed to do.</p>
+
+        <p>What the model cannot do is also part of what it knows. A first-order Markov chain has no gamaka — no oscillations, slides, or microtonal inflections, all of which a Carnatic listener would say <em>are</em> the raga. It has no pakad, the characteristic phrase by which a raga is recognised. It has nothing above one-note context. What it has is the surprising sufficiency of pairwise transitions to separate two traditions cleanly in the data. That sufficiency is not the whole story of a raga. But it is more of the story than a model this transparent has any right to capture.</p>
+
+        <div class="essay-footer">
+          <a href="../../#inquiries" class="back-link">← back to inquiries</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>
