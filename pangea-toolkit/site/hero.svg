@@ -1,0 +1,113 @@
+<svg viewBox="0 0 1200 675" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stylised lineage of a research-ideation system prompt: six versioned cards arranged in a cascade with v5.2 struck through, alongside a stack of papers representing the accepted-paper corpus that grounds each iteration">
+  <defs>
+    <style>
+      .bg        { fill: #F7F3EE; }
+      .corpus    { fill: #FDFBF8; stroke: #1A1714; stroke-width: 1.4; }
+      .corpusln  { stroke: #6B6460; stroke-width: 1.2; stroke-linecap: round; fill: none; }
+      .card      { fill: #FDFBF8; stroke: #1A4F4F; stroke-width: 1.6; }
+      .card-bar  { fill: #2A6B6B; }
+      .card-line { stroke: #1A4F4F; stroke-width: 1.2; stroke-linecap: round; fill: none; }
+      .killed    { stroke: #B65656; stroke-width: 3.5; stroke-linecap: round; }
+      .killed-fade { fill: rgba(255, 255, 255, 0.55); }
+      .version   { font-family: 'Courier New', monospace; font-size: 17px; letter-spacing: 0.12em; fill: #1A4F4F; }
+      .version-killed { font-family: 'Courier New', monospace; font-size: 17px; letter-spacing: 0.12em; fill: #B65656; }
+      .label     { fill: #6B6460; font-family: 'Courier New', monospace; font-size: 18px; letter-spacing: 0.16em; text-transform: uppercase; }
+      .feed      { stroke: #2A6B6B; stroke-width: 1.4; stroke-dasharray: 4 5; fill: none; }
+      .feedhd    { fill: #2A6B6B; }
+    </style>
+  </defs>
+
+  <rect class="bg" width="1200" height="675"/>
+
+  <!-- LEFT — corpus stack -->
+  <text class="label" x="120" y="110">corpus</text>
+
+  <rect class="corpus" x="120" y="130" width="220" height="285" rx="4"/>
+  <line class="corpusln" x1="145" y1="175" x2="285" y2="175"/>
+  <line class="corpusln" x1="145" y1="200" x2="315" y2="200"/>
+  <line class="corpusln" x1="145" y1="225" x2="265" y2="225"/>
+  <line class="corpusln" x1="145" y1="250" x2="310" y2="250"/>
+  <line class="corpusln" x1="145" y1="275" x2="290" y2="275"/>
+  <line class="corpusln" x1="145" y1="300" x2="305" y2="300"/>
+  <line class="corpusln" x1="145" y1="325" x2="245" y2="325"/>
+  <line class="corpusln" x1="145" y1="350" x2="300" y2="350"/>
+  <line class="corpusln" x1="145" y1="375" x2="275" y2="375"/>
+
+  <!-- second corpus paper behind for depth -->
+  <rect class="corpus" x="135" y="115" width="220" height="285" rx="4" opacity="0.55"/>
+
+  <text class="label" x="120" y="445">reviewer comments</text>
+  <text class="label" x="120" y="473">accepted papers</text>
+
+  <!-- feed lines from corpus to cards -->
+  <path class="feed" d="M360,260 C440,260 460,210 530,210"/>
+  <path class="feed" d="M360,275 C440,275 460,285 530,285"/>
+  <path class="feed" d="M360,290 C440,290 460,360 530,360"/>
+  <path class="feed" d="M360,305 C440,305 460,435 530,435"/>
+  <polygon class="feedhd" points="525,205 540,210 525,215"/>
+  <polygon class="feedhd" points="525,280 540,285 525,290"/>
+  <polygon class="feedhd" points="525,355 540,360 525,365"/>
+  <polygon class="feedhd" points="525,430 540,435 525,440"/>
+
+  <!-- CENTRE / RIGHT — versioned cards in cascade -->
+  <text class="label" x="540" y="110">iteration</text>
+
+  <!-- v1 -->
+  <rect class="card" x="540" y="130" width="260" height="68" rx="3"/>
+  <rect class="card-bar" x="540" y="130" width="6" height="68"/>
+  <text class="version" x="570" y="160">v1</text>
+  <line class="card-line" x1="570" y1="175" x2="770" y2="175"/>
+  <line class="card-line" x1="570" y1="188" x2="730" y2="188"/>
+
+  <!-- v2 -->
+  <rect class="card" x="555" y="208" width="260" height="68" rx="3"/>
+  <rect class="card-bar" x="555" y="208" width="6" height="68"/>
+  <text class="version" x="585" y="238">v2</text>
+  <line class="card-line" x1="585" y1="253" x2="785" y2="253"/>
+  <line class="card-line" x1="585" y1="266" x2="745" y2="266"/>
+
+  <!-- v3 -->
+  <rect class="card" x="570" y="286" width="260" height="68" rx="3"/>
+  <rect class="card-bar" x="570" y="286" width="6" height="68"/>
+  <text class="version" x="600" y="316">v3</text>
+  <line class="card-line" x1="600" y1="331" x2="800" y2="331"/>
+  <line class="card-line" x1="600" y1="344" x2="760" y2="344"/>
+
+  <!-- v4 -->
+  <rect class="card" x="585" y="364" width="260" height="68" rx="3"/>
+  <rect class="card-bar" x="585" y="364" width="6" height="68"/>
+  <text class="version" x="615" y="394">v4</text>
+  <line class="card-line" x1="615" y1="409" x2="815" y2="409"/>
+  <line class="card-line" x1="615" y1="422" x2="775" y2="422"/>
+
+  <!-- v5.2 (killed) -->
+  <rect class="card" x="600" y="442" width="260" height="68" rx="3"/>
+  <rect class="card-bar" x="600" y="442" width="6" height="68"/>
+  <text class="version-killed" x="630" y="472">v5.2</text>
+  <line class="card-line" x1="630" y1="487" x2="830" y2="487" opacity="0.4"/>
+  <line class="card-line" x1="630" y1="500" x2="790" y2="500" opacity="0.4"/>
+  <!-- strike-through -->
+  <line class="killed" x1="610" y1="450" x2="852" y2="502"/>
+  <line class="killed" x1="610" y1="502" x2="852" y2="450"/>
+
+  <!-- v6 (current) -->
+  <rect class="card" x="615" y="520" width="260" height="68" rx="3" stroke-width="2.4"/>
+  <rect class="card-bar" x="615" y="520" width="6" height="68"/>
+  <text class="version" x="645" y="550" font-weight="bold">v6 · current</text>
+  <line class="card-line" x1="645" y1="565" x2="845" y2="565"/>
+  <line class="card-line" x1="645" y1="578" x2="805" y2="578"/>
+
+  <!-- RIGHT — output indicator -->
+  <text class="label" x="935" y="110">output</text>
+  <rect class="card" x="935" y="280" width="180" height="120" rx="3"/>
+  <text class="version" x="950" y="312" font-weight="bold">ideation</text>
+  <text class="version" x="950" y="334">prompt</text>
+  <text class="version" x="950" y="356">toolkit</text>
+  <line class="card-line" x1="950" y1="376" x2="1100" y2="376"/>
+  <line class="card-line" x1="950" y1="388" x2="1080" y2="388"/>
+
+  <!-- arrow from v6 to output -->
+  <path class="feed" d="M885,554 C905,554 920,365 935,340"/>
+  <polygon class="feedhd" points="932,345 939,332 942,348"/>
+
+</svg>

@@ -1,0 +1,109 @@
+<svg viewBox="0 0 1200 675" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stylised hub-and-spoke architecture: four integration sources (Zoom, Google Drive, Calendar, Airtable) feeding into a central Scholar Context File node, which then flows to a Claude routing layer split across Haiku and Sonnet">
+  <defs>
+    <style>
+      .bg          { fill: #F7F3EE; }
+      .node        { fill: #FDFBF8; stroke: #1A4F4F; stroke-width: 1.6; }
+      .node-label  { font-family: 'Courier New', monospace; font-size: 17px; letter-spacing: 0.14em; fill: #1A4F4F; text-transform: uppercase; }
+      .node-sub    { font-family: 'Courier New', monospace; font-size: 12px; letter-spacing: 0.1em; fill: #6B6460; text-transform: uppercase; }
+      .hub         { fill: #2A6B6B; stroke: #1A4F4F; stroke-width: 2; }
+      .hub-label   { font-family: 'Courier New', monospace; font-size: 24px; letter-spacing: 0.18em; fill: #FDFBF8; text-transform: uppercase; font-weight: bold; }
+      .hub-sub     { font-family: 'Courier New', monospace; font-size: 13px; letter-spacing: 0.14em; fill: #C9C5DA; text-transform: uppercase; }
+      .spoke       { stroke: #2A6B6B; stroke-width: 1.6; fill: none; }
+      .spokehd     { fill: #2A6B6B; }
+      .down        { stroke: #1A4F4F; stroke-width: 1.6; stroke-dasharray: 4 5; fill: none; }
+      .downhd      { fill: #1A4F4F; }
+      .group-label { fill: #6B6460; font-family: 'Courier New', monospace; font-size: 16px; letter-spacing: 0.16em; text-transform: uppercase; }
+      .router      { fill: #FDFBF8; stroke: #2A6B6B; stroke-width: 1.6; }
+      .router-h    { fill: #FDFBF8; stroke: #6B6460; stroke-width: 1.4; }
+      .router-s    { fill: #FDFBF8; stroke: #1A4F4F; stroke-width: 1.8; }
+    </style>
+  </defs>
+
+  <rect class="bg" width="1200" height="675"/>
+
+  <!-- group label: integrations -->
+  <text class="group-label" x="95" y="80">integrations</text>
+
+  <!-- FOUR SOURCE NODES on the left -->
+  <!-- Zoom -->
+  <rect class="node" x="80" y="110" width="190" height="76" rx="4"/>
+  <text class="node-label" x="100" y="143">zoom</text>
+  <text class="node-sub" x="100" y="167">transcripts</text>
+
+  <!-- Drive -->
+  <rect class="node" x="80" y="208" width="190" height="76" rx="4"/>
+  <text class="node-label" x="100" y="241">drive</text>
+  <text class="node-sub" x="100" y="265">docs · sheets</text>
+
+  <!-- Calendar -->
+  <rect class="node" x="80" y="306" width="190" height="76" rx="4"/>
+  <text class="node-label" x="100" y="339">calendar</text>
+  <text class="node-sub" x="100" y="363">meetings</text>
+
+  <!-- Airtable -->
+  <rect class="node" x="80" y="404" width="190" height="76" rx="4"/>
+  <text class="node-label" x="100" y="437">airtable</text>
+  <text class="node-sub" x="100" y="461">central tracker</text>
+
+  <!-- CENTRAL HUB — SCF -->
+  <text class="group-label" x="445" y="80">per-scholar memory</text>
+  <rect class="hub" x="430" y="200" width="280" height="200" rx="5"/>
+  <text class="hub-label" x="570" y="282" text-anchor="middle">SCF</text>
+  <text class="hub-sub" x="570" y="312" text-anchor="middle">scholar context file</text>
+  <text class="hub-sub" x="570" y="335" text-anchor="middle">markdown · per-student</text>
+  <text class="hub-sub" x="570" y="358" text-anchor="middle">append-only · auditable</text>
+
+  <!-- SPOKES from sources to hub -->
+  <path class="spoke" d="M270,148 C340,148 370,260 425,260"/>
+  <polygon class="spokehd" points="420,255 432,260 420,265"/>
+
+  <path class="spoke" d="M270,246 C340,246 380,278 425,280"/>
+  <polygon class="spokehd" points="420,275 432,280 420,285"/>
+
+  <path class="spoke" d="M270,344 C340,344 380,318 425,318"/>
+  <polygon class="spokehd" points="420,313 432,318 420,323"/>
+
+  <path class="spoke" d="M270,442 C340,442 370,348 425,343"/>
+  <polygon class="spokehd" points="420,338 432,343 420,348"/>
+
+  <!-- RIGHT — Claude routing layer -->
+  <text class="group-label" x="800" y="80">claude routing</text>
+
+  <!-- Routing splitter -->
+  <rect class="router" x="800" y="220" width="280" height="55" rx="3"/>
+  <text class="node-label" x="820" y="253">two-tier · cost-aware</text>
+
+  <!-- Haiku -->
+  <rect class="router-h" x="800" y="305" width="130" height="105" rx="3"/>
+  <text class="node-label" x="819" y="335" fill="#6B6460">haiku</text>
+  <text class="node-sub" x="819" y="360">transcripts</text>
+  <text class="node-sub" x="819" y="380">extractions</text>
+  <text class="node-sub" x="819" y="400">summaries</text>
+
+  <!-- Sonnet -->
+  <rect class="router-s" x="950" y="305" width="130" height="105" rx="3"/>
+  <text class="node-label" x="970" y="335">sonnet</text>
+  <text class="node-sub" x="970" y="360">strategy</text>
+  <text class="node-sub" x="970" y="380">essays</text>
+  <text class="node-sub" x="970" y="400">PRDs</text>
+
+  <!-- arrows from hub to router and back -->
+  <path class="spoke" d="M715,290 C755,290 770,247 798,247"/>
+  <polygon class="spokehd" points="793,242 805,247 793,252"/>
+
+  <path class="spoke" d="M715,310 C755,310 770,357 798,357"/>
+  <polygon class="spokehd" points="793,352 805,357 793,362"/>
+
+  <!-- bottom: prototype → production arrow -->
+  <text class="group-label" x="430" y="495">prototype</text>
+  <text class="group-label" x="730" y="495" text-anchor="end">→</text>
+  <text class="group-label" x="750" y="495">production · used company-wide</text>
+
+  <line class="down" x1="430" y1="520" x2="1080" y2="520"/>
+  <polygon class="downhd" points="1075,515 1088,520 1075,525"/>
+
+  <!-- vibe-coded annotation -->
+  <text class="node-sub" x="430" y="555">~5,700 LOC · Python/FastAPI · vanilla JS</text>
+  <text class="node-sub" x="430" y="578">handed to product / IT · 746-line context doc</text>
+
+</svg>

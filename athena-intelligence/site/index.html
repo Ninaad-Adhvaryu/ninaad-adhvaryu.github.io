@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Athena Intelligence — Ninaad Adhvaryu</title>
+  <meta name="description" content="A vibe-coded internal platform that turned Zoom transcripts into shared scholar context — demoed to leadership, handed off to product and IT, now used company-wide.">
+  <link rel="stylesheet" href="../../style.css">
+
+  <style>
+    :root {
+      --cream-dark:    #E8E2D9;
+      --ink-muted:     #6B6460;
+      --teal-pale:     rgba(42, 107, 107, 0.09);
+      --obsidian-mid:  #272540;
+      --obsidian-text: #C9C5DA;
+      --obsidian-muted:#7C789A;
+      --max-width:     1080px;
+      --gutter:        2.5rem;
+      --prose-width:   700px;
+    }
+    body { background: var(--cream); color: var(--ink); font-family: var(--serif-body); font-size: 1rem; line-height: 1.72; -webkit-font-smoothing: antialiased; }
+    ::selection { background: rgba(42, 107, 107, 0.18); }
+    a { color: var(--teal); text-decoration: none; transition: color 0.2s; }
+
+    nav {
+      position: sticky; top: 0; z-index: 200;
+      background: var(--obsidian); height: 54px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 var(--gutter);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .nav-monogram { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--obsidian-muted); }
+    .nav-monogram a { color: inherit; }
+    .nav-monogram a:hover { color: var(--teal-light); }
+    .nav-links { display: flex; gap: 2.25rem; list-style: none; }
+    .nav-links a { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; color: var(--obsidian-text); text-transform: lowercase; padding-bottom: 2px; border-bottom: 1px solid transparent; transition: color 0.2s, border-color 0.2s; }
+    .nav-links a:hover { color: var(--teal-light); border-bottom-color: var(--teal-light); }
+
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--gutter); }
+    .placeholder-section { padding: 6rem 0 8rem; max-width: var(--prose-width); }
+
+    .eyebrow { font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--teal); margin-bottom: 1.1rem; }
+
+    h1 {
+      font-family: var(--serif-display);
+      font-size: clamp(1.8rem, 3.8vw, 2.75rem);
+      font-weight: 700; line-height: 1.15; letter-spacing: -0.02em;
+      color: var(--ink); margin-bottom: 1.25rem;
+    }
+    .lede { font-family: var(--serif-body); font-size: 1.05rem; font-style: italic; line-height: 1.65; color: var(--ink-muted); margin-bottom: 2.5rem; }
+
+    .prose p { font-size: 0.95rem; line-height: 1.78; color: var(--ink); margin-bottom: 1.1em; }
+    .prose p + p { margin-top: 0; }
+
+    .status-card {
+      background: var(--obsidian); padding: 1.65rem 1.7rem;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem 2.25rem;
+      margin: 2rem 0 2.5rem;
+    }
+    .status-label { font-family: var(--mono); font-size: 0.52rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--obsidian-muted); margin-bottom: 0.4rem; }
+    .status-val { font-family: var(--serif-body); font-size: 0.86rem; color: var(--obsidian-text); line-height: 1.5; }
+
+    .pull {
+      border-left: 2px solid var(--teal);
+      padding: 0.4rem 0 0.4rem 1.1rem;
+      font-style: italic; color: var(--ink-muted);
+      margin: 1.5rem 0 2rem;
+      font-size: 0.95rem;
+    }
+
+    .back-link {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--teal); border-bottom: 1px solid rgba(42,107,107,0.3);
+      padding-bottom: 2px; margin-top: 2.5rem;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .back-link:hover { color: var(--teal-light); border-bottom-color: var(--teal-light); }
+
+    footer { background: var(--obsidian); padding: 1.5rem var(--gutter); display: flex; justify-content: space-between; align-items: center; }
+    footer span { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.12em; color: var(--obsidian-muted); }
+    footer a { color: var(--obsidian-muted); }
+    footer a:hover { color: var(--teal-light); }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+    .placeholder-section { animation: fadeUp 0.6s 0.05s ease both; }
+
+    @media (max-width: 640px) {
+      .status-card { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <span class="nav-monogram"><a href="../../index.html">N. Adhvaryu</a></span>
+    <ul class="nav-links">
+      <li><a href="../../index.html#inquiries">inquiries</a></li>
+      <li><a href="../../index.html#building">building</a></li>
+      <li><a href="../../index.html#teaching">teaching</a></li>
+      <li><a href="../../index.html#contact">contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <div class="placeholder-section">
+      <p class="eyebrow">Internal Platform · Vibe-Coded → Production · 2026</p>
+      <h1>What if every team member could see every meeting they weren't in?</h1>
+      <p class="lede">On a vibe-coded internal platform that turned Zoom transcripts into shared scholar context — demoed to leadership, handed off to product and IT for productionisation, and now used company-wide.</p>
+
+      <div class="prose">
+        <p>The moment that triggered this project was small. I had been piping Zoom AI summaries from Gmail into a Notion database, partly for my own use and partly because the summaries were too useful to keep buried in email. During a chat with my manager about a scholar I had been mentoring, I pulled up the scholar's recent check-ins inline, in the conversation. He noticed. The realisation in the room, the one we both arrived at at roughly the same time, was that if every team member could see every meeting they had not been in — what was discussed, what was decided, what was outstanding — the next mentor walking into a session with that student would arrive already oriented. Athena rotates team members across stages of a scholar's journey, often quickly, and the cost of that rotation in lived practice is the few minutes at the start of every session where the next person has to be re-briefed. Multiplied across the team, those minutes are real time.</p>
+
+        <p>That was the seed. The work that followed was a roughly six-week vibe-coded prototype I called Athena Intelligence, and the framing I want to lead with is what kind of object it was. It was not a production platform. It was the working version of an idea, built fast and built solo, with the explicit intent that whatever survived the demo would be handed to the product and IT teams to rebuild properly. That arc — prototype to handoff to production — is the thing the essay is about. The technical work matters, but the discipline that made the arc clean is the harder thing to describe, so I want to spend most of the words on that.</p>
+
+        <p>The codebase that came out of those weeks is about 5,700 lines: a Python and FastAPI backend across roughly nine modules, a single-file vanilla-JavaScript frontend that grew to about 2,200 lines, and a small Node.js subprocess for one specific job. There is no framework on the frontend, no auth, no Docker, no CI pipeline, no HTTPS, no test suite, and a JSON flat file for a database. Every one of those omissions is a deliberate decision about what a prototype is for. The job of the prototype was to prove that the workflow worked end to end and that the AI's outputs were useful enough that a real team would want to use them. Nothing else.</p>
+
+        <p>The architectural choice I would still defend, the one that survived the rebuild, is the Student Context File. Each scholar has a single Markdown file on disk. The file accumulates meeting summaries, action items, context snippets, and a few structured sections under named headings: Profile, Application Theme and Strategy, Projects, Meeting Log, Availability, and so on. The AI reads this file before every action. Generating an ATS document, doing a gap analysis, writing an essay outline, summarising a Drive folder — all of these start by reading the SCF. The database stores meeting metadata; the SCF holds narrative. The decision to make the AI's memory a Markdown file rather than a structured record was the load-bearing design call in the project, and I want to be precise about why.</p>
+
+        <p>A consultant can read a Markdown file. A consultant cannot read a normalised database. The SCF can be opened in any text editor, copied into an email, dropped into another Claude conversation, screenshotted and sent to a parent, edited by hand when the model gets a name wrong. It is diffable, which means a consultant can see what the AI changed when a meeting was processed. It is human-curated, which means when a piece of context matters more than its frequency suggests, the consultant can promote it to a Context Snippets section and the AI will see it on every subsequent call. The shape of the memory is the shape the team already worked in: prose, sectioned, persistent, editable. The AI does not have a separate brain from the team. It reads the same document the team reads. That property is the one the production team kept.</p>
+
+        <p>The second architectural choice worth describing is the routing between Anthropic's Haiku and Sonnet models. There are roughly ten AI-driven actions in the platform: Zoom transcript processing, gap analysis, essay-draft checking, summer-program matching, Drive document summarisation, freeform chat, ATS generation, project-idea generation, essay-outline generation, worksheet-JSON generation. The first six run on Haiku. The last four run on Sonnet. The split is not subtle. The Haiku tasks are high-volume extraction and matching jobs where the structure of the output is fixed and the cost-per-call is what matters. The Sonnet tasks are long-form generative outputs where the structure is open and the quality of the output is what matters. I would estimate, conservatively, that the routing reduces token cost by roughly eighty per cent over what running everything on Sonnet would have cost, but I want to flag that this is a design intent rather than a measured benchmark; the platform never ran in a single-model configuration long enough to A/B it. The percentage is a design intent because the cost decision shaped the platform's scope. A 60-day Zoom sweep across the entire account is something that becomes financially tenable on Haiku and stops being interesting on Sonnet. Without the routing, the bulk sweep would have been a different feature, or no feature at all.</p>
+
+        <p>The integrations are the part of the project where the design choices were most concrete because each one had a specific organisational constraint behind it. Zoom uses Server-to-Server OAuth and a recursive sweep across every user in the account, downloading VTT transcripts, parsing them with speaker attribution, and matching meetings to scholars by name, email, and name-token. There is a concurrency limit of five transcripts in parallel, because Haiku-via-API will throttle past that and the failure mode is opaque. Google Drive uses OAuth2 user login rather than a service account, and the reason is mundane but mattered: Athena's Drive folders are owned across two different Google Workspace domains, and a service account in either domain would have needed per-folder sharing across the other. A single user token reaches both domains via shared-with-me without any administrative work. Google Calendar reuses that token. Airtable is wired in read-only, because Athena's Central Tracker is the source of truth for student records and the platform is a downstream consumer, not a replacement.</p>
+
+        <p>The Drive summariser is the integration whose design I want to flag, because it is where the AI's job stops being extraction and starts being editorial. A scholar's research folder is a mix of paper drafts, datasets, analysis notebooks, working notes, and the occasional file someone uploaded by mistake. A flat list of documents is unreadable. The summariser batches files, calls Haiku with content budgets that vary by file type — three thousand characters for Google Docs and Sheets, one thousand for CSVs, fifteen hundred for Jupyter notebooks — and asks the model to group the files by <em>purpose</em> rather than by file type. The output is a small set of named groups: Research Papers, Datasets and Data Collection, Analysis and Code, Strategy and Planning, Other. Each group gets a one-sentence summary and a one-sentence note on what the group demonstrates from an admissions angle. The framing matters. Admissions officers read a profile as a narrative, not as a file list. The summariser is one of the places in the platform where the AI's output had to match the team's mental model, not the underlying data structure.</p>
+
+        <p>The worksheet generator is one further example of the same instinct, though at a different layer. Claude is good at producing structured JSON and not particularly good at producing formatted Word documents. The platform routes worksheet generation through a Node.js subprocess that consumes Claude's JSON and renders a branded <code>.docx</code> with a navy and gold palette, header tables, formula boxes, callout blocks, and page numbers. Claude does the writing. Node does the formatting. The two halves never see each other except through the JSON contract, and that decoupling is the thing that lets either half be replaced without touching the other. The production team kept the contract; the rendering layer they implemented differs from mine, but a consultant who used the prototype would not notice the difference where it counts.</p>
+
+        <p>I want to be explicit about what the prototype was missing, because the catalogue is long and it is the kind of catalogue that gets glossed in vibe-coded narratives. There was no authentication on any endpoint; the FastAPI app accepted any client on any origin and would have done so happily in production. There were no tests of any kind: no unit tests, no integration tests, no smoke tests. The bulk-sync progress state lived in process memory, which meant the operation worked for one user at a time and broke under reload. The SCF section-parsing logic was string-based and fragile to template changes. If Claude's response was truncated mid-transcript, the meeting would land in the database as a partial record with no recovery path. The JSON flat-file database had MongoDB-compatible function signatures — every read and write was async, every query returned a list of dicts — which was deliberate, so that swapping the storage layer would not require touching any caller. The swap itself had not happened. The frontend was a single 2,200-line HTML file with no framework, no state management, and no build step, which made it fast to iterate but unsupportable past the user count it had at handoff. None of these omissions were oversights. Each one was a known shortcut, taken because the prototype's job was not to be production, but to demonstrate that production was worth building.</p>
+
+        <p>The artifact that made the handoff clean was a 746-line document I wrote called PROJECT_CONTEXT.md. It described every decision, every shortcut, every "designed for X swap" comment in the codebase, and every integration's specific configuration. The decision to write this document at length rather than relying on the code to be self-documenting is the one decision in the project I would defend the hardest, because it is the one that made the next conversation possible. When product and IT picked the codebase up, they did not have to reverse-engineer my intent. The document said, in prose a non-author could read, what I had built, why I had built it that way, and what about each piece would have to change to make it production-shaped. The codebase was the prototype. The document was the bridge.</p>
+
+        <p>What the production team actually built sits behind a different decision boundary, and I do not want to claim it. They rebuilt substantial portions of the system for security, scale, observability, and maintainability. The architecture survived in places — the SCF-as-memory pattern, the OAuth scope strategy, the routing between models, the decoupling of Claude-as-writer from Node-as-formatter, the data model the JSON DB had been shaped for. The implementation is theirs. I attended the scoping meetings, supplied design intent, and stepped back when the conversation moved into the kind of production-engineering questions I had explicitly not been making decisions about. The production platform is in use company-wide now. My contribution to it is the prototype that proved the value was real, the architecture that was worth keeping, and the handoff document that let someone else do the work I was not the right person to do.</p>
+
+        <p>The lesson I take from this project is about prototype honesty. A vibe-coded prototype that pretends to be a production system is the worst kind of artifact, because every shortcut it took in service of speed becomes a hidden cost the next team inherits without knowing. A vibe-coded prototype that is honest about being a prototype — that documents its shortcuts, that names its swap points, that ships with a context document explaining what it is and is not — is a different kind of object. It can be handed off cleanly. It can be replaced part by part. It can be argued with, on its own terms, by people who were not in the room when it was built. The part of the work I would defend, if I had to defend one part, is not the code. It is that the prototype was honest about being a prototype, and the handoff document made the honesty legible to the people who had to take it the rest of the way.</p>
+      </div>
+
+      <div class="pull">The codebase was the prototype. The document was the bridge.</div>
+
+      <div class="status-card">
+        <div>
+          <p class="status-label">Status</p>
+          <p class="status-val">Prototype shipped · Handed off · Production version live company-wide</p>
+        </div>
+        <div>
+          <p class="status-label">Stack</p>
+          <p class="status-val">Python · FastAPI · Vanilla JS · Anthropic API · Haiku / Sonnet routing</p>
+        </div>
+        <div>
+          <p class="status-label">Integrations</p>
+          <p class="status-val">Zoom · Google Drive · Google Calendar · Airtable</p>
+        </div>
+        <div>
+          <p class="status-label">My role</p>
+          <p class="status-val">Architected, built, demoed, handed off · Advisory through productionisation</p>
+        </div>
+      </div>
+
+      <a href="../../index.html#building" class="back-link">← back to building</a>
+    </div>
+  </div>
+
+  <footer>
+    <span>Ninaad Adhvaryu</span>
+    <span><a href="../../index.html">ninaad.github.io</a></span>
+  </footer>
+
+</body>
+</html>

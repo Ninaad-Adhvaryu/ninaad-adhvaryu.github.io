@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NHSJS Tools — Ninaad Adhvaryu</title>
+  <meta name="description" content="Encoding a journal's submission requirements as a Streamlit app and pip-installable package — the five mistakes the tool refuses to make.">
+  <link rel="stylesheet" href="../../style.css">
+
+  <style>
+    :root {
+      --cream-dark:    #E8E2D9;
+      --ink-muted:     #6B6460;
+      --teal-pale:     rgba(42, 107, 107, 0.09);
+      --obsidian-mid:  #272540;
+      --obsidian-text: #C9C5DA;
+      --obsidian-muted:#7C789A;
+      --max-width:     1080px;
+      --gutter:        2.5rem;
+      --prose-width:   700px;
+    }
+    body { background: var(--cream); color: var(--ink); font-family: var(--serif-body); font-size: 1rem; line-height: 1.72; -webkit-font-smoothing: antialiased; }
+    ::selection { background: rgba(42, 107, 107, 0.18); }
+    a { color: var(--teal); text-decoration: none; transition: color 0.2s; }
+
+    nav {
+      position: sticky; top: 0; z-index: 200;
+      background: var(--obsidian); height: 54px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 var(--gutter);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .nav-monogram { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--obsidian-muted); }
+    .nav-monogram a { color: inherit; }
+    .nav-monogram a:hover { color: var(--teal-light); }
+    .nav-links { display: flex; gap: 2.25rem; list-style: none; }
+    .nav-links a { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; color: var(--obsidian-text); text-transform: lowercase; padding-bottom: 2px; border-bottom: 1px solid transparent; transition: color 0.2s, border-color 0.2s; }
+    .nav-links a:hover { color: var(--teal-light); border-bottom-color: var(--teal-light); }
+
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--gutter); }
+    .placeholder-section { padding: 6rem 0 8rem; max-width: var(--prose-width); }
+
+    .eyebrow { font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--teal); margin-bottom: 1.1rem; }
+
+    h1 {
+      font-family: var(--serif-display);
+      font-size: clamp(1.8rem, 3.8vw, 2.75rem);
+      font-weight: 700; line-height: 1.15; letter-spacing: -0.02em;
+      color: var(--ink); margin-bottom: 1.25rem;
+    }
+    .lede { font-family: var(--serif-body); font-size: 1.05rem; font-style: italic; line-height: 1.65; color: var(--ink-muted); margin-bottom: 2.5rem; }
+
+    .prose p { font-size: 0.95rem; line-height: 1.78; color: var(--ink); margin-bottom: 1.1em; }
+    .prose p + p { margin-top: 0; }
+
+    .status-card {
+      background: var(--obsidian); padding: 1.65rem 1.7rem;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem 2.25rem;
+      margin: 2rem 0 2.5rem;
+    }
+    .status-label { font-family: var(--mono); font-size: 0.52rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--obsidian-muted); margin-bottom: 0.4rem; }
+    .status-val { font-family: var(--serif-body); font-size: 0.86rem; color: var(--obsidian-text); line-height: 1.5; }
+    .status-val a { color: var(--teal-light); border-bottom: 1px solid rgba(170,210,210,0.25); }
+
+    .pull {
+      border-left: 2px solid var(--teal);
+      padding: 0.4rem 0 0.4rem 1.1rem;
+      font-style: italic; color: var(--ink-muted);
+      margin: 1.5rem 0 2rem;
+      font-size: 0.95rem;
+    }
+
+    .back-link {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--teal); border-bottom: 1px solid rgba(42,107,107,0.3);
+      padding-bottom: 2px; margin-top: 2.5rem;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .back-link:hover { color: var(--teal-light); border-bottom-color: var(--teal-light); }
+
+    footer { background: var(--obsidian); padding: 1.5rem var(--gutter); display: flex; justify-content: space-between; align-items: center; }
+    footer span { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.12em; color: var(--obsidian-muted); }
+    footer a { color: var(--obsidian-muted); }
+    footer a:hover { color: var(--teal-light); }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+    .placeholder-section { animation: fadeUp 0.6s 0.05s ease both; }
+
+    @media (max-width: 640px) {
+      .status-card { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <span class="nav-monogram"><a href="../../index.html">N. Adhvaryu</a></span>
+    <ul class="nav-links">
+      <li><a href="../../index.html#inquiries">inquiries</a></li>
+      <li><a href="../../index.html#building">building</a></li>
+      <li><a href="../../index.html#teaching">teaching</a></li>
+      <li><a href="../../index.html#contact">contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <div class="placeholder-section">
+      <p class="eyebrow">Tooling · Python Package · 2025–present</p>
+      <h1>What if the formatting rules were code, not a checklist?</h1>
+      <p class="lede">On encoding a journal's submission requirements as a Streamlit app and pip-installable package — and on what happens when the same five mistakes stop being mentor problems and become problems the tool refuses to make.</p>
+
+      <div class="prose">
+        <p>There is a kind of mistake that gets interesting only after you have watched it happen the fifth time. Not because the mistake itself is interesting — it is dull, almost embarrassingly small — but because the fifth occurrence forces a different question. Why is this still happening? The rules have not changed. The mentors are not new. The author guidelines have been read. And yet the same handful of formatting errors kept appearing in NHSJS submissions across our team, with enough regularity that by early 2026 I could usually tell which mistake a paper had made from the first half-second of looking at it.</p>
+
+        <p>The National High School Journal of Science maintains two formats: a Standard manuscript form for the version that gets reviewed, and an Online form for the version that gets published. Almost every formatting mistake clustered around the conversion from one to the other. Superscript citation numbers had to become inline <code>((full citation))</code> blocks. Figures had to be embedded in the document rather than referenced. Captions had to be auto-numbered in a specific way, and cross-references had to resolve to real targets. There was a class of mistake further upstream too: papers written in LaTeX, on Overleaf, had to be converted into a Standard <code>.docx</code> before any of the above could happen at all. The journal's author guidelines describe each of these clearly. They are not difficult rules. They are merely numerous, they apply in a fixed order, and any one of them being mis-applied silently is enough to embarrass the team in front of a reviewer.</p>
+
+        <p>I want to write about what I ended up doing about this, because the move strikes me as worth describing slowly. It is not that I built a Streamlit app and made the team's life easier. That is the surface. The deeper move was a small change in where the rules lived, and it kept being the same move at three different layers of the problem.</p>
+
+        <p>The default response to a recurring mistake is to write better documentation. I tried that first. A clearer pre-submission checklist, a more explicit version of the journal's guidelines paraphrased in our own words, a short internal note pinning the most common slip-ups to the top of the page. The checklist worked for about three weeks. After that it began to slip, in the predictable way that checklists slip — not because anyone was being careless, but because a checklist relies on the user remembering, at the right moment, that the checklist exists at all. Nobody opens a checklist for a small task. They open the paper, scroll through it, fix the obvious things, and submit. The checklist is in another tab.</p>
+
+        <p>What kept troubling me was the asymmetry. A formatting rule that lives in a PDF lets the writer make the mistake and then catches it on review, if review happens at all. A formatting rule that lives in code can refuse to let the mistake happen. The shape of the rule is the same in both cases. The asymmetry is entirely in where it sits. And once I put it that way — a place where the rule can be silently violated, and a place where it cannot — the fix became obvious. The rules belonged in code.</p>
+
+        <p>The first version of the tool was the two converters. LaTeX or Overleaf <code>.zip</code> on one side, Standard <code>.docx</code> on the other, Online <code>.docx</code> on the far end. Two functions, both narrow, both deterministic. The journal's formatting rules, the ones the team had been mis-applying for months, were now applied by <code>python-docx</code> against the document's actual XML rather than by a mentor's memory against a PDF. The interface was an upload field and a download. It was small enough that I could describe it in a sentence: paste in a draft, hit a button, get back the file in the format NHSJS will accept. That sentence is still the whole product on the conversion side. Every additional behaviour the tool has on that path, the rules it enforces, the citations it resolves, the figures it embeds, sits underneath that sentence as implementation detail.</p>
+
+        <p>Once the Streamlit app had been used on a few real submissions, the second move became obvious. Streamlit is a web app, which means it is a tab in a browser, which means it is one step removed from the actual workflow of a mentor writing a paper. The mentors who used it most were the ones who knew it existed and remembered to open it. So I wrapped the same logic as a pip-installable package, <code>pip install nhsjs-tools</code>, and what changed was not the rules but the friction. After a one-time install the tool sits next to the paper, on the same machine where the writing happens, as a command rather than a tab. That is a different ergonomic, and it matters, because almost every recurring-mistake problem is at least partly an ergonomic problem.</p>
+
+        <p>That would have been a complete story, except that submitting a paper is not the only moment when these mistakes happen. The other moment, the one that ended up reshaping the whole project, is the moment a paper comes back from review.</p>
+
+        <p>A reviewer's decision arrives as a PDF of comments. The team has to address each comment, in the paper, with tracked changes the journal can see, in the Standard format, with an anonymised attribution that does not reveal which mentor was involved, and with a response letter that maps every change in the paper back to a numbered reviewer comment. That is several artifacts coming out of one revision act, and each artifact has its own version of the same problem: a class of small mistakes that are recoverable in principle but recurring in practice.</p>
+
+        <p>My first cut at this leaned on the model in a way I have since stopped recommending. The instruction was something close to: here is the original manuscript, here is the reviewer's decision, please produce a revised manuscript with the changes marked inline. The model would do it. The output looked fine. But every few drafts, a sentence would appear in the revision that did not exist in the original, in a paragraph the reviewer had not touched. The hallucinations were not flagrant. They were small, plausible, and contextually correct. They were the kind that do not get caught until a reviewer notices that the paper now says something different from what was originally submitted.</p>
+
+        <p>I would call this a model failure if I had not seen it three times in a row. After the third time, I started looking at the shape of the workflow rather than at the model. The tool was asking the model to re-emit a multi-thousand-word document. Every word it produced was a chance to drift. The mistakes were not random; they were the predictable result of putting the model in a position where it had to copy text it had not been instructed to change.</p>
+
+        <p>The v2 rewrite addressed that by inverting the relationship. Instead of a revised manuscript with markers, the revision file became a sequence of anchored patches against the original document. Each patch carries a verbatim <code>FIND</code> clause and a <code>REPLACE</code> clause. The build engine looks for the <code>FIND</code> clause in the original document's XML. If it matches exactly one paragraph, the patch is applied. If it matches zero paragraphs, or more than one, the build aborts with a line number. The model is no longer allowed to re-emit unchanged text. It can only state, in patches, what is to change. The text it does not touch is, by construction, the text that already exists.</p>
+
+        <p>I should be honest about how skeptical I was that this would work in practice. The fear was that the patch vocabulary — find-replace, insert-after-paragraph, delete-range, table-cell-edit, reference-list-renumber, and a handful of others — would not be expressive enough to cover what a real reviewer revision actually asks for. So before committing to the v2 rewrite I built a single test. Take a paper that had already been revised by hand, fully: original Standard, human-produced tracked-changes final. Reverse-engineer the patch list that would turn one into the other. Apply it through the new engine. Reconcile the output against the human-produced final at the character level. The pass condition was a 1.000 reconciliation ratio. Seventy-three patches later it cleared. That paper is now the regression gate for the package. Any future release that does not still hit 1.000 against it is, by definition, broken.</p>
+
+        <p>The part of the v2 engine I find most worth describing has nothing to do with the patch model itself. It is what the audit step does after the patches are applied. The build runs thirteen checks against the output. Most of them are the obvious kind: every patch anchor matched, every citation has a reference behind it, the reference numbering is sequential, the superscript runs in the output are real OOXML superscripts rather than Unicode glyphs. Two of them are not the obvious kind, and those are the ones I want to call out.</p>
+
+        <p>The first is an author-attribution check. The Word document's core properties have an Author field that the journal can read. If the build sees that field set to "Claude" or to any other LLM-derived author name, the check fails. The student's name is set by the build engine itself; the audit verifies it was set. The second is a phrase-list check against the body text. Strings like "my mentor", "Athena Education", and "thanks to my counsellor" — phrases the model occasionally inserts in drafts because they exist in the prompt context — would compromise the journal's blind-review process if they made it into a submission. The audit refuses to let them through. Neither check would have occurred to me to write if I had not seen the model do exactly these things in earlier drafts. They are the rules-as-code move applied to a different kind of mistake: not formatting mistakes, but LLM tells.</p>
+
+        <p>There is a third move, late in the project, that closes a class of failure I had not fully understood until I caused it. The patch engine and the system prompt that the model uses to author patches are two halves of the same workflow. If the engine adds a new operation but the prompt does not know about it, the model never produces it. If the prompt changes the patch syntax but the engine has not been updated, the build fails on every input. The two halves can drift apart silently, and they did, between two versions of the spec. The fix I shipped was small but load-bearing: the system prompt now lives as data inside the package, exposed by a CLI called <code>nhsjs-start</code>. The user installs the package, runs the command, and the prompt is printed to standard output. The model reads it and starts the workflow. A <code>pip install --upgrade</code> upgrades both the engine and the prompt in the same wheel. They cannot drift apart, because they are literally the same artifact.</p>
+
+        <p>I am leaving a list of things I did not do. The tracked changes the engine produces are at paragraph granularity rather than sentence granularity: when a mentor reviews the diff in Word, the entire paragraph appears wrapped in a deletion and the entire revised paragraph appears in an insertion, even when only one sentence changed. A future version can split the runs around the <code>FIND</code> boundaries so the diff appears at sentence level. There is a residual bug in the Standard-to-Online converter when the references section uses Word's auto-numbering feature rather than explicit "1.", "2." text prefixes; the audit catches it cleanly as a failure, but the underlying parser still needs fixing. The Streamlit version's handling of the <code>REPLACE_ALL</code> operation with an unknown occurrence count auto-applies with a warning, when a cleaner experience would show the count first and let the mentor confirm. These are filed in the package's notes, not pretended.</p>
+
+        <p>What stays with me from this project is the move at the centre of it. The shape of the move is the same at each layer. A formatting rule that lives in a PDF cannot prevent the mistake; a formatting rule that lives in code can. A revision workflow that asks the model to re-emit text invites hallucination; a revision workflow that constrains the model to verbatim anchors removes the opportunity. A system prompt that lives in a separate document drifts away from the engine that consumes it; a system prompt that ships in the same wheel cannot drift. Each move closes a class of failure that documentation cannot close, because each move replaces "did the human remember the rule?" with "did the function refuse to violate it?" That is a different question with a different answer, and the answer is reliable in a way documentation is not. The first time, the mistake is the mistake. The third time, the mistake is the absence of a tool.</p>
+      </div>
+
+      <div class="pull">The model is no longer allowed to re-emit unchanged text. It can only state, in patches, what is to change.</div>
+
+      <div class="status-card">
+        <div>
+          <p class="status-label">Status</p>
+          <p class="status-val">Shipped · In production use · Full essay forthcoming</p>
+        </div>
+        <div>
+          <p class="status-label">Stack</p>
+          <p class="status-val">Python · Streamlit · pip package</p>
+        </div>
+        <div>
+          <p class="status-label">Install</p>
+          <p class="status-val"><code>pip install nhsjs-tools</code></p>
+        </div>
+        <div>
+          <p class="status-label">Used by</p>
+          <p class="status-val">Athena Education research mentor team</p>
+        </div>
+      </div>
+
+      <a href="../../index.html#building" class="back-link">← back to building</a>
+    </div>
+  </div>
+
+  <footer>
+    <span>Ninaad Adhvaryu</span>
+    <span><a href="../../index.html">ninaad.github.io</a></span>
+  </footer>
+
+</body>
+</html>

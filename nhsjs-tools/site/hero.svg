@@ -1,0 +1,74 @@
+<svg viewBox="0 0 1200 675" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stylised before-and-after of a paper draft being run through a formatting tool — irregular lines on the left, clean structured layout on the right, with a labelled pipeline arrow between them">
+  <defs>
+    <style>
+      .bg       { fill: #F7F3EE; }
+      .paper    { fill: #FDFBF8; stroke: #1A1714; stroke-width: 1.4; }
+      .drift    { stroke: #6B6460; stroke-width: 2; stroke-linecap: round; fill: none; }
+      .clean    { stroke: #1A4F4F; stroke-width: 2; stroke-linecap: round; fill: none; }
+      .header   { stroke: #2A6B6B; stroke-width: 6; stroke-linecap: round; }
+      .arrow    { stroke: #2A6B6B; stroke-width: 3; fill: none; }
+      .arrowhd  { fill: #2A6B6B; }
+      .pipe     { fill: #2A6B6B; }
+      .pipe-txt { fill: #FDFBF8; font-family: 'Courier New', monospace; font-size: 22px; letter-spacing: 0.18em; text-transform: uppercase; }
+      .label    { fill: #6B6460; font-family: 'Courier New', monospace; font-size: 18px; letter-spacing: 0.16em; text-transform: uppercase; }
+      .x        { stroke: #B65656; stroke-width: 3; stroke-linecap: round; }
+    </style>
+  </defs>
+
+  <rect class="bg" width="1200" height="675"/>
+
+  <!-- LEFT — messy draft -->
+  <rect class="paper" x="90" y="105" width="380" height="465" rx="5"/>
+  <!-- title line -->
+  <line class="header" x1="125" y1="155" x2="320" y2="155"/>
+  <!-- irregular text rows -->
+  <path class="drift" d="M125,210 L420,212"/>
+  <path class="drift" d="M125,240 L370,243"/>
+  <path class="drift" d="M125,270 L425,267"/>
+  <path class="drift" d="M125,300 L290,304"/>
+  <!-- missing section break -->
+  <path class="drift" d="M125,355 L405,360"/>
+  <path class="drift" d="M125,385 L335,381"/>
+  <!-- a couple of red x marks (mistakes) -->
+  <line class="x" x1="430" y1="225" x2="450" y2="245"/>
+  <line class="x" x1="450" y1="225" x2="430" y2="245"/>
+  <line class="x" x1="320" y1="370" x2="340" y2="390"/>
+  <line class="x" x1="340" y1="370" x2="320" y2="390"/>
+  <path class="drift" d="M125,440 L415,442"/>
+  <path class="drift" d="M125,470 L355,473"/>
+  <path class="drift" d="M125,500 L400,498"/>
+  <path class="drift" d="M125,530 L290,532"/>
+  <text class="label" x="90" y="92">draft</text>
+
+  <!-- CENTRE — pipeline arrow + label -->
+  <path class="arrow" d="M495,337 L705,337"/>
+  <polygon class="arrowhd" points="705,328 725,337 705,346"/>
+  <rect class="pipe" x="525" y="290" width="150" height="36" rx="2"/>
+  <text class="pipe-txt" x="600" y="315" text-anchor="middle">nhsjs-tools</text>
+  <text class="label" x="600" y="380" text-anchor="middle">pip install</text>
+
+  <!-- RIGHT — clean paper -->
+  <rect class="paper" x="730" y="105" width="380" height="465" rx="5"/>
+  <!-- title line (longer, centered) -->
+  <line class="header" x1="765" y1="155" x2="1075" y2="155"/>
+  <!-- byline-ish -->
+  <line class="clean" x1="765" y1="190" x2="900" y2="190" stroke-width="1"/>
+  <!-- abstract heading -->
+  <line class="header" x1="765" y1="225" x2="830" y2="225" stroke-width="3"/>
+  <!-- clean evenly-spaced rows -->
+  <path class="clean" d="M765,255 L1075,255"/>
+  <path class="clean" d="M765,280 L1075,280"/>
+  <path class="clean" d="M765,305 L995,305"/>
+  <!-- section heading -->
+  <line class="header" x1="765" y1="345" x2="855" y2="345" stroke-width="3"/>
+  <path class="clean" d="M765,375 L1075,375"/>
+  <path class="clean" d="M765,400 L1075,400"/>
+  <path class="clean" d="M765,425 L1075,425"/>
+  <path class="clean" d="M765,450 L1015,450"/>
+  <!-- next section -->
+  <line class="header" x1="765" y1="490" x2="855" y2="490" stroke-width="3"/>
+  <path class="clean" d="M765,520 L1075,520"/>
+  <path class="clean" d="M765,545 L965,545"/>
+  <text class="label" x="730" y="92">nhsjs-ready</text>
+
+</svg>

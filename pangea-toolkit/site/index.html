@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pangea Toolkit — Ninaad Adhvaryu</title>
+  <meta name="description" content="Six versions of a research-ideation toolkit grounded in the corpus of accepted papers and reviewer comments — and why v5.2 was discarded.">
+  <link rel="stylesheet" href="../../style.css">
+
+  <style>
+    :root {
+      --cream-dark:    #E8E2D9;
+      --ink-muted:     #6B6460;
+      --teal-pale:     rgba(42, 107, 107, 0.09);
+      --obsidian-mid:  #272540;
+      --obsidian-text: #C9C5DA;
+      --obsidian-muted:#7C789A;
+      --max-width:     1080px;
+      --gutter:        2.5rem;
+      --prose-width:   700px;
+    }
+    body { background: var(--cream); color: var(--ink); font-family: var(--serif-body); font-size: 1rem; line-height: 1.72; -webkit-font-smoothing: antialiased; }
+    ::selection { background: rgba(42, 107, 107, 0.18); }
+    a { color: var(--teal); text-decoration: none; transition: color 0.2s; }
+
+    nav {
+      position: sticky; top: 0; z-index: 200;
+      background: var(--obsidian); height: 54px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 var(--gutter);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .nav-monogram { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--obsidian-muted); }
+    .nav-monogram a { color: inherit; }
+    .nav-monogram a:hover { color: var(--teal-light); }
+    .nav-links { display: flex; gap: 2.25rem; list-style: none; }
+    .nav-links a { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; color: var(--obsidian-text); text-transform: lowercase; padding-bottom: 2px; border-bottom: 1px solid transparent; transition: color 0.2s, border-color 0.2s; }
+    .nav-links a:hover { color: var(--teal-light); border-bottom-color: var(--teal-light); }
+
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--gutter); }
+    .placeholder-section { padding: 6rem 0 8rem; max-width: var(--prose-width); }
+
+    .eyebrow { font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--teal); margin-bottom: 1.1rem; }
+
+    h1 {
+      font-family: var(--serif-display);
+      font-size: clamp(1.8rem, 3.8vw, 2.75rem);
+      font-weight: 700; line-height: 1.15; letter-spacing: -0.02em;
+      color: var(--ink); margin-bottom: 1.25rem;
+    }
+    .lede { font-family: var(--serif-body); font-size: 1.05rem; font-style: italic; line-height: 1.65; color: var(--ink-muted); margin-bottom: 2.5rem; }
+
+    .prose p { font-size: 0.95rem; line-height: 1.78; color: var(--ink); margin-bottom: 1.1em; }
+    .prose p + p { margin-top: 0; }
+
+    .status-card {
+      background: var(--obsidian); padding: 1.65rem 1.7rem;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem 2.25rem;
+      margin: 2rem 0 2.5rem;
+    }
+    .status-label { font-family: var(--mono); font-size: 0.52rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--obsidian-muted); margin-bottom: 0.4rem; }
+    .status-val { font-family: var(--serif-body); font-size: 0.86rem; color: var(--obsidian-text); line-height: 1.5; }
+
+    .pull {
+      border-left: 2px solid var(--teal);
+      padding: 0.4rem 0 0.4rem 1.1rem;
+      font-style: italic; color: var(--ink-muted);
+      margin: 1.5rem 0 2rem;
+      font-size: 0.95rem;
+    }
+
+    .back-link {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--teal); border-bottom: 1px solid rgba(42,107,107,0.3);
+      padding-bottom: 2px; margin-top: 2.5rem;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .back-link:hover { color: var(--teal-light); border-bottom-color: var(--teal-light); }
+
+    footer { background: var(--obsidian); padding: 1.5rem var(--gutter); display: flex; justify-content: space-between; align-items: center; }
+    footer span { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.12em; color: var(--obsidian-muted); }
+    footer a { color: var(--obsidian-muted); }
+    footer a:hover { color: var(--teal-light); }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+    .placeholder-section { animation: fadeUp 0.6s 0.05s ease both; }
+
+    @media (max-width: 640px) {
+      .status-card { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <span class="nav-monogram"><a href="../../index.html">N. Adhvaryu</a></span>
+    <ul class="nav-links">
+      <li><a href="../../index.html#inquiries">inquiries</a></li>
+      <li><a href="../../index.html#building">building</a></li>
+      <li><a href="../../index.html#teaching">teaching</a></li>
+      <li><a href="../../index.html#contact">contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <div class="placeholder-section">
+      <p class="eyebrow">Research Tooling · LLM Systems · 2025–present</p>
+      <h1>Can an ideation tool learn from what reviewers actually accept?</h1>
+      <p class="lede">On six versions of a research-ideation toolkit grounded in the corpus of accepted papers and reviewer comments — and on why v5.2 had to be discarded after the conversation data showed it added schema without adding lift.</p>
+
+      <div class="prose">
+        <p>Two things are usually true at the same time about the high-school research journals my students target. The author guidelines describe a set of standards in clear prose. And the accepted-paper corpus describes a different set of standards in lived practice. The two overlap, mostly, but not entirely. The gap between what a journal says it wants and what it actually accepts is the thing that ate roughly six months of my time last year, and the toolkit I ended up building is, at its centre, an attempt to live inside that gap deliberately rather than trip into it.</p>
+
+        <p>I want to describe what I built, but I want to lead with the iteration discipline rather than the structure, because the structure is downstream of the discipline. The toolkit is a folder of versioned prompts on my disk. The prompts get loaded into a per-student Claude Project so that every conversation about that student begins with a shared operating context, a shared set of session-level workflows, and a shared notion of which journal is being targeted. Each scholar has their own Project. Each Project has the same scaffolding. The scaffolding is what I version.</p>
+
+        <p>The lineage went v1 through v6 over the year I have been watching closely. v1 was a prompt. v2 was a slightly better prompt. By v4 it had become a system: a seed-portfolio voice that produced three to five candidate research ideas for any topic a mentor came in with, each with an anchor paper or two, a primary outcome named at seed stage, a feasibility note, a scope boundary, and a competitive-landscape check. v5 added cross-venue routing because some projects clearly belonged at one journal and not another. v5.1 tightened. v5.2 went further, in a way I now think of as the cautionary part of this story.</p>
+
+        <p>What I added in v5.2 was a set of "cross-venue reviewer non-negotiables." I had spent some weeks mining the reviewer corpus: 13 NHSJS reviewer-decision PDFs from Athena-mentored papers, 70 JHSS public peer-review files, 2,037 discrete reviewer objections classified into twelve categories. The patterns were clear. Reviewers flagged causal overreach in 45% of NHSJS papers and 41% of JHSS papers. They asked for sensitivity or robustness checks in 51% of JHSS papers and 82% of NHSJS papers. They demanded variability quantification on every reported metric. Six categories hit every paper. I encoded each pattern as a guardrail in the prompt, with its statistical motivation cited inline so the bot knew why each rule mattered.</p>
+
+        <p>The prompt got longer. The structure got heavier. And when I read v5.2 a few weeks after shipping it, what I saw was a kind of statistical kabuki. The guardrails were correct. The motivations were correct. But the seed-portfolio voice that had made v4 useful in the first place — the directive, slightly editorial tone that helped a mentor see the shape of a paper before its body — had been crowded out by the apparatus around it. The prompt now read like a reviewer's pre-emption checklist with seeds wedged into the gaps.</p>
+
+        <p>I should be honest that I almost shipped a v5.3 to clean it up. The instinct was the wrong one. The voice was not failing because of how it was being asked to perform; it was failing because the prompt's centre of gravity had moved away from "help the mentor see the seed" and toward "help the bot not embarrass itself in front of a future reviewer." Those are different functions, and they were competing. v6 rolled back the voice to v4's seed-portfolio register and kept only the guardrails that had earned their complexity. Most of v5.2's statistical motivations went into a separate file, available to the prompt as reference rather than living inside it. The ones that mattered — the predict-explain pivot pre-committed at seed stage, the structural-saturation rejection rule, the dimensional-integrity check on cross-domain transfers — survived because they were behavioural, not motivational.</p>
+
+        <p>I want to dwell on the structural-saturation rule, because it is one of the few moves in the toolkit that I think generalises beyond my use case. When mentors come to a research-ideation conversation with topic ideas, the failure mode is rarely topic-saturation in the obvious sense. It is form-saturation. A paper that does "model A versus model B on dataset C, accuracy reported" can be on stock prediction, sentiment classification, exoplanet detection, or oral disease imaging — the topic varies; the form is the same. The reviewer corpus showed that NHSJS rejects on the form regardless of topic, with surprising consistency. So the toolkit screens form-fit, not keyword overlap. Two seeds about totally different subjects can both be flagged as saturated if they share a form. Two seeds about overlapping subjects can both pass if their forms are different. This is a small move, but it changed the kind of ideation conversation I could run with a mentor, because it freed the conversation from defending the topic and forced it onto defending the shape.</p>
+
+        <p>There is a related move worth describing. Every predictive seed in v6 carries a "Plan B if accuracy is mediocre" line, written at the seed stage, before any code exists. The line takes the form: if the model's accuracy falls below threshold X, the paper reframes as an interpretability study examining what the model's coefficients or feature importances or clusters reveal about the underlying phenomenon. I added this after watching three real student projects where accuracy underperformed and the team scrambled mid-write to find a new story. The scramble was always a salvage, and the salvages always read like salvages. Pre-committing the pivot at seed stage prevented one whole class of late-stage panic. It also forced honesty at the start: if you cannot name a meaningful pivot at seed time, the predictive framing was probably load-bearing in a way the paper cannot support.</p>
+
+        <p>The cross-domain integrity check is the third move I would defend. v5 added it after a real reviewer rejected a student paper for two specific failure modes. The first was pure analytic equivalence: the paper claimed empirical validation of general relativity against GPS clock data, but the two pipelines were related by construction, so the residual was a self-consistency check, not a validation. The null hypothesis was trivial. The second was broken source-domain math with retained source-domain branding: a black-hole simulation kept the Paczyński-Wiita potential's functional form but replaced its physical coefficient with a fitted parameter that recovered Earth-surface acceleration, while still labelling the runs "Earth-mass," "Sun-mass," and "Sgr A*-mass." The reviewer's quote, which lives in the toolkit's notes, is worth keeping: "The manuscript no longer simulates the named black-hole fields." Two papers from real students were rejected for these patterns. The toolkit now refuses to let a cross-domain seed pass without preserving the source-domain math, or relabelling the work as a toy system. No middle ground.</p>
+
+        <p>Around the IdeationBOT sits a set of supporting prompts that together make the toolkit usable in practice rather than only in theory. A Pangea_OS prompt that gets pasted into every scholar's Project Instructions, with a commands library — <code>[SYNC]</code>, <code>[FIGURES]</code>, <code>[PIVOT]</code>, <code>[SUMMARIZE]</code>, and a handful of others — that the mentor invokes mid-chat without leaving the current conversation. A Reference Hunter prompt for lit-review and claim-targeted reference work. Per-journal Writing Worksheet Generators that produce paper-writing scaffolds in the target journal's exact format. Per-journal Revise-After-Review prompts that handle reviewer responses, of which the NHSJS version eventually became the engine for the nhsjs-tools package I have written about elsewhere. The toolkit is genuinely modular: any one of these prompts can be loaded at the top of a fresh chat without the others.</p>
+
+        <p>The evidence loop that drives all of this is the part I am most attached to. Every few months I export the cowork sessions where the toolkit is actually used — these are session transcripts where I have been working with the bot through a real revision or ideation — and run them through a mining script that flags every place I overrode the bot, redirected it, cut its scope, or corrected it. The current corpus is eight sessions, roughly four hundred message turns, with five themes that recur clearly. The most common, present in seven of eight, is "don't act yet, plan first": the bot reads inputs and starts producing, and the mentor stops it to ask for a workflow plan. The second is a student-mentor work-split that the prompt did not previously have a slot for; mentors routinely re-assign each action to either the student or themselves, per task. The third is voice preservation: when present, it is a hard constraint, because a student's draft cannot read like an AI rewrite. The fourth is the reference-formatting instruction that gets pasted into nearly every revision session in nearly identical words: references must be real OOXML superscript, before the period, renumbered correctly. The fifth is scope cuts, the mentor saying "we don't need that section" or "this is one paper, not two."</p>
+
+        <p>These themes are not abstract. They are sentences I have actually written to the bot, mined and counted, sorted by frequency. They are also the input to the next version of the toolkit. The student-mentor work-split is the major change I want to make in v7, because it is the most common gap between what the bot offers and what mentors actually need. The voice-preservation theme has already become a top-level operating constraint with two settings — minimum-edit / surgical, and full-rewrite-OK — that the mentor picks during the first phase of any revision session.</p>
+
+        <p>There is one detail about how the toolkit lives on my disk that I find embarrassing and worth mentioning. The root folder is called <code>Pangea Toolkit </code> with a trailing space. The space was a typo I made when first creating the directory, and I did not notice it until several writes from scripts pointing at <code>Pangea Toolkit</code> with no space had silently created a sibling directory in parallel. Two folders with nearly identical names, one populated by my hand and the other by my code, each invisible to the workflow that thought it was using the other. The fix was to standardise on the trailing-space path in every script that touches the folder and to add the bug to the toolkit's notes. The reason I am telling this story is that the bug is the kind of production-hygiene lesson a toolkit-as-folder cannot absorb the way a packaged library can. The folder structure is honest about what it is: a hand-curated working surface, not infrastructure. Every move in the toolkit has to survive that constraint.</p>
+
+        <p>I want to be explicit about what the toolkit is not. It is not a Python package. It is not a service. There is no CI, no test suite, no version-control discipline beyond named files and an <code>_archive</code> folder of superseded prompts. JRHS, one of the venues I work with, has no reviewer-pattern corpus yet because the journal publishes no public reviews; the structural-depth bar there is inferred from the corpus of accepted papers alone. The top-level README is somewhat stale at the time of this writing, and the v6 prompt's header documents the lineage more accurately than the README does. The toolkit's affordances are exactly the affordances a folder of well-named files can have. The reason it works is not the medium. It is the loop that produces and audits the files.</p>
+
+        <p>What stays with me from a year of working on this is the case for prompt versioning as a real engineering practice. Most prompt-engineering work, in my limited reading of the literature and my much less limited reading of other people's prompts, iterates by feel. You make a prompt better by reading it, deciding what is missing, and adding the thing. The discipline that the toolkit forced on me, by accident at first and then on purpose, was to add things only when there was evidence the addition would earn its complexity, and to remove things when the evidence said an addition had not. v5.2 was rolled back because the addition did not earn its complexity. v6 kept what did. The next version will be evaluated the same way, against the same kind of evidence, by the same kind of audit. That is not a software practice. It is a documentation practice. It is also, I am beginning to think, the right practice for any system whose primary artifact is a piece of writing that an LLM reads before doing work on someone else's behalf.</p>
+      </div>
+
+      <div class="pull">v5.2 was rolled back because the addition did not earn its complexity. v6 kept what did.</div>
+
+      <div class="status-card">
+        <div>
+          <p class="status-label">Status</p>
+          <p class="status-val">In active use · v6 current · Full essay forthcoming</p>
+        </div>
+        <div>
+          <p class="status-label">Stack</p>
+          <p class="status-val">Claude Projects · Versioned system prompts · Curated corpora</p>
+        </div>
+        <div>
+          <p class="status-label">Corpora</p>
+          <p class="status-val">13 NHSJS reviewer-decision PDFs · 685 accepted papers · 17+ active Pangea projects</p>
+        </div>
+        <div>
+          <p class="status-label">Used by</p>
+          <p class="status-val">Athena Education research mentor team</p>
+        </div>
+      </div>
+
+      <a href="../../index.html#building" class="back-link">← back to building</a>
+    </div>
+  </div>
+
+  <footer>
+    <span>Ninaad Adhvaryu</span>
+    <span><a href="../../index.html">ninaad.github.io</a></span>
+  </footer>
+
+</body>
+</html>
