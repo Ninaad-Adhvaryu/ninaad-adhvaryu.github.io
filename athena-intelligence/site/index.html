@@ -38,7 +38,14 @@
     .nav-links a:hover { color: var(--teal-light); border-bottom-color: var(--teal-light); }
 
     .container { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--gutter); }
-    .placeholder-section { padding: 6rem 0 8rem; max-width: var(--prose-width); }
+    .placeholder-section { padding: 2rem 0 8rem; max-width: var(--prose-width); }
+
+    .essay-hero-wrap { padding: 3rem 0 0; }
+    .essay-hero { margin: 0; }
+    .essay-hero img {
+      display: block; width: 100%; height: auto;
+      border: 1px solid var(--cream-dark); border-radius: 2px;
+    }
 
     .eyebrow { font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--teal); margin-bottom: 1.1rem; }
 
@@ -104,6 +111,14 @@
       <li><a href="../../index.html#contact">contact</a></li>
     </ul>
   </nav>
+
+  <div class="essay-hero-wrap">
+    <div class="container">
+      <figure class="essay-hero">
+        <img src="hero.svg" alt="Stylised network of integrations — Zoom, Drive, Calendar, Airtable — feeding into a central per-scholar context file">
+      </figure>
+    </div>
+  </div>
 
   <div class="container">
     <div class="placeholder-section">
