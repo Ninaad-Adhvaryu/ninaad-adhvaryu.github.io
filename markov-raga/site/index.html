@@ -5,6 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>What Does a First-Order Markov Chain Know About a Raga? — Ninaad Adhvaryu</title>
   <meta name="description" content="On pitch-class transition matrices, Jensen-Shannon divergence, and what survives when a melodic tradition is compressed into one step of context.">
+  <link rel="canonical" href="https://ninaad-adhvaryu.github.io/markov-raga/site/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="What Does a First-Order Markov Chain Know About a Raga? — Ninaad Adhvaryu">
+  <meta property="og:description" content="On pitch-class transition matrices, Jensen-Shannon divergence, and what survives when a melodic tradition is compressed into one step of context.">
+  <meta property="og:url" content="https://ninaad-adhvaryu.github.io/markov-raga/site/">
+  <meta name="twitter:card" content="summary">
+  <meta name="theme-color" content="#1C1A2E">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,300;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../style.css">
 
   <style>
@@ -15,7 +26,7 @@
       --teal-pale:     rgba(42, 107, 107, 0.09);
       --obsidian-mid:  #272540;
       --obsidian-text: #C9C5DA;
-      --obsidian-muted:#7C789A;
+      --obsidian-muted:#918DAE;
       --max-width:     1080px;
       --gutter:        2.5rem;
       --prose-width:   700px;
@@ -97,11 +108,20 @@
       .essay-title { font-size: 1.8rem; }
       .essay-meta { gap: 1.5rem; }
     }
+
+    @media (max-width: 480px) {
+      :root { --gutter: 1rem; }
+      .nav-links { gap: 0.9rem; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+      .nav-links::-webkit-scrollbar { display: none; }
+      .nav-links a { font-size: 0.62rem; letter-spacing: 0.04em; white-space: nowrap; }
+    }
   </style>
 </head>
 <body>
 
-  <nav>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <nav aria-label="Main">
     <a href="../../index.html" class="nav-monogram nav-back">← back</a>
     <ul class="nav-links">
       <li><a href="../../#inquiries">inquiries</a></li>
@@ -113,10 +133,12 @@
     </ul>
   </nav>
 
+  <main id="main">
+
   <section class="essay-header">
     <div class="container">
       <figure class="essay-hero">
-        <img src="hero.svg" alt="Side-by-side 12-by-12 pitch-class transition matrices — a sparse Carnatic raga matrix with mass concentrated on a few pentatonic transitions, and a more diffuse Western chorale matrix with diatonic stepwise motion distributed across many pitch-class pairs">
+        <img decoding="async" src="hero.svg" alt="Side-by-side 12-by-12 pitch-class transition matrices — a sparse Carnatic raga matrix with mass concentrated on a few pentatonic transitions, and a more diffuse Western chorale matrix with diatonic stepwise motion distributed across many pitch-class pairs">
       </figure>
       <h1 class="essay-title">What Does a First-Order Markov Chain Know About a Raga?</h1>
       <div class="essay-meta">
@@ -159,6 +181,8 @@
       </div>
     </div>
   </section>
+
+  </main>
 
 </body>
 </html>

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What If Space Flows Like a River Past the Event Horizon? — Ninaad Adhvaryu</title>
+  <meta name="description" content="A way of seeing gravity as flowing water rather than curvature — checked, of all places, against the atomic clocks aboard GPS satellites.">
+  <link rel="canonical" href="https://ninaad-adhvaryu.github.io/black-hole-rivers/site/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="What If Space Flows Like a River Past the Event Horizon? — Ninaad Adhvaryu">
+  <meta property="og:description" content="A way of seeing gravity as flowing water rather than curvature — checked, of all places, against the atomic clocks aboard GPS satellites.">
+  <meta property="og:url" content="https://ninaad-adhvaryu.github.io/black-hole-rivers/site/">
+  <meta name="twitter:card" content="summary">
+  <meta name="theme-color" content="#1C1A2E">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,300;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style.css">
+
+  <style>
+    :root {
+      --cream-dark:    #E8E2D9;
+      --cream-card:    #FDFBF8;
+      --ink-muted:     #6B6460;
+      --teal-pale:     rgba(42, 107, 107, 0.09);
+      --obsidian-mid:  #272540;
+      --obsidian-text: #C9C5DA;
+      --obsidian-muted:#918DAE;
+      --max-width:     1080px;
+      --gutter:        2.5rem;
+      --prose-width:   700px;
+    }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--serif-body);
+      font-size: 1rem;
+      line-height: 1.72;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    ::selection { background: rgba(42, 107, 107, 0.18); }
+    a { color: var(--teal); text-decoration: none; transition: color 0.2s ease; }
+
+    nav {
+      position: sticky; top: 0; z-index: 200;
+      background: var(--obsidian); height: 54px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 var(--gutter);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .nav-monogram { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--obsidian-muted); }
+    .nav-links { display: flex; gap: 2.25rem; list-style: none; }
+    .nav-links a { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; color: var(--obsidian-text); text-transform: lowercase; padding-bottom: 2px; border-bottom: 1px solid transparent; transition: color 0.2s ease, border-color 0.2s ease; }
+    .nav-links a:hover { color: var(--teal-light); border-bottom-color: var(--teal-light); }
+    .nav-back { color: var(--obsidian-text); }
+
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--gutter); }
+    section { padding: 4rem 0; }
+
+    .essay-header { padding: 3rem 0 3.5rem; }
+    .essay-hero { margin: 0 0 2.75rem; }
+    .essay-hero img {
+      display: block; width: 100%; height: auto;
+      border: 1px solid var(--cream-dark); border-radius: 2px;
+    }
+    .essay-title {
+      font-family: var(--serif-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700; line-height: 1.15; letter-spacing: -0.015em;
+      color: var(--ink); margin-bottom: 1.75rem; max-width: 760px;
+    }
+    .essay-meta {
+      display: flex; flex-wrap: wrap; gap: 2rem;
+      margin-top: 2.5rem; padding-top: 2.5rem;
+      border-top: 1px solid var(--cream-dark);
+    }
+    .essay-meta-block { flex: 0 1 auto; }
+    .essay-meta-label {
+      font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--ink-muted); margin-bottom: 0.5rem;
+    }
+    .essay-meta-value { font-family: var(--serif-body); font-size: 0.95rem; color: var(--ink); }
+
+    .essay-body { max-width: var(--prose-width); margin: 0 auto; }
+    .essay-body p {
+      font-size: 1rem; line-height: 1.82;
+      margin-bottom: 1.4em; color: var(--ink);
+    }
+    .essay-body em { font-style: italic; }
+    .essay-body strong { font-weight: 600; }
+    .essay-body h2 {
+      font-family: var(--serif-display);
+      font-size: 1.5rem; font-weight: 600; line-height: 1.25;
+      color: var(--ink); margin: 2.75rem 0 1.25rem; max-width: 640px;
+    }
+
+    /* Figures & captions */
+    .figure-wrap { margin: 3rem 0; text-align: center; }
+    .figure-wrap svg { max-width: 100%; height: auto; display: inline-block; }
+    .figure-wrap img {
+      max-width: 100%; height: auto; display: inline-block;
+      border-radius: 2px; background: var(--cream-dark); padding: 0.5rem;
+    }
+    .figure-caption {
+      font-family: var(--serif-body); font-size: 0.85rem; line-height: 1.6;
+      color: var(--ink-muted); margin-top: 1rem; font-style: italic;
+      max-width: 620px; margin-left: auto; margin-right: auto;
+    }
+
+    .essay-footer { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--cream-dark); }
+    .back-link {
+      font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em;
+      text-transform: lowercase; color: var(--teal);
+      border-bottom: 1px solid var(--teal-rule); padding-bottom: 2px;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+    .back-link:hover { color: var(--teal-light); border-bottom-color: var(--teal-light); }
+
+    @media (max-width: 768px) {
+      :root { --gutter: 1.5rem; }
+      section { padding: 3rem 0; }
+      .essay-header { padding: 3rem 0 2rem; }
+      .essay-title { font-size: 1.8rem; }
+      .essay-meta { gap: 1.5rem; }
+    }
+
+    @media (max-width: 480px) {
+      :root { --gutter: 1rem; }
+      .nav-links { gap: 0.9rem; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+      .nav-links::-webkit-scrollbar { display: none; }
+      .nav-links a { font-size: 0.62rem; letter-spacing: 0.04em; white-space: nowrap; }
+    }
+  </style>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <nav aria-label="Main">
+    <a href="../../index.html" class="nav-monogram nav-back">← back</a>
+    <ul class="nav-links">
+      <li><a href="../../#inquiries">inquiries</a></li>
+      <li><a href="../../#building">building</a></li>
+      <li><a href="../../#thesis">thesis</a></li>
+      <li><a href="../../#teaching">teaching</a></li>
+      <li><a href="../../#writing">writing</a></li>
+      <li><a href="../../#contact">contact</a></li>
+    </ul>
+  </nav>
+
+  <main id="main">
+
+  <section class="essay-header">
+    <div class="container">
+      <figure class="essay-hero">
+        <img decoding="async" src="hero.svg" alt="A field of teal streamlines spiralling inward from every edge toward a dark central disk, with concentric speed contours deepening toward the centre and a bright ring marking the event horizon where the inward flow reaches its limit">
+      </figure>
+      <h1 class="essay-title">What If Space Flows Like a River Past the Event Horizon?</h1>
+      <div class="essay-meta">
+        <div class="essay-meta-block">
+          <p class="essay-meta-label">Domain</p>
+          <p class="essay-meta-value">General Relativity · Geodesy</p>
+        </div>
+        <div class="essay-meta-block">
+          <p class="essay-meta-label">Status</p>
+          <p class="essay-meta-value">Complete · 2026</p>
+        </div>
+        <div class="essay-meta-block">
+          <p class="essay-meta-label">Methods</p>
+          <p class="essay-meta-value">Painlevé–Gullstrand coordinates · SP3 ephemeris analysis · Relativistic clock-rate modelling · Closed-form residual check</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="essay-body-wrap">
+    <div class="container">
+      <div class="essay-body">
+
+        <p>The trouble with "spacetime curvature" is that nobody can picture it. It is the correct answer, and it is also a phrase that does most of its work by sounding authoritative rather than by showing you anything. So I have always been drawn to a different way of describing the same physics, one you can actually see in your head: space is not curved so much as <em>flowing</em>, pouring inward toward a massive body like water toward a drain, faster the closer you get. This is the river model of black holes, and the thing I wanted to do with a student was take it seriously enough to check it against data — not near a black hole, which is inconvenient, but twenty thousand kilometres above our heads.</p>
+
+        <p>The river picture is not a rival to general relativity. It is general relativity, written in a different set of coordinates. If you take the usual Schwarzschild description of the space around a non-rotating mass and change the time coordinate — from the time kept by a distant observer to the time kept by someone falling freely inward from rest — the arithmetic rearranges itself into Painlevé–Gullstrand form, and in that form space behaves like a medium with a velocity. At radius <em>r</em> the inward flow speed is exactly the Newtonian escape velocity, <em>v</em><sub>flow</sub>(<em>r</em>) = √(2GM/<em>r</em>), which is a small miracle of tidiness: the speed you would need to climb out is the speed at which space is falling in. The two are the same number because they are the same fact seen from two sides.</p>
+
+        <p>The metaphor pays off at the horizon. Think of light as a fish that can only ever swim at speed <em>c</em> through the water around it. Far from the hole the water is nearly still, so an outward-swimming fish makes easy progress. As it approaches the hole the inward current quickens, and the fish's ground-speed drops. At the event horizon the current reaches <em>c</em> exactly: now an outward-swimming photon, going flat-out, exactly treads water and never advances. Cross inside and the current runs faster than light — not because anything locally is breaking the speed limit, but because the "flow" is a property of the coordinates, not a thing you could clock as it went past. That is the whole reason the horizon is one-way, told without a single tensor.</p>
+
+        <p>You can watch it happen in the tilt of the local light cones.</p>
+
+        <div class="figure-wrap">
+          <svg viewBox="0 0 680 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Five light cones drawn at increasing distance from a black hole: far from the hole the cone is symmetric and upright, closer in it tips toward the hole, at the event horizon its outgoing edge stands vertical so outward light stalls, and inside the horizon both edges point inward">
+            <defs><style>
+              .bhlbl { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; fill: #6B6460; letter-spacing: 0.04em; }
+              .bhh   { font-family: 'Source Serif 4', serif; font-size: 12px; font-style: italic; fill: #1A1714; }
+            </style></defs>
+            <rect x="0" y="0" width="70" height="300" fill="#1A4F4F" fill-opacity="0.20"/>
+            <rect x="0" y="0" width="24" height="300" fill="#1A4F4F"/>
+            <line x1="220" y1="18" x2="220" y2="250" stroke="#1A1714" stroke-width="1.4" stroke-dasharray="6 5"/>
+            <text class="bhh" x="228" y="34">event horizon</text>
+            <line x1="30" y1="262" x2="650" y2="262" stroke="#6B6460" stroke-width="1"/>
+            <polygon points="650,262 641,258 641,266" fill="#6B6460"/>
+            <text class="bhlbl" x="486" y="281">radius from the hole →</text>
+            <text class="bhlbl" x="86" y="281" text-anchor="start">flow speed increases inward</text>
+            <polygon points="120,215 81.4,144.9 46.2,184.2" fill="#2A6B6B" fill-opacity="0.16"/>
+            <line x1="120" y1="215" x2="81.4" y2="144.9" stroke="#1A1714" stroke-width="1.6"/>
+            <line x1="120" y1="215" x2="46.2" y2="184.2" stroke="#1A1714" stroke-width="1.6"/>
+            <circle cx="120" cy="215" r="2.6" fill="#1A1714"/>
+            <polygon points="220,215 220.0,135.0 149.2,177.7" fill="#2A6B6B" fill-opacity="0.16"/>
+            <line x1="220" y1="215" x2="220.0" y2="135.0" stroke="#1A1714" stroke-width="1.6"/>
+            <line x1="220" y1="215" x2="149.2" y2="177.7" stroke="#1A1714" stroke-width="1.6"/>
+            <circle cx="220" cy="215" r="2.6" fill="#1A1714"/>
+            <polygon points="335,215 367.8,142.0 268.5,170.5" fill="#2A6B6B" fill-opacity="0.16"/>
+            <line x1="335" y1="215" x2="367.8" y2="142.0" stroke="#1A1714" stroke-width="1.6"/>
+            <line x1="335" y1="215" x2="268.5" y2="170.5" stroke="#1A1714" stroke-width="1.6"/>
+            <circle cx="335" cy="215" r="2.6" fill="#1A1714"/>
+            <polygon points="465,215 511.7,150.1 402.5,165.1" fill="#2A6B6B" fill-opacity="0.16"/>
+            <line x1="465" y1="215" x2="511.7" y2="150.1" stroke="#1A1714" stroke-width="1.6"/>
+            <line x1="465" y1="215" x2="402.5" y2="165.1" stroke="#1A1714" stroke-width="1.6"/>
+            <circle cx="465" cy="215" r="2.6" fill="#1A1714"/>
+            <polygon points="595,215 649.8,156.7 537.0,159.9" fill="#2A6B6B" fill-opacity="0.16"/>
+            <line x1="595" y1="215" x2="649.8" y2="156.7" stroke="#1A1714" stroke-width="1.6"/>
+            <line x1="595" y1="215" x2="537.0" y2="159.9" stroke="#1A1714" stroke-width="1.6"/>
+            <circle cx="595" cy="215" r="2.6" fill="#1A1714"/>
+          </svg>
+          <p class="figure-caption">Light cones in the river picture. Far from the hole (right) a cone is symmetric: light can go either way. As the inward flow quickens the cone tips toward the hole; at the horizon the outgoing edge stands perfectly vertical — an outward photon treads water — and inside it, both edges point inward, so every future leads to the centre. The one-way horizon is just the moment the current outruns light.</p>
+        </div>
+
+        <p>All of this is a picture, though, and a picture proves nothing. Because the river model is Schwarzschild's geometry in disguise, no observation could ever favour one over the other; they are the same theory. So the honest question is narrower and, I think, more interesting: if you actually <em>implement</em> the river bookkeeping as a computer program and run it on real data, does it reproduce the standard relativistic answer — and if it doesn't, can you predict in advance exactly how it will fail?</p>
+
+        <p>The place to try this is GPS. Every satellite in the constellation carries an atomic clock, and those clocks tick at a slightly different rate from clocks on the ground — faster, because they sit higher in Earth's gravity, and slower, because they are moving, with the gravitational effect winning by a wide margin. The standard accounting splits the clock-rate offset into a gravitational-redshift term, δ<sub>grav</sub> = (GM/<em>c</em>²)(1/R<sub>⊕</sub> − 1/<em>r</em>), and a kinematic time-dilation term, δ<sub>kin</sub> = −<em>v</em>²/2<em>c</em>². The river accounting does something that looks completely different. It says: forget potential and velocity separately; just ask how fast the satellite is moving <em>relative to the inflowing river of space</em>. At GPS altitude that river is running inward at about 5.5 kilometres per second. Compute the satellite's speed through the current, apply one time-dilation formula to that "swim speed," and you are done.</p>
+
+        <p>We fed both pipelines the same thing — an ordinary precise-orbit file giving the positions of all thirty-two GPS satellites every five minutes over a two-hour window — and let them each compute the clock-rate offset epoch by epoch. Then we subtracted one series from the other.</p>
+
+        <p>They did not agree to zero. And that is where the essay actually starts, because for a while a non-zero residual looks exactly like a bug. The clock-rate offset itself is about 4.7 × 10<sup>−10</sup>; the leftover between the two methods sat at around 10<sup>−12</sup>, roughly two-tenths of a percent of the signal. Small, but stubbornly present, and structured — it wobbled up and down with the orbit rather than scattering like numerical noise. The temptation is to go hunting for the mistake.</p>
+
+        <p>There is no mistake. If you take the river formula and expand it algebraically in the weak-field limit, it comes apart into exactly the gravitational term, exactly the kinematic term, and one extra piece: −<em>v</em><sub>flow</sub>(<em>r</em>) (<em>v</em>·<em>r̂</em>)/<em>c</em>², a term proportional to the satellite's <em>radial</em> velocity — how fast it is climbing or falling through the current. That is the residual. Not approximately; the per-epoch leftover matches this closed-form expression at a correlation of 1.000, across all thirty-two satellites. It even has the right shape: because the radial velocity peaks when a satellite is nearest Earth, the residual is largest for the satellites on the most eccentric orbits, and its size — a couple of parts in 10<sup>12</sup> — is what you get by plugging their eccentricities into the formula. The two bookkeepers were never going to give identical numbers, because they keep time in slightly different coordinates, and the gap between their clocks is a quantity you can write down on paper before running either one.</p>
+
+        <p>That is the payoff, and it is a conceptual one rather than a discovery. Nothing here tests general relativity — both pipelines are the same physics, so of course they mostly agree. What the exercise shows is subtler and, to me, more satisfying: a way of seeing gravity as flow, invented to make a black hole's horizon intuitive, survives all the way down to the undramatic setting of a satellite clock, and where it parts company with the textbook method it does so by precisely the term its change of coordinates predicts. The river runs from the event horizon to low Earth orbit, and the books balance to a part in a trillion.</p>
+
+        <h2>An honest caveat that should go before any stronger claim</h2>
+
+        <p>The scope here is narrow and worth stating plainly. Everything quantitative lives in the weak field, with satellites treated as test particles too light to bend spacetime themselves, and with Earth approximated as a simple non-rotating Schwarzschild mass. That last approximation quietly discards the effects of Earth's oblateness and its rotation (frame-dragging); those are real, but they enter the <em>difference</em> between the two pipelines only at the level of 10<sup>−15</sup> or below — a thousand times under the residual we care about — because both methods sit on the same Schwarzschild background and the corrections cancel. So the GPS result should not be oversold: it does not confirm the strong-field claims the light-cone picture illustrates, and because both pipelines are deterministic computations from one ephemeris file, it is not an independent measurement of relativity at all. It is a consistency check — a demonstration that two coordinate systems, one of them shaped like a flowing river, agree to the exact term the coordinate change between them requires. The strong-field version, where the river really earns its keep, is the thing a next project would have to reach.</p>
+
+        <div class="essay-footer">
+          <a href="../../#inquiries" class="back-link">← back to inquiries</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+</body>
+</html>

@@ -5,6 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>How Dense Does a Forest Have to Be Before a Spark Matters? — Ninaad Adhvaryu</title>
   <meta name="description" content="On measuring ignition thresholds in forest-fire models, and on what connectivity means when a spark lands in the wrong place.">
+  <link rel="canonical" href="https://ninaad-adhvaryu.github.io/forest-fires/site/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="How Dense Does a Forest Have to Be Before a Spark Matters? — Ninaad Adhvaryu">
+  <meta property="og:description" content="On measuring ignition thresholds in forest-fire models, and on what connectivity means when a spark lands in the wrong place.">
+  <meta property="og:url" content="https://ninaad-adhvaryu.github.io/forest-fires/site/">
+  <meta name="twitter:card" content="summary">
+  <meta name="theme-color" content="#1C1A2E">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,300;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../style.css">
 
   <!-- MathJax for LaTeX rendering -->
@@ -31,7 +42,7 @@
       --teal-pale:     rgba(42, 107, 107, 0.09);
       --obsidian-mid:  #272540;
       --obsidian-text: #C9C5DA;
-      --obsidian-muted:#7C789A;
+      --obsidian-muted:#918DAE;
       --max-width:     1080px;
       --gutter:        2.5rem;
       --prose-width:   700px;
@@ -263,12 +274,21 @@
       .essay-title { font-size: 1.8rem; }
       .essay-meta { gap: 1.5rem; }
     }
+
+    @media (max-width: 480px) {
+      :root { --gutter: 1rem; }
+      .nav-links { gap: 0.9rem; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+      .nav-links::-webkit-scrollbar { display: none; }
+      .nav-links a { font-size: 0.62rem; letter-spacing: 0.04em; white-space: nowrap; }
+    }
   </style>
 </head>
 <body>
 
+  <a class="skip-link" href="#main">Skip to content</a>
+
   <!-- NAV -->
-  <nav>
+  <nav aria-label="Main">
     <a href="../../index.html" class="nav-monogram nav-back">← back</a>
     <ul class="nav-links">
       <li><a href="../../#inquiries">inquiries</a></li>
@@ -280,11 +300,13 @@
     </ul>
   </nav>
 
+  <main id="main">
+
   <!-- ESSAY -->
   <section class="essay-header">
     <div class="container">
       <figure class="essay-hero">
-        <img src="hero.svg" alt="Stylised percolation grid showing a connected fire cluster at the critical density threshold">
+        <img decoding="async" src="hero.svg" alt="Stylised percolation grid showing a connected fire cluster at the critical density threshold">
       </figure>
       <h1 class="essay-title">How Dense Does a Forest Have to Be Before a Spark Matters?</h1>
       <div class="essay-meta">
@@ -313,7 +335,7 @@
         <p>A student I was working with had built a version of the Drossel–Schwabl forest-fire model, which is one of those deceptively simple models that becomes more interesting the longer you stare at it. The lattice is just a square grid. Each site is empty, tree-filled, burning, or burnt. Between lightning strikes, trees regrow at random; when lightning lands on a tree, the entire connected cluster containing that site is removed in one go. It is a stylised model in the strongest possible sense. There is no wind, no slope, no moisture, no suppression, and no fire front moving cell by cell. But that simplification is the point. It strips the problem down to connectivity.</p>
 
         <div class="figure-wrap">
-          <img src="figures/model_schematic.png" alt="Drossel-Schwabl forest-fire model schematic showing pre-ignition and post-ignition lattice states">
+          <img loading="lazy" decoding="async" width="2202" height="1114" src="figures/model_schematic.png" alt="Drossel-Schwabl forest-fire model schematic showing pre-ignition and post-ignition lattice states">
           <p class="figure-caption">This is the model in one glance. The crucial point is that θ does not control fire size directly; it controls how much connected fuel has time to accumulate before the next random lightning strike.</p>
         </div>
 
@@ -326,7 +348,7 @@
         <p>What the simulation shows is not a gradual, featureless increase in fire size as the local neighbourhood gets denser. Instead, the median fire size as a function of \(\rho_{\mathrm{loc}}\) develops a very sharp uptick. Across the parameter sweeps in the paper, that knee sits remarkably close to the same place: \(\rho_{\mathrm{loc}}^\star \approx 0.61\). Below that, typical burns stay small. Above it, the ignition site is much more likely to sit inside a connected fuel network that can support a much larger event.</p>
 
         <div class="figure-wrap">
-          <img src="figures/s_vs_x_with_knees.png" alt="Fire size vs local density, showing connectivity threshold">
+          <img loading="lazy" decoding="async" width="944" height="704" src="figures/s_vs_x_with_knees.png" alt="Fire size vs local density, showing connectivity threshold">
           <p class="figure-caption">The eye goes first to the height of the curve, but the more interesting feature is where it turns. Even when θ is large and post-threshold fires become much more severe, the knee still appears at essentially the same local density.</p>
         </div>
 
@@ -339,7 +361,7 @@
         <p>For a representative sweep at <em>N</em>=128, the probability that a lightning event produces any fire rises from about 0.405 at <em>θ</em>=250 to about 0.482 at <em>θ</em>=3000. More dramatically, the unconditional probability of a genuinely large event—defined here as burning at least ten percent of the lattice, so \(S \ge 0.10N^2\)—rises from about 0.028 to about 0.196. That is a big jump, and it matters that it is expressed per lightning event rather than conditional on a fire already having started. Operationally, that is the quantity that tells you how often a random strike produces a serious event in the model.</p>
 
         <div class="figure-wrap">
-          <img src="figures/exceedance_vs_theta.png" alt="Exceedance probability vs regrowth parameter">
+          <img loading="lazy" decoding="async" width="944" height="704" src="figures/exceedance_vs_theta.png" alt="Exceedance probability vs regrowth parameter">
           <p class="figure-caption">The threshold itself barely shifts, but the risk above it changes sharply. As θ increases, large fires stop being rare per lightning event; the different initial layouts lying close together is also a quiet hint that the dynamics are forgetting how the forest started.</p>
         </div>
 
@@ -366,6 +388,8 @@
       </div>
     </div>
   </section>
+
+  </main>
 
 </body>
 </html>

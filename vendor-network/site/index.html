@@ -5,6 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>When Does a Market Tip From Many Small Sellers to One Platform? — Ninaad Adhvaryu</title>
   <meta name="description" content="On the phase boundary between local and digital vendors, and on how two perfectly reasonable simulation engines can disagree about which knob is doing the work.">
+  <link rel="canonical" href="https://ninaad-adhvaryu.github.io/vendor-network/site/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="When Does a Market Tip From Many Small Sellers to One Platform? — Ninaad Adhvaryu">
+  <meta property="og:description" content="On the phase boundary between local and digital vendors, and on how two perfectly reasonable simulation engines can disagree about which knob is doing the work.">
+  <meta property="og:url" content="https://ninaad-adhvaryu.github.io/vendor-network/site/">
+  <meta name="twitter:card" content="summary">
+  <meta name="theme-color" content="#1C1A2E">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,300;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../style.css">
 
   <!-- MathJax for LaTeX rendering -->
@@ -31,7 +42,7 @@
       --teal-pale:     rgba(42, 107, 107, 0.09);
       --obsidian-mid:  #272540;
       --obsidian-text: #C9C5DA;
-      --obsidian-muted:#7C789A;
+      --obsidian-muted:#918DAE;
       --max-width:     1080px;
       --gutter:        2.5rem;
       --prose-width:   700px;
@@ -263,12 +274,21 @@
       .essay-title { font-size: 1.8rem; }
       .essay-meta { gap: 1.5rem; }
     }
+
+    @media (max-width: 480px) {
+      :root { --gutter: 1rem; }
+      .nav-links { gap: 0.9rem; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+      .nav-links::-webkit-scrollbar { display: none; }
+      .nav-links a { font-size: 0.62rem; letter-spacing: 0.04em; white-space: nowrap; }
+    }
   </style>
 </head>
 <body>
 
+  <a class="skip-link" href="#main">Skip to content</a>
+
   <!-- NAV -->
-  <nav>
+  <nav aria-label="Main">
     <a href="../../index.html" class="nav-monogram nav-back">← back</a>
     <ul class="nav-links">
       <li><a href="../../#inquiries">inquiries</a></li>
@@ -280,11 +300,13 @@
     </ul>
   </nav>
 
+  <main id="main">
+
   <!-- ESSAY -->
   <section class="essay-header">
     <div class="container">
       <figure class="essay-hero">
-        <img src="hero.svg" alt="Three-phase diagram of a vendor-platform market showing Digital, Mixed and Local regimes">
+        <img decoding="async" src="hero.svg" alt="Three-phase diagram of a vendor-platform market showing Digital, Mixed and Local regimes">
       </figure>
       <h1 class="essay-title">When Does a Market Tip From Many Small Sellers to One Platform?</h1>
       <div class="essay-meta">
@@ -368,21 +390,21 @@
         <p>The central quantitative output is the phase diagram across the \((T, \gamma)\) plane. What it actually looks like is the less pretty but more informative part.</p>
 
         <div class="figure-wrap">
-          <img src="figures/phase_diagram_abm.png" alt="Steady-state local market share across the temperature-gamma plane in the agent-based model">
+          <img loading="lazy" decoding="async" width="1050" height="750" src="figures/phase_diagram_abm.png" alt="Steady-state local market share across the temperature-gamma plane in the agent-based model">
           <p class="figure-caption">Steady-state local market share \(L^*\) across the \((T, \gamma)\) plane from the agent-based simulation. The low-γ band is almost entirely digital; the high-γ, low-T corner is almost entirely local. What matters in this image is the width of the crossover — and whether that width is a physical fact or an artefact of the engine generating it.</p>
         </div>
 
         <p>That last sentence is where the project stopped being a mapping exercise and became interesting. Because I ran the same sweep with two different simulation engines. The first is the agent-based model above — individual customers with individual histories, choosing stochastically each round. The second is a self-consistent mean-field fixed-point solver that treats the population as a single aggregate magnetisation \(m\) that updates against its own average field. The two are formally equivalent in the \(N \to \infty\) limit; the law-of-large-numbers argument is textbook. They should agree, and in the bulk of both ordered phases they do. Where they disagree is at the boundary.</p>
 
         <div class="figure-wrap">
-          <img src="figures/phase_diagram_mf.png" alt="Mean-field version of the phase diagram, with the gamma axis visibly compressed">
+          <img loading="lazy" decoding="async" width="1050" height="750" src="figures/phase_diagram_mf.png" alt="Mean-field version of the phase diagram, with the gamma axis visibly compressed">
           <p class="figure-caption">The mean-field version of the same sweep. The overall topology is preserved, but the crossover is sharper, more vertical, and organised almost entirely along the \(T\) axis. The \(\gamma\) axis is visibly compressed. The same parameters produce qualitatively different-looking phase boundaries depending on which engine you ask.</p>
         </div>
 
         <p>The interesting diagnostic turned out to be susceptibility — the partial derivative of \(L^*\) with respect to each control parameter, computed numerically from the grid. In a physical phase transition, the susceptibility peaks along the critical line; the ridge of \(\chi_\gamma = \partial L^* / \partial \gamma\) is where the system is most responsive to information access, and the ridge of \(\chi_T = \partial L^* / \partial T\) is where it is most responsive to noise. When you plot both for both engines, something concrete happens.</p>
 
         <div class="figure-wrap">
-          <img src="figures/susceptibility.png" alt="Finite-difference susceptibility maps in the T-gamma plane for both ABM and mean-field">
+          <img loading="lazy" decoding="async" width="1050" height="750" src="figures/susceptibility.png" alt="Finite-difference susceptibility maps in the T-gamma plane for both ABM and mean-field">
           <p class="figure-caption">Susceptibility maps. In the ABM, \(\chi_\gamma\) shows localised hotspots — specific cells where a small increase in information access produces a disproportionate gain in local share. In the mean-field engine, \(\chi_\gamma\) is near-zero almost everywhere. Both engines agree that \(T\) is an active control; they disagree about whether \(\gamma\) is.</p>
         </div>
 
@@ -395,7 +417,7 @@
         <p>There is a follow-up study that takes the same framework and asks a sharper policy question. If a recommendation system deliberately weights vendors by proximity — for instance, through an Open Network for Digital Commerce-style protocol with a distance weight \(w\) — how much does the market shift? The experiment is a two-parameter sweep over \(\gamma\) and \(w\) at fixed \(T\). The result is that \(\gamma\) acts as a <em>gate</em>: at \(\gamma = 0\) no amount of distance weighting produces any local share at all, because local vendors are never discovered. Once \(\gamma > 0\), \(w\) becomes the active knob. Moving \(w\) from \(0\) to \(1\) at a fixed \(\gamma = 0.3\) more than triples late-time local share, from about \(0.17\) to about \(0.55\), and roughly halves the HHI concentration index.</p>
 
         <div class="figure-wrap">
-          <img src="figures/ondc_gamma_w_slice.png" alt="Interaction slice between information access gamma and protocol distance weight w">
+          <img loading="lazy" decoding="async" width="1400" height="900" src="figures/ondc_gamma_w_slice.png" alt="Interaction slice between information access gamma and protocol distance weight w">
           <p class="figure-caption">The \(\gamma \times w\) interaction slice at fixed \(T = 0.5\). Each curve is a different distance weight. \(\gamma = 0\) collapses them all to zero local share by construction; above that, the curves fan out, and the gap between low-\(w\) and high-\(w\) persists all the way to full discovery. Visibility is a necessary precondition, but distance weighting is a separate channel once that precondition is met.</p>
         </div>
 
@@ -410,6 +432,8 @@
       </div>
     </div>
   </section>
+
+  </main>
 
 </body>
 </html>

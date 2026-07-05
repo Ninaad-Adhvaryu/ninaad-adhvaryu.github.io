@@ -5,6 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>When a Gas Becomes One — Ninaad Adhvaryu</title>
   <meta name="description" content="On Bose-Einstein condensation, dipolar quantum gases, and a map of the vortex states that appear when matter is made to spin near absolute zero.">
+  <link rel="canonical" href="https://ninaad-adhvaryu.github.io/dipolar-quantum-gases/site/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="When a Gas Becomes One — Ninaad Adhvaryu">
+  <meta property="og:description" content="On Bose-Einstein condensation, dipolar quantum gases, and a map of the vortex states that appear when matter is made to spin near absolute zero.">
+  <meta property="og:url" content="https://ninaad-adhvaryu.github.io/dipolar-quantum-gases/site/">
+  <meta name="twitter:card" content="summary">
+  <meta name="theme-color" content="#1C1A2E">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,300;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../style.css">
 
   <!-- MathJax -->
@@ -34,7 +45,7 @@
       --teal-pale:     rgba(42, 107, 107, 0.09);
       --obsidian-mid:  #272540;
       --obsidian-text: #C9C5DA;
-      --obsidian-muted:#7C789A;
+      --obsidian-muted:#918DAE;
       --max-width:     1080px;
       --gutter:        2.5rem;
       --prose-width:   700px;
@@ -364,7 +375,6 @@
       height: 3px;
       background: var(--cream-dark);
       border-radius: 2px;
-      outline: none;
     }
 
     .slider-row input[type="range"]::-webkit-slider-thumb {
@@ -456,15 +466,24 @@
       color: var(--teal-light);
       border-bottom-color: var(--teal-light);
     }
+
+    @media (max-width: 480px) {
+      :root { --gutter: 1rem; }
+      .nav-links { gap: 0.9rem; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+      .nav-links::-webkit-scrollbar { display: none; }
+      .nav-links a { font-size: 0.62rem; letter-spacing: 0.04em; white-space: nowrap; }
+    }
   </style>
 </head>
 
 <body>
 
+  <a class="skip-link" href="#main">Skip to content</a>
+
   <!-- ============================================================
        NAV
   ============================================================ -->
-  <nav>
+  <nav aria-label="Main">
     <span class="nav-monogram">N · A</span>
     <ul class="nav-links">
       <li><a href="../../index.html">home</a></li>
@@ -473,6 +492,8 @@
       <li><a href="../../index.html#writing">writing</a></li>
     </ul>
   </nav>
+
+  <main id="main">
 
   <!-- ============================================================
        ESSAY HEADER
@@ -1251,6 +1272,8 @@
   <!-- ============================================================
        FOOTER
   ============================================================ -->
+  </main>
+
   <footer>
     <div>
       <a href="../../index.html" class="footer-back">← all essays</a>
@@ -1386,6 +1409,7 @@
     // Attach to DOM element
     new p5(vortexSketch, document.getElementById('vortex-sketch'));
   </script>
+
 
 </body>
 </html>

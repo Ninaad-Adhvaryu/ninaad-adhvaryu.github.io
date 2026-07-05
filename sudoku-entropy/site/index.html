@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Can a Single Number Tell You How Hard a Sudoku Is? — Ninaad Adhvaryu</title>
+  <meta name="description" content="On reading a Sudoku as a column of bits draining toward zero, and on a gap between a person and a constraint solver that turned out to be mostly a measurement choice.">
+  <link rel="canonical" href="https://ninaad-adhvaryu.github.io/sudoku-entropy/site/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Can a Single Number Tell You How Hard a Sudoku Is? — Ninaad Adhvaryu">
+  <meta property="og:description" content="On reading a Sudoku as a column of bits draining toward zero, and on a gap between a person and a constraint solver that turned out to be mostly a measurement choice.">
+  <meta property="og:url" content="https://ninaad-adhvaryu.github.io/sudoku-entropy/site/">
+  <meta name="twitter:card" content="summary">
+  <meta name="theme-color" content="#1C1A2E">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,300;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style.css">
+
+  <style>
+    :root {
+      --cream-dark:    #E8E2D9;
+      --cream-card:    #FDFBF8;
+      --ink-muted:     #6B6460;
+      --teal-pale:     rgba(42, 107, 107, 0.09);
+      --obsidian-mid:  #272540;
+      --obsidian-text: #C9C5DA;
+      --obsidian-muted:#918DAE;
+      --max-width:     1080px;
+      --gutter:        2.5rem;
+      --prose-width:   700px;
+    }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--serif-body);
+      font-size: 1rem;
+      line-height: 1.72;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    ::selection { background: rgba(42, 107, 107, 0.18); }
+    a { color: var(--teal); text-decoration: none; transition: color 0.2s ease; }
+
+    nav {
+      position: sticky; top: 0; z-index: 200;
+      background: var(--obsidian); height: 54px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 var(--gutter);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .nav-monogram { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--obsidian-muted); }
+    .nav-links { display: flex; gap: 2.25rem; list-style: none; }
+    .nav-links a { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; color: var(--obsidian-text); text-transform: lowercase; padding-bottom: 2px; border-bottom: 1px solid transparent; transition: color 0.2s ease, border-color 0.2s ease; }
+    .nav-links a:hover { color: var(--teal-light); border-bottom-color: var(--teal-light); }
+    .nav-back { color: var(--obsidian-text); }
+
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--gutter); }
+    section { padding: 4rem 0; }
+
+    .essay-header { padding: 3rem 0 3.5rem; }
+    .essay-hero { margin: 0 0 2.75rem; }
+    .essay-hero img {
+      display: block; width: 100%; height: auto;
+      border: 1px solid var(--cream-dark); border-radius: 2px;
+    }
+    .essay-title {
+      font-family: var(--serif-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700; line-height: 1.15; letter-spacing: -0.015em;
+      color: var(--ink); margin-bottom: 1.75rem; max-width: 720px;
+    }
+    .essay-meta {
+      display: flex; flex-wrap: wrap; gap: 2rem;
+      margin-top: 2.5rem; padding-top: 2.5rem;
+      border-top: 1px solid var(--cream-dark);
+    }
+    .essay-meta-block { flex: 0 1 auto; }
+    .essay-meta-label {
+      font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--ink-muted); margin-bottom: 0.5rem;
+    }
+    .essay-meta-value { font-family: var(--serif-body); font-size: 0.95rem; color: var(--ink); }
+
+    .essay-body { max-width: var(--prose-width); margin: 0 auto; }
+    .essay-body p {
+      font-size: 1rem; line-height: 1.82;
+      margin-bottom: 1.4em; color: var(--ink);
+    }
+    .essay-body em { font-style: italic; }
+    .essay-body strong { font-weight: 600; }
+    .essay-body h2 {
+      font-family: var(--serif-display);
+      font-size: 1.5rem; font-weight: 600; line-height: 1.25;
+      color: var(--ink); margin: 2.75rem 0 1.25rem; max-width: 640px;
+    }
+
+    /* Figures & captions */
+    .figure-wrap { margin: 3rem 0; text-align: center; }
+    .figure-wrap svg { max-width: 100%; height: auto; display: inline-block; }
+    .figure-wrap img {
+      max-width: 100%; height: auto; display: inline-block;
+      border-radius: 2px; background: var(--cream-dark); padding: 0.5rem;
+    }
+    .figure-caption {
+      font-family: var(--serif-body); font-size: 0.85rem; line-height: 1.6;
+      color: var(--ink-muted); margin-top: 1rem; font-style: italic;
+      max-width: 620px; margin-left: auto; margin-right: auto;
+    }
+
+    .essay-footer { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--cream-dark); }
+    .back-link {
+      font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em;
+      text-transform: lowercase; color: var(--teal);
+      border-bottom: 1px solid var(--teal-rule); padding-bottom: 2px;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+    .back-link:hover { color: var(--teal-light); border-bottom-color: var(--teal-light); }
+
+    @media (max-width: 768px) {
+      :root { --gutter: 1.5rem; }
+      section { padding: 3rem 0; }
+      .essay-header { padding: 3rem 0 2rem; }
+      .essay-title { font-size: 1.8rem; }
+      .essay-meta { gap: 1.5rem; }
+    }
+
+    @media (max-width: 480px) {
+      :root { --gutter: 1rem; }
+      .nav-links { gap: 0.9rem; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+      .nav-links::-webkit-scrollbar { display: none; }
+      .nav-links a { font-size: 0.62rem; letter-spacing: 0.04em; white-space: nowrap; }
+    }
+  </style>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <nav aria-label="Main">
+    <a href="../../index.html" class="nav-monogram nav-back">← back</a>
+    <ul class="nav-links">
+      <li><a href="../../#inquiries">inquiries</a></li>
+      <li><a href="../../#building">building</a></li>
+      <li><a href="../../#thesis">thesis</a></li>
+      <li><a href="../../#teaching">teaching</a></li>
+      <li><a href="../../#writing">writing</a></li>
+      <li><a href="../../#contact">contact</a></li>
+    </ul>
+  </nav>
+
+  <main id="main">
+
+  <section class="essay-header">
+    <div class="container">
+      <figure class="essay-hero">
+        <img decoding="async" src="hero.svg" alt="Two nine-by-nine Sudoku grids side by side, each cell shaded by how much uncertainty it still holds — the left grid a pale field of many-candidate cells with a few resolved dark squares, the right grid almost entirely deep teal as the uncertainty has drained toward the solution">
+      </figure>
+      <h1 class="essay-title">Can a Single Number Tell You How Hard a Sudoku Is?</h1>
+      <div class="essay-meta">
+        <div class="essay-meta-block">
+          <p class="essay-meta-label">Domain</p>
+          <p class="essay-meta-value">Information Theory · Cognitive Science</p>
+        </div>
+        <div class="essay-meta-block">
+          <p class="essay-meta-label">Status</p>
+          <p class="essay-meta-value">Complete · 2026</p>
+        </div>
+        <div class="essay-meta-block">
+          <p class="essay-meta-label">Methods</p>
+          <p class="essay-meta-value">Shannon entropy · Constraint propagation · Move-level replay · ANOVA &amp; effect sizes</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="essay-body-wrap">
+    <div class="container">
+      <div class="essay-body">
+
+        <p>A solved Sudoku carries no uncertainty at all. Every cell holds exactly one digit, forced there by the others, and there is nothing left to be unsure about. An empty grid is the opposite: every cell could be almost anything, and the puzzle is nothing but uncertainty waiting to be spent. Somewhere between those two states is the entire experience of solving one — and it occurred to me, watching a student I was working with replay their own solve move by move, that the whole thing could be written as a single number falling toward zero.</p>
+
+        <p>The number is the grid's Shannon entropy. For a cell with <em>k</em> still-plausible digits, treating each as equally likely, the uncertainty is log<sub>2</sub> <em>k</em> bits; summing across all eighty-one cells gives the entropy of the whole grid, <em>H</em> = Σ<sub>s</sub> log<sub>2</sub> |D(s)|, where |D(s)| is the number of candidates still standing in cell <em>s</em>. A cell that already holds one digit contributes log<sub>2</sub> 1 = 0 and drops out of the sum. A completely blank grid, with all nine digits live in every empty cell, sits near its ceiling of about 257 bits. A finished grid sits at zero. Solving is the act of draining that quantity out of the grid.</p>
+
+        <p>What makes Sudoku a clean place to think about this is that the entropy only ever goes down. The puzzle has one solution and a fixed set of constraints, so every legal deduction — human or machine — removes possibilities and never adds them. That is not true of every game. In chess, an opponent can manufacture new threats and drive the uncertainty of a position back up; recent work treats that rising tension as its own kind of entropy. Sudoku has no adversary. It is a monotone descent, and a monotone descent is exactly the sort of thing you can put a ruler against.</p>
+
+        <p>So I did, or rather a project I was mentoring did. A constraint-propagation solver of the kind Peter Norvig wrote — the sort that repeatedly assigns a digit when a cell has one candidate left and eliminates it from that cell's twenty peers — was instrumented to log the grid's entropy at every internal step. On the human side, a small application recorded each placement with a timestamp, so a person's solve could be replayed and the grid's entropy recomputed after every move. Two summaries came out of each paired solve. One was the <em>initial gap</em>: how much higher the solver's starting entropy was than the human's. The other was the <em>cumulative area</em> between the two entropy curves once both were rescaled onto the same zero-to-one axis of progress — a measure of how far apart the two ways of solving stayed, integrated over the whole solve.</p>
+
+        <p>The geometry is worth making concrete before the numbers arrive.</p>
+
+        <div class="figure-wrap">
+          <svg viewBox="0 0 680 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Schematic of two declining entropy curves against normalised solving progress: an upper solver curve and a lower human curve, both falling to zero, with the vertical initial gap marked at the start and the region between them shaded as the cumulative area">
+            <defs>
+              <style>
+                .se-ax    { stroke: #6B6460; stroke-width: 1; fill: none; }
+                .se-axlbl { font-family: 'JetBrains Mono', monospace; font-size: 11px; fill: #6B6460; letter-spacing: 0.03em; }
+                .se-solver{ stroke: #1A4F4F; stroke-width: 2.4; fill: none; }
+                .se-human { stroke: #2A6B6B; stroke-width: 2.4; fill: none; stroke-dasharray: 7 4; }
+                .se-area  { fill: rgba(42,107,107,0.16); }
+                .se-gap   { stroke: #1A1714; stroke-width: 1.4; fill: none; }
+                .se-clbl  { font-family: 'Source Serif 4', serif; font-size: 13px; font-style: italic; fill: #1a1a1a; }
+                .se-glbl  { font-family: 'JetBrains Mono', monospace; font-size: 10px; fill: #1A1714; letter-spacing: 0.02em; }
+              </style>
+            </defs>
+            <g transform="translate(70,30)">
+              <line class="se-ax" x1="0" y1="0" x2="0" y2="280"/>
+              <line class="se-ax" x1="0" y1="280" x2="540" y2="280"/>
+              <text class="se-axlbl" x="-52" y="10">bits</text>
+              <text class="se-axlbl" x="470" y="305">progress →</text>
+              <path class="se-area" d="M0,40 C150,70 320,150 540,278 L540,278 C320,210 150,150 0,150 Z"/>
+              <path class="se-solver" d="M0,40 C150,70 320,150 540,278"/>
+              <path class="se-human" d="M0,150 C150,150 320,210 540,278"/>
+              <line class="se-gap" x1="-14" y1="40" x2="-14" y2="150"/>
+              <line class="se-gap" x1="-18" y1="40" x2="-10" y2="40"/>
+              <line class="se-gap" x1="-18" y1="150" x2="-10" y2="150"/>
+              <text class="se-glbl" x="-64" y="98">initial</text>
+              <text class="se-glbl" x="-58" y="112">gap</text>
+              <text class="se-clbl" x="360" y="120">solver</text>
+              <text class="se-clbl" x="250" y="185">human</text>
+              <text class="se-clbl" x="150" y="235">area between curves</text>
+            </g>
+          </svg>
+          <p class="figure-caption">The two summaries, drawn schematically. The solver's entropy starts high and falls to zero; the human's starts lower and also falls to zero. The vertical distance at the start is the initial gap; the shaded region is the cumulative area. Both shrink as puzzles get harder — which is the result, and also, as it turns out, the trap.</p>
+        </div>
+
+        <p>Across twenty-eight solves — ten easy, ten medium, eight hard, graded by the application — both summaries came out strikingly ordered. The initial gap fell from a mean of 144.69 bits on easy puzzles to 127.99 on medium and 79.00 on hard, a one-way analysis of variance giving <em>F</em>(2,25) = 24.78, <em>p</em> &lt; 0.001, and an easy-versus-hard effect size of <em>d</em> = 2.78 — enormous by the usual conventions. The cumulative area told the same story, sliding from 55,829 units on easy puzzles to 21,615 on hard ones, with a comparably large easy-versus-hard <em>d</em> of 2.80. Two different entropy statistics, computed two different ways, both marched monotonically down the difficulty ladder. As a difficulty ruler, entropy worked.</p>
+
+        <p>Then the gap misbehaved, and it is worth being honest about how.</p>
+
+        <p>The temptation, looking at a 145-bit gap on easy puzzles, is to read it as cognition: the human walks up to the grid, recognises patterns, and has already resolved a hundred-odd bits of uncertainty that the machine still has to grind through. Some of that is surely real. But most of that number is an artefact of <em>when</em> and <em>how</em> the two entropies were measured. The solver logs its first state from the fully unconstrained grid — every empty cell still carrying all nine candidates, before the puzzle's given digits have even been read in — so it starts near the 257-bit ceiling and only afterwards falls as the clues register. The human's starting entropy is computed from the grid as presented, with the givens already in place, and using nothing more than direct elimination of digits a cell's filled neighbours rule out. The two solvers are not being timed from the same starting line, and they are not using the same definition of a candidate. A large part of the gap is the distance between two measurement conventions, not the distance between two minds.</p>
+
+        <p>This is the sort of thing that is easy to wave away and shouldn't be, because it changes what the headline number means. The gap does <em>not</em> cleanly measure a human's cognitive head start. What it measures is contaminated by instrumentation in a way that happens to correlate with difficulty. And that is also the reason the difficulty-grading result survives the objection: the cumulative area and the gap both compare the <em>same</em> metric, with the <em>same</em> asymmetry baked in, across the three difficulty bands. Whatever offset the measurement convention introduces, it introduces it everywhere, so the ordering from easy to hard is still doing real work even though the absolute magnitude is not. The finding and the artefact travel together in the same statistic. Separating them is not a matter of collecting more data; it is a matter of noticing that one of the numbers is partly a definition.</p>
+
+        <p>What I find more interesting than the gap is the shape of a human solve up close. On a hard puzzle, the entropy did not slide down at a constant rate. It fell in steps: long plateaus where the number barely moved for the better part of a minute, punctuated by sudden drops that cleared several bits in a few seconds. That is what you would expect if a person is not eliminating candidates one at a time but recognising a configuration — a locked pair, a hidden single, a box that can only resolve one way — and collapsing a whole region of uncertainty in a single move. The chunk is the unit of a human solve, and the plateaus are the reader searching for the next chunk. A constraint solver, by contrast, never plateaus; it eliminates continuously because it has no notion of a pattern worth waiting for. Some grids, in fact, the solver clears with no guessing at all — pure forward propagation, never once needing to branch — which is its own small reminder that "hard for a person" and "hard for a machine" are not the same axis.</p>
+
+        <p>Entropy, then, is a good ruler and a treacherous yardstick. It grades Sudoku difficulty with effect sizes most psychology studies would envy, and it makes the moment-to-moment texture of a solve — the plateaus, the collapses, the monotone descent — visible in a way that a stopwatch cannot. What it does not do, at least not yet, is cleanly separate how a person resolves uncertainty from how an algorithm does, because the most eye-catching number in the study is measuring the ruler as much as the thing being ruled. That is not a failure of the idea. It is the idea telling you exactly where it needs to be sharpened.</p>
+
+        <h2>An honest caveat that should go before any stronger claim</h2>
+
+        <p>The difficulty-grading result is the robust one; the human-versus-machine comparison should be read as descriptive only. The two entropies were computed by different procedures from different starting states, so the size of the gap cannot be taken as a measure of cognitive advantage until both are defined identically. The sample is twenty-eight solves, and if a single person contributed many of them the observations are not independent, which would make the analysis-of-variance p-values optimistic; the honest version of this study reports effect sizes and treats the significance tests as descriptive until the participant count is pinned down and a clustered model is run. The difficulty labels came from the application rather than an external standard, the hard band's variance dwarfs the easy band's, and the entropy definition itself is a deliberate over-estimate — it ignores the logical dependencies between cells, so it counts more uncertainty than a perfect reasoner would actually face. None of that sinks the central claim. It just means the claim is that a single entropy statistic orders difficulty, not that entropy measures the mind.</p>
+
+        <div class="essay-footer">
+          <a href="../../#inquiries" class="back-link">← back to inquiries</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+</body>
+</html>

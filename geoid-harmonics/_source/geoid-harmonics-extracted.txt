@@ -1,0 +1,80 @@
+SOURCE EXTRACT — "A Reproducible Framework for the Compressibility of Truncated
+Spherical-harmonic Planetary Potential-field Models"
+Pulled from Google Drive (fileId 1pbAVRvtu2y3FcuJF2ww_nav2Pra3eFqt, PDF) via read_file_content, 2026-07-04.
+Author: independent researcher; keep anonymous per house rule. NB paper contains unfinished
+"[PALAASH: ...]" author-note placeholders (Figs 6-8 interpretation) — DRAFT notes, do NOT surface.
+
+CORE IDEA
+Spherical-harmonic degree truncation of a planetary potential field = LOSSY COMPRESSION. A field on
+a sphere expands in spherical harmonics by degree (scale); keeping only degrees <= n_max is like
+keeping only the low-frequency terms. Questions: how many coefficients to reach relative accuracy
+epsilon, and is degree truncation an efficient way to store them? Compared across fields:
+gravity (EGM2008 geoid), geomagnetic MAIN field (IGRF-13), and a secondary CRUSTAL field (NGDC-720).
+
+KEY FINDING / SPINE
+Compressibility differs enormously by field, and it tracks SPECTRAL CHARACTER + SOURCE DEPTH.
+- GEOID (gravity): error decays SLOWLY. log-log slope -0.861 +/- 0.033. Reaches 1% error at degree
+  ~191.2, needing ~37,249 coefficients. (10% at deg 12.1, 5% at 37.5.) Geoid undulations span
+  -113 to +101 m relative to the WGS84 ellipsoid.
+- MAGNETIC MAIN FIELD (IGRF-13, degrees 1-13): decays STEEPLY. slope -2.924 +/- 0.724. Reaches 1%
+  at degree ~5.9 with only 49 coefficients. The degree-1 dipole holds ~93.8% of radial-field power.
+- => ~760-fold difference in storage at 1% accuracy (37,249 vs 49); 3.4x steeper slope.
+- CRUSTAL magnetic field (NGDC-720): decays even MORE SLOWLY than the geoid. slope -0.248; stays
+  above 10% error until degree ~129.5; near-WHITE spectrum. => LEAST compressible.
+- THE TWIST: "magnetism compresses better than gravity" holds ONLY for the core/main field. The
+  crustal magnetic field compresses WORSE than gravity. Magnetism is not one category.
+
+THE INSIGHT (the payoff — depth -> compressibility)
+Compressibility tracks the physical SOURCE DEPTH:
+- Deep, dipole-dominated outer-core field -> power concentrated at lowest degrees -> longest
+  wavelength -> most compressible (49 numbers).
+- Geoid: density structure through crust + mantle -> power across a wide range of degrees ->
+  intermediate.
+- Shallow crustal magnetisation -> near-white spectrum -> shortest wavelength -> least compressible.
+Physical scales: geoid 5% at deg 38 ~ 527 km half-wavelength; deg 12 (~10%) ~ 1668 km (mantle
+convection cells); main field 1% at deg 6 ~ 3336 km ~ outer-core radius (CMB ~3480 km). The coarsest
+meaningful main-field truncation already captures outer-core-scale structure.
+Downward continuation: continue IGRF from surface (a/r=1) to CMB (a/r~1.83): degree-for-1% rises
+5.9 -> 13.0, slope -2.92 -> -0.43 (the field "whitens" toward its source).
+
+METHOD / VERIFICATION
+pyshtools 4.14.1; EGM2008 (gravity), IGRF-13 epoch 2020 (magnetic main), NGDC-720 (crustal).
+Area-weighted relative L2 error e(n_max)=||f - T_n f|| / ||f|| on a Gauss-Legendre quadrature grid
+(exact for band-limited), verified analytically via the Parseval degree-variance identity
+e^2(n_max) = sum_{l>n_max} sigma_l^2 / sum_l sigma_l^2. Decay summarised by log-log OLS slope with
+delete-one-degree jackknife SE. Fully DETERMINISTIC (exact Parseval ratio, no sampling uncertainty).
+Grid error matches analytic Parseval to <10^-13 (some checks 2e-14). Extends to Moon (GRGM1200B),
+Mars areoid (GMM3), IGRF epochs 1900-2025.
+
+INFORMATION-THEORY LAYER (optional texture)
+Two SEPARABLE inefficiencies:
+(1) Coefficient inefficiency ~ 0: degree truncation is rate-optimal for isotropic Sobolev classes by
+    the Kolmogorov n-width argument; an oracle best-n-term reordering saves only ~0.3 percentage
+    points on the geoid at 1% -> the spherical-harmonic basis is essentially coefficient-optimal for
+    globally distributed fields. (Slepian/wavelet bases help only for regionally concentrated signals.)
+(2) Bit inefficiency (codec-dependent): naive float32 storage sits ~11.3x above the rate-distortion
+    floor at 1% error; a water-fill-guided greedy quantizer narrows this to 1.59x, and 1.23x with
+    entropy coding. Bit efficiency depends on the codec, not on the truncation degree.
+Spectral slope law: e(n_max) ~ K n^{(1-alpha)/2}, so slope p = (1-alpha)/2; Sobolev smoothness index
+s* = alpha/2 - 1 is the same quantity. Geoid alpha ~ 2.84 (Kaula-like); main field effective alpha
+7.5 (dipole-dominated, band-limited to 13, so an EFFECTIVE index only); crustal alpha < 1 (near white,
+slope law doesn't apply). Reference degrees: 360 (geoid), 13 (main), 133 (crustal).
+
+HONEST CAVEAT / LIMITS
+Reference degree defines "full signal"; a different reference shifts absolute thresholds (not the
+ordering). Geoid 1% threshold mildly depends on degree-2 / ellipsoid + tide-system convention
+(deg 191 standard; ~219 if degree-2 excluded). Crustal model itself truncated to deg 133. Compression
+ratio counts coefficients only (upper bound on a real codec; bit-level picture is the codec section).
+EGM2008 info ceiling ~deg 1787 (per-degree SNR=1) is distinct from the 1% compression threshold
+(deg 191, well inside signal-dominated band), so model noise doesn't affect these results.
+
+FIGURES (for image-suggestion mapping)
+Fig 1: EGM2008 geoid reconstructed at n_max = 10, 30, 90, 360 (the "potato" gaining detail). <- striking.
+Fig 2: degree-variance power spectra (geoid slow/Kaula vs IGRF steep/dipole).
+Fig 3: relative L2 error vs truncation degree, log-log, both fields + crustal. <- the money decay figure.
+Fig 4: error vs coefficient count (storage Pareto).
+Fig 5: geoid signal DISCARDED by truncating at deg 38, mapped along tectonic boundaries (Andes,
+       Himalaya, western Pacific) — short-wavelength anomalies over subduction zones.
+Fig 6: Earth/Moon/Mars geoid error curves. Fig 7: downward-continuation compressibility. Fig 8: bit storage vs accuracy.
+Key refs: Kaula 1966 (gravity power law); Lowes-Mauersberger (main-field spectrum); Pavlis 2012
+(EGM2008); Alken 2021 (IGRF-13); Maus 2010 (NGDC-720 crustal); Pinkus 1985 (n-widths); Cover & Thomas.

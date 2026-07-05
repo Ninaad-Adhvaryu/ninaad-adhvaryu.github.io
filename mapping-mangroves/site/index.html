@@ -5,6 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>What Happens When a Forest Dataset Meets a Mangrove? — Ninaad Adhvaryu</title>
   <meta name="description" content="On comparing satellite forest datasets in Mumbai, and on what it means when two global products disagree about whether a mangrove is 'there.'">
+  <link rel="canonical" href="https://ninaad-adhvaryu.github.io/mapping-mangroves/site/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="What Happens When a Forest Dataset Meets a Mangrove? — Ninaad Adhvaryu">
+  <meta property="og:description" content="On comparing satellite forest datasets in Mumbai, and on what it means when two global products disagree about whether a mangrove is 'there.'">
+  <meta property="og:url" content="https://ninaad-adhvaryu.github.io/mapping-mangroves/site/">
+  <meta name="twitter:card" content="summary">
+  <meta name="theme-color" content="#1C1A2E">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,300;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../style.css">
 
   <!-- MathJax for LaTeX rendering -->
@@ -31,7 +42,7 @@
       --teal-pale:     rgba(42, 107, 107, 0.09);
       --obsidian-mid:  #272540;
       --obsidian-text: #C9C5DA;
-      --obsidian-muted:#7C789A;
+      --obsidian-muted:#918DAE;
       --max-width:     1080px;
       --gutter:        2.5rem;
       --prose-width:   700px;
@@ -251,12 +262,21 @@
       .essay-title { font-size: 1.8rem; }
       .essay-meta { gap: 1.5rem; }
     }
+
+    @media (max-width: 480px) {
+      :root { --gutter: 1rem; }
+      .nav-links { gap: 0.9rem; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+      .nav-links::-webkit-scrollbar { display: none; }
+      .nav-links a { font-size: 0.62rem; letter-spacing: 0.04em; white-space: nowrap; }
+    }
   </style>
 </head>
 <body>
 
+  <a class="skip-link" href="#main">Skip to content</a>
+
   <!-- NAV -->
-  <nav>
+  <nav aria-label="Main">
     <a href="../../index.html" class="nav-monogram nav-back">← back</a>
     <ul class="nav-links">
       <li><a href="../../#inquiries">inquiries</a></li>
@@ -267,6 +287,8 @@
       <li><a href="../../#contact">contact</a></li>
     </ul>
   </nav>
+
+  <main id="main">
 
   <!-- ESSAY -->
   <section class="essay-header">
@@ -310,7 +332,7 @@
         <p>That narrowing matters. It turns a vague comparison of two maps into a concrete test. Instead of asking whether the datasets look similar in the abstract, the project asks whether a pixel that a mangrove-specific dataset considers mangrove is treated as stable forest by a generic forest product.</p>
 
         <div class="figure-wrap">
-          <img src="figures/Overlap Disagreement Map - Project Essays.png" alt="Spatial overlap and disagreement between Hansen and GMW datasets">
+          <img decoding="async" width="1400" height="1050" src="figures/Overlap Disagreement Map - Project Essays.png" alt="Spatial overlap and disagreement between Hansen and GMW datasets">
           <p class="figure-caption">This is the cleanest single picture of the project. The point is not merely that the datasets disagree, but where they disagree: the mismatches cluster around the messy intertidal edges, where a generic forest classifier should be expected to struggle.</p>
         </div>
 
@@ -331,14 +353,14 @@
         <p>If one took it literally, the implication would be absurd: Mumbai's mangroves are somehow being detected as forest briefly, intermittently, and then not persisting through the end of the record at all. Mangroves do not behave like a crop that appears and disappears on yearly timescales. The more plausible interpretation is that the classification itself is flickering.</p>
 
         <div class="figure-wrap">
-          <img src="figures/Mangrove Presence Classes.png" alt="Breakdown of pixels by detection persistence category">
+          <img loading="lazy" decoding="async" width="1400" height="1050" src="figures/Mangrove Presence Classes.png" alt="Breakdown of pixels by detection persistence category">
           <p class="figure-caption">This is the figure that makes the problem impossible to ignore. The absence of any persistent-forest class is too extreme to read as ecology; it has to be read as a property of the classifier interacting with a difficult landscape.</p>
         </div>
 
         <p>The duration analysis says the same thing in a slightly different language. Detection durations were dominated by short intervals, with a median near zero years and very few pixels showing long-lived forest persistence. Spatially, the duration map does not reveal a system that is steadily degrading. It reveals a system that drops in and out of recognition.</p>
 
         <div class="figure-wrap">
-          <img src="figures/Detection Duration Histogram.png" alt="Histogram of detection duration across pixels">
+          <img loading="lazy" decoding="async" width="1400" height="1790" src="figures/Detection Duration Histogram.png" alt="Histogram of detection duration across pixels">
           <p class="figure-caption">The histogram gives the summary, but the map makes the pattern legible. The short durations are not isolated outliers; they are spread across the mangrove system, which is exactly what one would expect from unstable classification rather than synchronized ecological collapse.</p>
         </div>
 
@@ -367,6 +389,8 @@
       </div>
     </div>
   </section>
+
+  </main>
 
 </body>
 </html>

@@ -5,6 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Can Geometry Substitute for Infrastructure in a Disaster? — Ninaad Adhvaryu</title>
   <meta name="description" content="On testing three drone-placement strategies on real SRTM elevation data from Indian disaster zones — and on the moment a flat-terrain tie became a Kerala-specific divergence.">
+  <link rel="canonical" href="https://ninaad-adhvaryu.github.io/drone-coverage/site/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Can Geometry Substitute for Infrastructure in a Disaster? — Ninaad Adhvaryu">
+  <meta property="og:description" content="On testing three drone-placement strategies on real SRTM elevation data from Indian disaster zones — and on the moment a flat-terrain tie became a Kerala-specific divergence.">
+  <meta property="og:url" content="https://ninaad-adhvaryu.github.io/drone-coverage/site/">
+  <meta name="twitter:card" content="summary">
+  <meta name="theme-color" content="#1C1A2E">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,300;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../style.css">
 
   <style>
@@ -15,7 +26,7 @@
       --teal-pale:     rgba(42, 107, 107, 0.09);
       --obsidian-mid:  #272540;
       --obsidian-text: #C9C5DA;
-      --obsidian-muted:#7C789A;
+      --obsidian-muted:#918DAE;
       --max-width:     1080px;
       --gutter:        2.5rem;
       --prose-width:   700px;
@@ -99,11 +110,20 @@
       .essay-title { font-size: 1.8rem; }
       .essay-meta { gap: 1.5rem; }
     }
+
+    @media (max-width: 480px) {
+      :root { --gutter: 1rem; }
+      .nav-links { gap: 0.9rem; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+      .nav-links::-webkit-scrollbar { display: none; }
+      .nav-links a { font-size: 0.62rem; letter-spacing: 0.04em; white-space: nowrap; }
+    }
   </style>
 </head>
 <body>
 
-  <nav>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <nav aria-label="Main">
     <a href="../../index.html" class="nav-monogram nav-back">← back</a>
     <ul class="nav-links">
       <li><a href="../../#inquiries">inquiries</a></li>
@@ -115,10 +135,12 @@
     </ul>
   </nav>
 
+  <main id="main">
+
   <section class="essay-header">
     <div class="container">
       <figure class="essay-hero">
-        <img src="hero.svg" alt="Top-down stylised view of fragmented flood-plain terrain — three drone Wi-Fi hotspots placed in the channel-bounded land pockets, each with a transparent teal coverage circle">
+        <img decoding="async" src="hero.svg" alt="Top-down stylised view of fragmented flood-plain terrain — three drone Wi-Fi hotspots placed in the channel-bounded land pockets, each with a transparent teal coverage circle">
       </figure>
       <h1 class="essay-title">Can Geometry Substitute for Infrastructure in a Disaster?</h1>
       <div class="essay-meta">
@@ -161,6 +183,8 @@
       </div>
     </div>
   </section>
+
+  </main>
 
 </body>
 </html>

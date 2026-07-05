@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How Many Fractal Dimensions Does a Coastline Have? — Ninaad Adhvaryu</title>
+  <meta name="description" content="The coastline paradox, five Indian shores measured two ways, and the awkward discovery that the fractal dimension meant to be scale-free depends on how you measure it.">
+  <link rel="canonical" href="https://ninaad-adhvaryu.github.io/fractals/site/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="How Many Fractal Dimensions Does a Coastline Have? — Ninaad Adhvaryu">
+  <meta property="og:description" content="The coastline paradox, five Indian shores measured two ways, and the awkward discovery that the fractal dimension meant to be scale-free depends on how you measure it.">
+  <meta property="og:url" content="https://ninaad-adhvaryu.github.io/fractals/site/">
+  <meta name="twitter:card" content="summary">
+  <meta name="theme-color" content="#1C1A2E">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,300;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style.css">
+
+  <style>
+    :root {
+      --cream-dark:    #E8E2D9;
+      --cream-card:    #FDFBF8;
+      --ink-muted:     #6B6460;
+      --teal-pale:     rgba(42, 107, 107, 0.09);
+      --obsidian-mid:  #272540;
+      --obsidian-text: #C9C5DA;
+      --obsidian-muted:#918DAE;
+      --max-width:     1080px;
+      --gutter:        2.5rem;
+      --prose-width:   700px;
+    }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--serif-body);
+      font-size: 1rem;
+      line-height: 1.72;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    ::selection { background: rgba(42, 107, 107, 0.18); }
+    a { color: var(--teal); text-decoration: none; transition: color 0.2s ease; }
+
+    nav {
+      position: sticky; top: 0; z-index: 200;
+      background: var(--obsidian); height: 54px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 var(--gutter);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .nav-monogram { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--obsidian-muted); }
+    .nav-links { display: flex; gap: 2.25rem; list-style: none; }
+    .nav-links a { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; color: var(--obsidian-text); text-transform: lowercase; padding-bottom: 2px; border-bottom: 1px solid transparent; transition: color 0.2s ease, border-color 0.2s ease; }
+    .nav-links a:hover { color: var(--teal-light); border-bottom-color: var(--teal-light); }
+    .nav-back { color: var(--obsidian-text); }
+
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--gutter); }
+    section { padding: 4rem 0; }
+
+    .essay-header { padding: 3rem 0 3.5rem; }
+    .essay-hero { margin: 0 0 2.75rem; }
+    .essay-hero img {
+      display: block; width: 100%; height: auto;
+      border: 1px solid var(--cream-dark); border-radius: 2px;
+    }
+    .essay-title {
+      font-family: var(--serif-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700; line-height: 1.15; letter-spacing: -0.015em;
+      color: var(--ink); margin-bottom: 1.75rem; max-width: 780px;
+    }
+    .essay-meta {
+      display: flex; flex-wrap: wrap; gap: 2rem;
+      margin-top: 2.5rem; padding-top: 2.5rem;
+      border-top: 1px solid var(--cream-dark);
+    }
+    .essay-meta-block { flex: 0 1 auto; }
+    .essay-meta-label {
+      font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--ink-muted); margin-bottom: 0.5rem;
+    }
+    .essay-meta-value { font-family: var(--serif-body); font-size: 0.95rem; color: var(--ink); }
+
+    .essay-body { max-width: var(--prose-width); margin: 0 auto; }
+    .essay-body p {
+      font-size: 1rem; line-height: 1.82;
+      margin-bottom: 1.4em; color: var(--ink);
+    }
+    .essay-body em { font-style: italic; }
+    .essay-body strong { font-weight: 600; }
+    .essay-body h2 {
+      font-family: var(--serif-display);
+      font-size: 1.5rem; font-weight: 600; line-height: 1.25;
+      color: var(--ink); margin: 2.75rem 0 1.25rem; max-width: 640px;
+    }
+
+    /* Figures & captions */
+    .figure-wrap { margin: 3rem 0; text-align: center; }
+    .figure-wrap svg { max-width: 100%; height: auto; display: inline-block; }
+    .figure-wrap img {
+      max-width: 100%; height: auto; display: inline-block;
+      border-radius: 2px; background: var(--cream-dark); padding: 0.5rem;
+    }
+    .figure-caption {
+      font-family: var(--serif-body); font-size: 0.85rem; line-height: 1.6;
+      color: var(--ink-muted); margin-top: 1rem; font-style: italic;
+      max-width: 620px; margin-left: auto; margin-right: auto;
+    }
+
+    .essay-footer { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--cream-dark); }
+    .back-link {
+      font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em;
+      text-transform: lowercase; color: var(--teal);
+      border-bottom: 1px solid var(--teal-rule); padding-bottom: 2px;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+    .back-link:hover { color: var(--teal-light); border-bottom-color: var(--teal-light); }
+
+    @media (max-width: 768px) {
+      :root { --gutter: 1.5rem; }
+      section { padding: 3rem 0; }
+      .essay-header { padding: 3rem 0 2rem; }
+      .essay-title { font-size: 1.8rem; }
+      .essay-meta { gap: 1.5rem; }
+    }
+
+    @media (max-width: 480px) {
+      :root { --gutter: 1rem; }
+      .nav-links { gap: 0.9rem; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+      .nav-links::-webkit-scrollbar { display: none; }
+      .nav-links a { font-size: 0.62rem; letter-spacing: 0.04em; white-space: nowrap; }
+    }
+  </style>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <nav aria-label="Main">
+    <a href="../../index.html" class="nav-monogram nav-back">← back</a>
+    <ul class="nav-links">
+      <li><a href="../../#inquiries">inquiries</a></li>
+      <li><a href="../../#building">building</a></li>
+      <li><a href="../../#thesis">thesis</a></li>
+      <li><a href="../../#teaching">teaching</a></li>
+      <li><a href="../../#writing">writing</a></li>
+      <li><a href="../../#contact">contact</a></li>
+    </ul>
+  </nav>
+
+  <main id="main">
+
+  <section class="essay-header">
+    <div class="container">
+      <figure class="essay-hero">
+        <img decoding="async" src="hero.svg" alt="A jagged, self-similar coastline separating pale-teal land below from cream sea above, with a measuring grid laid across the whole frame and every grid cell the coast passes through shaded darker teal, illustrating the box-counting method for a coastline's fractal dimension">
+      </figure>
+      <h1 class="essay-title">How Many Fractal Dimensions Does a Coastline Have?</h1>
+      <div class="essay-meta">
+        <div class="essay-meta-block">
+          <p class="essay-meta-label">Domain</p>
+          <p class="essay-meta-value">Fractal Geometry · Geospatial Analysis</p>
+        </div>
+        <div class="essay-meta-block">
+          <p class="essay-meta-label">Status</p>
+          <p class="essay-meta-value">Complete · 2026</p>
+        </div>
+        <div class="essay-meta-block">
+          <p class="essay-meta-label">Methods</p>
+          <p class="essay-meta-value">Box-counting · Richardson divider · Grid-origin bootstrap · Segmented log–log fits</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="essay-body-wrap">
+    <div class="container">
+      <div class="essay-body">
+
+        <p>In 1967 Benoit Mandelbrot asked a question that sounds like it has an answer: how long is the coast of Britain? It does not. Measure it with a ruler a hundred kilometres long and you get one number; measure it with a ten-kilometre ruler and the ruler now fits into bays and around headlands the long one skipped over, and the total grows. Shrink the ruler again and it grows again, and there is no length it settles down to — as the ruler goes to zero, the measured coastline goes to infinity. This is the coastline paradox, and Mandelbrot's resolution was one of the founding moves of fractal geometry: stop asking for the length, which does not exist, and ask instead for the <em>rate</em> at which the length blows up as the ruler shrinks. That rate is a stable number, and it is the fractal dimension.</p>
+
+        <p>The picture is worth holding onto before the arithmetic. A smooth curve, measured with ever-finer rulers, converges to a fixed length — its dimension is one, an ordinary line. A coastline does not converge, because at every scale there is new detail: bays within bays, inlets within inlets. The fractal dimension measures how aggressively that new detail appears. A dimension of one means a smooth shore; a dimension approaching two means a coast so convoluted it starts to fill the plane like a region rather than trace it like a line. The walking-divider method turns this directly into a measurement: step a fixed-length divider along the coast, count the steps, shrink the divider, and watch the measured length climb.</p>
+
+        <div class="figure-wrap">
+          <svg viewBox="0 0 720 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The same crinkly coastline measured two ways. On the left a long measuring stick steps across the bays in a few big chords and reports a short length; on the right a short stick follows the inlets in many small chords and reports a much longer length.">
+            <defs><style>
+              .fxlbl { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; fill: #6B6460; letter-spacing: 0.03em; }
+              .fxh   { font-family: 'Source Serif 4', serif; font-size: 12.5px; font-style: italic; fill: #1A1714; }
+            </style></defs>
+            <text class="fxh" x="20" y="26">long ruler — 3 steps, misses the bays</text>
+            <text class="fxh" x="390" y="26">short ruler — 10 steps, follows them</text>
+            <polyline points="20,135 25,130 29,138 34,151 39,152 43,150 48,148 53,142 58,148 62,140 67,136 72,125 76,114 81,115 86,112 90,118 95,123 100,118 104,122 109,108 114,101 118,105 123,104 128,102 132,113 137,130 142,135 147,139 151,146 156,143 161,135 165,136 170,141 175,149 179,138 184,138 189,131 193,130 198,132 203,128 208,125 212,132 217,142 222,155 226,153 231,140 236,148 240,151 245,149 250,155 254,144 259,149 264,153 268,148 273,149 278,156 282,160 287,156 292,149 297,150 301,137 306,138 311,125 315,113 320,110" fill="none" stroke="#3D9090" stroke-width="1.2" stroke-opacity="0.6"/>
+            <polyline points="20,135 106,114 192,133 278,156" fill="none" stroke="#1A4F4F" stroke-width="2.4" stroke-linejoin="round"/>
+            <circle cx="20" cy="135" r="3" fill="#1A4F4F"/>
+            <circle cx="106" cy="114" r="3" fill="#1A4F4F"/>
+            <circle cx="192" cy="133" r="3" fill="#1A4F4F"/>
+            <circle cx="278" cy="156" r="3" fill="#1A4F4F"/>
+            <polyline points="390,135 395,130 399,138 404,151 409,152 413,150 418,148 423,142 428,148 432,140 437,136 442,125 446,114 451,115 456,112 460,118 465,123 470,118 474,122 479,108 484,101 488,105 493,104 498,102 502,113 507,130 512,135 517,139 521,146 526,143 531,135 535,136 540,141 545,149 549,138 554,138 559,131 563,130 568,132 573,128 578,125 582,132 587,142 592,155 596,153 601,140 606,148 610,151 615,149 620,155 624,144 629,149 634,153 638,148 643,149 648,156 652,160 657,156 662,149 667,150 671,137 676,138 681,125 685,113 690,110" fill="none" stroke="#3D9090" stroke-width="1.2" stroke-opacity="0.6"/>
+            <polyline points="390,135 421,143 445,114 478,111 507,130 540,141 570,129 592,155 624,144 652,160 676,138" fill="none" stroke="#1A4F4F" stroke-width="2.4" stroke-linejoin="round"/>
+            <circle cx="390" cy="135" r="3" fill="#1A4F4F"/>
+            <circle cx="421" cy="143" r="3" fill="#1A4F4F"/>
+            <circle cx="445" cy="114" r="3" fill="#1A4F4F"/>
+            <circle cx="478" cy="111" r="3" fill="#1A4F4F"/>
+            <circle cx="507" cy="130" r="3" fill="#1A4F4F"/>
+            <circle cx="540" cy="141" r="3" fill="#1A4F4F"/>
+            <circle cx="570" cy="129" r="3" fill="#1A4F4F"/>
+            <circle cx="592" cy="155" r="3" fill="#1A4F4F"/>
+            <circle cx="624" cy="144" r="3" fill="#1A4F4F"/>
+            <circle cx="652" cy="160" r="3" fill="#1A4F4F"/>
+            <circle cx="676" cy="138" r="3" fill="#1A4F4F"/>
+            <text class="fxlbl" x="20" y="222">measured length: shorter</text>
+            <text class="fxlbl" x="390" y="222">measured length: longer</text>
+            <text class="fxlbl" x="20" y="240">shrink the ruler and the coastline grows — the paradox fractal dimension was built to tame</text>
+          </svg>
+          <p class="figure-caption">The coastline paradox, and the divider method that measures it. The long ruler cuts across the inlets in three big chords; the short ruler follows them in ten small ones and reports a longer coast. How fast the measured length climbs as the ruler shrinks is the fractal dimension — the number meant to be independent of the ruler you happened to use.</p>
+        </div>
+
+        <p>There is a second way to measure the same thing, and it matters that there is more than one. Box-counting lays a grid over the coastline and counts how many boxes it touches; then it uses a finer grid and counts again. A smooth line touches roughly twice as many boxes each time you halve the box size; a crinkly coast touches more than that, because the finer grid catches detail the coarse one straddled. The exponent relating the box count to the box size is, once again, the dimension. Two methods, one number — or so the theory promises. Working with a student, I wanted to run both against real coastlines and see whether the promise held.</p>
+
+        <p>We took five stretches of the Indian coast chosen to be as different from each other as possible: the tidal inlet of the Gulf of Kutch, the mangrove maze of the Sundarbans, the straight rocky Konkan shore, the barrier lagoon at Chilika, and the reef-and-sandbar shallows of the Palk Strait. Each was pulled from the same public vector map, measured by both methods, and — because box-counting is notoriously sensitive to exactly where you place the grid — bootstrapped over a hundred and twenty-eight random grid offsets to put honest error bars on each estimate. The geomorphology came through clearly. The Sundarbans, all distributary channels and tidal creeks, scored the highest dimension at about 1.47; the Konkan coast, a comparatively featureless rocky line, scored the lowest at 1.08, barely fractal at all. Every coast landed above one, as a coastline must. As a way of ranking shorelines by their raw crinkliness, the method worked exactly as advertised.</p>
+
+        <p>And then the two methods disagreed with each other, consistently, and the disagreement is the real subject of this essay. Across all five coasts, the divider method returned a systematically lower dimension than box-counting — and not by a rounding error. For the Chilika lagoon, box-counting said 1.41 and the divider said 1.18, a gap of nearly a quarter of a dimension for the same shoreline measured on the same afternoon. Worse, box-counting would not even agree with itself: as we rasterised each coast at finer resolution, its estimate drifted steadily downward — the Gulf of Kutch fell from 1.32 to 1.28 to 1.23 as the pixels shrank. The number changed depending on how sharp your image was, where you dropped the grid, and which portion of the log–log plot you decided was the "real" straight line. There is no single answer sitting in the coastline waiting to be read off.</p>
+
+        <p>This is more than a nuisance, because of what fractal dimension was <em>for</em>. It was invented precisely to escape the coastline paradox — to replace a length that depends on your ruler with a dimension that does not. The whole promise was scale-invariance: a property of the coast itself, independent of the instrument. What the five coasts show is that the promise is only half-kept. The paradox did not vanish when we moved from length to dimension; it climbed up one level of abstraction and reappeared. Length depended on the ruler; dimension depends on the <em>method</em> — on box-counting versus divider, on the resolution, on the grid offset, on the fitting band. You cannot measure your way out of the coastline paradox. You can only choose the level at which you are willing to let it live.</p>
+
+        <p>What survives is quieter and, I think, more useful than a clean constant would have been. Both methods, for all their disagreement on the value, agreed on the <em>order</em>: the Sundarbans is more convoluted than the Konkan by either estimator, and by a wide margin. The dimension is not a fixed property a coastline possesses the way it possesses a latitude. It is a measurement, and like any measurement it comes with an instrument, a scale, and an uncertainty, and it is honest only when reported with all three attached. A coastline's fractal dimension is real in the way a coastline's temperature is real: a genuine number that nonetheless means nothing until you say how, and at what scale, you took it.</p>
+
+        <h2>An honest caveat that should go before any stronger claim</h2>
+
+        <p>The specific dimensions here should be read as comparative, not absolute. Every coast was projected with Web Mercator, which distorts area with latitude, so the values are trustworthy for ranking these five against each other but not for stacking against a dimension someone else measured on a different projection or a different map. The estimates move with rasterisation resolution, grid placement, and the choice of scaling band — that method-dependence is, after all, the point of the essay — so a bare number without its method attached is close to meaningless. The Palk Strait's reef-and-sandbar geometry produced the widest error bars of the five, a reminder that some coasts resist a single dimension more than others. And the whole analysis rests on one coarse vector product at a fixed scale; a finer shoreline source might well shift every value, though probably not the ranking. What the study earns is not "the fractal dimension of the Sundarbans is 1.47" but something more careful: measured this way, at this scale, with this uncertainty, the Sundarbans is markedly more fractal than the Konkan — and the number you cite should never travel without that clause.</p>
+
+        <div class="essay-footer">
+          <a href="../../#inquiries" class="back-link">← back to inquiries</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+</body>
+</html>

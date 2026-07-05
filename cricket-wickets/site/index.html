@@ -5,6 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Does the "Corridor of Uncertainty" Actually Take Wickets? — Ninaad Adhvaryu</title>
   <meta name="description" content="On testing a piece of cricket coaching folklore against 140,000 Hawkeye deliveries, and on the one result that wouldn't behave.">
+  <link rel="canonical" href="https://ninaad-adhvaryu.github.io/cricket-wickets/site/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Does the &quot;Corridor of Uncertainty&quot; Actually Take Wickets? — Ninaad Adhvaryu">
+  <meta property="og:description" content="On testing a piece of cricket coaching folklore against 140,000 Hawkeye deliveries, and on the one result that wouldn't behave.">
+  <meta property="og:url" content="https://ninaad-adhvaryu.github.io/cricket-wickets/site/">
+  <meta name="twitter:card" content="summary">
+  <meta name="theme-color" content="#1C1A2E">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,300;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../style.css">
 
   <!-- MathJax for LaTeX rendering -->
@@ -31,7 +42,7 @@
       --teal-pale:     rgba(42, 107, 107, 0.09);
       --obsidian-mid:  #272540;
       --obsidian-text: #C9C5DA;
-      --obsidian-muted:#7C789A;
+      --obsidian-muted:#918DAE;
       --max-width:     1080px;
       --gutter:        2.5rem;
       --prose-width:   700px;
@@ -263,12 +274,21 @@
       .essay-title { font-size: 1.8rem; }
       .essay-meta { gap: 1.5rem; }
     }
+
+    @media (max-width: 480px) {
+      :root { --gutter: 1rem; }
+      .nav-links { gap: 0.9rem; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+      .nav-links::-webkit-scrollbar { display: none; }
+      .nav-links a { font-size: 0.62rem; letter-spacing: 0.04em; white-space: nowrap; }
+    }
   </style>
 </head>
 <body>
 
+  <a class="skip-link" href="#main">Skip to content</a>
+
   <!-- NAV -->
-  <nav>
+  <nav aria-label="Main">
     <a href="../../index.html" class="nav-monogram nav-back">← back</a>
     <ul class="nav-links">
       <li><a href="../../#inquiries">inquiries</a></li>
@@ -280,11 +300,13 @@
     </ul>
   </nav>
 
+  <main id="main">
+
   <!-- ESSAY -->
   <section class="essay-header">
     <div class="container">
       <figure class="essay-hero">
-        <img src="hero.svg" alt="Stylised cricket pitch from above with KDE wicket density contours clustered in the good-length off-stump corridor">
+        <img decoding="async" src="hero.svg" alt="Stylised cricket pitch from above with KDE wicket density contours clustered in the good-length off-stump corridor">
       </figure>
       <h1 class="essay-title">Does the "Corridor of Uncertainty" Actually Take Wickets?</h1>
       <div class="essay-meta">
@@ -368,21 +390,21 @@
         <p>With that picture held in mind, the overall spatial distribution looks exactly like the coaching story would predict.</p>
 
         <div class="figure-wrap">
-          <img src="figures/kde_heatmap.png" alt="KDE heatmap of all deliveries overlaid with wicket deliveries in pitch_x and pitch_y coordinates">
+          <img loading="lazy" decoding="async" width="683" height="374" src="figures/kde_heatmap.png" alt="KDE heatmap of all deliveries overlaid with wicket deliveries in pitch_x and pitch_y coordinates">
           <p class="figure-caption">Two-dimensional KDE overlay on the \((\mathrm{pitch\_x}, \mathrm{pitch\_y})\) plane. The bulk of all deliveries sit in a channel just outside off stump between about five and eight metres, which is the textbook "good length" region. The wicket-only density sits on the same channel but slightly fuller — closer to the batter — and a bit tighter laterally. The coaching sentence survives the first look.</p>
         </div>
 
         <p>The one-dimensional projections make the contraction easier to see, because you can watch the wicket curve visibly crowd inward relative to the non-wicket one on both axes.</p>
 
         <div class="figure-wrap">
-          <img src="figures/length_density.png" alt="Density of pitch_y for wicket and non-wicket deliveries">
+          <img loading="lazy" decoding="async" width="841" height="547" src="figures/length_density.png" alt="Density of pitch_y for wicket and non-wicket deliveries">
           <p class="figure-caption">Marginal density of <code>pitch_y</code> (length) split by whether the ball was a wicket. Non-wicket deliveries spread broadly from roughly four to ten metres; wicket deliveries pile up in a narrower band between about 4.5 and 7 m, and the wicket mode sits slightly fuller than the non-wicket mode. The lateral axis tells the same story but more gently — wickets concentrate closer to the stump line than the average delivery does.</p>
         </div>
 
         <p>So far the story is a tidy vindication of the folk theorem. But the moment you collapse the plane into bar chart form, something misbehaves.</p>
 
         <div class="figure-wrap">
-          <img src="figures/wicket_rate_all.png" alt="Wicket rate by length zone across all bowlers">
+          <img loading="lazy" decoding="async" width="574" height="458" src="figures/wicket_rate_all.png" alt="Wicket rate by length zone across all bowlers">
           <p class="figure-caption">Wicket rate — fraction of deliveries in each zone that produced a dismissal — across the five length zones, pooled across all bowlers and all match phases. Full and Good Length sit where one would expect, around five to six per cent. Yorkers are a hair behind. Short is the weakest. And then Bouncer / Very Short, at roughly six per cent, is competitive with the best zone on the chart.</p>
         </div>
 
@@ -393,21 +415,21 @@
         <p>The correct response to the misbehaving bar is not to throw out the finding. It is to stratify — to re-compute the wicket rate separately by bowling style, or separately by match phase, and see whether the Bouncer anomaly survives the split. And when you do that, the story becomes legible in a way that the pooled chart obscured.</p>
 
         <div class="figure-wrap">
-          <img src="figures/wicket_rate_pace.png" alt="Wicket rate by length zone for pace bowlers only">
+          <img loading="lazy" decoding="async" width="554" height="456" src="figures/wicket_rate_pace.png" alt="Wicket rate by length zone for pace bowlers only">
           <p class="figure-caption">The same bar chart restricted to pace bowlers. Full is still at the top. Bouncer is still elevated but no longer competitive with Good Length in the way the pooled version made it look. The pattern that survives the restriction — Full and Good Length as the reliable wicket-takers, Short as the weakest, Yorker as tactically important — is much closer to the coaching picture. The anomaly was a pooling artifact.</p>
         </div>
 
         <p>Splitting by bowling style sharpens the picture further. Spin and pace are not merely two versions of the same process. They generate wickets through geometrically different mechanisms, and the heatmaps make that visible without any further modelling.</p>
 
         <div class="figure-wrap">
-          <img src="figures/pace_vs_spin_heatmap.png" alt="Wicket density heatmaps for pace and spin bowlers, side by side">
+          <img loading="lazy" decoding="async" width="988" height="924" src="figures/pace_vs_spin_heatmap.png" alt="Wicket density heatmaps for pace and spin bowlers, side by side">
           <p class="figure-caption">Wicket-density heatmaps for pace (left) and spin (right). Pace wickets spread out along the off-stump corridor, with the mode sitting around \(\mathrm{pitch\_x} \approx -0.4\) m and \(\mathrm{pitch\_y}\) between six and eight metres, and the distribution tailing meaningfully into shorter lengths. Spin wickets form a much tighter, more central cluster — almost on the line of the stumps, shorter lengths between four and six metres. The two styles are producing wickets out of different regions, and the pooled story misses this entirely.</p>
         </div>
 
         <p>There is a second, related finding that seems worth flagging. For seam bowlers specifically, ball speed carries almost no independent signal about wicket probability.</p>
 
         <div class="figure-wrap">
-          <img src="figures/ball_speed_kde.png" alt="Kernel density of ball speed for wicket vs non-wicket deliveries, seamers only">
+          <img loading="lazy" decoding="async" width="572" height="458" src="figures/ball_speed_kde.png" alt="Kernel density of ball speed for wicket vs non-wicket deliveries, seamers only">
           <p class="figure-caption">KDE of ball speed for seam bowlers, split on <code>is_wicket</code>. The wicket and non-wicket curves overlap almost completely through the bulk of the professional speed range. Whatever is making a delivery a wicket ball, it is not pace by itself. (The small cluster at near-zero is sensor noise that survived the filter and should be ignored.)</p>
         </div>
 
@@ -424,6 +446,8 @@
       </div>
     </div>
   </section>
+
+  </main>
 
 </body>
 </html>

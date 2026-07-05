@@ -1,0 +1,80 @@
+SOURCE EXTRACT — "The river model of black holes: Painlevé–Gullstrand visualizations and a
+GPS clock-rate equivalence check"
+Pulled from Google Drive (fileId 1m3ovA1QwuRF-mxXSUzJHPh4p8qkknpbN, docx) via read_file_content, 2026-07-04.
+Student author; keep anonymous per house rule.
+
+CORE IDEA
+The river model (Hamilton & Lisle 2008): reframe gravity not as curvature but as space "flowing"
+inward toward a mass, in Painlevé–Gullstrand (PG) coordinates. PG = coordinate change on the
+Schwarzschild metric; time = proper time of an observer free-falling from rest at infinity.
+Spatial slices are locally Euclidean; the dt·dr cross-term encodes the inward "flow."
+Inward flow speed = Newtonian escape velocity v_flow(r) = sqrt(2GM/r). Reaches c at the horizon
+r_s; exceeds c inside (coordinate speed only — not locally measurable, no SR violation).
+PG removes the Schwarzschild coordinate singularity at r_s (physics unchanged).
+Because PG is just a coordinate transform of Schwarzschild, the two pictures are ANALYTICALLY
+EQUIVALENT already (established literature). So this paper is NOT a new test of GR. It asks two
+pedagogical questions:
+  Q1: can the river/PG picture be visualized so the one-way horizon is manifest, without
+      Schwarzschild-time pathologies?
+  Q2: when you implement the standard GNSS clock-rate split AND an explicit river/PG bookkeeping
+      on the SAME ephemeris, does the residual between them match the post-Newtonian coordinate-
+      time correction you can derive a priori from the PG–Schwarzschild transformation?
+
+TWO CHECKS
+1. PG visualizations (Fig 1, strong field, near horizon): inward flow v_flow=sqrt(2GM/r) reaching
+   c at r_s; radial null-ray slopes (dr/dt_PG)/c with the OUTGOING ray stalling at the horizon;
+   local lightcones tipping inward near the horizon. Pedagogical illustration of the river picture.
+2. GPS equivalence check (Fig 2, Tables 1a/1b, S1; weak field, test particle): two pipelines on the
+   same IGS SP3 ephemeris; compare per-epoch residual to the closed-form term.
+
+THE PIVOT (what "misbehaves" — and why it's the point)
+The two pipelines do NOT agree to zero. There is a structured residual at the ~10^-12 level. That
+residual is NOT numerical noise or a discrepancy: it equals a CLOSED-FORM analytic term
+  delta_std - delta_river = -v_flow(r) * (v·rhat) / c^2
+i.e. the leading-order post-Newtonian coordinate-time correction from the PG↔Schwarzschild
+transformation. Observed residual tracks this prediction at Pearson r = 1.000 for ALL 32 PRNs.
+So the "disagreement" is understood in advance; the residual is a signature of the coordinate-time
+difference, not an error. The two bookkeepers describe the same physics; where they differ, they
+differ by a term you can write down.
+
+KEY NUMBERS / METHOD
+- Constants: c = 299 792 458 m/s; GM_earth = 3.986004418e14 m^3/s^2; R_earth = 6 371 000 m.
+- v_flow at GPS altitude ~ 5,475 m/s (essay: "about 5.5 km/s"). At horizon of a black hole, = c.
+- Standard split: delta_grav = (GM/c^2)(1/R - 1/r); delta_kin = -(v^2 - v_ground^2)/(2c^2);
+  delta_ecc = d/dt[-2 r·v / c^2] (IS-GPS-200N periodic eccentricity term).
+- River bookkeeping: v_flow(r)=sqrt(2GM/r); swim velocity u_sat = v_sat - v_flow(r) rhat;
+  delta_river = -(|u_sat|^2 - u_gnd^2)/(2c^2) + delta_ecc. Expanding gives delta_grav + delta_kin
+  plus a radial cross-term +v_flow(r)(v·rhat)/c^2; delta_ecc cancels in the difference.
+- Data: IGS final SP3 COD0MGXFIN_20251840000_01D_05M_ORB.SP3.gz (CODE, DOY 184 of 2025), 5-min
+  epochs, ITRF/IGS14 ECEF, velocities by 2nd-order central difference (numpy.gradient).
+  All 32 GPS PRNs with continuous coverage; common 2-hour window 2025-07-03 00:00-02:00 UTC (25 epochs).
+- Six representative PRNs G01-G06. Max|residual| 5.458e-12 to 7.554e-12; RMS ~1.1-3.2e-12.
+- Absolute clock-rate offset |delta_std| ~ 4.7e-10 (dominated by gravitational redshift).
+  Residual ~1e-12 => ~0.2% relative agreement between pipelines.
+- 4 of 6 PRNs (G01,G03,G04,G06): mean residual consistent with 0 at 95% CI. G02 mean 3.026e-12
+  (p=3.5e-12), G05 mean 1.159e-12 (p=4.3e-6) — small but statistically nonzero; both MATCH the
+  closed-form term (r=1.000), not noise.
+- Peak residual predictable from eccentricity: v_r ~ e·v_orbit at perigee; for e = 0.005-0.02,
+  predicts peak residuals 1.2-4.7e-12, consistent with Table 1a.
+- All 32 PRNs (Table S1): residual matches -v_flow·v_r/c^2 at correlation 1.0000 in EVERY case.
+
+SCOPE / LIMITS (honest caveat)
+- Weak-field, test-particle, Schwarzschild-approximate regime only (Earth orbit). NOT strong-field,
+  NOT non-test-particle, NOT Kerr / Lense-Thirring / J2.
+- J2 oblateness ~1e-10 per orbit but cancels in the residual (common Schwarzschild background) to
+  <1e-15; Lense-Thirring ~1e-15-1e-16. Neither explains the ~1e-12 residual.
+- Discretization from SP3 sampling + central-difference bounded at ~1e-13 (order below observed).
+- Both pipelines deterministic from same file => this is NOT an empirical validation of the river
+  model as physics; it verifies the two formulations differ by the expected coordinate-time term.
+- v_ground set to 0 (omits ~465 m/s Earth rotation); cancels in residual at zeroth order.
+  No Sagnac correction by design (Sagnac applies to signal propagation, not the clock-rate offset).
+- PG coordinates break down in some geometries (e.g. anti-de Sitter; Faraoni & Vachon 2020).
+
+FIGURES (for image-suggestion mapping)
+Fig 1: three PG panels — inward flow reaching c at horizon; radial null-ray slopes (outgoing stalls);
+       lightcone directions tipping near horizon. (Covered by my inline lightcone schematic.)
+Fig 2: six PRNs — left col standard vs river overlays; right col residuals (standard-river) ~1e-12.
+       <- best evidence figure if Ninaad wants a real plot on the page.
+Tables 1a/1b, S1: residual stats per PRN.
+Key refs: Hamilton & Lisle 2008 (river model); Painlevé 1921 & Gullstrand; Kraus & Wilczek 1994;
+Martel & Poisson 2001; Ashby 2003 (GPS relativity).

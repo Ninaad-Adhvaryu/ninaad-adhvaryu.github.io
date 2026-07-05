@@ -1,0 +1,62 @@
+SOURCE EXTRACT — "Estimating Fractal Dimension of Indian Coastlines Using Box-Counting and
+Divider Methods"
+Pulled from Google Drive (fileId 1HXcq27Tgw8I6d-T9T9VvQbnnNxh6ACMdpOIw_B2k2bw, Google Doc) via
+read_file_content, 2026-07-04. Student author; keep anonymous per house rule. No institution names.
+
+CORE
+Estimate the fractal dimension D of five geomorphologically distinct Indian coastlines
+(Gulf of Kutch, Sundarbans, Konkan, Chilika, Palk Strait) using TWO estimators: box-counting and
+the Richardson walking-divider. Motivated by the COASTLINE PARADOX (Mandelbrot 1967, "How long is
+the coast of Britain?"): as the ruler shrinks, measured length grows without bound; D captures how a
+coastline fills space. Topological dim of a coastline = 1; fractal when D > 1. Britain D ~ 1.25.
+
+METHODS
+- Data: Natural Earth 1:10m coastline vectors, clipped to fixed lat/long bounding boxes per region,
+  projected to Web Mercator (EPSG:3857; uniform pixel spacing within a small box; NO inter-regional
+  absolute-distance comparison), rasterized at 512/1024/2048 px, edge masks (buffer + dilation-erosion).
+- Box-counting: count occupied boxes N(eps) on a grid of box size eps; D = slope of log N(eps) vs
+  log(1/eps). Grid-origin BOOTSTRAP (128 replicates, random origin shifts per eps) -> 95% CI.
+- Scaling band: two-segment piecewise-linear fit (pwlf); report slope of the longer segment as
+  segmented D_band (coastlines show scale breaks, not one clean slope).
+- Richardson divider: step along the polyline with divider length delta; L(delta) ~ delta^(1-D);
+  D = 1 - m (m = log-log slope of L vs delta).
+- Python: GeoPandas/Shapely, rasterio, NumPy/SciPy, pwlf. Google Colab.
+
+RESULTS (Table 1; segmented D at 1024 px; Richardson D)
+  Gulf of Kutch:  segmented 1.292 (R2 0.999, ~4.3 octaves); Richardson 1.132. bootstrap 1.320/1.275/1.233 (512/1024/2048).
+  Sundarbans:     segmented 1.467 (R2 1.000, ~2.9 octaves) — HIGHEST; Richardson 1.342. bootstrap 1.416/1.332/1.268.
+  Konkan:         segmented 1.084 (R2 1.000, ~3.7 octaves) — LOWEST; Richardson 1.120. bootstrap 1.232/1.189/1.154.
+  Chilika:        segmented 1.413 (R2 1.000, ~3.4 octaves); Richardson 1.175 — BIGGEST estimator gap (~0.24). bootstrap 1.339/1.279/1.233.
+  Palk Strait:    segmented 1.369 (R2 1.000, ~3.0 octaves); Richardson 1.102 — LOWEST Richardson; WIDEST bootstrap CI (shallow reef/sandbar, grid-orientation sensitive). bootstrap 1.339/1.274/1.219.
+  Segmented range 1.084-1.467; Richardson range 1.102-1.342. All D > 1 (all fractal).
+
+THE PIVOT (what "misbehaves" — and it's the deepest point)
+The fractal dimension is NOT one number; it depends on the instrument.
+- Richardson divider estimates are CONSISTENTLY LOWER than segmented box-counting (every region;
+  Chilika worst: 1.413 vs 1.175).
+- Box-counting bootstrap D DRIFTS DOWN with rasterization resolution (e.g. Kutch 1.320 -> 1.275 ->
+  1.233 as px 512 -> 1024 -> 2048). Also sensitive to grid placement and scaling-band choice.
+=> Meta-paradox: fractal dimension was invented to be the SCALE-INVARIANT summary that resolves the
+  coastline paradox (length depends on ruler). But the dimension ITSELF depends on ruler (estimator,
+  resolution, grid, scaling band). The number meant to tame ruler-dependence is itself ruler-dependent.
+  The honest deliverable is a dimension WITH its method, scaling band, and uncertainty attached —
+  not a bare number.
+
+GEOMORPHOLOGY (why the values differ — genuine signal under the method-noise)
+Sundarbans mangrove delta (dense tidal channels/distributaries) -> highest D (1.467), most convoluted.
+Konkan straight rocky shore -> lowest D (1.084), near-1D. Kutch tidal inlet, Chilika barrier-lagoon,
+Palk Strait shallow-reef/sandbar in between. Values near 1 = smooth; near 2 = space-filling.
+
+HONEST CAVEAT / LIMITS
+Web Mercator area distortion (relative comparisons only, valid because same projection/approach for
+all); rasterization resolution, grid placement, scaling-band width all move the number; only 5 regions;
+1:10m data is coarse (sub-decametre structure untested); estimator choice matters. Palk Strait CI widest.
+
+CONCEPT FIGURES (for image-suggestion mapping; mostly stock)
+Fig 1 Sierpinski triangle; Fig 2 Koch curve (length grows, stays bounded — coastline-paradox analog);
+Fig 3-5 Mandelbrot set + zooms + higher powers; Fig 6 box-counting Britain coastline (Wolfram, D~1.18);
+Fig 7-9 Britain ruler example N vs r (N=9,19,48,97 at r=1,2,4,8), Desmos/GeoGebra fits (m~1.1627).
+STUDY figures (paper's own evidence): Fig 10/12/14/16/18 study-region maps; Fig 11/13/15/17/19 the
+segmented two-slope log-log box-counting fits. <- Fig 13 (Sundarbans fit, highest D) best evidence figure.
+Key refs: Mandelbrot 1967 (coastline paradox); Falconer (fractal geometry); Rai et al. 2011 (Indian
+coastlines, D 1.1-1.4); Jiang & Plotnick 1998 (US coastlines); pwlf (segmented regression).

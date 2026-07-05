@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How Many Numbers Does It Take to Store the Shape of Gravity? — Ninaad Adhvaryu</title>
+  <meta name="description" content="Writing a planet's gravity as a sum of wiggles: why the geoid costs 37,000 numbers where the magnetic field costs 49 — and how that ratio turns out to be a measure of depth.">
+  <link rel="canonical" href="https://ninaad-adhvaryu.github.io/geoid-harmonics/site/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="How Many Numbers Does It Take to Store the Shape of Gravity? — Ninaad Adhvaryu">
+  <meta property="og:description" content="Writing a planet's gravity as a sum of wiggles: why the geoid costs 37,000 numbers where the magnetic field costs 49 — and how that ratio turns out to be a measure of depth.">
+  <meta property="og:url" content="https://ninaad-adhvaryu.github.io/geoid-harmonics/site/">
+  <meta name="twitter:card" content="summary">
+  <meta name="theme-color" content="#1C1A2E">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,300;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style.css">
+
+  <style>
+    :root {
+      --cream-dark:    #E8E2D9;
+      --cream-card:    #FDFBF8;
+      --ink-muted:     #6B6460;
+      --teal-pale:     rgba(42, 107, 107, 0.09);
+      --obsidian-mid:  #272540;
+      --obsidian-text: #C9C5DA;
+      --obsidian-muted:#918DAE;
+      --max-width:     1080px;
+      --gutter:        2.5rem;
+      --prose-width:   700px;
+    }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--serif-body);
+      font-size: 1rem;
+      line-height: 1.72;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    ::selection { background: rgba(42, 107, 107, 0.18); }
+    a { color: var(--teal); text-decoration: none; transition: color 0.2s ease; }
+
+    nav {
+      position: sticky; top: 0; z-index: 200;
+      background: var(--obsidian); height: 54px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 var(--gutter);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .nav-monogram { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--obsidian-muted); }
+    .nav-links { display: flex; gap: 2.25rem; list-style: none; }
+    .nav-links a { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; color: var(--obsidian-text); text-transform: lowercase; padding-bottom: 2px; border-bottom: 1px solid transparent; transition: color 0.2s ease, border-color 0.2s ease; }
+    .nav-links a:hover { color: var(--teal-light); border-bottom-color: var(--teal-light); }
+    .nav-back { color: var(--obsidian-text); }
+
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--gutter); }
+    section { padding: 4rem 0; }
+
+    .essay-header { padding: 3rem 0 3.5rem; }
+    .essay-hero { margin: 0 0 2.75rem; }
+    .essay-hero img {
+      display: block; width: 100%; height: auto;
+      border: 1px solid var(--cream-dark); border-radius: 2px;
+    }
+    .essay-title {
+      font-family: var(--serif-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700; line-height: 1.15; letter-spacing: -0.015em;
+      color: var(--ink); margin-bottom: 1.75rem; max-width: 780px;
+    }
+    .essay-meta {
+      display: flex; flex-wrap: wrap; gap: 2rem;
+      margin-top: 2.5rem; padding-top: 2.5rem;
+      border-top: 1px solid var(--cream-dark);
+    }
+    .essay-meta-block { flex: 0 1 auto; }
+    .essay-meta-label {
+      font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--ink-muted); margin-bottom: 0.5rem;
+    }
+    .essay-meta-value { font-family: var(--serif-body); font-size: 0.95rem; color: var(--ink); }
+
+    .essay-body { max-width: var(--prose-width); margin: 0 auto; }
+    .essay-body p {
+      font-size: 1rem; line-height: 1.82;
+      margin-bottom: 1.4em; color: var(--ink);
+    }
+    .essay-body em { font-style: italic; }
+    .essay-body strong { font-weight: 600; }
+    .essay-body h2 {
+      font-family: var(--serif-display);
+      font-size: 1.5rem; font-weight: 600; line-height: 1.25;
+      color: var(--ink); margin: 2.75rem 0 1.25rem; max-width: 640px;
+    }
+
+    /* Figures & captions */
+    .figure-wrap { margin: 3rem 0; text-align: center; }
+    .figure-wrap svg { max-width: 100%; height: auto; display: inline-block; }
+    .figure-wrap img {
+      max-width: 100%; height: auto; display: inline-block;
+      border-radius: 2px; background: var(--cream-dark); padding: 0.5rem;
+    }
+    .figure-caption {
+      font-family: var(--serif-body); font-size: 0.85rem; line-height: 1.6;
+      color: var(--ink-muted); margin-top: 1rem; font-style: italic;
+      max-width: 620px; margin-left: auto; margin-right: auto;
+    }
+
+    .essay-footer { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--cream-dark); }
+    .back-link {
+      font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em;
+      text-transform: lowercase; color: var(--teal);
+      border-bottom: 1px solid var(--teal-rule); padding-bottom: 2px;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+    .back-link:hover { color: var(--teal-light); border-bottom-color: var(--teal-light); }
+
+    @media (max-width: 768px) {
+      :root { --gutter: 1.5rem; }
+      section { padding: 3rem 0; }
+      .essay-header { padding: 3rem 0 2rem; }
+      .essay-title { font-size: 1.8rem; }
+      .essay-meta { gap: 1.5rem; }
+    }
+
+    @media (max-width: 480px) {
+      :root { --gutter: 1rem; }
+      .nav-links { gap: 0.9rem; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+      .nav-links::-webkit-scrollbar { display: none; }
+      .nav-links a { font-size: 0.62rem; letter-spacing: 0.04em; white-space: nowrap; }
+    }
+  </style>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <nav aria-label="Main">
+    <a href="../../index.html" class="nav-monogram nav-back">← back</a>
+    <ul class="nav-links">
+      <li><a href="../../#inquiries">inquiries</a></li>
+      <li><a href="../../#building">building</a></li>
+      <li><a href="../../#thesis">thesis</a></li>
+      <li><a href="../../#teaching">teaching</a></li>
+      <li><a href="../../#writing">writing</a></li>
+      <li><a href="../../#contact">contact</a></li>
+    </ul>
+  </nav>
+
+  <main id="main">
+
+  <section class="essay-header">
+    <div class="container">
+      <figure class="essay-hero">
+        <img decoding="async" src="hero.svg" alt="An undulation contour map filling the frame: nested irregular teal contour lines trace the highs and lows of a lumpy gravity field, deep teal loops marking the peaks and pale loops the troughs, the way a geoid's bumps look drawn as topography">
+      </figure>
+      <h1 class="essay-title">How Many Numbers Does It Take to Store the Shape of Gravity?</h1>
+      <div class="essay-meta">
+        <div class="essay-meta-block">
+          <p class="essay-meta-label">Domain</p>
+          <p class="essay-meta-value">Geodesy · Data Compression</p>
+        </div>
+        <div class="essay-meta-block">
+          <p class="essay-meta-label">Status</p>
+          <p class="essay-meta-value">Complete · 2026</p>
+        </div>
+        <div class="essay-meta-block">
+          <p class="essay-meta-label">Methods</p>
+          <p class="essay-meta-value">Spherical-harmonic truncation · Degree-variance spectra · Parseval error · Rate-distortion analysis</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="essay-body-wrap">
+    <div class="container">
+      <div class="essay-body">
+
+        <p>Sea level is not level. If you drained the oceans and let gravity alone decide where the surface of a still, worldwide sea would sit, you would get a lumpy, dimpled shape — rising tens of metres over the North Atlantic, dropping about a hundred below in the Indian Ocean south of the peninsula — that bears no resemblance to a smooth sphere. This shape is the geoid, and it is the honest answer to "what is the shape of the Earth." I got interested in it, working with a student, not for its shape but for a more mundane-sounding question: how many numbers does it take to write it down? The answer turned out to be a small lesson in where a planet keeps its secrets.</p>
+
+        <p>To store a field that lives on a sphere — gravity, the magnetic field, temperature, anything — you almost always reach for spherical harmonics. The idea is the same one behind a Fourier series, wrapped onto a globe. Any such field can be written as a sum of standard wavy patterns organised by a whole number called the degree: degree zero is a constant, degree one is a single big lobe, degree two splits the globe into quarters, and so on, with each higher degree carrying finer and finer detail. A field is then just its list of coefficients — how much of each pattern to add in. Keep every degree and you have the field exactly. Keep only the degrees up to some cutoff and throw the rest away, and you have a compressed version: smooth where you kept detail, blurred where you didn't. Truncating a spherical-harmonic model is lossy compression, the spherical cousin of turning down the quality slider on a JPEG.</p>
+
+        <p>So the question "how many numbers" becomes precise. Pick a tolerance — say you will accept a reconstruction that is within one per cent of the true field — and ask what cutoff degree you need. Because the harmonics are orthogonal, the error has an exact closed form: the fraction of the field's total power that lives in the degrees you discarded. No sampling, no noise, no Monte Carlo — you can compute the exact error at every cutoff and read off where it crosses your tolerance. That is what we did, for the Earth's gravity field and its magnetic field side by side.</p>
+
+        <div class="figure-wrap">
+          <svg viewBox="0 0 680 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A schematic of reconstruction error falling as more spherical-harmonic detail is kept. The magnetic core-field curve plunges steeply and crosses the one-per-cent error line after only tens of coefficients; the gravity geoid curve falls much more gently and does not cross one per cent until tens of thousands of coefficients.">
+            <defs><style>
+              .gxlbl { font-family: 'JetBrains Mono', monospace; font-size: 11px; fill: #6B6460; letter-spacing: 0.03em; }
+              .gxnum { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; fill: #1A1714; letter-spacing: 0.02em; }
+              .gxcur { font-family: 'Source Serif 4', serif; font-size: 13px; font-style: italic; fill: #1A1714; }
+            </style></defs>
+            <line x1="60" y1="34" x2="60" y2="300" stroke="#6B6460" stroke-width="1"/>
+            <line x1="60" y1="300" x2="632" y2="300" stroke="#6B6460" stroke-width="1"/>
+            <text class="gxlbl" x="30" y="30">error</text>
+            <text class="gxlbl" x="360" y="330">spherical-harmonic detail kept  →</text>
+            <line x1="60" y1="250" x2="632" y2="250" stroke="#2A6B6B" stroke-width="1.2" stroke-dasharray="6 5"/>
+            <text class="gxnum" x="600" y="244" text-anchor="end">1% error</text>
+            <path d="M60,70 C180,120 360,205 520,250 C560,261 600,268 632,271" fill="none" stroke="#2A6B6B" stroke-width="2.6"/>
+            <path d="M60,52 C96,66 126,232 156,250 C210,281 400,286 632,289" fill="none" stroke="#1A4F4F" stroke-width="2.6"/>
+            <circle cx="156" cy="250" r="4.2" fill="#1A4F4F"/>
+            <circle cx="520" cy="250" r="4.2" fill="#2A6B6B"/>
+            <text class="gxnum" x="150" y="234" text-anchor="middle">~49 numbers</text>
+            <text class="gxnum" x="520" y="234" text-anchor="middle">~37,000 numbers</text>
+            <text class="gxcur" x="120" y="92">magnetic core field</text>
+            <text class="gxcur" x="360" y="170">gravity — the geoid</text>
+          </svg>
+          <p class="figure-caption">How fast the error falls as you keep more detail is the whole story of compressibility. The magnetic core field plunges to one per cent after only a few dozen coefficients; the geoid drifts down so gently that it needs tens of thousands to reach the same accuracy. Same tolerance, same method — a thousandfold difference in cost.</p>
+        </div>
+
+        <p>The gap is startling. The magnetic field — specifically the main field, the part generated deep in Earth's molten core — reaches one per cent accuracy at degree six, which is forty-nine numbers. Forty-nine. The geoid, at the same one per cent, needs degree one hundred and ninety-one: about thirty-seven thousand coefficients. To store gravity as faithfully as you store magnetism costs seven hundred and sixty times as much. If you had guessed in advance which of Earth's great fields was the "simpler" one, the magnetic field — invisible, exotic, the thing that flips every few hundred thousand years — would not have been the obvious pick. But it is overwhelmingly the more compressible, because almost all of its strength is in a single dominant pattern, the dipole, the bar-magnet shape that makes a compass work. Ninety-four per cent of its power sits in the very lowest degree. There is almost nothing at fine scales to store.</p>
+
+        <p>Here is where it would be easy to write down a tidy rule — magnetism compresses, gravity doesn't — and here is where the data refuses to let you. There is a third field on Earth: the crustal magnetic field, the faint magnetism frozen into rocks near the surface, separate from the deep core field. When we ran it through the same machine, it decayed more slowly than the geoid. It was the <em>least</em> compressible of the three. So the clean story collapses: it is not gravity versus magnetism at all. Two magnetic fields sit at opposite ends of the ranking. Whatever governs compressibility, it is not which force you are looking at.</p>
+
+        <p>What governs it is depth. Trace each field back to where it is made. The core field comes from the fluid outer core, thousands of kilometres down, and a source that deep can only imprint broad, smooth, planet-scale patterns on the surface — the fine detail is smeared out by the sheer distance, so its power piles up at the lowest degrees and it compresses to almost nothing. The geoid comes from density variations spread all through the crust and mantle, at every depth, so it carries power across a wide band of scales and lands in the middle. The crustal magnetic field comes from shallow, patchy magnetisation just under our feet, and shallow sources write sharp, local, high-frequency detail — its spectrum is nearly flat, power at every scale, nothing to throw away. The order is monotonic in depth: the deeper the source, the smoother and longer-wavelength the field, the fewer numbers it takes to store. Compressibility is, quietly, a form of depth-sounding. You can even see it in the reverse: take the core field and mathematically continue it downward toward the core, and as you approach its source it <em>whitens</em> — its steep, compact spectrum flattens out, its compressibility draining away exactly as you close in on where it is born.</p>
+
+        <p>There is a coda worth adding, because "how many numbers" has a second meaning. One is <em>how many coefficients</em> — and there the news is that spherical harmonics are essentially the right basis: an oracle that could keep whichever coefficients it liked, in any cleverer arrangement, beats plain degree truncation on the geoid by three-tenths of one per cent. There is no smarter global basis waiting to be found; the geoid is expensive because it genuinely has structure at every scale, and you cannot compress what is really there. The other meaning is <em>how many bits per coefficient</em> — and there the naive choice of a 32-bit float wastes about a factor of eleven over the theoretical floor, a gap a smarter encoder closes to a few tens of per cent. But that is an engineering matter of coding, separable from the field itself. The deep fact is the first one: the number of coefficients is set by the physics, and the physics is set by the depth.</p>
+
+        <h2>An honest caveat that should go before any stronger claim</h2>
+
+        <p>The exact numbers depend on some defensible choices. "The full field" has to be defined by some maximum degree — 360 for the geoid, 13 for the core field — and a different reference would slide the absolute thresholds, though not the ordering that carries the argument. The geoid's one-per-cent degree is mildly sensitive to how the large-scale flattening term is handled: the standard ellipsoid-referenced convention puts it near degree 191, and dropping the degree-two term entirely pushes it to about 219. The crustal model is itself a truncation of a larger one, so its slope is the honest summary rather than its threshold. And the coefficient count is a clean upper bound on storage, not the last word — a real codec does better, as the bit-level analysis shows. What survives all of that is the comparison, because every field went through the identical, exact, area-weighted procedure: gravity is far less compressible than the core field, the crustal field is less compressible still, and the ranking tracks the depth of the source. The specific degrees are conventions. The ordering is physics.</p>
+
+        <div class="essay-footer">
+          <a href="../../#inquiries" class="back-link">← back to inquiries</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+</body>
+</html>

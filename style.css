@@ -1,11 +1,12 @@
 /* ============================================================
    Project Essays — Shared Stylesheet
-   Ninaad Adhvaryu · ninaad.github.io
+   Ninaad Adhvaryu · ninaad-adhvaryu.github.io
    ============================================================ */
 
-/* ── Fonts ───────────────────────────────────────────────── */
-/* Union of weights used across all pages */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,300;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap');
+/* ── Fonts ───────────────────────────────────────────────────
+   Fonts are loaded via <link> tags in each page's <head>
+   (preconnect + stylesheet) rather than a render-blocking
+   @import here. See IMPROVEMENTS.md.                          */
 
 /* ── Design Tokens ───────────────────────────────────────── */
 :root {
@@ -15,6 +16,16 @@
   --teal:        #2A6B6B;
   --teal-light:  #3D9090;
   --obsidian:    #1C1A2E;
+
+  /* Shared secondary tokens (pages may override locally) */
+  --cream-dark:    #E8E2D9;
+  --cream-card:    #FDFBF8;
+  --ink-muted:     #6B6460;
+  --teal-pale:     rgba(42, 107, 107, 0.09);
+  --teal-rule:     rgba(42, 107, 107, 0.22);
+  --obsidian-mid:  #272540;
+  --obsidian-text: #C9C5DA;
+  --obsidian-muted:#918DAE;
 
   /* Typefaces — two naming conventions for cross-page compatibility:
      index.html uses --serif-display / --serif-body / --mono
@@ -30,4 +41,41 @@
 /* ── Reset ───────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; font-size: 20px; }
-img  { display: block; max-width: 100%; }
+img  { display: block; max-width: 100%; height: auto; }
+
+/* ── Accessibility ───────────────────────────────────────── */
+.skip-link {
+  position: absolute;
+  left: 0.75rem;
+  top: -100%;
+  z-index: 300;
+  padding: 0.5rem 0.9rem;
+  background: var(--teal);
+  color: #fff;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  border-radius: 0 0 3px 3px;
+  transition: top 0.15s ease;
+}
+.skip-link:focus { top: 0; }
+
+:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+nav :focus-visible,
+footer :focus-visible {
+  outline-color: var(--teal-light);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
+    transition-duration: 0.01ms !important;
+  }
+}

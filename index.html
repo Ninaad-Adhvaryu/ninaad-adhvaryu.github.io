@@ -3,12 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ninaad Adhvaryu</title>
+  <title>Ninaad Adhvaryu — Computational Physicist &amp; Data Scientist</title>
   <meta name="description" content="Computational physicist and data scientist working on real-world problems in environment, education, and public-sector decision-making.">
-  <link rel="stylesheet" href="style.css">
+  <link rel="canonical" href="https://ninaad-adhvaryu.github.io/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Ninaad Adhvaryu — Computational Physicist &amp; Data Scientist">
+  <meta property="og:description" content="Computational physicist and data scientist working on real-world problems in environment, education, and public-sector decision-making.">
+  <meta property="og:url" content="https://ninaad-adhvaryu.github.io/">
+  <meta property="og:image" content="https://ninaad-adhvaryu.github.io/photo.jpg">
+  <meta name="twitter:card" content="summary">
+  <meta name="theme-color" content="#1C1A2E">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,300;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
   <style>
     :root {
       --serif-display: 'Fraunces', 'Playfair Display', Georgia, serif;
@@ -24,7 +34,7 @@
       --teal-pale2:    rgba(42, 107, 107, 0.05);
       --obsidian-mid:  #272540;
       --obsidian-text: #C9C5DA;
-      --obsidian-muted:#7C789A;
+      --obsidian-muted:#918DAE;
 
       --max-width:     1080px;
       --gutter:        2.5rem;
@@ -118,6 +128,7 @@
       align-items: center;
       gap: 0.8rem;
       font-family: var(--mono);
+      font-weight: 400;
       font-size: 0.65rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
@@ -262,263 +273,6 @@
     #inquiries {
       border-top: 1px solid var(--cream-dark);
     }
-
-    .filter-bar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-bottom: 3rem;
-    }
-
-    .filter-btn {
-      font-family: var(--mono);
-      font-size: 0.58rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      padding: 0.3rem 0.7rem;
-      border: 1px solid var(--cream-dark);
-      background: transparent;
-      color: var(--ink-muted);
-      cursor: pointer;
-      transition: all 0.18s ease;
-      border-radius: 1px;
-    }
-
-    .filter-btn:hover,
-    .filter-btn.active {
-      background: var(--teal);
-      border-color: var(--teal);
-      color: #fff;
-    }
-
-    .index-list {
-      list-style: none;
-    }
-
-    .index-entry {
-      border-top: 1px solid var(--cream-dark);
-      transition: border-color 0.2s ease;
-    }
-
-    .index-entry:last-child {
-      border-bottom: 1px solid var(--cream-dark);
-    }
-
-    .index-entry.is-open {
-      border-top-color: var(--teal);
-    }
-
-    .entry-trigger {
-      display: grid;
-      grid-template-columns: 52px 1fr 120px auto;
-      align-items: center;
-      gap: 1.5rem;
-      padding: 1.4rem 0;
-      cursor: pointer;
-      user-select: none;
-      -webkit-user-select: none;
-      transition: background 0.15s ease;
-    }
-
-    .entry-thumbnail {
-      width: 120px;
-      height: 75px;
-      background: var(--cream-dark);
-      border-radius: 3px;
-      overflow: hidden;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .entry-thumbnail img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .entry-thumbnail.empty {
-      background: linear-gradient(135deg, var(--teal-pale) 0%, rgba(42, 107, 107, 0.04) 100%);
-    }
-
-    .entry-trigger:hover .entry-title {
-      color: var(--teal);
-    }
-
-    .entry-num {
-      font-family: var(--mono);
-      font-size: 0.6rem;
-      letter-spacing: 0.08em;
-      color: var(--ink-muted);
-      padding-top: 0.2rem;
-    }
-
-    .entry-domain {
-      font-family: var(--mono);
-      font-size: 0.55rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--teal);
-      margin-bottom: 0.3rem;
-    }
-
-    .entry-title {
-      font-family: var(--serif-display);
-      font-size: 1.08rem;
-      font-weight: 600;
-      line-height: 1.3;
-      color: var(--ink);
-      transition: color 0.18s ease;
-      margin-bottom: 0.4rem;
-    }
-
-    .entry-lede {
-      font-family: var(--serif-body);
-      font-size: 0.85rem;
-      font-style: italic;
-      line-height: 1.6;
-      color: var(--ink-muted);
-      max-width: 680px;
-    }
-
-    .entry-toggle {
-      font-family: var(--mono);
-      font-size: 0.85rem;
-      color: var(--ink-muted);
-      flex-shrink: 0;
-      transition: color 0.2s ease, transform 0.3s ease;
-      margin-left: 1rem;
-      line-height: 1;
-      align-self: center;
-    }
-
-    .is-open .entry-toggle {
-      color: var(--teal);
-      transform: rotate(45deg);
-    }
-
-    .entry-body {
-      display: grid;
-      grid-template-rows: 0fr;
-      transition: grid-template-rows 0.38s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .entry-body-inner {
-      overflow: hidden;
-    }
-
-    .is-open .entry-body {
-      grid-template-rows: 1fr;
-    }
-
-    .entry-body-content {
-      padding: 0 0 2.5rem 3.5rem;
-      display: grid;
-      grid-template-columns: 1fr 220px;
-      gap: 3rem;
-      align-items: start;
-    }
-
-    .entry-prose p {
-      font-size: 0.9rem;
-      line-height: 1.85;
-      color: var(--ink-mid);
-    }
-
-    .entry-prose p + p {
-      margin-top: 1em;
-    }
-
-    .entry-read-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      margin-top: 1.25rem;
-      font-family: var(--mono);
-      font-size: 0.6rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--teal);
-      text-decoration: none;
-      border-bottom: 1px solid var(--teal-rule);
-      padding-bottom: 2px;
-      transition: color 0.2s, border-color 0.2s;
-    }
-
-    .entry-read-link:hover {
-      color: var(--teal-light);
-      border-bottom-color: var(--teal-light);
-    }
-
-    .entry-note {
-      background: var(--cream-card);
-      padding: 1.4rem 1.35rem;
-      border-left: 2px solid var(--teal);
-      border-top: 1px solid var(--cream-dark);
-      border-right: 1px solid var(--cream-dark);
-      border-bottom: 1px solid var(--cream-dark);
-    }
-
-    .entry-note-label {
-      font-family: var(--mono);
-      font-size: 0.52rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--ink-muted);
-      margin-bottom: 1rem;
-    }
-
-    .note-row {
-      margin-bottom: 0.9rem;
-    }
-
-    .note-row:last-child { margin-bottom: 0; }
-
-    .note-key {
-      font-family: var(--mono);
-      font-size: 0.55rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--ink-muted);
-      margin-bottom: 0.2rem;
-    }
-
-    .note-val {
-      font-family: var(--serif-body);
-      font-size: 0.8rem;
-      line-height: 1.45;
-      color: var(--ink);
-    }
-
-    .note-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.3rem;
-      margin-top: 0.3rem;
-    }
-
-    .note-tag {
-      font-family: var(--mono);
-      font-size: 0.5rem;
-      letter-spacing: 0.08em;
-      background: var(--teal-pale);
-      color: var(--teal);
-      padding: 0.15rem 0.4rem;
-      border-radius: 1px;
-    }
-
-    /* staggered entry animation */
-    .index-entry { opacity: 0; }
-    .index-entry:nth-child(1) { animation: fadeUp 0.5s 0.05s ease both; }
-    .index-entry:nth-child(2) { animation: fadeUp 0.5s 0.10s ease both; }
-    .index-entry:nth-child(3) { animation: fadeUp 0.5s 0.15s ease both; }
-    .index-entry:nth-child(4) { animation: fadeUp 0.5s 0.20s ease both; }
-    .index-entry:nth-child(5) { animation: fadeUp 0.5s 0.25s ease both; }
-    .index-entry:nth-child(6) { animation: fadeUp 0.5s 0.30s ease both; }
-    .index-entry:nth-child(7) { animation: fadeUp 0.5s 0.35s ease both; }
-    .index-entry:nth-child(8) { animation: fadeUp 0.5s 0.40s ease both; }
-    .index-entry:nth-child(9) { animation: fadeUp 0.5s 0.45s ease both; }
 
     /* Facts card (in opening) — cream with teal accent */
     .facts-card {
@@ -965,11 +719,6 @@
         margin: 0 auto;
       }
 
-      .entry-trigger { grid-template-columns: 36px 1fr auto; gap: 0.9rem; }
-      .entry-thumbnail { display: none; }
-      .entry-body-content { grid-template-columns: 1fr; gap: 1.5rem; padding-left: 2.5rem; }
-      .entry-note { order: -1; }
-
       .nav-monogram { display: none; }
       .nav-links { gap: 1.75rem; }
 
@@ -984,7 +733,10 @@
       section { padding: 4.5rem 0; }
       #opening { padding: 5rem 0 4rem; }
       .opening-name { font-size: 2.4rem; }
-      .nav-links { gap: 1.25rem; }
+      :root { --gutter: 1rem; }
+      .nav-links { gap: 0.9rem; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+      .nav-links::-webkit-scrollbar { display: none; }
+      .nav-links a { font-size: 0.62rem; letter-spacing: 0.04em; white-space: nowrap; }
     }
 
     /* ============================================================
@@ -1220,10 +972,12 @@
 </head>
 <body>
 
+  <a class="skip-link" href="#main">Skip to content</a>
+
   <!-- ============================================================
        NAV
   ============================================================ -->
-  <nav>
+  <nav aria-label="Main">
     <span class="nav-monogram">N. Adhvaryu</span>
     <ul class="nav-links">
       <li><a href="#inquiries">inquiries</a></li>
@@ -1235,6 +989,8 @@
     </ul>
   </nav>
 
+
+  <main id="main">
 
   <!-- ============================================================
        OPENING
@@ -1261,7 +1017,7 @@
 
         <div>
           <div class="photo-frame">
-            <img src="photo.jpg" alt="Ninaad Adhvaryu" style="width:100%;height:100%;object-fit:cover;">
+            <img src="photo.jpg" alt="Portrait of Ninaad Adhvaryu" width="600" height="800" style="width:100%;height:100%;object-fit:cover;">
           </div>
 
           <div class="facts-card">
@@ -1313,7 +1069,7 @@
   ============================================================ -->
   <section id="inquiries">
     <div class="container">
-      <p class="section-marker">inquiries</p>
+      <h2 class="section-marker">inquiries</h2>
 
       <p class="athena-framing">A selection of technical work produced through my role at Athena Education — open questions I have pursued long enough to have something to say about them.</p>
       <p class="athena-framing-note">featured essays · selected technical work</p>
@@ -1324,11 +1080,11 @@
         <!-- 01 · DOUBLE PENDULUM -->
         <a class="featured-card" href="double-pendulum/site/index.html">
           <div class="featured-hero-wrap">
-            <img src="double-pendulum/site/hero.svg" alt="Two double pendulums under different gravity fields tracing divergent chaotic trajectories">
+            <img loading="lazy" decoding="async" width="700" height="394" src="double-pendulum/site/hero.svg" alt="Two double pendulums under different gravity fields tracing divergent chaotic trajectories">
           </div>
           <div class="featured-body">
             <p class="featured-domain">Physics · Nonlinear Dynamics</p>
-            <h2 class="featured-title">If you change the shape of gravity, does chaos follow?</h2>
+            <h3 class="featured-title">If you change the shape of gravity, does chaos follow?</h3>
             <p class="featured-lede">On what happens to a double pendulum when "downward" is no longer constant — and on what that reveals about the assumptions quietly built into every physical model.</p>
             <span class="featured-read">Read full essay →</span>
           </div>
@@ -1337,11 +1093,11 @@
         <!-- 05 · CRICKET WICKETS -->
         <a class="featured-card" href="cricket-wickets/site/index.html">
           <div class="featured-hero-wrap">
-            <img src="cricket-wickets/site/hero.svg" alt="Stylised cricket pitch with KDE contours showing wicket density in the good-length off-stump corridor">
+            <img loading="lazy" decoding="async" width="700" height="394" src="cricket-wickets/site/hero.svg" alt="Stylised cricket pitch with KDE contours showing wicket density in the good-length off-stump corridor">
           </div>
           <div class="featured-body">
             <p class="featured-domain">Sports Analytics · Spatial Statistics</p>
-            <h2 class="featured-title">Does the "corridor of uncertainty" actually take wickets?</h2>
+            <h3 class="featured-title">Does the "corridor of uncertainty" actually take wickets?</h3>
             <p class="featured-lede">On a ball-by-ball Hawkeye study of ~140,000 IPL deliveries — and on the one pooled result that wouldn't behave until the data were stratified by bowling style and match phase.</p>
             <span class="featured-read">Read full essay →</span>
           </div>
@@ -1350,11 +1106,11 @@
         <!-- 08 · FOREST FIRES -->
         <a class="featured-card" href="forest-fires/site/index.html">
           <div class="featured-hero-wrap">
-            <img src="forest-fires/site/hero.svg" alt="Stylised percolation grid showing a connected fire cluster at the critical density threshold">
+            <img loading="lazy" decoding="async" width="700" height="394" src="forest-fires/site/hero.svg" alt="Stylised percolation grid showing a connected fire cluster at the critical density threshold">
           </div>
           <div class="featured-body">
             <p class="featured-domain">Environment · Complex Systems</p>
-            <h2 class="featured-title">How dense does a forest have to be before a spark matters?</h2>
+            <h3 class="featured-title">How dense does a forest have to be before a spark matters?</h3>
             <p class="featured-lede">On local connectivity thresholds in forest-fire models — and on why the geography of ignition points matters more than global forest density.</p>
             <span class="featured-read">Read full essay →</span>
           </div>
@@ -1363,11 +1119,11 @@
         <!-- 09 · VENDOR NETWORK -->
         <a class="featured-card" href="vendor-network/site/index.html">
           <div class="featured-hero-wrap">
-            <img src="vendor-network/site/hero.svg" alt="Stylised three-phase diagram of a vendor–platform market showing Digital, Mixed and Local regimes">
+            <img loading="lazy" decoding="async" width="700" height="394" src="vendor-network/site/hero.svg" alt="Stylised three-phase diagram of a vendor–platform market showing Digital, Mixed and Local regimes">
           </div>
           <div class="featured-body">
             <p class="featured-domain">Econophysics · Agent-Based Modeling</p>
-            <h2 class="featured-title">When does a market tip from many small sellers to one dominant platform?</h2>
+            <h3 class="featured-title">When does a market tip from many small sellers to one dominant platform?</h3>
             <p class="featured-lede">On a statistical-physics model of consumer choice between digital platforms and local vendors — and on how two perfectly reasonable simulation engines can disagree about which knob is doing the work.</p>
             <span class="featured-read">Read full essay →</span>
           </div>
@@ -1376,7 +1132,7 @@
       </div>
 
       <!-- ── SECONDARY LIST: other inquiries in progress ─────── -->
-      <p class="secondary-header">other inquiries · in progress</p>
+      <p class="secondary-header">more inquiries</p>
       <ul class="secondary-list">
 
         <li class="secondary-item">
@@ -1435,6 +1191,46 @@
           <span class="secondary-status">Complete</span>
         </li>
 
+        <li class="secondary-item">
+          <a class="secondary-link" href="sudoku-entropy/site/index.html">
+            <p class="secondary-domain">Information Theory · Cognitive Science</p>
+            <p class="secondary-title">Can a single number tell you how hard a Sudoku is?</p>
+          </a>
+          <span class="secondary-status">Complete</span>
+        </li>
+
+        <li class="secondary-item">
+          <a class="secondary-link" href="black-hole-rivers/site/index.html">
+            <p class="secondary-domain">General Relativity · Geodesy</p>
+            <p class="secondary-title">What if space flows like a river past the event horizon?</p>
+          </a>
+          <span class="secondary-status">Complete</span>
+        </li>
+
+        <li class="secondary-item">
+          <a class="secondary-link" href="galaxy-superstructures/site/index.html">
+            <p class="secondary-domain">Cosmology · Large-Scale Structure</p>
+            <p class="secondary-title">How real is the largest structure in the universe?</p>
+          </a>
+          <span class="secondary-status">Complete</span>
+        </li>
+
+        <li class="secondary-item">
+          <a class="secondary-link" href="fractals/site/index.html">
+            <p class="secondary-domain">Fractal Geometry · Geospatial Analysis</p>
+            <p class="secondary-title">How many fractal dimensions does a coastline have?</p>
+          </a>
+          <span class="secondary-status">Complete</span>
+        </li>
+
+        <li class="secondary-item">
+          <a class="secondary-link" href="geoid-harmonics/site/index.html">
+            <p class="secondary-domain">Geodesy · Data Compression</p>
+            <p class="secondary-title">How many numbers does it take to store the shape of gravity?</p>
+          </a>
+          <span class="secondary-status">Complete</span>
+        </li>
+
       </ul>
 
     </div>
@@ -1446,7 +1242,7 @@
   ============================================================ -->
   <section id="building" style="border-top: 1px solid var(--cream-dark);">
     <div class="container">
-      <p class="section-marker">building</p>
+      <h2 class="section-marker">building</h2>
 
       <p class="athena-framing">Software and systems I've built and shipped at Athena Education — tools my colleagues use daily, iterated against actual use, and in one case handed off to the product team to take to production.</p>
       <p class="athena-framing-note">internal tools · shipped systems</p>
@@ -1456,11 +1252,11 @@
         <!-- 01 · NHSJS-TOOLS -->
         <a class="featured-card" href="nhsjs-tools/site/index.html">
           <div class="featured-hero-wrap">
-            <img src="nhsjs-tools/site/hero.svg" alt="Stylised before/after of a paper draft being run through a formatting pipeline">
+            <img loading="lazy" decoding="async" width="700" height="394" src="nhsjs-tools/site/hero.svg" alt="Stylised before/after of a paper draft being run through a formatting pipeline">
           </div>
           <div class="featured-body">
             <p class="featured-domain">Tooling · Python Package</p>
-            <h2 class="featured-title">What if the formatting rules were code, not a checklist?</h2>
+            <h3 class="featured-title">What if the formatting rules were code, not a checklist?</h3>
             <p class="featured-lede">On encoding a journal's submission requirements as a Streamlit app and pip-installable package — and on what happens when the same five mistakes stop being mentor problems and become problems the tool refuses to make.</p>
             <span class="featured-read">Read full essay →</span>
           </div>
@@ -1469,11 +1265,11 @@
         <!-- 02 · PANGEA TOOLKIT -->
         <a class="featured-card" href="pangea-toolkit/site/index.html">
           <div class="featured-hero-wrap">
-            <img src="pangea-toolkit/site/hero.svg" alt="Stylised representation of six versioned iterations of a system prompt, with v5.2 crossed through">
+            <img loading="lazy" decoding="async" width="700" height="394" src="pangea-toolkit/site/hero.svg" alt="Stylised representation of six versioned iterations of a system prompt, with v5.2 crossed through">
           </div>
           <div class="featured-body">
             <p class="featured-domain">Research Tooling · LLM Systems</p>
-            <h2 class="featured-title">Can an ideation tool learn from what reviewers actually accept?</h2>
+            <h3 class="featured-title">Can an ideation tool learn from what reviewers actually accept?</h3>
             <p class="featured-lede">On six versions of a research-ideation toolkit grounded in the corpus of accepted papers and reviewer comments — and on why v5.2 had to be discarded after the conversation data showed it added schema without adding lift.</p>
             <span class="featured-read">Read full essay →</span>
           </div>
@@ -1482,11 +1278,11 @@
         <!-- 03 · ATHENA INTELLIGENCE -->
         <a class="featured-card" href="athena-intelligence/site/index.html">
           <div class="featured-hero-wrap">
-            <img src="athena-intelligence/site/hero.svg" alt="Stylised network of integrations — Zoom, Drive, Calendar, Airtable — feeding into a central scholar context file">
+            <img loading="lazy" decoding="async" width="700" height="394" src="athena-intelligence/site/hero.svg" alt="Stylised network of integrations — Zoom, Drive, Calendar, Airtable — feeding into a central scholar context file">
           </div>
           <div class="featured-body">
             <p class="featured-domain">Internal Platform · Vibe-Coded → Production</p>
-            <h2 class="featured-title">What if every team member could see every meeting they weren't in?</h2>
+            <h3 class="featured-title">What if every team member could see every meeting they weren't in?</h3>
             <p class="featured-lede">On a vibe-coded internal platform that turned Zoom transcripts into shared scholar context — demoed to leadership, handed off to product and IT for productionisation, and now used company-wide.</p>
             <span class="featured-read">Read full essay →</span>
           </div>
@@ -1599,7 +1395,7 @@
 
         <div class="thesis-intro-prose">
           <p>My MSc thesis asked a deceptively narrow question: can we reliably compute the ground state of a rotating dipolar Bose–Einstein condensate, and how do two distinct numerical methods compare when they try? The system is a cloud of 75,000 dysprosium atoms — one of the most magnetic elements in the periodic table — cooled to within billionths of a degree of absolute zero, then spun. At that temperature, quantum mechanics stops being a correction and becomes the whole story.</p>
-          <p>What makes dipolar condensates unusual is that their atoms don't just interact when they touch. The magnetic dipole–dipole interaction reaches across space, couples to rotation, and introduces an anisotropy that no standard condensate has. When the cloud spins fast enough, it doesn't swell uniformly — it nucleates vortices, quantised holes in the wavefunction arranged in a hexagonal lattice. The image above shows one such configuration: seven vortices in a Abrikosov-like lattice, each colour-coded by the phase of the quantum field winding around its core.</p>
+          <p>What makes dipolar condensates unusual is that their atoms don't just interact when they touch. The magnetic dipole–dipole interaction reaches across space, couples to rotation, and introduces an anisotropy that no standard condensate has. When the cloud spins fast enough, it doesn't swell uniformly — it nucleates vortices, quantised holes in the wavefunction arranged in a hexagonal lattice. The image above shows one such configuration: three vortex cores in a triangular arrangement — the seed of an Abrikosov-like lattice — sitting inside the condensate density envelope, with the multigrid mesh refining around them.</p>
           <p>The thesis developed and tested two complementary ground-state solvers — a preconditioned Conjugate Gradient Method and Imaginary Time Evolution with Strang operator splitting — on the full extended Gross–Pitaevskii equation, including the Lee–Huang–Yang quantum fluctuation correction. A Cascadic Multigrid Method reduced computation times by up to 22× by seeding fine-grid runs from coarse solutions. The essay below goes through all of this in detail.</p>
           <a href="dipolar-quantum-gases/site/index.html" class="thesis-read-link">Read full essay →</a>
         </div>
@@ -1639,7 +1435,7 @@
   ============================================================ -->
   <section id="writing">
     <div class="container">
-      <p class="section-marker">writing</p>
+      <h2 class="section-marker">writing</h2>
 
       <div class="writing-list">
 
@@ -1680,7 +1476,7 @@
   ============================================================ -->
   <section id="teaching">
     <div class="container">
-      <p class="section-marker">teaching</p>
+      <h2 class="section-marker">teaching</h2>
 
       <p class="teaching-intro" style="max-width:720px; font-size:0.92rem; line-height:1.72; color:var(--ink-muted); margin-bottom:2.5rem;">All teaching was at <a href="https://ahduni.edu.in/academics/schools-centres/undergraduate-college/foundation-programme/" target="_blank" rel="noopener">Ahmedabad University</a>, where I served as Teaching Assistant across the Foundation Programme and several interdisciplinary seminars in 2024–25.</p>
 
@@ -1729,7 +1525,7 @@
   ============================================================ -->
   <section id="contact">
     <div class="container">
-      <p class="section-marker">contact</p>
+      <h2 class="section-marker">contact</h2>
 
       <p class="contact-tagline">Open to research collaborations, teaching, and applied work — especially where technical depth meets real-world stakes.</p>
 
@@ -1747,6 +1543,7 @@
     </div>
   </section>
 
+  </main>
 
   <!-- ============================================================
        FOOTER
@@ -1756,32 +1553,5 @@
     <span>New Delhi · 2026</span>
   </footer>
 
-  <script>
-    // ── INQUIRIES: EXPAND / COLLAPSE ──
-    function toggleEntry(trigger) {
-      const entry  = trigger.closest('.index-entry');
-      const isOpen = entry.classList.contains('is-open');
-      document.querySelectorAll('.index-entry.is-open').forEach(e => e.classList.remove('is-open'));
-      if (!isOpen) entry.classList.add('is-open');
-    }
-
-    // ── INQUIRIES: DOMAIN FILTER ──
-    const filterBar = document.getElementById('filterBar');
-    const entries   = document.querySelectorAll('.index-entry');
-
-    if (filterBar) {
-      filterBar.addEventListener('click', e => {
-        const btn = e.target.closest('.filter-btn');
-        if (!btn) return;
-        filterBar.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const domain = btn.dataset.domain;
-        entries.forEach(entry => {
-          const match = domain === 'all' || entry.dataset.domain === domain;
-          entry.style.display = match ? '' : 'none';
-        });
-      });
-    }
-  </script>
 </body>
 </html>

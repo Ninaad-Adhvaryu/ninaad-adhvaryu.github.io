@@ -1,0 +1,69 @@
+SOURCE EXTRACT — "How robustly can clustering algorithms recover cosmic superstructures from
+X-ray galaxy cluster catalogues? A method comparison under input sparsity"
+Pulled from Google Drive (fileId 17EYLq-W3lY__H3k7vE_DD871kD5YfHOf, PDF) via read_file_content, 2026-07-04.
+Student author (British School New Delhi); keep anonymous per house rule. No institution names in essay.
+
+CORE QUESTION
+Cosmic superstructures = coherent overdensities of galaxy clusters spanning hundreds of Mpc.
+Quipu (Böhringer et al. 2025): a 428 Mpc filament of 68 X-ray clusters, "largest known cosmic
+structure," ~2.4e17 solar masses, found by friends-of-friends (FoF) on the CLASSIX catalogue with a
+redshift-scaled linking length. Question: does such a result HOLD under a different clustering
+algorithm, or with a SPARSER input catalogue? Not previously tested systematically.
+
+METHOD
+Six clustering methods on 317 X-ray clusters (MCXC catalogue, redshift slice z=0.03-0.07), scored
+against the 185 published superstructure members by binary F1. Robustness = random subsampling.
+Second slice z=0.04-0.08 (324 clusters) tests slice-dependence.
+Methods: (1) FoF fixed linking length L=50 Mpc; (2) FoF redshift-scaled linking length
+l(z)=(2 N_Cl)^(-1/3); (3) DBSCAN (eps=50 Mpc, min_samples=3); (4) HDBSCAN (min_cluster_size=10,
+min_samples=3); (5) single-linkage hierarchical (cut at 50 Mpc); (6) Gaussian Mixture Model (K=10).
+Positions: equatorial->comoving Cartesian, flat LCDM H0=70, Om=0.3. Ground truth from Böhringer
+Table A.1. Off-the-shelf (UNOPTIMISED) hyperparameters on purpose. Metrics: adjusted Rand index,
+binary F1, per-superstructure Jaccard. Sparsity sweep: 100 bootstraps at fractions {1,0.8,0.6,0.4,0.2}.
+Whole thing runs in ~30 min on a laptop CPU. Code on Zenodo, fully reproducible from 2 VizieR catalogues.
+
+THE PIVOT (what "misbehaves")
+The method that WINS at full density is the WORST under sparsity — it falls off a cliff to F1=0.00.
+- Full sample: FoF-fixed = DBSCAN = single-linkage all tie at highest F1 = 0.74 (prec 0.62, rec 0.91).
+  FoF-fixed and single-linkage are mathematically IDENTICAL (ARI=1.000). DBSCAN agrees on binary F1.
+  FoF redshift-scaled 0.67; GMM 0.50 (over-grouping: prec 0.34, rec 0.96); HDBSCAN 0.47 (prec 0.37, rec 0.64).
+- Sparsity (primary slice): fixed-scale methods 0.74(100%) -> 0.61(80%) -> 0.00(60%). CLIFF.
+  HDBSCAN: 0.58(80%), 0.50(60%), 0.49(40%), 0.41(20%) — holds F1>=0.30 across the whole range.
+  Redshift-scaled FoF: 0.49(60%), 0.33(40%), 0.00(20%). GMM: 0.47(60%), 0.05(40%), 0.00(20%).
+- Sensitivity slice (z=0.04-0.08): fixed-scale 0.65 full, cliff at 80%. HDBSCAN 0.31-0.39 across all.
+  HDBSCAN is the ONLY method with median F1>0.30 at the 20% subsample in BOTH slices.
+=> Trade-off: full-density accuracy (fixed-scale) vs robustness under input sparsity (adaptive-density).
+
+MECHANISM (why the cliff — it's percolation)
+Fixed linking length L=50 Mpc vs mean inter-cluster separation ~67 Mpc at full density
+(comoving volume ~9.5e7 Mpc^3). Subsampling grows mean separation by (fraction)^(-1/3); at 60%
+it's ~80 Mpc, well ABOVE L, so the superstructure fragments into pieces below the 20-member
+threshold -> F1 collapses. Bootstrap 16-84% bands widen most at the cliff, consistent with a
+PERCOLATION transition in the FoF connectivity graph. HDBSCAN uses relative density contrast (no
+fixed length scale), so it still finds dense cores when the sample thins — at the cost of lower
+full-sample F1 (it excludes the periphery that single-linkage chains in).
+
+OTHER NUMBERS / TEXTURE
+- Per-superstructure Jaccard (FoF fixed): Shapley 0.83, Sculptor-Pegasus 0.76, Quipu 0.55,
+  Hercules 0.23, Serpens-Corona Borealis 0.13. Serpens-CrB + Hercules MERGE into one 42-cluster
+  component at 50 Mpc (projection overlap; a known single-linkage failure mode).
+- Quipu: only 35 of 68 published members are even in MCXC (33 northern members live in deeper
+  CLASSIX/REFLEX II/NORAS II, absent from MCXC) -> unrecoverable at any skill. Recovered candidate:
+  30 true positives, 20 false positives, 38 not recovered.
+- GMM over-groups (fits ellipsoidal Gaussians to filamentary structure — wrong tool).
+
+HONEST CAVEAT / SCOPE
+Descriptive comparison at fixed catalogue + fixed hyperparameters; NO causal ranking, NO new
+structure discovered. MCXC subset (317) shallower than CLASSIX (345). Off-the-shelf hyperparameters
+(tuning would shift absolute F1 but not the qualitative cliff, per the density argument). Positions
+only (no mass/luminosity/redshift-space). Bootstrap uncertainties omit ground-truth systematics.
+Two slices of one catalogue — don't extrapolate to other surveys. Relevance: eROSITA all-sky survey
+has heterogeneous depth -> cross-check fixed-scale FoF against HDBSCAN where completeness < ~80%.
+
+FIGURES (for image-suggestion mapping)
+Fig 1 precision-recall of all 6 methods at full sample.
+Fig 2 per-superstructure Jaccard bars (Serpens-CrB + Hercules merged at m=42).
+Fig 3 sky map of recovered Quipu candidate (TP/FP/missed).
+Fig 4 F1 vs subsample fraction, two slices — THE money figure (the cliff). <- best evidence figure.
+Key refs: Böhringer et al. 2025 (Quipu); Huchra & Geller 1982 (FoF); Campello/McInnes (HDBSCAN);
+Piffaretti 2011 (MCXC); Knebe 2011 (halo-finder comparison methodology).

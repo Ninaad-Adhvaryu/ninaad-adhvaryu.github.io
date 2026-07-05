@@ -1,0 +1,86 @@
+SOURCE EXTRACT — "Shannon Entropy as a Lens for Human-Computer Sudoku Analysis"
+Pulled from Google Drive (fileId 1rSsfNvOpyLi6fldGiES_HB6weXDWBj7k) via read_file_content, 2026-07-04.
+Paper is anonymised for review ("Author name and affiliation removed").
+
+ABSTRACT / CORE CLAIM
+Sudoku as a controlled setting to compare how humans and algorithms reduce uncertainty.
+Question: can Shannon entropy serve as a quantitative lens that (a) distinguishes human from
+machine solving and (b) grades puzzle difficulty. A Norvig-style constraint-propagation solver
+was instrumented to record state entropy = sum over cells of log2(candidate-set size) at every
+internal step. Human solving captured with a custom app timestamping each placement; entropy
+reconstructed after each move. 28 solves = 10 easy, 10 medium, 8 hard. Two metrics: initial
+entropy gap (solver start - human start) and cumulative area between the two entropy trajectories.
+
+KEY NUMBERS
+- Grid entropy H = sum_s log2|D(s)|, D(s) = candidate set for cell s. Zero when every cell solved.
+  Naive UPPER BOUND on true remaining uncertainty (ignores logical dependencies between cells).
+- Solver first logged state = fully unconstrained grid (all 9 candidates in every empty cell,
+  before givens parsed) => near theoretical max ~257 bits (81*log2(9)=256.8), falls as givens read.
+- Initial entropy gap (bits): Easy 144.69 (SD 6.70, 95% CI 139.90-149.48), Medium 127.99
+  (SD 11.63), Hard 79.00 (SD 34.97, CI 49.77-108.24). ANOVA F(2,25)=24.78, p<0.001,
+  partial eta^2=0.665. Cohen's d: easy-med 1.76; med-hard 1.98; easy-hard 2.78.
+  Hard band far wider dispersion (range 37.40-145.31) than easy (SD 6.70).
+- Cumulative area (entropy-by-step units): Easy 55829, Medium 38191, Hard 21615.
+  ANOVA F(2,25)=17.81, p<0.001, eta^2=0.588. d: easy-med 1.35; med-hard 1.52; easy-hard 2.80.
+- Representative solve (Fig 1): solver fill trace starts ~133 bits at first non-given placement,
+  ends 0; human trace starts ~38 bits, ends 0. Curves fall at similar RATE once under way ->
+  separation dominated by a roughly CONSTANT OFFSET, not diverging slope.
+- Fig 2: empty-branch solve -> grid solved by pure forward constraint propagation, no guess/branch/backtrack.
+- Fig 4: human trajectory over elapsed time (high-complexity puzzle): starts ~38.6 bits,
+  reaches 0 after ~320 s. NOT uniform: plateaus (~7 bits held for ~40 s) alternate with rapid
+  drops resolving several bits in seconds. Plateaus + steep reductions, not constant slope.
+
+METHOD DETAIL
+- Norvig-style solver (Norvig 2011); arc-consistency descends from Mackworth 1977.
+  81 squares A1..I9; assign+eliminate; DFS with minimum-remaining-values heuristic (fewest
+  candidates first), ties by label, digits tried descending. Fully deterministic.
+- Human entropy: event-driven. compute_human_events replays recorded moves; board_to_domains
+  recomputes each empty cell's candidates as digits not used by a filled peer (DIRECT peer
+  elimination only, NOT full constraint propagation).
+- Custom digital Sudoku app logged every action; CSV per solve: step index, timestamp(ms),
+  elapsed(ms), row/col/label, digit, action type; footer = 81-char puzzle string + start/finish.
+  Only value placements used to reconstruct entropy. Solves span Mar-Apr 2026.
+- Stats: per-band mean/SD/min/max, 95% CI from t; one-way ANOVA; Cohen's d pooled SD.
+
+NARRATIVE PIVOT (the thing that misbehaves)
+The measurement asymmetry. Human and solver entropy were NOT computed by the same procedure:
+solver logs from the fully unconstrained grid (before givens parsed) using full constraint
+propagation; human candidates from direct peer elimination only, starting from the given grid.
+=> "A large part of the initial entropy gap therefore reflects WHEN and HOW each entropy was
+measured rather than a difference in cognition." The headline human-vs-machine number is
+partly an artifact of instrumentation. BUT the difficulty-grading result is robust because it
+compares the SAME metric across bands. Finding and artifact travel together; you separate them
+by noticing the metric is definitional.
+
+INTERPRETIVE FRAME
+- Sudoku = declining-entropy task (single solution, fixed constraints; every step narrows
+  possibilities). Contrast chess: adversary can INCREASE positional-tension entropy (Barthelemy 2025).
+- Information theory as cognition currency: Hick's law RT ~ log2(alternatives) (Hick 1952);
+  Hyman 1953; Attneave 1954 (perception reduces redundancy).
+- Chunking/template theory: experts encode positions as chunks (Chase & Simon 1973), short-term
+  capacity ~7+-2 (Miller 1956), templates (Gobet & Simon 1996). Predicts humans collapse a region
+  into one recognised pattern, resolving much uncertainty in one move -> humans start LOWER, and
+  harder puzzles expose fewer recognisable patterns -> smaller gap. The plateaus-then-drops in
+  Fig 4 read as chunk recognition events.
+- Sudoku completion is NP-complete (Yato & Seta 2003). Hard instances concentrate near a critical
+  boundary / phase transition (Cheeseman 1991; Monasson 1999) -> connects to empty-branch solves.
+- Applications: entropy-aware tutoring (locate cell/unit of highest uncertainty, give pattern-level
+  hint); hybrid solvers with a recognition stage before search.
+
+LIMITATIONS
+- Measurement asymmetry (above) is the biggest: gap magnitude cannot be read as pure cognitive advantage.
+- 28 solves; if one participant produced many, observations not independent -> ANOVA p-values
+  descriptive not inferential until participant count confirmed + mixed-effects run.
+  [Paper flags: author to confirm number of distinct participants.]
+- Difficulty labels assigned by the app, not validated against external difficulty model.
+- Unequal variance (hard band >> easy band) -> equal-variance ANOVA assumption questionable.
+- Naive entropy ignores logical dependencies -> overstates true remaining uncertainty, most for
+  grids far from solved.
+- Figs 3 & 5 (distribution histograms) to be regenerated from raw per-solve data before submission.
+
+FIGURES (for image-suggestion mapping)
+Fig 1 representative human vs solver trajectory (normalised progress).
+Fig 2 empty-branch solve (pure forward propagation).
+Fig 3 initial-gap distribution by difficulty (to be regenerated).
+Fig 4 human entropy vs elapsed time, plateaus + drops (high-complexity solve). <- best evidence figure.
+Fig 5 cumulative-area distribution by difficulty (to be regenerated).
