@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Does More Chaos Make a Better Cipher? — Ninaad Adhvaryu</title>
+  <meta name="description" content="Five chaotic maps competing to hide a message: the fancy two-dimensional Hénon map came last, undone by the finite precision of the computer it ran on. On why chaos is not the same as randomness.">
+  <link rel="canonical" href="https://ninaad-adhvaryu.github.io/chaos-encryption/site/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Does More Chaos Make a Better Cipher? — Ninaad Adhvaryu">
+  <meta property="og:description" content="Five chaotic maps competing to hide a message: the fancy two-dimensional Hénon map came last, undone by the finite precision of the computer it ran on.">
+  <meta property="og:url" content="https://ninaad-adhvaryu.github.io/chaos-encryption/site/">
+  <meta name="twitter:card" content="summary">
+  <meta name="theme-color" content="#1C1A2E">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,300;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style.css">
+
+  <style>
+    :root {
+      --cream-dark:    #E8E2D9;
+      --cream-card:    #FDFBF8;
+      --ink-muted:     #6B6460;
+      --teal-pale:     rgba(42, 107, 107, 0.09);
+      --obsidian-mid:  #272540;
+      --obsidian-text: #C9C5DA;
+      --obsidian-muted:#918DAE;
+      --max-width:     1080px;
+      --gutter:        2.5rem;
+      --prose-width:   700px;
+    }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--serif-body);
+      font-size: 1rem;
+      line-height: 1.72;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    ::selection { background: rgba(42, 107, 107, 0.18); }
+    a { color: var(--teal); text-decoration: none; transition: color 0.2s ease; }
+
+    nav {
+      position: sticky; top: 0; z-index: 200;
+      background: var(--obsidian); height: 54px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 var(--gutter);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .nav-monogram { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--obsidian-muted); }
+    .nav-links { display: flex; gap: 2.25rem; list-style: none; }
+    .nav-links a { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; color: var(--obsidian-text); text-transform: lowercase; padding-bottom: 2px; border-bottom: 1px solid transparent; transition: color 0.2s ease, border-color 0.2s ease; }
+    .nav-links a:hover { color: var(--teal-light); border-bottom-color: var(--teal-light); }
+    .nav-back { color: var(--obsidian-text); }
+
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--gutter); }
+    section { padding: 4rem 0; }
+
+    .essay-header { padding: 3rem 0 3.5rem; }
+    .essay-hero { margin: 0 0 2.75rem; }
+    .essay-hero img {
+      display: block; width: 100%; height: auto;
+      border: 1px solid var(--cream-dark); border-radius: 2px;
+    }
+    .essay-title {
+      font-family: var(--serif-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700; line-height: 1.15; letter-spacing: -0.015em;
+      color: var(--ink); margin-bottom: 1.75rem; max-width: 760px;
+    }
+    .essay-meta {
+      display: flex; flex-wrap: wrap; gap: 2rem;
+      margin-top: 2.5rem; padding-top: 2.5rem;
+      border-top: 1px solid var(--cream-dark);
+    }
+    .essay-meta-block { flex: 0 1 auto; }
+    .essay-meta-label {
+      font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--ink-muted); margin-bottom: 0.5rem;
+    }
+    .essay-meta-value { font-family: var(--serif-body); font-size: 0.95rem; color: var(--ink); }
+
+    .essay-body { max-width: var(--prose-width); margin: 0 auto; }
+    .essay-body p {
+      font-size: 1rem; line-height: 1.82;
+      margin-bottom: 1.4em; color: var(--ink);
+    }
+    .essay-body em { font-style: italic; }
+    .essay-body strong { font-weight: 600; }
+    .essay-body h2 {
+      font-family: var(--serif-display);
+      font-size: 1.5rem; font-weight: 600; line-height: 1.25;
+      color: var(--ink); margin: 2.75rem 0 1.25rem; max-width: 640px;
+    }
+
+    /* Figures & captions */
+    .figure-wrap { margin: 3rem 0; text-align: center; }
+    .figure-wrap svg { max-width: 100%; height: auto; display: inline-block; }
+    .figure-wrap img {
+      max-width: 100%; height: auto; display: inline-block;
+      border-radius: 2px; background: var(--cream-dark); padding: 0.5rem;
+    }
+    .figure-caption {
+      font-family: var(--serif-body); font-size: 0.85rem; line-height: 1.6;
+      color: var(--ink-muted); margin-top: 1rem; font-style: italic;
+      max-width: 620px; margin-left: auto; margin-right: auto;
+    }
+
+    .essay-footer { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--cream-dark); }
+    .back-link {
+      font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em;
+      text-transform: lowercase; color: var(--teal);
+      border-bottom: 1px solid var(--teal-rule); padding-bottom: 2px;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+    .back-link:hover { color: var(--teal-light); border-bottom-color: var(--teal-light); }
+
+    @media (max-width: 768px) {
+      :root { --gutter: 1.5rem; }
+      section { padding: 3rem 0; }
+      .essay-header { padding: 3rem 0 2rem; }
+      .essay-title { font-size: 1.8rem; }
+      .essay-meta { gap: 1.5rem; }
+    }
+
+    @media (max-width: 480px) {
+      :root { --gutter: 1rem; }
+      .nav-links { gap: 0.9rem; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+      .nav-links::-webkit-scrollbar { display: none; }
+      .nav-links a { font-size: 0.62rem; letter-spacing: 0.04em; white-space: nowrap; }
+    }
+  </style>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <nav aria-label="Main">
+    <a href="../../index.html" class="nav-monogram nav-back">← back</a>
+    <ul class="nav-links">
+      <li><a href="../../#inquiries">inquiries</a></li>
+      <li><a href="../../#building">building</a></li>
+      <li><a href="../../#thesis">thesis</a></li>
+      <li><a href="../../#teaching">teaching</a></li>
+      <li><a href="../../#writing">writing</a></li>
+      <li><a href="../../#contact">contact</a></li>
+    </ul>
+  </nav>
+
+  <main id="main">
+
+  <section class="essay-header">
+    <div class="container">
+      <figure class="essay-hero">
+        <img decoding="async" src="hero.svg" alt="Two square plots of consecutive keystream bytes: on the left a formless, evenly spread cloud of teal dots signalling good randomness with no correlation; on the right the dots collapse onto several parallel diagonal bands, betraying that consecutive bytes are not independent — a chaotic map that failed to hide its structure">
+      </figure>
+      <h1 class="essay-title">Does More Chaos Make a Better Cipher?</h1>
+      <div class="essay-meta">
+        <div class="essay-meta-block">
+          <p class="essay-meta-label">Domain</p>
+          <p class="essay-meta-value">Cryptography · Dynamical Systems</p>
+        </div>
+        <div class="essay-meta-block">
+          <p class="essay-meta-label">Status</p>
+          <p class="essay-meta-value">Complete · 2026</p>
+        </div>
+        <div class="essay-meta-block">
+          <p class="essay-meta-label">Methods</p>
+          <p class="essay-meta-value">Chaotic maps · XOR stream cipher · Entropy / correlation / avalanche metrics</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="essay-body-wrap">
+    <div class="container">
+      <div class="essay-body">
+
+        <p>There is a seductive idea in cryptography that chaos is a natural source of secrecy. A chaotic system is deterministic — no randomness, no dice — and yet so exquisitely sensitive to its starting conditions that two nearly identical starts diverge into completely different futures. That is exactly the property you want in a cipher: change one bit of the key and the encrypted message should scramble beyond recognition. So it is tempting to reach for the most dramatic chaos you can find, on the theory that more complexity buys more secrecy. A project I worked on with a student set out to test that theory directly, and it came back inverted.</p>
+
+        <p>The setup was deliberately plain. Take five well-known chaotic maps — four of them one-dimensional (the logistic, tent, sine, and piecewise-linear maps) and one two-dimensional (the Hénon map) — and use each as the engine of a simple stream cipher. A stream cipher works by generating a long pseudo-random keystream and combining it with the message one bit at a time; if the keystream is genuinely random-looking, the ciphertext is too, and the message is hidden. Each map produces a sequence of numbers as it iterates; threshold those numbers into zeros and ones and you have a keystream. The question is which map produces the best one. The hypothesis going in was the intuitive one: the Hénon map, being two-dimensional and therefore richer, ought to win.</p>
+
+        <p>To judge "best," the keystreams were put through five standard tests of randomness. Are the zeros and ones balanced, or is the stream biased toward one? Is the entropy — the information density — close to the theoretical maximum of eight bits per byte? Are neighbouring bytes uncorrelated, as independent random values would be? Is the ciphertext incompressible, the way truly random data is? And does flipping a single bit of the key produce a completely different ciphertext? On paper all five maps are chaotic, so all five should do well. They did not do equally well, and the ranking was not the one anyone predicted.</p>
+
+        <p>The simplest map won. The tent map — a triangle-shaped rule so elementary you could compute it by hand — produced the most random keystream by every measure: near-perfect bit balance, the highest entropy at 7.95 of a possible 8 bits per byte, negligible correlation between neighbouring bytes, and ciphertext that would not compress at all. And the Hénon map, the sophisticated two-dimensional favourite, came last. Its ciphertext had the lowest entropy of the five, and it was the only one that compressed — a quiet but damning tell, because compressibility means a pattern is still there to be found. The fancy map was the worst at the one job it was supposed to be best at.</p>
+
+        <div class="figure-wrap">
+          <svg viewBox="0 0 720 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Two panels. Left: the Henon attractor drawn as scattered points tracing its folded-curve shape, an orbit that in exact arithmetic never repeats. Right: the same orbit under finite-precision arithmetic collapses onto a short closed loop of seven points that cycles forever.">
+            <defs><style>
+              .celbl { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; fill: #6B6460; letter-spacing: 0.03em; }
+              .ceh   { font-family: 'Source Serif 4', serif; font-size: 12.5px; font-style: italic; fill: #1A1714; }
+            </style></defs>
+            <text class="ceh" x="20" y="24">in exact arithmetic: never repeats</text>
+            <text class="ceh" x="398" y="24">in a computer: a short loop, forever</text>
+            <g><circle cx="34" cy="60" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="207" cy="188" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="295" cy="124" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="110" cy="77" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="315" cy="153" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="215" cy="181" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="284" cy="118" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="36" cy="60" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="237" cy="175" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="197" cy="90" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="180" cy="216" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="298" cy="126" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="136" cy="83" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="233" cy="202" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="176" cy="85" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="83" cy="236" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="227" cy="109" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="319" cy="147" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="150" cy="203" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="300" cy="129" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="162" cy="90" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="129" cy="227" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="239" cy="103" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="298" cy="125" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="134" cy="83" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="244" cy="198" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="120" cy="74" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="293" cy="177" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="179" cy="96" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="142" cy="224" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="267" cy="113" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="89" cy="68" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="275" cy="117" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="43" cy="60" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="267" cy="144" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="59" cy="63" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="219" cy="103" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="311" cy="167" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="242" cy="166" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="180" cy="86" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="91" cy="234" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="203" cy="98" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="238" cy="201" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="151" cy="80" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="124" cy="228" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="226" cy="100" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="319" cy="155" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="118" cy="211" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="227" cy="100" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="320" cy="153" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="112" cy="213" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="211" cy="96" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="272" cy="189" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="55" cy="64" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="234" cy="111" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="307" cy="131" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="230" cy="117" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="310" cy="134" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="252" cy="133" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="171" cy="84" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="74" cy="238" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="258" cy="129" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="128" cy="75" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="255" cy="194" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="71" cy="65" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="215" cy="99" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="294" cy="179" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="191" cy="99" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="189" cy="214" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="294" cy="124" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="95" cy="73" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="292" cy="125" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="80" cy="70" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="238" cy="105" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="298" cy="125" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="131" cy="82" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="255" cy="194" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="72" cy="65" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="217" cy="99" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="302" cy="174" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="244" cy="125" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="239" cy="101" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="298" cy="125" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="133" cy="82" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="246" cy="197" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="110" cy="72" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="314" cy="157" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="221" cy="179" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="269" cy="112" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="74" cy="65" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="222" cy="100" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="314" cy="163" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="203" cy="186" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="304" cy="130" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="203" cy="104" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="254" cy="195" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="74" cy="66" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="222" cy="100" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="315" cy="163" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="201" cy="187" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="306" cy="132" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="230" cy="116" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="312" cy="135" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="256" cy="144" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="121" cy="73" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="288" cy="180" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="139" cy="84" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="217" cy="206" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="243" cy="103" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="275" cy="114" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="45" cy="60" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="265" cy="136" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="75" cy="65" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="224" cy="101" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="317" cy="160" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="157" cy="201" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="307" cy="134" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="234" cy="119" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="295" cy="124" r="2" fill="#2A6B6B" fill-opacity="0.85"/><circle cx="110" cy="77" r="2" fill="#2A6B6B" fill-opacity="0.85"/></g>
+            <path d="M530,76 L586,103 L600,164 L561,212 L498,212 L459,164 L473,103 Z" fill="none" stroke="#1A4F4F" stroke-width="2" stroke-linejoin="round"/><circle cx="530" cy="76" r="5" fill="#1A4F4F"/><circle cx="586" cy="103" r="5" fill="#1A4F4F"/><circle cx="600" cy="164" r="5" fill="#1A4F4F"/><circle cx="561" cy="212" r="5" fill="#1A4F4F"/><circle cx="498" cy="212" r="5" fill="#1A4F4F"/><circle cx="459" cy="164" r="5" fill="#1A4F4F"/><circle cx="473" cy="103" r="5" fill="#1A4F4F"/>
+            <text class="celbl" x="34" y="272">a chaotic orbit densely fills its attractor</text>
+            <text class="celbl" x="398" y="272">finite precision forces a repeating cycle</text>
+          </svg>
+          <p class="figure-caption">Why the fancy map failed. In exact arithmetic the Hénon map's orbit wanders forever across its folded attractor and never repeats. In a computer, which can only store finitely many distinct numbers, the orbit must eventually land on a value it has already visited — and from there it loops, forever. A keystream that loops is a keystream that compresses, which is the opposite of what a cipher needs.</p>
+        </div>
+
+        <p>Why the plain map wins is a matter of how evenly it spreads itself. The tent map visits every part of its range with equal frequency, so slicing its output at the midpoint yields as many zeros as ones — a naturally balanced keystream. The logistic map does not: at the parameter used it crowds its values toward the extremes, so the same slicing produced a stream that was 59 per cent ones, a bias an attacker could lean on. The piecewise-linear map had good balance but left a fingerprint of a different kind — its neighbouring bytes were noticeably correlated, the straight-line pieces of its rule imprinting short repeating patterns on the output. Each map failed, when it failed, in a way traceable to its own shape.</p>
+
+        <p>The Hénon map failed for the most humbling reason of all, and it has nothing to do with the mathematics of chaos. In the idealised world where numbers have infinite precision, the Hénon orbit is genuinely aperiodic: it threads its attractor forever without ever exactly repeating. But a computer does not store real numbers. It stores a finite set of floating-point approximations, and a sequence drawn from a finite set must eventually repeat — once the orbit lands, by rounding, on a value it has already occupied, it is trapped in a loop from then on. For the Hénon map in ordinary double precision those loops turn out to be short, and a short loop is death for a keystream: it means the "random" output is secretly periodic, which is exactly the redundancy that showed up as low entropy and compressible ciphertext. The sophistication that was supposed to be the Hénon map's advantage counted for nothing against the plain fact that the machine ran out of numbers.</p>
+
+        <p>There is one property, though, that every map had in abundance, and it is worth dwelling on because it is the property people usually point to. All five maps were superbly sensitive to their keys: flip a single bit of the key and roughly half the ciphertext bits flip in response, for every map, without exception. The butterfly effect was real and universal. But that is precisely the point the study makes. Key sensitivity is the easy part — it falls out of chaos automatically — and it is necessary but nowhere near sufficient. A cipher does not only need to react violently to key changes; it needs its output, for any fixed key, to be statistically featureless: balanced, unpredictable, incompressible. That second requirement is not guaranteed by chaos at all. It depends on quiet, unglamorous properties — how uniformly a map fills its range, how its structure correlates successive outputs, how it behaves once you pin it inside a finite-precision machine — and those are exactly the properties that separated the tent map from the Hénon map.</p>
+
+        <p>So the honest answer to whether more chaos makes a better cipher is no, or at least not on its own. "Chaotic" and "random" are different words that happen to sound alike. Chaos buys you sensitivity for free and nothing else for free; the featurelessness a cipher actually lives on has to be earned map by map, and the plainest candidate here earned it best while the most elaborate one was quietly defeated by the finite precision of the computer it ran on. Mathematical chaos is a thing that happens on paper. A cipher is a thing that happens in a machine, and the two are not the same place.</p>
+
+        <h2>An honest caveat that should go before any stronger claim</h2>
+
+        <p>None of this crowns the tent map as a secure cipher. What was tested was five raw maps under identical, deliberately simple conditions — one parameter setting each, the crudest possible way of turning a number into bits, and ordinary double-precision arithmetic throughout — which is a fair benchmark of the maps against each other but not a security proof for any of them. A real cipher would need far more: careful output extraction, a full sweep across each map's parameters, and the formal statistical test batteries that regulators actually require, none of which was run here. The Hénon map's poor showing in particular should be read narrowly — it is a statement about finite-precision behaviour at this precision, and higher-precision arithmetic or a deliberate perturbation scheme might well recover the theoretical properties it lost. The durable lesson is not "use the tent map." It is that chaos alone does not certify randomness, and every candidate has to prove it the hard way.</p>
+
+        <div class="essay-footer">
+          <a href="../../#inquiries" class="back-link">← back to inquiries</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+SOURCE EXTRACT — "How Floor Surface Affects the Rotational Mechanics of Chaîné Turns: A Smartphone
+Gyroscope Study Comparing Wood, Rosin, and Marley"
+Pulled from Google Drive (fileId 1bzkt_SB7YYxURJKtKKTBVhZlg-zCI52C, docx) via read_file_content, 2026-07-05.
+Student author (the dancer herself); keep anonymous per house rule. No institution names in essay body.
+
+CORE
+Does floor surface change the rotational mechanics of ballet chaîné turns? One trained dancer, in pointe
+shoes, 3 surfaces (plain WOOD, rosin-treated wood, MARLEY vinyl), waist-mounted smartphone GYROSCOPE
+(phyphox, 100 Hz), 3 x 10-second trials per surface = 9 trials. |ω| = full-vector norm of triaxial
+gyro; integrate |ω| over time / 2π -> turn count. Explicitly EXPLORATORY (single subject, n=3/condition,
+NO inferential stats) — a feasibility + hypothesis-generating study.
+
+PHYSICS
+Angular momentum L = Iω conserved in the free-spin phase. Push-off angular impulse ΔL = τΔt is bounded
+by static friction fs,max = μs·N. Higher μs -> larger push-off torque -> higher ω. Prediction: rosin
+(higher friction) -> faster turns. The paper tests whether kinematics reflect this.
+
+RESULTS (Table 1: mean|ω| / peak|ω| / est. turns, mean±SD over 3 trials)
+  Wood + Rosin: 4.20 ± 0.32 / 9.14 ± 0.13 / 6.7 ± 0.5   <- HIGHEST mean & turns, but SD 6-8x larger
+  Wood:         4.00 ± 0.05 / 9.06 ± 0.23 / 6.4 ± 0.1
+  Marley:       3.99 ± 0.04 / 8.77 ± 0.59 / 6.4 ± 0.1    <- SMALLEST SD on mean|ω| = MOST CONSISTENT
+- Rosin mean ~5% higher than others = ~0.3 extra turns over 10 s (physically SMALL).
+- Peak |ω|: no meaningful separation (rosin 9.14, wood 9.06, Marley 8.77; Marley widest peak spread).
+- Turn counts 6.3-7.3, mostly ~6.4-6.7, all BELOW the 7-turn (2520°) reference. |ω| overestimates pure
+  yaw by only ~2-3% (adds off-axis components), too small to explain the gap -> the dancer really did
+  ~6-7 turns. Trial durations 9.999-10.077 s; ~994-1001 samples/trial (stable 100 Hz). |ω(t)| is
+  periodic: peaks = single-leg spin, troughs = step-through; turn period ~0.7-1.2 s.
+
+THE PIVOT (mean vs variance — the interesting part)
+The metric everyone reaches for (MEAN speed) says "rosin wins." But rosin's win is (a) small (~5%, ~0.3
+turns) and (b) UNSTABLE: rosin SD 0.32 vs 0.04-0.05 for wood/Marley — 6-8x noisier (Trial 2 ran 10-15%
+high). Likely because rosin depletes/transfers to the shoe sole unevenly across trials -> friction
+changes trial to trial. The metric that actually matters for PERFORMANCE is CONSISTENCY, and MARLEY —
+the international professional standard — has the smallest trial-to-trial variability (SD 0.04). So the
+mean-focused reading ("rosin is best") misses that Marley's value is repeatability, not peak speed.
+Bonus surprise: plain wood ≈ Marley on the mean (4.00 vs 3.99), despite Marley's reputation — but this
+is CONFOUNDED (Marley tested in a different studio, at the end of a fixed order). Wanke: 53% of dance-
+floor injuries from floors too slippery, 18% from getting stuck — the friction dichotomy that rosin's
+variability sits between.
+
+HONEST CAVEAT / CONFOUNDS (this study is caveat-rich — that richness is part of the story)
+- SINGLE participant = the student investigator, who KNEW the hypothesis (expectation/effort bias, may
+  have pushed harder on the surface she expected to win). n=3/condition -> no inferential stats.
+- FIXED condition order (wood, rosin, Marley) -> fatigue/learning confounded with surface.
+- Tested on 3 SEPARATE DAYS (12/14/16 March 2026) -> day-to-day fatigue/soreness/learning.
+- MARLEY tested in a DIFFERENT studio (subfloor build, room size, temperature not matched) -> any
+  Marley difference can't be attributed to surface alone.
+- Rosin application NOT standardised (quantity/coverage/method unmeasured; not reapplied between trials).
+- Friction coefficients of the 3 surfaces vs the pointe shoe were NEVER measured -> friction-ω link is
+  INFERRED, not tested. Waist (not shoe-floor) sensor placement. Smartphone gyro validated for general
+  human motion but not for chaîné turns specifically. Rest between trials ~1-1.5 min, timed informally.
+=> The friction hypothesis is consistent with the data but not demonstrated; the durable outputs are the
+METHOD (a phone can measure this) and the VARIANCE insight.
+
+FUTURE WORK
+Multiple dancers at different levels; counterbalanced surface order at ONE shared studio; simultaneous
+FORCE-PLATE to test the friction-impulse mechanism directly; standardise rosin by mass/area; add
+pirouettes (sustained pivot may be more surface-sensitive than chaîné's push-off).
+
+FIGURES (for image-suggestion mapping)
+Fig 1 smoothed |ω(t)| time series, 3 trials/surface overlaid (periodic spin structure; rosin Trial 2 high).
+       <- the hero schematises this.
+Fig 2 mean |ω| dot plot per surface (3 trials each + mean line). <- key evidence / the pivot.
+Fig 3 peak |ω| dot plot. Fig 4 total angular displacement vs 2520° (7-turn) reference. Fig 5 combined dot plots.
+       <- the inline diagram schematises Fig 2/Fig 5(a).
+Key refs: Kim et al. 2014 (pirouette angular momentum); Perala 2018 (footwear friction -> free moments);
+Wanke 2012 (dance-floor injury slippery/stuck); Umek & Kos 2016 (smartphone-gyro validation).

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Can Floating Solar Power a City and Save Its Water? — Ninaad Adhvaryu</title>
+  <meta name="description" content="Solar panels that make electricity and slow a drought at once — and how, once a project does two things, which reservoir is best depends entirely on what you decide to count.">
+  <link rel="canonical" href="https://ninaad-adhvaryu.github.io/floatovoltaics/site/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Can Floating Solar Power a City and Save Its Water? — Ninaad Adhvaryu">
+  <meta property="og:description" content="Solar panels that make electricity and slow a drought at once — and how, once a project does two things, which reservoir is best depends entirely on what you decide to count.">
+  <meta property="og:url" content="https://ninaad-adhvaryu.github.io/floatovoltaics/site/">
+  <meta name="twitter:card" content="summary">
+  <meta name="theme-color" content="#1C1A2E">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,300;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style.css">
+
+  <style>
+    :root {
+      --cream-dark:    #E8E2D9;
+      --cream-card:    #FDFBF8;
+      --ink-muted:     #6B6460;
+      --teal-pale:     rgba(42, 107, 107, 0.09);
+      --obsidian-mid:  #272540;
+      --obsidian-text: #C9C5DA;
+      --obsidian-muted:#918DAE;
+      --max-width:     1080px;
+      --gutter:        2.5rem;
+      --prose-width:   700px;
+    }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--serif-body);
+      font-size: 1rem;
+      line-height: 1.72;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    ::selection { background: rgba(42, 107, 107, 0.18); }
+    a { color: var(--teal); text-decoration: none; transition: color 0.2s ease; }
+
+    nav {
+      position: sticky; top: 0; z-index: 200;
+      background: var(--obsidian); height: 54px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 var(--gutter);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .nav-monogram { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--obsidian-muted); }
+    .nav-links { display: flex; gap: 2.25rem; list-style: none; }
+    .nav-links a { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; color: var(--obsidian-text); text-transform: lowercase; padding-bottom: 2px; border-bottom: 1px solid transparent; transition: color 0.2s ease, border-color 0.2s ease; }
+    .nav-links a:hover { color: var(--teal-light); border-bottom-color: var(--teal-light); }
+    .nav-back { color: var(--obsidian-text); }
+
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--gutter); }
+    section { padding: 4rem 0; }
+
+    .essay-header { padding: 3rem 0 3.5rem; }
+    .essay-hero { margin: 0 0 2.75rem; }
+    .essay-hero img {
+      display: block; width: 100%; height: auto;
+      border: 1px solid var(--cream-dark); border-radius: 2px;
+    }
+    .essay-title {
+      font-family: var(--serif-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700; line-height: 1.15; letter-spacing: -0.015em;
+      color: var(--ink); margin-bottom: 1.75rem; max-width: 760px;
+    }
+    .essay-meta {
+      display: flex; flex-wrap: wrap; gap: 2rem;
+      margin-top: 2.5rem; padding-top: 2.5rem;
+      border-top: 1px solid var(--cream-dark);
+    }
+    .essay-meta-block { flex: 0 1 auto; }
+    .essay-meta-label {
+      font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--ink-muted); margin-bottom: 0.5rem;
+    }
+    .essay-meta-value { font-family: var(--serif-body); font-size: 0.95rem; color: var(--ink); }
+
+    .essay-body { max-width: var(--prose-width); margin: 0 auto; }
+    .essay-body p {
+      font-size: 1rem; line-height: 1.82;
+      margin-bottom: 1.4em; color: var(--ink);
+    }
+    .essay-body em { font-style: italic; }
+    .essay-body strong { font-weight: 600; }
+    .essay-body h2 {
+      font-family: var(--serif-display);
+      font-size: 1.5rem; font-weight: 600; line-height: 1.25;
+      color: var(--ink); margin: 2.75rem 0 1.25rem; max-width: 640px;
+    }
+
+    /* Figures & captions */
+    .figure-wrap { margin: 3rem 0; text-align: center; }
+    .figure-wrap svg { max-width: 100%; height: auto; display: inline-block; }
+    .figure-wrap img {
+      max-width: 100%; height: auto; display: inline-block;
+      border-radius: 2px; background: var(--cream-dark); padding: 0.5rem;
+    }
+    .figure-caption {
+      font-family: var(--serif-body); font-size: 0.85rem; line-height: 1.6;
+      color: var(--ink-muted); margin-top: 1rem; font-style: italic;
+      max-width: 620px; margin-left: auto; margin-right: auto;
+    }
+
+    .essay-footer { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--cream-dark); }
+    .back-link {
+      font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em;
+      text-transform: lowercase; color: var(--teal);
+      border-bottom: 1px solid var(--teal-rule); padding-bottom: 2px;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+    .back-link:hover { color: var(--teal-light); border-bottom-color: var(--teal-light); }
+
+    @media (max-width: 768px) {
+      :root { --gutter: 1.5rem; }
+      section { padding: 3rem 0; }
+      .essay-header { padding: 3rem 0 2rem; }
+      .essay-title { font-size: 1.8rem; }
+      .essay-meta { gap: 1.5rem; }
+    }
+
+    @media (max-width: 480px) {
+      :root { --gutter: 1rem; }
+      .nav-links { gap: 0.9rem; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+      .nav-links::-webkit-scrollbar { display: none; }
+      .nav-links a { font-size: 0.62rem; letter-spacing: 0.04em; white-space: nowrap; }
+    }
+  </style>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <nav aria-label="Main">
+    <a href="../../index.html" class="nav-monogram nav-back">← back</a>
+    <ul class="nav-links">
+      <li><a href="../../#inquiries">inquiries</a></li>
+      <li><a href="../../#building">building</a></li>
+      <li><a href="../../#thesis">thesis</a></li>
+      <li><a href="../../#teaching">teaching</a></li>
+      <li><a href="../../#writing">writing</a></li>
+      <li><a href="../../#contact">contact</a></li>
+    </ul>
+  </nav>
+
+  <main id="main">
+
+  <section class="essay-header">
+    <div class="container">
+      <figure class="essay-hero">
+        <img decoding="async" src="hero.svg" alt="An irregular reservoir filling the frame, its water a pale teal ringed by a dark shoreline, with a tidy rectangular array of deep-teal floating solar panels covering one patch near the centre of the surface and faint glints on the open water beyond">
+      </figure>
+      <h1 class="essay-title">Can Floating Solar Power a City and Save Its Water?</h1>
+      <div class="essay-meta">
+        <div class="essay-meta-block">
+          <p class="essay-meta-label">Domain</p>
+          <p class="essay-meta-value">Energy Modeling · Water Systems</p>
+        </div>
+        <div class="essay-meta-block">
+          <p class="essay-meta-label">Status</p>
+          <p class="essay-meta-value">Complete · 2026</p>
+        </div>
+        <div class="essay-meta-block">
+          <p class="essay-meta-label">Methods</p>
+          <p class="essay-meta-value">Deterministic spatial model · PVOUT &amp; evaporation data · Dual-benefit efficiency (kWh/ML) · Transmission-loss ranking</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="essay-body-wrap">
+    <div class="container">
+      <div class="essay-body">
+
+        <p>California is short of two things at once: clean electricity and water. Most fixes help with one and ignore the other, or trade one against the other — a desert solar farm makes power but eats land and does nothing for the water table. Floating photovoltaics are unusual because they help with both. Cover part of a reservoir with solar panels and you generate electricity from an otherwise idle surface, and, because the panels shade the water, you also cut how much of it evaporates away under the sun. Power and water, from the same installation. A student I was working with wanted to know what that dual benefit would actually amount to across California's reservoirs — and the more interesting thing he found was not a number but a question the number cannot answer on its own.</p>
+
+        <p>The setup is a deterministic model rather than a field trial: take the ten largest California reservoirs, imagine covering a tenth of each one with panels, and compute two outputs from public data. The first is electricity, estimated from each site's local solar yield and the area of panels it can hold. The second is water saved, estimated from each site's evaporation rate and how much of that a shading layer suppresses. Add it all up and the totals are substantial — on the order of twelve thousand gigawatt-hours of electricity a year and thirty-odd thousand megalitres of water kept in the reservoirs rather than lost to the air. As a demonstration that the dual benefit is real and large, the model does its job in the first paragraph of results.</p>
+
+        <p>Then it gets interesting, because a project that produces two different goods does not have a single "best" site. It has as many rankings as you have ways to keep score, and they do not agree.</p>
+
+        <div class="figure-wrap">
+          <svg viewBox="0 0 640 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A scatter plot of the ten reservoirs, annual energy on the vertical axis against water saved on the horizontal axis. Shasta sits furthest out, largest on both. A dashed line from the origin through Berryessa is the steepest, marking it as the site with the most energy generated per unit of water saved — a different winner from the biggest producer.">
+            <defs><style>
+              .fvlbl { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; fill: #6B6460; letter-spacing: 0.03em; }
+              .fvn   { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; fill: #1A1714; }
+              .fvh   { font-family: 'Source Serif 4', serif; font-size: 12px; font-style: italic; fill: #1A1714; }
+            </style></defs>
+            <line x1="70" y1="40" x2="70" y2="275" stroke="#6B6460" stroke-width="1"/>
+            <line x1="70" y1="275" x2="580" y2="275" stroke="#6B6460" stroke-width="1"/>
+            <text class="fvlbl" x="24" y="44">energy</text>
+            <text class="fvlbl" x="430" y="298">water saved →</text>
+            <line x1="70" y1="275" x2="532" y2="44" stroke="#1A4F4F" stroke-width="1.4" stroke-dasharray="6 5"/>
+            <circle cx="505" cy="63" r="6" fill="#1A4F4F" fill-opacity="0.95"/>
+            <circle cx="324" cy="154" r="4.5" fill="#2A6B6B" fill-opacity="0.6"/>
+            <circle cx="312" cy="168" r="4.5" fill="#2A6B6B" fill-opacity="0.6"/>
+            <circle cx="221" cy="204" r="4.5" fill="#2A6B6B" fill-opacity="0.6"/>
+            <circle cx="383" cy="118" r="6" fill="#1A4F4F" fill-opacity="0.95"/>
+            <circle cx="261" cy="180" r="4.5" fill="#2A6B6B" fill-opacity="0.6"/>
+            <circle cx="281" cy="179" r="4.5" fill="#2A6B6B" fill-opacity="0.6"/>
+            <circle cx="219" cy="208" r="4.5" fill="#2A6B6B" fill-opacity="0.6"/>
+            <circle cx="456" cy="88" r="4.5" fill="#2A6B6B" fill-opacity="0.6"/>
+            <circle cx="150" cy="240" r="4.5" fill="#2A6B6B" fill-opacity="0.6"/>
+            <text class="fvh" x="497" y="49" text-anchor="end">Shasta — biggest of both</text>
+            <text class="fvh" x="395" y="122">Berryessa</text>
+            <text class="fvn" x="150" y="70">steepest line = most</text>
+            <text class="fvn" x="150" y="85">energy per drop saved</text>
+          </svg>
+          <p class="figure-caption">Every reservoir plotted by the two things floating solar delivers: electricity up the side, water saved along the bottom. Shasta sits furthest out — it is biggest on both, because it is simply the largest lake. But "best" as a ratio is a slope, not a distance: the steepest line from the origin, through Lake Berryessa, marks the site that generates the most energy per unit of water it saves. The biggest producer and the most efficient one are not the same reservoir.</p>
+        </div>
+
+        <p>Score the sites by raw electricity and the answer is almost boring: the biggest reservoir wins, because energy scales with how many panels you can float, which scales with surface area. Shasta, the largest, tops the list; the local sunniness of a site barely moves the ranking next to the sheer size of the lake. But raw generation is the wrong yardstick for a dual-purpose machine, because it ignores half of what the machine is for. So the study proposes a different score — energy generated per unit of water saved — and by that measure a different reservoir wins. Lake Berryessa, which is not the largest, comes first, because it sits where the baseline evaporation is relatively low. That sounds backwards until you see the arithmetic: a site with low evaporation saves less water per hectare of panel, so each megalitre it does save is "bought" with more electricity generated alongside it, and the ratio of energy to water comes out high. The biggest producer is not the most efficient dual-purpose site. Which reservoir is "best" flipped the moment the yardstick did.</p>
+
+        <p>A third metric reshuffles the middle of the table again, and this one is the most physical of the three. Electricity is only useful where people are, and every kilometre of transmission line bleeds a little of it away as heat. Fold that in — charge each site a small penalty per kilometre to its nearest city — and reservoirs that generate more can end up delivering less. A lake thirty-seven kilometres from Sacramento climbs past one a hundred and twenty-one kilometres away, even though the distant lake produces more power, because so much of that far-away power never arrives. The average site loses only a couple of per cent to the wire, which sounds negligible until you multiply it by a large plant: for the most remote reservoir it works out to tens of gigawatt-hours of clean electricity vanishing into the transmission lines every year. Remoteness is a quiet tax that raw generation figures never show.</p>
+
+        <p>None of these three rankings is wrong. They are answers to three different questions — how much power, how much power per drop of water, how much power actually delivered — and the point of the study is that you cannot avoid choosing which question you are asking. That choice is not a technicality downstream of the "real" analysis; it is the analysis. Conventional energy planning quietly picks one answer by default: it optimises energy per dollar, which is why it keeps building solar in cheap empty desert. Put water in the denominator instead and a completely different map lights up — one where a reservoir is not just a surface to rent but a dual-purpose asset, a power station that also holds back a drought. The contribution here is not the discovery that Berryessa scores well. It is the yardstick that makes Berryessa's kind of value visible at all, because a benefit you never put in the denominator is a benefit your ranking will always throw away.</p>
+
+        <p>I should be plain that this is a model built from annual averages, not a measurement of any real installation, and its specific numbers should be read as illustrations of the framework rather than a procurement list. But the framework is the durable part, and it generalises well past reservoirs. Whenever an intervention does two things at once — generates and conserves, treats and prevents, earns and protects — there is no single scalar that ranks the options, and the most consequential modelling decision is the humblest-looking one: what you divide by. Get the numerator and the denominator right and the arithmetic will faithfully tell you which site wins. It just cannot tell you which question you should have been asking, and that was never the model's job. It was yours.</p>
+
+        <h2>An honest caveat that should go before any stronger claim</h2>
+
+        <p>The rankings here are the output of a deterministic desktop model, and every input is an approximation. Energy is estimated from annualised solar climatology, so it misses seasonal swings, heatwave temperature penalties, and — most importantly in California — the drought drawdowns that shrink a reservoir's surface and change both how many panels it can hold and how much it evaporates, the two quantities the whole analysis rests on. The water-saving figures ride on an evaporation-suppression factor that the literature places anywhere from twenty to sixty per cent, an enormous range that no single site-specific measurement here pins down. The transmission penalty is a flat loss per straight-line kilometre, which ignores real grid capacity, substation limits, and the actual routing of power lines. And coverage was fixed at a tenth of each surface by assumption, not optimised. What the study earns is not "build at Berryessa" but something more useful and more portable: a demonstration that for a dual-benefit technology the choice of efficiency metric drives the siting decision, that transmission distance can quietly overturn a generation-based ranking, and that scoring energy against water saved surfaces priorities a generation-only or dollar-only analysis would never reveal. Turning that into a real siting recommendation would need the time-varying hydrology, dynamic grid modelling, and on-site evaporation measurements the model deliberately leaves for later.</p>
+
+        <div class="essay-footer">
+          <a href="../../#inquiries" class="back-link">← back to inquiries</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+</body>
+</html>

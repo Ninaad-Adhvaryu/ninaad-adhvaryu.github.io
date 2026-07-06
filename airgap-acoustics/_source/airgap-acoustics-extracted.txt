@@ -1,0 +1,60 @@
+SOURCE EXTRACT — "Acoustic Data Exfiltration via Fan Speed Modulation: A Replication Study"
+Pulled from Google Drive (fileId 14Ozi61VBqWSLwLEhe7I9FM_tfqos6Y17, docx) via read_file_content, 2026-07-05.
+Student author; keep anonymous per house rule. NB the paper's reviewer-suggestion list names Ninaad
+and "Pangea Society" — do NOT surface any names or institutions in the essay body.
+
+CORE
+Replicate the Fansmitter technique (M. Guri): exfiltrate data from an AIR-GAPPED (network-isolated,
+speakerless) computer through an ACOUSTIC covert channel — by modulating a GPU fan between two speeds.
+25% duty = binary 0, 100% duty = binary 1 (frequency-shift / on-off keying). Record with a phone
+microphone (phyphox app, audio-spectrum FFT). Decode bits with a Python peak-frequency pipeline.
+Threat model: an air gap defends against NETWORK attacks, but a compromised machine (malware) can leak
+data via PHYSICAL side effects. Four covert-channel families: electromagnetic, optical, thermal, ACOUSTIC.
+
+SETUP / METHOD
+- FanControl app; one controllable GPU fan (only one had an audible speed difference). Two duty states.
+  25% ~ ~1000 RPM ~ ~67 Hz tone (observed peak clustered ~47 Hz); 100% ~ ~1600 RPM ~ ~107 Hz (~70 Hz observed).
+- 5 s per bit (fan inertia + 2 s transition at max 50%/s slew -> slow). 6-bit messages, 30 s recordings,
+  5 s preamble to cut timing uncertainty. iPhone 16 mic, straight-line, mic facing the machine.
+- Distances 20, 30, 40, 50 cm. 16 trials (4 distances x 4 bit strings). Realistic NOISY shared workspace,
+  no noise suppression by design.
+- Decoding: load "Peak History.csv" (dominant-frequency-vs-time). Because fan transitions aren't aligned to
+  timing, a BEST-FIT search sweeps a decision threshold (from quantiles of the in-band peak distribution),
+  a small time offset, and a stretch factor. Split into 6 windows; "vote ratio" = fraction of samples above
+  threshold; hard bit = 1 if vote ratio > 0.5. Binary error rate = % of bits wrong.
+  Soft error = continuous: closeness = vote ratio (if expected 1) or 1-vote ratio (if 0); soft error =
+  100*(1 - mean closeness). Soft penalises confident-wrong more, gives partial credit near the boundary.
+
+THE PIVOT / honest finding
+The channel WORKS up close (two frequency bands ~47 Hz and ~70 Hz separate cleanly; 6-bit patterns
+recovered) but DEGRADES substantially with distance and under realistic background noise — "inconsistent
+beyond short distances," "unreliable for consistent bit recovery." Peak tracker jumps to harmonics / noise
+peaks in louder conditions.
+SUBTLE POINT: soft error is consistently a few points BELOW binary error at most distances -> even when
+the hard decision flips, the vote ratio was often CLOSE to the right side. So confidence degrades
+GRADUALLY, not abruptly: the channel "remains partially intelligible even when full bit recovery fails."
+The signal still carries some structure even far out. Security lesson: countermeasures must degrade signal
+CLARITY itself, not just decoding success. For attackers: partial secrets recoverable in imperfect conditions.
+
+NUMBERS / CONSTRAINTS
+- Throughput ~0.1-0.15 bits/s (~5 s/bit + transition) -> only tiny payloads (passwords) realistic.
+- Strongly distance-sensitive; environment-sensitive; the fan switching itself may be audible (detectable).
+- 16 trials, 4 distances, 6-bit patterns (e.g. '011010'). One fan, single machine, single session.
+
+COUNTERMEASURE (the paper's contribution)
+Cheap software mitigation: inject CONTROLLED RANDOMNESS into fan control — small PWM jitter / brief
+irregular speed perturbations — to blur spectral separation and weaken timing consistency, without new
+hardware. Future work: evaluate countermeasures experimentally; more robust decoding under varied acoustics.
+
+HONEST CAVEAT / SCOPE
+Single desktop, single controllable fan, single session, 16 trials, straight-line only (no angles),
+noisy but uncontrolled environment. Manual fan triggering -> timing uncertainty (hence the best-fit search).
+A replication/feasibility study, not a demonstration of a practical exfiltration tool. The countermeasure
+is proposed, not experimentally validated.
+
+FIGURES (for image-suggestion mapping)
+Fig 1 peak-frequency trace from a single run.
+Fig 2 control runs: peak-frequency distributions + decoding threshold.
+Fig 3 expected vs decoded bit patterns, near vs far distance. <- best evidence figure (the degradation).
+Fig 4 error vs distance, binary vs soft scoring. <- key evidence figure (graceful degradation).
+Prior art: Guri's Fansmitter/DiskFiltration/RAMBO/BitWhisper/GSMem/AirHopper; Hanspach & Goetz (acoustic mesh).

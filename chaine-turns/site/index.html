@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Does a Faster Spin Make a Better Turn? — Ninaad Adhvaryu</title>
+  <meta name="description" content="Measuring ballet turns with a phone on a dancer's waist: the fastest floor was the least trustworthy, while the professional standard won on the number an average throws away.">
+  <link rel="canonical" href="https://ninaad-adhvaryu.github.io/chaine-turns/site/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Does a Faster Spin Make a Better Turn? — Ninaad Adhvaryu">
+  <meta property="og:description" content="Measuring ballet turns with a phone on a dancer's waist: the fastest floor was the least trustworthy, while the professional standard won on the number an average throws away.">
+  <meta property="og:url" content="https://ninaad-adhvaryu.github.io/chaine-turns/site/">
+  <meta name="twitter:card" content="summary">
+  <meta name="theme-color" content="#1C1A2E">
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,300;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style.css">
+
+  <style>
+    :root {
+      --cream-dark:    #E8E2D9;
+      --cream-card:    #FDFBF8;
+      --ink-muted:     #6B6460;
+      --teal-pale:     rgba(42, 107, 107, 0.09);
+      --obsidian-mid:  #272540;
+      --obsidian-text: #C9C5DA;
+      --obsidian-muted:#918DAE;
+      --max-width:     1080px;
+      --gutter:        2.5rem;
+      --prose-width:   700px;
+    }
+
+    body {
+      background: var(--cream);
+      color: var(--ink);
+      font-family: var(--serif-body);
+      font-size: 1rem;
+      line-height: 1.72;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    ::selection { background: rgba(42, 107, 107, 0.18); }
+    a { color: var(--teal); text-decoration: none; transition: color 0.2s ease; }
+
+    nav {
+      position: sticky; top: 0; z-index: 200;
+      background: var(--obsidian); height: 54px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 var(--gutter);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .nav-monogram { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--obsidian-muted); }
+    .nav-links { display: flex; gap: 2.25rem; list-style: none; }
+    .nav-links a { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; color: var(--obsidian-text); text-transform: lowercase; padding-bottom: 2px; border-bottom: 1px solid transparent; transition: color 0.2s ease, border-color 0.2s ease; }
+    .nav-links a:hover { color: var(--teal-light); border-bottom-color: var(--teal-light); }
+    .nav-back { color: var(--obsidian-text); }
+
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 var(--gutter); }
+    section { padding: 4rem 0; }
+
+    .essay-header { padding: 3rem 0 3.5rem; }
+    .essay-hero { margin: 0 0 2.75rem; }
+    .essay-hero img {
+      display: block; width: 100%; height: auto;
+      border: 1px solid var(--cream-dark); border-radius: 2px;
+    }
+    .essay-title {
+      font-family: var(--serif-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700; line-height: 1.15; letter-spacing: -0.015em;
+      color: var(--ink); margin-bottom: 1.75rem; max-width: 760px;
+    }
+    .essay-meta {
+      display: flex; flex-wrap: wrap; gap: 2rem;
+      margin-top: 2.5rem; padding-top: 2.5rem;
+      border-top: 1px solid var(--cream-dark);
+    }
+    .essay-meta-block { flex: 0 1 auto; }
+    .essay-meta-label {
+      font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--ink-muted); margin-bottom: 0.5rem;
+    }
+    .essay-meta-value { font-family: var(--serif-body); font-size: 0.95rem; color: var(--ink); }
+
+    .essay-body { max-width: var(--prose-width); margin: 0 auto; }
+    .essay-body p {
+      font-size: 1rem; line-height: 1.82;
+      margin-bottom: 1.4em; color: var(--ink);
+    }
+    .essay-body em { font-style: italic; }
+    .essay-body strong { font-weight: 600; }
+    .essay-body h2 {
+      font-family: var(--serif-display);
+      font-size: 1.5rem; font-weight: 600; line-height: 1.25;
+      color: var(--ink); margin: 2.75rem 0 1.25rem; max-width: 640px;
+    }
+
+    /* Figures & captions */
+    .figure-wrap { margin: 3rem 0; text-align: center; }
+    .figure-wrap svg { max-width: 100%; height: auto; display: inline-block; }
+    .figure-wrap img {
+      max-width: 100%; height: auto; display: inline-block;
+      border-radius: 2px; background: var(--cream-dark); padding: 0.5rem;
+    }
+    .figure-caption {
+      font-family: var(--serif-body); font-size: 0.85rem; line-height: 1.6;
+      color: var(--ink-muted); margin-top: 1rem; font-style: italic;
+      max-width: 620px; margin-left: auto; margin-right: auto;
+    }
+
+    .essay-footer { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--cream-dark); }
+    .back-link {
+      font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em;
+      text-transform: lowercase; color: var(--teal);
+      border-bottom: 1px solid var(--teal-rule); padding-bottom: 2px;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+    .back-link:hover { color: var(--teal-light); border-bottom-color: var(--teal-light); }
+
+    @media (max-width: 768px) {
+      :root { --gutter: 1.5rem; }
+      section { padding: 3rem 0; }
+      .essay-header { padding: 3rem 0 2rem; }
+      .essay-title { font-size: 1.8rem; }
+      .essay-meta { gap: 1.5rem; }
+    }
+
+    @media (max-width: 480px) {
+      :root { --gutter: 1rem; }
+      .nav-links { gap: 0.9rem; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+      .nav-links::-webkit-scrollbar { display: none; }
+      .nav-links a { font-size: 0.62rem; letter-spacing: 0.04em; white-space: nowrap; }
+    }
+  </style>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <nav aria-label="Main">
+    <a href="../../index.html" class="nav-monogram nav-back">← back</a>
+    <ul class="nav-links">
+      <li><a href="../../#inquiries">inquiries</a></li>
+      <li><a href="../../#building">building</a></li>
+      <li><a href="../../#thesis">thesis</a></li>
+      <li><a href="../../#teaching">teaching</a></li>
+      <li><a href="../../#writing">writing</a></li>
+      <li><a href="../../#contact">contact</a></li>
+    </ul>
+  </nav>
+
+  <main id="main">
+
+  <section class="essay-header">
+    <div class="container">
+      <figure class="essay-hero">
+        <img decoding="async" src="hero.svg" alt="The angular-velocity signature of a dancer's chaîné turns: a strongly periodic teal waveform sweeping across the frame, rising to a sharp peak during each single-leg spin and dropping to a trough at each step between turns, repeated a dozen times across a ten-second sequence, with the area beneath it filled">
+      </figure>
+      <h1 class="essay-title">Does a Faster Spin Make a Better Turn?</h1>
+      <div class="essay-meta">
+        <div class="essay-meta-block">
+          <p class="essay-meta-label">Domain</p>
+          <p class="essay-meta-value">Biomechanics · Sensor Measurement</p>
+        </div>
+        <div class="essay-meta-block">
+          <p class="essay-meta-label">Status</p>
+          <p class="essay-meta-value">Complete · 2026</p>
+        </div>
+        <div class="essay-meta-block">
+          <p class="essay-meta-label">Methods</p>
+          <p class="essay-meta-value">Smartphone gyroscope (IMU) · Angular-velocity integration · Friction–impulse physics · Trial-variance analysis</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="essay-body-wrap">
+    <div class="container">
+      <div class="essay-body">
+
+        <p>A ballet turn is a physics problem wearing a costume. When a dancer executes a chaîné — a line of quick, continuous half-turn steps travelling across the floor — she is a rotating body governed by the conservation of angular momentum, and the speed she carries into each turn is set at the instant of push-off, when her foot pushes against the floor to generate the twist. The harder she can push without slipping, the faster she can spin, and how hard she can push depends on the friction the floor gives back. Which raises a concrete question a student I was working with — a trained dancer — wanted to answer with her own feet: does the floor decide how well you turn? She taped a phone to her waist and went looking.</p>
+
+        <p>The instrument is almost the whole charm of the thing. A modern smartphone contains a gyroscope good enough to record how fast it is rotating, a hundred times a second, and a free physics app will stream that out to a spreadsheet. Belted firmly at the waist, the phone captures the dancer's angular velocity through an entire ten-second run of turns — a signal that rises to a sharp peak during each single-leg spin and drops to a trough at each step between turns, over and over down the diagonal. Add up that angular velocity over the ten seconds and you have counted her rotations without a motion-capture lab or a force plate in sight. She ran the same ten-second sequence on three surfaces: plain sprung hardwood, the same wood dusted with rosin — a sticky pine resin dancers have used for a century to keep from slipping — and Marley, the vinyl floor that is the international standard for professional performance. The physics makes a clean prediction. Rosin raises friction, more friction allows a bigger push-off, a bigger push-off means more angular impulse, so rosin should produce the fastest turns.</p>
+
+        <p>And it did. Averaged across its trials, the rosin surface gave the highest spin speed and the greatest number of turns, just as the friction argument says it should. If you stopped at that number — the mean — the study would read as a tidy confirmation: rosin wins, use rosin. But the mean, it turns out, was the least trustworthy number in the whole experiment.</p>
+
+        <div class="figure-wrap">
+          <svg viewBox="0 0 640 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A dot plot of mean spin speed for three floor surfaces, three trials each. Wood and Marley each cluster tightly around four radians per second. Rosin has the highest average but its three trials are widely scattered, one running far above the others — the highest mean is also the least repeatable.">
+            <defs><style>
+              .ctlbl { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; fill: #6B6460; letter-spacing: 0.03em; }
+              .ctn   { font-family: 'JetBrains Mono', monospace; font-size: 11px; fill: #1A1714; }
+              .cth   { font-family: 'Source Serif 4', serif; font-size: 12px; font-style: italic; fill: #1A1714; }
+            </style></defs>
+            <line x1="70" y1="45" x2="70" y2="270" stroke="#6B6460" stroke-width="1"/>
+            <line x1="70" y1="270" x2="590" y2="270" stroke="#6B6460" stroke-width="1"/>
+            <text class="ctlbl" x="20" y="49">mean |ω|</text>
+            <text class="ctlbl" x="20" y="63">(rad/s)</text>
+            <circle cx="134" cy="207" r="4.5" fill="#2A6B6B" fill-opacity="0.85"/>
+            <circle cx="150" cy="200" r="4.5" fill="#2A6B6B" fill-opacity="0.85"/>
+            <circle cx="166" cy="193" r="4.5" fill="#2A6B6B" fill-opacity="0.85"/>
+            <line x1="124" y1="200" x2="176" y2="200" stroke="#1A4F4F" stroke-width="3"/>
+            <text x="150" y="292" text-anchor="middle" class="ctn">wood</text>
+            <circle cx="314" cy="204" r="4.5" fill="#2A6B6B" fill-opacity="0.85"/>
+            <circle cx="330" cy="186" r="4.5" fill="#2A6B6B" fill-opacity="0.85"/>
+            <circle cx="346" cy="105" r="4.5" fill="#2A6B6B" fill-opacity="0.85"/>
+            <line x1="304" y1="165" x2="356" y2="165" stroke="#1A4F4F" stroke-width="3"/>
+            <text x="330" y="292" text-anchor="middle" class="ctn">rosin</text>
+            <circle cx="494" cy="207" r="4.5" fill="#2A6B6B" fill-opacity="0.85"/>
+            <circle cx="510" cy="202" r="4.5" fill="#2A6B6B" fill-opacity="0.85"/>
+            <circle cx="526" cy="197" r="4.5" fill="#2A6B6B" fill-opacity="0.85"/>
+            <line x1="484" y1="202" x2="536" y2="202" stroke="#1A4F4F" stroke-width="3"/>
+            <text x="510" y="292" text-anchor="middle" class="ctn">Marley</text>
+            <text class="cth" x="330" y="86" text-anchor="middle">highest average — but scattered</text>
+            <text class="cth" x="510" y="176" text-anchor="middle">tightest —</text>
+            <text class="cth" x="510" y="192" text-anchor="middle">the pro standard</text>
+          </svg>
+          <p class="figure-caption">Each dot is one trial; the bar is the surface's average. Rosin has the highest mean spin speed, but its three trials scatter widely — one ran far above the other two, and it is that outlier doing most of the work of lifting the average. Wood and Marley sit lower but land in almost the same place every time. The highest mean belongs to the least repeatable surface.</p>
+        </div>
+
+        <p>Look at the spread and the story changes. Rosin's advantage over the other two surfaces was small to begin with — about five per cent in speed, which works out to roughly a third of an extra turn across ten seconds — and it came at the cost of being wildly inconsistent. The three rosin trials varied six to eight times more than the trials on either other surface; one run sat far above the others and dragged the average up with it. Marley, by contrast, essentially tied plain wood on the mean and beat everything on steadiness: its trials landed in nearly the identical place each time. So the two summaries point in opposite directions. The average says rosin is best. The variance says Marley is, and it is Marley that professionals actually dance on — not because it spins you fastest, which it doesn't, but because it does the same thing under your feet every single night.</p>
+
+        <p>That is the reframing the study quietly forces, and I think it is the real finding. For a performer, a surface that occasionally grants a brilliant turn and occasionally turns treacherous is worse than useless — the whole value of a floor is that you can stop thinking about it. Consistency is the property a professional surface is chosen for, and consistency is precisely the property a mean is built to discard. The instability of rosin even has a tidy physical explanation: rosin wears off and transfers onto the shoe unevenly from one run to the next, so the friction it provides keeps drifting, sitting somewhere between the two classic failure modes of a dance floor — too slippery and too sticky — without settling on either. The number that captured the interesting behaviour of these floors was never the average speed. It was the scatter around it.</p>
+
+        <p>I have to be honest about how fragile even that is, because the caveats here are not footnotes — they are half the point. This was a single dancer, three trials per surface, and the dancer was the investigator herself, who knew exactly which floor she expected to win and could easily, without meaning to, have pushed a little harder on it. The three surfaces were tested on different days in a fixed order, so fatigue and warm-up are tangled up with the floor. Marley was measured in an entirely different studio, on a different subfloor, in a different room at a different temperature. And the friction of the three surfaces was never actually measured — the whole friction-to-speed argument is inferred from the spin data, not demonstrated against it. Any one of those confounds could manufacture a five-per-cent bump on its own. What does not survive this pile of qualifications is the headline "rosin is fastest"; that claim is far too delicate to lean on. What does survive is smaller and sturdier: a phone belted to a waist really can resolve a dancer's turns cleanly enough to study, and even in a tiny, noisy, thoroughly confounded dataset, the spread carried a more honest signal than the average did.</p>
+
+        <p>So the tempting result — rosin wins — was also the least trustworthy thing the experiment produced, and the humble one underneath it is worth more. The lesson generalises past ballet: the first number you reach for, the average, is frequently the one that replicates worst, and the variation you were about to smooth away is sometimes the measurement that actually means something. The professional dancers had already worked this out in their feet, choosing the floor that behaves the same way every time over the floor that occasionally spins a little faster. The gyroscope did not discover anything they didn't know. It just wrote down, in radians per second, why they were right.</p>
+
+        <h2>An honest caveat that should go before any stronger claim</h2>
+
+        <p>This is an exploratory, single-subject study, and its numbers cannot bear weight. One dancer performed three ten-second trials on each surface — far too few for any real statistics — and because she was also the investigator and knew the hypothesis, unconscious effort bias cannot be ruled out. The surfaces were tested in a fixed order across separate days, confounding floor with fatigue and learning; Marley was tested in a different studio whose subfloor, size, and temperature were uncontrolled; the rosin was applied by hand in an unmeasured amount and not renewed between trials; and the shoe-floor friction coefficients that the entire mechanism rests on were never measured, only assumed. The waist-mounted sensor also slightly overstates pure spin by folding in a couple of per cent of off-axis sway, though that offset applies equally across surfaces and does not affect the comparison. The right next study is obvious and was the point of running this one: multiple dancers of different levels, a counterbalanced surface order in a single shared studio, and a force plate recording the push-off directly so the friction hypothesis can be tested rather than inferred. Read as a feasibility demonstration and a hypothesis generator, the work stands. Read as a verdict on dance floors, it does not, and does not claim to.</p>
+
+        <div class="essay-footer">
+          <a href="../../#inquiries" class="back-link">← back to inquiries</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+</body>
+</html>

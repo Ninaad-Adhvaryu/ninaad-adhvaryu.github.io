@@ -1,0 +1,64 @@
+SOURCE EXTRACT — "Modeling the Dual Benefits of Floating Photovoltaics on California Reservoirs:
+Energy Generation, Net Deliverable Yield, and Evaporative Water Conservation"
+Pulled from Google Drive (fileId 11rL1ASxYBL4rn_vwv8eUY8y8ae2Lk8CM, docx) via read_file_content, 2026-07-05.
+Student author; keep anonymous per house rule. No institution names in essay body.
+
+CORE
+Deterministic spatial model of floating solar PV (FPV) at a fixed 10% surface coverage across 10 major
+California reservoirs (>1000 ha). Inputs: point-specific PVOUT (Global Solar Atlas, kWh/kWp/yr) +
+evaporation depth (NASA POWER). Outputs: gross annual energy, NET deliverable energy (linear transmission
+loss 0.03%/km to nearest urban load center >=80k pop), volumetric water savings (evaporation reduction
+20-60% band, 40% midpoint), and a DUAL-BENEFIT efficiency metric kWh/ML (energy per megalitre of water saved).
+DUAL BENEFIT: panels make power AND save water by shading the surface -> less evaporation. Turns passive
+water infrastructure into dual-purpose utilities.
+
+MODEL / PARAMS
+Egross = A_ha * 0.10(coverage) * 1.5(MWp/ha) * PVOUT * 0.80(PR) * 1000 / 1e6  [GWh/yr]
+Wsaved = A_ha * 0.10 * devap(m/yr) * rreduction(0.40 midpoint) * 10  [ML/yr]  (1 m over 1 ha = 10 ML)
+Net = gross * (1 - 0.0003 * dist_km).  10% coverage preserves shoreline/recreation buffers.
+Reservoirs (area ha / PVOUT kWh/kWp/yr / evap m/yr / nearest city @ km):
+ Shasta 12140.6/1521/1.28/Redding 35;  Oroville 6398.1/1638/1.42/Sacramento 121;
+ San Luis 5139.5/1812/1.68/San Jose 84; Folsom 3716/1654/1.45/Sacramento 37;
+ Berryessa 8094/1683/1.38/Napa 42;      Trinity 5584/1479/1.22/Redding 91;
+ New Melones 4856/1724/1.55/Stockton 93; Don Pedro 3360/1741/1.58/Modesto 59;
+ Almanor 10521/1548/1.31/Chico 103;      Millerton 1640/1853/1.74/Fresno 39.
+
+KEY NUMBERS
+- Combined gross energy 11,979.9 GWh/yr; combined midpoint water conservation 34,441.0 ML/yr.
+- Gross energy range: Shasta HIGHEST 2,215.9 GWh/yr (biggest lake); Millerton lowest 364.7. Driven by
+  SURFACE AREA (order-of-magnitude range), NOT solar yield.
+- Water savings: Shasta highest 6,216.0 ML/yr; Millerton lowest 1,141.4.
+- Dual-benefit efficiency (kWh/ML, 40% midpoint): LAKE BERRYESSA HIGHEST 365,870 kWh/ML; Millerton lowest
+  319,483. Berryessa wins because it has LOW ambient evaporation depth per hectare -> more electricity per
+  unit water preserved. Efficiency is INVERSELY related to evaporation depth.
+- Transmission: average net loss 2.11%; Oroville WORST 3.63% (121 km from Sacramento) = ~45.6 GWh/yr lost.
+  <50 km -> <1.5% loss; >100 km -> ~3%+ loss.
+- Pareto (energy vs water): SHASTA is the sole strictly Pareto-optimal site (dominates both, via scale +
+  solar). But Berryessa wins the efficiency RATIO. So "biggest" (Shasta) != "most efficient" (Berryessa).
+
+THE PIVOTS (the interesting moves)
+1. The METRIC decides the winner. Gross energy -> Shasta (biggest). Energy-per-water (kWh/ML) -> Berryessa.
+   The biggest producer is NOT the most efficient dual-purpose site. Change the yardstick, change the answer.
+2. Gross vs NET (transmission) RE-RANKS the mid/low tier: Folsom climbs past Oroville (37 vs 121 km to
+   Sacramento shields it); Don Pedro past New Melones; Millerton past San Luis. Remoteness "quietly
+   degrades" real-world value. A site's worth depends on distance to the load, not just generation.
+3. Reframe the benchmark: from "energy per dollar" (favors big land-hungry desert arrays) to "energy per
+   unit of water saved" -> surfaces a DIFFERENT priority set for water-stressed regions. Lake Berryessa
+   retained #1 in BOTH gross and net efficiency frameworks (net 361,259.6 kWh/ML); San Luis dropped to
+   bottom in the net framework (84 km to San Jose).
+
+HONEST CAVEAT / SCOPE
+It's a MODEL, not a measurement. Deterministic; annualized CLIMATOLOGY averages (omit seasonal solar,
+temperature spikes, and drought drawdowns that shrink reservoirs -> change FPV footprint + evaporation
+physics). Evaporation reduction 20-60% is a WIDE uncertainty band needing site-specific micrometeorology
+before contracts. Linear transmission penalty ignores grid capacity / substation interconnect constraints.
+Line-of-sight distances. Fixed 10% coverage. The value is the FRAMEWORK + the metric-dependence insight,
+not precise siting. Recommendations: prioritise kWh/ML over gross capacity; sites <50 km priority
+(<1.5% loss); >100 km weigh against dedicated transmission cost; treat 20-60% evap band as uncertainty.
+
+FIGURES (for image-suggestion mapping)
+Fig 1 gross energy bars (Shasta highest). Fig 2 water savings bars + uncertainty bands.
+Fig 3 dual-benefit efficiency kWh/ML ranking (Berryessa #1). <- key evidence figure (the pivot).
+Fig 4 gross vs net energy per reservoir. Fig 5 energy-water trade-off scatter + Pareto frontier (Shasta
+      sole Pareto-optimal). <- the inline diagram schematises this. Fig 6 gross vs net efficiency re-ranking.
+Prior: Jin et al. 2023 (Nature Sustainability, global reservoir FPV energy+water); Spencer et al. 2019 (US FPV).

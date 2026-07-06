@@ -1,0 +1,61 @@
+SOURCE EXTRACT — "Comparing Chaotic Maps as Pseudorandom Generators for Stream Cipher Encryption"
+Pulled from Google Drive (fileId 1PB-POGdkxv7SRDbNmtcF5l4Kd6NzDROH, docx) via read_file_content, 2026-07-05.
+Student author; keep anonymous per house rule. No institution names in essay body.
+
+CORE
+Compare 5 chaotic maps as keystream generators for a basic XOR stream cipher: Logistic, Tent, Sine,
+PWLCM (piecewise-linear chaotic map), Hénon (2D). Threshold each map's real-valued orbit at 0.5 -> bits;
+XOR a 1-MB plaintext; measure the ciphertext against 5 randomness metrics.
+Metrics (ideal): bit balance / ones ratio (0.50), 8-bit Shannon entropy (8 bits/byte), adjacent-byte
+Pearson correlation (0), compression ratio (>=1, i.e. incompressible), avalanche BER on 1-bit key flip (0.50).
+
+THE PIVOT (hypothesis inverted)
+HYPOTHESIS: higher-dimensional maps (the 2D Hénon) would give the best keystreams.
+RESULT: WRONG. The simple 1D TENT map was best on every metric. The 2D HÉNON map was WORST
+(lowest entropy, only one to give compressible ciphertext). "Adding dimensionality does not
+automatically improve cryptographic capability." The culprit is FINITE-PRECISION arithmetic: Hénon's
+orbit falls into short internal cycles in double precision, so its output carries structure the math
+says shouldn't be there. The gap is between MATHEMATICAL chaos (infinite precision, aperiodic) and
+COMPUTATIONAL chaos (finite precision, eventually periodic).
+
+RESULTS (Table 1: ones ratio / entropy bits / adj-byte corr r / compression / BER)
+  Logistic: 0.5930 (heavy 1-bit BIAS) / 7.8793 / 0.0863 / 1.0031 / 0.5018
+  Tent:     0.5042 / 7.9468 (HIGHEST) / 0.0134 (near 0) / 1.0031 / 0.5033   <- BEST overall
+  Sine:     0.5264 (mild bias) / 7.9448 / -0.0896 / 1.0031 / 0.5029          <- close 2nd
+  PWLCM:    0.4987 / 7.9080 / 0.3754 (!! high corr, visible BANDING) / 1.0031 / 0.5091
+  Hénon:    0.4961 / 7.5347 (LOWEST) / 0.1360 / 0.9742 (COMPRESSIBLE) / 0.5008  <- WORST
+- All 5 have BER ~ 0.50 => strong key sensitivity / avalanche is UNIVERSAL across chaos. But that's
+  the EASY property; keystream statistical quality (balance, entropy, correlation, incompressibility)
+  is NOT universal and is what separates them.
+
+WHY (mechanisms — the interesting part)
+- Tent wins: UNIFORM invariant density over [0,1] -> thresholding at 0.5 samples 0/1 evenly ->
+  near-perfect bit balance, negligible byte correlation, high entropy.
+- Logistic fails on balance: at r=3.90 (near 4) the invariant density is non-uniform, values cluster
+  near the extremes -> 59.3% ones. A biased keystream.
+- PWLCM fails on correlation: piecewise-linear structure -> short deterministic patterns ->
+  adjacent bytes correlated (r=0.375, banded density plot). Good entropy, bad independence.
+- Hénon fails on entropy + compressibility: finite-precision short cycles -> residual structure.
+- KEY MESSAGE: "mathematical chaos alone does not guarantee cryptographic randomness." Decisive
+  factors are uniform invariant density, parameterisation, and output-extraction method — not how
+  chaotic or high-dimensional the map is. Sensitivity (butterfly effect) is necessary, not sufficient.
+
+METHOD / PARAMS
+Logistic x_{n+1}=r x_n(1-x_n), r=3.90; Tent slope mu=2; Sine x_{n+1}=sin(pi x_n); PWLCM break p=0.5;
+Hénon x_{n+1}=1-a x_n^2 + y_n, y_{n+1}=b x_n, a=1.4, b=0.3. Random initial value = key. Discard transient.
+Threshold at 0.5. 1-MB plaintext. XOR. Decryption verified 100% accurate. Python double-precision.
+Prior: Song & Ding (logistic vs Hénon); Al-Daraiseh 2023 (tent PRNG passes NIST 800-22).
+
+HONEST CAVEAT / SCOPE
+Raw maps, simple thresholding extraction, single parameter setting per map, double precision only.
+No formal NIST SP 800-22 suite run (future work). Finite-precision degradation (Hénon) could be
+mitigated by higher precision or perturbation. A full parameter sweep, better extraction (bit-
+interleaving, multi-map mixing), and hyperchaotic systems are future directions. This is a benchmark
+of standard maps under identical conditions, not a claim that tent is a secure cipher on its own.
+
+FIGURES (for image-suggestion mapping)
+Fig 1 bit balance bars (logistic 0.593 stands out).
+Fig 2 normalised block entropy H_m/m, m=1..8 (tent flat at 1.0, Hénon steep decline). <- good evidence.
+Fig 3 neighbouring-byte density plots per map (tent uniform cloud vs PWLCM banded). <- best evidence figure.
+Fig 4 avalanche BER vs key perturbation (all ~0.50).
+Fig 5 keystream autocorrelation (appendix). Table 1 = the metrics summary.

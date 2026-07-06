@@ -1,0 +1,62 @@
+SOURCE EXTRACT — "Computational Analysis of Prime Gaps: Testing Cramér's and Hardy–Littlewood's
+Conjectures on Finite Ranges"
+Pulled from Google Drive (fileId 1yf2TkBGExOC6F-KEzQ7u3usSIG-tHnDe, PDF) via read_file_content, 2026-07-05.
+Student author; keep anonymous per house rule. No institution names in essay body.
+
+CORE
+Test two heuristics on prime gaps g_n = p_{n+1} - p_n, using the first 25,000,000 primes
+(2 ... 472,882,027, from PrimePages). Two threads:
+1. CRAMÉR: normalized ratio R(p_n) = g_n / (log p_n)^2. Cramér 1936: g_n = O((log p_n)^2), i.e.
+   R stays bounded as p_n -> inf.
+2. HARDY–LITTLEWOOD: relative frequencies of even gaps g are shaped by an arithmetic weight
+   (product over odd prime divisors p of k=g/2 of (p-1)/(p-2)).
+
+CRAMÉR RESULTS
+- Running max of R(p_n) rises at tiny primes, then goes FLAT across the whole range; stays well
+  below the Granville threshold 2 e^{-gamma} ≈ 1.1229 (gamma ≈ 0.5772). (Empirical data up to
+  ~10^18 elsewhere puts the running max near 0.9214.)
+- Exceedance rates (fraction of gaps with R > threshold) DECLINE steadily as p_n grows; above
+  R>0.3 and R>0.4 they approach zero. => large normalized gaps don't get relatively more common.
+- Consistent with Cramér AND with Granville's refinement; finite data at this scale CANNOT
+  distinguish the two models. Cramér's model has a known flaw (Maier 1985: integers aren't
+  statistically independent; the model mispredicts primes in short intervals). Best unconditional
+  bound is Baker–Harman–Pintz g_n = O(p_n^0.525), far weaker than Cramér.
+
+HARDY–LITTLEWOOD RESULTS + THE PIVOT
+- Gap frequencies decay ~exponentially with a clear PERIODICITY: every third even gap (6,12,18,...)
+  is more common; gaps divisible by small primes (6, 30, 210) are "arithmetic favorites"
+  (jumping champions). Peaks at g=6 and g=30 match HL weights closely (freq ~1e-2 and ~1e-3).
+- **THE PIVOT (Fig 3):** log-log scatter of empirical frequency vs HL weight shows NO trend — points
+  form VERTICAL BANDS. Pearson r = 0.0507 (p = 0.616); Spearman rho = 0.0364 (p = 0.719). Near-zero,
+  non-significant. The obvious statistic (correlate weight vs frequency) says "no relationship."
+  YET the peaks align (Fig 2). Resolution: HL governs the RELATIVE ORDERING among specific gap sizes
+  (which gaps are locally favored), not a global proportionality / power law between weight magnitude
+  and frequency magnitude. The correlation is the wrong lens; the structure is local peak alignment.
+- Residuals (Fig 6): empirical minus normalized HL weight. Largest positive at small gaps
+  (g=6 residual = +0.107); cross zero near g≈50; small negative after (g=180 residual = -0.018);
+  residual SD = 0.022. A single global scaling factor lambda (≈6.697e-3) can't match both the steep
+  small-gap decay and the flatter HL curve — a SYSTEMATIC (not random) misfit. Another case of one
+  number failing to capture structure.
+
+THE DEEPER THEME (honest caveat)
+Finite computational evidence can only show CONSISTENCY with asymptotic conjectures, never
+confirmation (both conjectures are statements as p_n -> inf). Results depend on dataset size,
+bin width, normalization, floating-point precision. The near-zero correlation is not a failure of
+the theory — it's a failure of the summary statistic to see local structure.
+
+METHOD / NUMBERS
+- Datasets: small self-generated (p <= 1,000,000; 78,498 primes) for debugging; large precomputed
+  25M primes to 472,882,027.
+- Even gaps analyzed up to g = 200; 40 log-spaced exceedance bins; Cramér thresholds 0.1/0.2/0.3/0.4.
+- HL scaling lambda ≈ 6.697e-3. Pearson r=0.0507 (p=0.616); Spearman rho=0.0364 (p=0.719).
+- Python 3.11: NumPy, Pandas, Matplotlib, SciPy, SymPy.
+- Related: Goldston–Pintz–Yıldırım, Zhang, Maynard (small gaps); Ford–Green–Konyagin–Tao (large gaps);
+  Lemke Oliver–Soundararajan 2016 (unexpected biases in consecutive primes); Banks–Ford–Tao 2023.
+
+FIGURES (for image-suggestion mapping)
+Fig 1 even-gap distribution (log y), small vs large dataset — periodicity visible.
+Fig 2 empirical freq (bars) vs normalized HL weights (line), peaks at 6, 30. <- key evidence figure.
+Fig 3 log-log scatter freq vs weight — vertical bands, r≈0 (THE pivot figure).
+Fig 4 running max of R(p_n) vs p_n, flat, below Granville 1.1229 dashed line. <- key evidence figure.
+Fig 5 exceedance rates above thresholds, declining in log bins.
+Fig 6 residuals (empirical - HL), +0.107 at g=6, systematic sign change.
